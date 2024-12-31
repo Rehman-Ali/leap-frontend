@@ -24,10 +24,10 @@ const Testimonials = () => {
         <Marquee direction="left">
           <div className="w-[370px] mx-[12px] h-[254px] bg-[#13141266]  rounded-[12px] border border-[#1f250e] p-[24px]">
             <p className="text-[16px] text-[#c5c6c5] font-inter">
-              "I've tried many project management tools, but Saasta stands out
+            &quot;I&apos;ve tried many project management tools, but Saasta stands out
               for its simplicity and effectiveness. It has everything we need to
               stay organized and collaborate effectively. Our projects have
-              never been smoother!"
+              never been smoother!&quot;
             </p>
             <div className="flex flex-row items-center gap-x-3 mt-[15px]">
               <Image
@@ -49,10 +49,10 @@ const Testimonials = () => {
           </div>
           <div className="w-[370px] mx-[12px] h-[254px] bg-[#13141266]  rounded-[12px] border border-[#1f250e] p-[24px]">
             <p className="text-[16px] text-[#c5c6c5] font-inter">
-              "I've tried many project management tools, but Saasta stands out
+              &quot;I&apos;ve tried many project management tools, but Saasta stands out
               for its simplicity and effectiveness. It has everything we need to
               stay organized and collaborate effectively. Our projects have
-              never been smoother!"
+              never been smoother!&quot;
             </p>
             <div className="flex flex-row items-center gap-x-3 mt-[15px]">
               <Image
@@ -74,10 +74,10 @@ const Testimonials = () => {
           </div>
           <div className="w-[370px] mx-[12px] h-[254px] bg-[#13141266]  rounded-[12px] border border-[#1f250e] p-[24px]">
             <p className="text-[16px] text-[#c5c6c5] font-inter">
-              "I've tried many project management tools, but Saasta stands out
+              &quot;I&apos;ve tried many project management tools, but Saasta stands out
               for its simplicity and effectiveness. It has everything we need to
               stay organized and collaborate effectively. Our projects have
-              never been smoother!"
+              never been smoother!&quot;
             </p>
             <div className="flex flex-row items-center gap-x-3 mt-[15px]">
               <Image
@@ -99,10 +99,10 @@ const Testimonials = () => {
           </div>
           <div className="w-[370px] mx-[12px] h-[254px] bg-[#13141266]  rounded-[12px] border border-[#1f250e] p-[24px]">
             <p className="text-[16px] text-[#c5c6c5] font-inter">
-              "I've tried many project management tools, but Saasta stands out
+              &quot;I&apos;ve tried many project management tools, but Saasta stands out
               for its simplicity and effectiveness. It has everything we need to
               stay organized and collaborate effectively. Our projects have
-              never been smoother!"
+              never been smoother!&quot;
             </p>
             <div className="flex flex-row items-center gap-x-3 mt-[15px]">
               <Image
@@ -134,10 +134,10 @@ const Testimonials = () => {
         <Marquee direction="right">
           <div className="w-[370px] mx-[12px] h-[254px] bg-[#13141266]  rounded-[12px] border border-[#1f250e] p-[24px]">
             <p className="text-[16px] text-[#c5c6c5] font-inter">
-              "I've tried many project management tools, but Saasta stands out
+              &quot;I&apos;ve tried many project management tools, but Saasta stands out
               for its simplicity and effectiveness. It has everything we need to
               stay organized and collaborate effectively. Our projects have
-              never been smoother!"
+              never been smoother!&quot;
             </p>
             <div className="flex flex-row items-center gap-x-3 mt-[15px]">
               <Image
@@ -159,10 +159,10 @@ const Testimonials = () => {
           </div>
           <div className="w-[370px] mx-[12px] h-[254px] bg-[#13141266]  rounded-[12px] border border-[#1f250e] p-[24px]">
             <p className="text-[16px] text-[#c5c6c5] font-inter">
-              "I've tried many project management tools, but Saasta stands out
+              &quot;I&apos;ve tried many project management tools, but Saasta stands out
               for its simplicity and effectiveness. It has everything we need to
               stay organized and collaborate effectively. Our projects have
-              never been smoother!"
+              never been smoother!&quot;
             </p>
             <div className="flex flex-row items-center gap-x-3 mt-[15px]">
               <Image
@@ -184,10 +184,10 @@ const Testimonials = () => {
           </div>
           <div className="w-[370px] mx-[12px] h-[254px] bg-[#13141266]  rounded-[12px] border border-[#1f250e] p-[24px]">
             <p className="text-[16px] text-[#c5c6c5] font-inter">
-              "I've tried many project management tools, but Saasta stands out
+            &quot;I&apos;ve tried many project management tools, but Saasta stands out
               for its simplicity and effectiveness. It has everything we need to
               stay organized and collaborate effectively. Our projects have
-              never been smoother!"
+              never been smoother!&quot;
             </p>
             <div className="flex flex-row items-center gap-x-3 mt-[15px]">
               <Image
@@ -209,10 +209,10 @@ const Testimonials = () => {
           </div>
           <div className="w-[370px] mx-[12px] h-[254px] bg-[#13141266]  rounded-[12px] border border-[#1f250e] p-[24px]">
             <p className="text-[16px] text-[#c5c6c5] font-inter">
-              "I've tried many project management tools, but Saasta stands out
+            &quot;I&apos;ve tried many project management tools, but Saasta stands out
               for its simplicity and effectiveness. It has everything we need to
               stay organized and collaborate effectively. Our projects have
-              never been smoother!"
+              never been smoother!&quot;
             </p>
             <div className="flex flex-row items-center gap-x-3 mt-[15px]">
               <Image

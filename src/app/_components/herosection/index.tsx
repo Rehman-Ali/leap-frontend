@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { FaCheck } from "react-icons/fa6";
+
 import { LuAsterisk, LuSquareAsterisk } from "react-icons/lu";
 
 const HeroSection = () => {
