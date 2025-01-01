@@ -3,7 +3,7 @@ const NodeGetStarted = () => {
     <div className="flex items-center justify-center  mb-[200px]">
       <div className=" flex flex-col items-center justify-center border border-[#131412] rounded-[16px] min-w-[960px]  bg-gradient-to-b from-[#121311] to-[#070806]   h-[340px] ">
         <p className="text-[60px] font-inter font-medium text-white">
-          Don't waste any more time
+          Don&apos;t waste any more time
         </p>
         <p className="text-[16px] font-inter text-[#c6c7c6]">
           Join today and claim a free trial of Leap Node
