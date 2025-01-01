@@ -1,9 +1,9 @@
-import ArbitageBot from "@/app/_components/arbitrage-bot";
-import FAQComponent from "@/app/_components/faq";
-import HeroSection from "@/app/_components/herosection";
-import Services from "@/app/_components/services";
-import TelegramTadingBot from "@/app/_components/telegram-trading-bot";
-import Testimonials from "@/app/_components/testimonials";
+import ArbitageBot from "@/app/_components/home/arbitrage-bot";
+import FAQComponent from "@/app/_components/home/faq";
+import HeroSection from "@/app/_components/home/herosection";
+import Services from "@/app/_components/home/services";
+import TelegramTadingBot from "@/app/_components/home/telegram-trading-bot";
+import Testimonials from "@/app/_components/home/testimonials";
 
 
 const HomePageScreen = () => {

@@ -1,4 +1,4 @@
-import './globals.css'
+
 import HomePageScreen from "@/pages/home-page";
 
 

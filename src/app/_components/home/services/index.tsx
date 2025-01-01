@@ -13,7 +13,7 @@ const Services = () => {
           </div>
 
           <p className="text-white text-[60px] font-inter font-medium leading-[70px] mt-[10px]">
-            Node Rental
+            VPS Rental
           </p>
           <p className="text-[#C5C6C5] font-inter text-[16px] max-w-[500px] my-[20px]">
             Unparalleled speed, reliability, and unlimited transactions per
