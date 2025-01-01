@@ -3,6 +3,7 @@ const { fontFamily } = require('tailwindcss/defaultTheme');
 export default {
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    
   ],
   theme: {
     extend: {
