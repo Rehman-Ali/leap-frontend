@@ -3,7 +3,7 @@ import { LuAsterisk } from "react-icons/lu";
 
 const NodeSpeedComponent = () => {
   return (
-    <div className="mx-auto my-24 px-4 max-w-7xl">
+    <div className="mx-auto my-[150px] px-4 max-w-7xl">
       <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-8">
         {/* Text Content */}
         <div className="lg:w-1/2">

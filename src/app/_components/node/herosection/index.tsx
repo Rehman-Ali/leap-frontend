@@ -13,7 +13,7 @@ const NodeHeroSection = () => {
           <h1 className="text-white text-center text-4xl sm:text-5xl lg:text-6xl font-inter font-medium">
             Leap <span className="text-darkPrimary">Node</span>
           </h1>
-          <p className="text-[#C6C7C6] text-center text-base sm:text-lg font-inter font-bold">
+          <p className="text-[#C6C7C6] text-center text-base sm:text-lg font-inter font-medium">
             Land transactions faster and more consistently than ever before
           </p>
         </div>
@@ -51,13 +51,13 @@ const NodeHeroSection = () => {
 
         {/* Benchmark Section */}
         <div className="flex flex-col items-center justify-center mt-24 px-4">
-          <p className="text-[#C6C7C6] text-center text-base sm:text-lg font-inter font-bold">
+          <p className="text-white text-center text-base sm:text-lg font-inter ">
             Land transactions faster and more consistently than ever before
           </p>
           <button className="mt-5 w-32 sm:w-36 h-12 bg-darkPrimary text-sm sm:text-base font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300">
             Join Now
           </button>
-          <p className="text-white text-center text-4xl sm:text-5xl lg:text-6xl font-inter font-medium mt-6">
+          <p className="text-white pb-[20px] text-center text-4xl sm:text-5xl lg:text-6xl font-inter font-medium mt-6">
             Benchmark
           </p>
           <Image
