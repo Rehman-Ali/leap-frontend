@@ -10,8 +10,8 @@ const HomePageScreen = () => {
   return (
     <div className="bg-bodycolor max-w-[1200px] mx-auto">
       <HeroSection/>
-      <Services/>
-      <TelegramTadingBot />
+       <Services/>
+     <TelegramTadingBot />
       <ArbitageBot/>
       <FAQComponent/>
       <Testimonials/>

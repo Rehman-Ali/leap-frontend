@@ -1,60 +1,62 @@
 import Image from "next/image";
 import { LuAsterisk } from "react-icons/lu";
 import { FaCheck } from "react-icons/fa6";
+
 const Services = () => {
   return (
-    <div className="mx-auto">
-    
-      <div className="flex flex-row items-center justify-between mt-[30px]">
-        <div>
-          <div className="  w-[112px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a] flex flex-row gap-x-1 justify-center items-center">
+    <div className="mx-auto px-[15px]">
+      {/* Header and Description */}
+      <div className="flex flex-col  mw-8:items-start mw-8:flex-col mw-8:space-y-6 md:flex-row justify-between items-center mt-[30px] space-y-0">
+        {/* Left Content */}
+        <div className="flex flex-col  items-start">
+          <div className="flex items-center justify-center w-[112px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]">
             <LuAsterisk size={14} color={"#37f94e"} />
-            <p className="text-[14px] font-inter text-darkPrimary">SERVICES</p>
+            <p className="text-[14px] mw-12:text-[12px] font-inter text-darkPrimary">
+              SERVICES
+            </p>
           </div>
 
-          <p className="text-white text-[60px] font-inter font-medium leading-[70px] mt-[10px]">
+          <p className="text-white text-[60px] mw-12:text-[42px] mw-8:text-[36px] font-inter font-medium mt-[10px] mw-8:mt-[20px] leading-[70px] mw-8:leading-[40px] text-left">
             VPS Rental
           </p>
-          <p className="text-[#C5C6C5] font-inter text-[16px] max-w-[500px] my-[20px]">
+          <p className="text-[#C5C6C5] font-inter text-[16px] mw-8:max-w-[100%] max-w-[500px] my-[20px] text-left">
             Unparalleled speed, reliability, and unlimited transactions per
             second (TPS). Optimise your botting with the fastest node on the
             Solana blockchain.
           </p>
-          <div className="flex flex-row gap-x-2 mb-[10px]">
-            <FaCheck size={18} color={"#37f94e"} />
-            <p className="text-[#C5C6C5] font-inter text-[14px]">Staked node</p>
-          </div>
-          <div className="flex flex-row gap-x-2 mb-[10px]">
-            <FaCheck size={18} color={"#37f94e"} />
-            <p className="text-[#C5C6C5] font-inter text-[14px]">
-              IP authorization
-            </p>
-          </div>
-          <div className="flex flex-row gap-x-2 mb-[10px]">
-            <FaCheck size={18} color={"#37f94e"} />
-            <p className="text-[#C5C6C5] font-inter text-[14px]">GRPC</p>
-          </div>
-          <div className="flex flex-row gap-x-2 mb-[15px]">
-            <FaCheck size={18} color={"#37f94e"} />
-            <p className="text-[#C5C6C5] font-inter text-[14px]">
-              Leverages unmatched speed and efficiency for maximum profitability
-            </p>
-          </div>
-          <button className="w-[168px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white">
+
+          {/* List Items */}
+          {[
+            "Staked node",
+            "IP authorization",
+            "GRPC",
+            "Bloxroute BDM",
+            "Jito Shred",
+          ].map((item, index) => (
+            <div key={index} className="flex flex-row items-center gap-x-2 mb-[10px]">
+              <FaCheck size={18} color={"#37f94e"} />
+              <p className="text-[#C5C6C5] font-inter text-[14px]">{item}</p>
+            </div>
+          ))}
+
+          <button className="w-[168px]   mw-8:mb-[50px] mw-12:w-[140px] mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white mt-[15px]">
             Discover More
           </button>
         </div>
-        <div>
+
+        {/* Right Content */}
+          <div className="flex justify-center   mw-8:w-[100%]">
           <Image
             src="/assets/home/services/services.jpg"
-            height={460}
+            alt="VPS Rental Service"
             width={535}
-            alt="telegram trading bot"
-            className="h-[460px] w-[535px] rounded-[10px]"
+            height={460}
+            className="h-auto mw-8:w-full w-[535px] rounded-[15px]"
           />
         </div>
+        </div>
       </div>
-    </div>
+    
   );
 };
 
