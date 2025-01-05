@@ -39,7 +39,6 @@ export default {
         "mw-4": { max: "420px" },
         "mw-3": { max: "360px" },
       },
-
     },
   },
   plugins: [],
