@@ -1,12 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useInView } from "@/hooks/useInView";
+import { useRef, useState } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 const Accordion = ({
   items,
+  isVisible
 }: {
   items: { title: string; content: string }[];
+  isVisible: boolean
 }) => {
+  
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const toggleAccordion = (index: number) => {
@@ -14,11 +18,15 @@ const Accordion = ({
   };
 
   return (
-    <div className="mt-10 space-y-4 w-full max-w-[800px] mx-auto">
+    <div className="mt-10 space-y-4 w-full max-w-[800px] mx-auto"
+    
+    >
       {items.map((item, index) => (
         <div
           key={index}
-          className="bg-[#131412] border border-[#393938] rounded-[15px] overflow-hidden"
+          className={`bg-[#131412] ${
+              isVisible ? "animate-slideIn" : ""
+            }  border border-[#393938] rounded-[15px] overflow-hidden`}
         >
           {/* Accordion Header */}
           <button
@@ -54,6 +62,9 @@ const Accordion = ({
 };
 
 const FAQComponent = () => {
+
+  const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
+  const isVisible = useInView(sectionRef, { threshold: 0.4 });
   const accordionItems = [
     {
       title: "Is our Node Staked?",
@@ -106,13 +117,19 @@ const FAQComponent = () => {
   ];
 
   return (
-    <div className="mx-auto mt-[100px] px-4">
+    <div className="mx-auto mt-[100px] px-4"
+    ref={sectionRef}
+    >
       <div className="flex flex-col items-center text-center">
-        <p className="text-white text-[42px] mw-8:text-[36px] font-inter font-medium mt-[20px]">
+        <p className={`text-white ${
+              isVisible ? "animate-slideIn" : ""
+            }  text-[42px] mw-8:text-[36px] font-inter font-medium mt-[20px]`}>
           Frequently Asked Questions (FAQs)
         </p>
       </div>
-      <Accordion items={accordionItems} />
+      <Accordion 
+      isVisible={isVisible}
+      items={accordionItems} />
     </div>
   );
 };

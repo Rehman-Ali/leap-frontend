@@ -9,6 +9,20 @@ export default {
       fontFamily: {
         inter: ['var(--font-inter)', ...fontFamily.sans],
       },
+      keyframes: {
+        slideIn: {
+          '0%': { transform: 'translateY(40px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideInFade: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        slideIn: 'slideIn 0.5s ease-out forwards',
+        slideInFade: 'slideInFade 0.6s ease-out forwards',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

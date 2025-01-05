@@ -1,6 +1,10 @@
+"use client"
 import Image from "next/image";
 
 const NodeHeroSection = () => {
+    //  const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
+    //   const isVisible = useInView(sectionRef, { threshold: 0.4 });
+  
   return (
     <div className="relative mt-24 min-h-screen overflow-hidden">
       {/* Background Image */}

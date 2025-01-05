@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sliding Text Animation</title>
+  <style>
+    /* Container to control overflow */
+    .text-container {
+      overflow: hidden;
+    }
+
+    /* Heading style */
+    h1 {
+      font-family: Arial, sans-serif;
+      font-size: 2em;
+      margin: 20px 0;
+      /* Initially position the text below its normal position */
+      transform: translateY(100%);
+      /* Apply the animation */
+      animation: slideIn 0.5s forwards cubic-bezier(.4, 0, .39, 1.04);
+    }
+
+    /* Keyframes for the slide-in effect */
+    @keyframes slideIn {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="text-container">
+    <h1>Your Sliding Text Here</h1>
+  </div>
+</body>
+</html>

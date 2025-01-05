@@ -1,13 +1,17 @@
 import Image from "next/image";
 import { LuAsterisk } from "react-icons/lu";
 import { FaCheck } from "react-icons/fa6";
+import { useRef } from "react";
+import { useInView } from "@/hooks/useInView";
 const ArbitageBot = () => {
+   const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
+    const isVisible = useInView(sectionRef, { threshold: 0.4 });
   return (
     <div className="mx-auto mt-[150px]">
       <div className="flex flex-row items-center justify-between">
       
         <div>
-          <div className="  w-[112px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a] flex flex-row gap-x-1 justify-center items-center">
+          <div className="  w-[112px] h-[34px] bg-[#131412] rounded-[40px] border  border-[#07210a] flex flex-row gap-x-1 justify-center items-center">
             <LuAsterisk size={14} color={"#37f94e"} />
             <p className="text-[14px]  mw-12:text-[12px] font-inter text-darkPrimary">SERVICES</p>
           </div>
@@ -42,7 +46,7 @@ const ArbitageBot = () => {
             Discover More
           </button>
         </div>
-        <div>
+        <div className="animate__animated animate__fadeInRight">
           <Image
             src="/assets/home/arbitrage-bot.png"
             height={460}
