@@ -47,11 +47,21 @@ const Header = () => {
           >
             Arb Bot
           </Link>
+          <Link
+            className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
+            href="/rpc"
+          >
+            RPC
+          </Link>
         </div>
+        <Link
+            className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
+            href="/login"
+          >
         <button className="hidden lg:block w-[168px]  mw-12:w-[150px]  mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white">
-          Join Our Discord
+          Dashboard
         </button>
-
+        </Link>    
         {/* Mobile Menu Toggle */}
         <div
           className="lg:hidden text-white cursor-pointer text-[24px]"
@@ -89,6 +99,13 @@ const Header = () => {
               onClick={toggleMenu}
             >
               Arb Bot
+            </Link>
+            <Link
+              className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
+              href="/rpc"
+              onClick={toggleMenu}
+            >
+              RPC
             </Link>
             <button
               className="w-[168px] h-[46px]  mw-12:w-[150px]  mw-12:text-[14px]  bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"

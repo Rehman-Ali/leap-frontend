@@ -1,12 +1,18 @@
 "use client"
 import { useInView } from "@/hooks/useInView";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { LuAsterisk } from "react-icons/lu";
 
 const TelegramHeroSection = () => {
-    const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
-      const isVisible = useInView(sectionRef, { threshold: 0.4 });
+   const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
+    const isVisible = useInView(sectionRef, { threshold: 0.4 });
+    const [animationTriggered, setAnimationTriggered] = useState(false);
+  
+    // Trigger animation only once
+    if (isVisible && !animationTriggered) {
+      setAnimationTriggered(true);
+    }
    
   return (
     <div
@@ -20,21 +26,21 @@ const TelegramHeroSection = () => {
         <div className="flex flex-col justify-center items-center space-y-4 text-center">
           <h1 className={`text-white
           ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             }
           text-4xl sm:text-5xl lg:text-6xl font-medium`}>
             Leap Telegram<span className="text-darkPrimary"> Bot</span>
           </h1>
           <p className={`text-[#C6C7C6]
           ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             }
           text-sm sm:text-base lg:text-lg max-w-xl`}>
             Take your crypto trading to the next level with the Leap Telegram Bot, designed for speed, simplicity, and precision.
           </p>
           <button className={`w-36
           ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             }
           mw-12:w-[110px] mw-12:text-[14px]  sm:w-40 h-12 bg-darkPrimary font-medium text-[#231F20] rounded-full cursor-pointer hover:bg-white`}>
             Get Started
@@ -77,7 +83,7 @@ const TelegramHeroSection = () => {
           ].map((feature, index) => (
             <div
               key={index}
-              className={`flex ${isVisible ? 'animate-slideInFade' :"" } flex-col bg-[#131412] rounded-lg p-6 text-center items-center space-y-4`}
+              className={`flex ${animationTriggered ? 'animate-slideInFade' :"" } flex-col bg-[#131412] rounded-lg p-6 text-center items-center space-y-4`}
               style={{
                 animationDelay: `${index * 0.1}s`,
               }}
@@ -94,20 +100,20 @@ const TelegramHeroSection = () => {
           <div className="text-left">
             <div className={`w-28 
             ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             }
             h-8 bg-[#131412] rounded-full border border-[#07210a] flex items-center justify-center space-x-2  lg:mx-0`} >
               <LuAsterisk size={14} color={"#37f94e"} />
               <span className="text-sm mw-8:text-[14px] text-darkPrimary">PRICING</span>
             </div>
             <h2 className={`text-white  ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             } mw-5:text-[31px] mw-12:text-[42px] mw-8:text-[38px]  text-[52px] leading-[60px]  font-medium  mt-4`}>
               Simple and<span className="text-darkPrimary"> Transparent</span>
               <br /> Pricing
             </h2>
             <ul className={`text-white   ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             } text-sm sm:text-base lg:text-lg mt-6 space-y-4 max-w-md mx-auto lg:mx-0`}>
               <li>Free to Set Up: Get started at no cost.</li>
               <li>
@@ -120,7 +126,7 @@ const TelegramHeroSection = () => {
           </div>
           <div className={`flex justify-center mw-8:w-full
           ${
-            isVisible ? "animate__animated animate__fadeInRight" : ""
+            animationTriggered ? "animate__animated animate__fadeInRight" : ""
           }
         `}>
           <Image

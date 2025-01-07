@@ -1,11 +1,17 @@
 "use client"
 import { useInView } from "@/hooks/useInView";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { LuAsterisk } from "react-icons/lu";
 
 const HeroSection = () => {
-   const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
-    const isVisible = useInView(sectionRef, { threshold: 0.4 });
+  const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
+  const isVisible = useInView(sectionRef, { threshold: 0.4 });
+  const [animationTriggered, setAnimationTriggered] = useState(false);
+
+  // Trigger animation only once
+  if (isVisible && !animationTriggered) {
+    setAnimationTriggered(true);
+  }
   return (
     <div className="relative mt-[100px] min-h-screen overflow-hidden"
     ref={sectionRef}
@@ -17,13 +23,13 @@ const HeroSection = () => {
       <div className="relative flex flex-col h-full z-10 mx-[10px]">
         <div className="flex flex-col justify-center items-center px-8 space-y-4">
           <h1 className={`text-white ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             } mw-8:text-[34px] mw-12:text-[53px] text-[65px] font-inter text-center font-medium`}>
             Leap <span className="text-darkPrimary">Ahead</span> Of Your
             Competition
           </h1>
           <p className={`text-[#C6C7C6] text-[16px] ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             } mw-8:text-[14px] text-center font-inter`}>
             You Deserve Seamless Trading Without Limits
           </p>
@@ -31,7 +37,7 @@ const HeroSection = () => {
 
         <div className="flex flex-col items-center justify-center mt-[70px]">
           <div className={`w-[150px] h-[34px] ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             } bg-[#131412] rounded-[40px] border border-[#07210a] flex flex-row gap-x-1 justify-center items-center`}>
             <LuAsterisk size={14} color={"#37f94e"} />
             <p className="text-[14px]  mw-12:text-[12px] font-inter text-darkPrimary">
@@ -39,7 +45,7 @@ const HeroSection = () => {
             </p>
           </div>
           <p className={`text-white ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             } text-[60px] mw-12:text-[42px] mw-8:text-[36px] font-inter font-medium mt-[5px]`}>
             Why Us?
           </p>
@@ -70,7 +76,7 @@ const HeroSection = () => {
           ].map((item, index) => (
             <div
               key={index}
-              className={`flex ${isVisible ? 'nimate-slideInFade' :"" } a  flex-col w-[23%] mw-8:w-[97%] mw-12:w-[48%] bg-[#131412] rounded-[12px] p-[24px] max-h-[300px] h-auto`}
+              className={`flex ${animationTriggered ? 'animate-slideInFade' :"" }   flex-col w-[23%] mw-8:w-[97%] mw-12:w-[48%] bg-[#131412] rounded-[12px] p-[24px] max-h-[300px] h-auto`}
               style={{
                 animationDelay: `${index * 0.1}s`,
               }}
@@ -86,7 +92,7 @@ const HeroSection = () => {
         </div>
 
         <div className={`flex flex-col items-center justify-center mt-[150px] ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             }`}>
           <div className="w-[170px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a] flex flex-row gap-x-1 justify-center items-center">
             <LuAsterisk size={14} color={"#37f94e"} />

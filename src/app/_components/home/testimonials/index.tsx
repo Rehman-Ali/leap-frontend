@@ -2,18 +2,24 @@
 import Image from "next/image";
 import { LuAsterisk } from "react-icons/lu";
 import Marquee from "react-fast-marquee";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 const Testimonials = () => {
-   const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
-    const isVisible = useInView(sectionRef, { threshold: 0.4 });
+  const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
+  const isVisible = useInView(sectionRef, { threshold: 0.4 });
+  const [animationTriggered, setAnimationTriggered] = useState(false);
+
+  // Trigger animation only once
+  if (isVisible && !animationTriggered) {
+    setAnimationTriggered(true);
+  }
   return (
     <div className="mx-auto my-[150px] "
     ref={sectionRef}
     >
       <div className="flex flex-col items-center justify-center">
         <div className={`w-[150px] ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             }  h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a] flex flex-row gap-x-1 justify-center items-center`}>
           <LuAsterisk size={14} color={"#37f94e"} />
           <p className="text-[14px]  mw-12:text-[12px] font-inter text-darkPrimary">
@@ -21,7 +27,7 @@ const Testimonials = () => {
           </p>
         </div>
         <p className={`text-white text-[60px] ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             } mw-12:text-[42px] mw-8:text-[36px] font-inter font-medium mt-[20px]`}>
           Testimonials
         </p>

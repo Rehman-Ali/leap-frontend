@@ -65,6 +65,12 @@ const FAQComponent = () => {
 
   const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
   const isVisible = useInView(sectionRef, { threshold: 0.4 });
+  const [animationTriggered, setAnimationTriggered] = useState(false);
+
+  // Trigger animation only once
+  if (isVisible && !animationTriggered) {
+    setAnimationTriggered(true);
+  }
   const accordionItems = [
     {
       title: "Is our Node Staked?",
@@ -122,13 +128,13 @@ const FAQComponent = () => {
     >
       <div className="flex flex-col items-center text-center">
         <p className={`text-white ${
-              isVisible ? "animate-slideIn" : ""
+              animationTriggered ? "animate-slideIn" : ""
             }  text-[42px] mw-8:text-[36px] font-inter font-medium mt-[20px]`}>
           Frequently Asked Questions (FAQs)
         </p>
       </div>
       <Accordion 
-      isVisible={isVisible}
+      isVisible={animationTriggered}
       items={accordionItems} />
     </div>
   );

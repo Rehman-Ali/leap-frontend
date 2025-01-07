@@ -19,9 +19,13 @@ export default {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
+      backgroundImage: {
+        'marble': "url('/assets/dashboard/marble.webp')",
+      },
       animation: {
         slideIn: 'slideIn 0.5s ease-out forwards',
         slideInFade: 'slideInFade 0.6s ease-out forwards',
+        'spin-slow': 'spin 4s linear infinite',
       },
       colors: {
         background: "var(--background)",
@@ -31,7 +35,7 @@ export default {
       },
       screens: {
         "mw-12": { max: "1280px" },
-        "mw-10": { max: "1024px" },
+        "mw-10": { max: "1023px" },
         "mw-8": { max: "840px" },
         "mw-7": { max: "768px" },
         "mw-6": { max: "640px" },

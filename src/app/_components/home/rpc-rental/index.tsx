@@ -5,7 +5,7 @@ import { FaCheck } from "react-icons/fa6";
 import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 
-const TelegramTradingBot = () => {
+const RPCRental = () => {
  const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
   const isVisible = useInView(sectionRef, { threshold: 0.4 });
   const [animationTriggered, setAnimationTriggered] = useState(false);
@@ -14,6 +14,7 @@ const TelegramTradingBot = () => {
   if (isVisible && !animationTriggered) {
     setAnimationTriggered(true);
   }
+
   return (
     <div className="mx-auto px-4 mt-[100px]" ref={sectionRef}>
       <div className="flex flex-col mw-8:flex-col md:flex-row items-center  mw-8:items-start justify-between gap-y-10 md:gap-x-[80px]">
@@ -52,15 +53,14 @@ const TelegramTradingBot = () => {
               animationTriggered ? "animate-slideIn" : ""
             } text-[60px] mw-12:text-[42px] mw-8:text-[36px] font-inter font-medium leading-[70px] mw-12:leading-[48px] mw-8:leading-[42px] mt-[20px]`}
           >
-            Telegram <span className="text-darkPrimary">Trading </span>
-            Bot
+          RPC Rental
           </p>
           <p
             className={`text-[#C5C6C5] font-inter ${
               animationTriggered ? "animate-slideIn" : ""
             } text-[16px] mw-8:max-w-[100%] max-w-[500px] my-[20px] text-left`}
           >
-            Simplified trading, faster than ever before.
+           Unparalleled speed, reliability, and unlimited transactions per second (TPS). Optimise your botting with the fastest node on the Solana blockchain.
           </p>
           {/* Features */}
           {[
@@ -94,4 +94,4 @@ const TelegramTradingBot = () => {
   );
 };
 
-export default TelegramTradingBot;
+export default RPCRental;

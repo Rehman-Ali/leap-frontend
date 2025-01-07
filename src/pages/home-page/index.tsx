@@ -4,6 +4,7 @@ import HeroSection from "@/app/_components/home/herosection";
 import Services from "@/app/_components/home/services";
 import TelegramTadingBot from "@/app/_components/home/telegram-trading-bot";
 import Testimonials from "@/app/_components/home/testimonials";
+import RPCRental from "@/app/_components/home/rpc-rental";
 
 
 const HomePageScreen = () => {
@@ -11,8 +12,9 @@ const HomePageScreen = () => {
     <div className="bg-bodycolor max-w-[1200px] mx-auto">
       <HeroSection/>
        <Services/>
-     <TelegramTadingBot />
+      <TelegramTadingBot />
       <ArbitageBot/>
+      <RPCRental/>
       <FAQComponent/>
       <Testimonials/>
      
