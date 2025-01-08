@@ -32,8 +32,7 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         darkPrimary: "#37F94E",
-        bodyColor:"#070806",
-        
+        bodyColor:"#070806",     
       },
       screens: {
         "mw-12": { max: "1280px" },
