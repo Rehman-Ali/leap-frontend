@@ -37,21 +37,21 @@ const Header = () => {
           </Link>
           <Link
             className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
-            href="/node"
-          >
-            Node
-          </Link>
-          <Link
-            className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
-            href="/arb-bot"
-          >
-            Arb Bot
-          </Link>
-          <Link
-            className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
             href="/rpc"
           >
             RPC
+          </Link>
+          <Link
+            className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
+            href="/trading-bot"
+          >
+            Trading Bot
+          </Link>
+          <Link
+            className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
+            href="/vps"
+          >
+            VPS
           </Link>
         </div>
         <Link
@@ -88,24 +88,24 @@ const Header = () => {
             </Link>
             <Link
               className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
-              href="/node"
-              onClick={toggleMenu}
-            >
-              Node
-            </Link>
-            <Link
-              className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
-              href="/arb-bot"
-              onClick={toggleMenu}
-            >
-              Arb Bot
-            </Link>
-            <Link
-              className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
               href="/rpc"
               onClick={toggleMenu}
             >
               RPC
+            </Link>
+            <Link
+              className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
+              href="/Trading-bot"
+              onClick={toggleMenu}
+            >
+              Trading Bot
+            </Link>
+            <Link
+              className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
+              href="/vps"
+              onClick={toggleMenu}
+            >
+              VPS
             </Link>
             <button
               className="w-[168px] h-[46px]  mw-12:w-[150px]  mw-12:text-[14px]  bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"

@@ -2,17 +2,17 @@ import Link from "next/link";
 
 const DashboardNodeScreen = () => {
   return (
-    <div className="h-full w-full max-w-[100vw] flex justify-center bg-white">
+    <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
       <div className="h-full w-full max-w-[1500px] p-2 lg:p-5">
         <div className="flex justify-between">
-          <h1 className="font-semibold text-xl flex items-center">
+          <h1 className="font-semibold text-xl flex items-center dark:text-white">
             Your Nodes
-            <span className="bg-darkPrimary text-black text-sm px-2 py-0.5 h-fit ml-5 rounded-lg">
+            <span className="bg-darkPrimary text-black dark:text-white text-sm px-2 py-0.5 h-fit ml-5 rounded-lg">
               0
             </span>
           </h1>
           <Link href="#">
-            <button className="flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu bg-darkPrimary text-black">
+            <button className="flex justify-center dark:text-white items-center font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu bg-darkPrimary text-black">
               Buy Node
             </button>
           </Link>
@@ -20,7 +20,7 @@ const DashboardNodeScreen = () => {
         <hr className="mt-4 mb-6" />
         <div>
           <div className="h-[80vh] w-full flex flex-col justify-center items-center text-center">
-            <div className="text-2xl font-semibold text-gray-400">
+            <div className="text-2xl font-semibold text-gray-400 dark:text-white">
               You dont have any paid plans yet.
               <br />
               Get started by buying one and fly by the competition.
@@ -29,25 +29,25 @@ const DashboardNodeScreen = () => {
               <span className="text-base">Want to test the waters first? </span>
             </div>
             <div className="border-2 border-dashed text-center rounded-lg flex justify-center flex-col items-center mt-4 p-4">
-              <div className="border border-gray-200 p-3 rounded-lg justify-center bg-white">
+              <div className="border border-gray-200 p-3 rounded-lg justify-center dark:bg-gray-900 bg-white">
                 <div className="flex justify-between mb-5">
                   <div className="flex items-center gap-2">
-                    <div className="text-xs font-semibold px-2 py-0.5 rounded-md border w-fit  text-gray-500 border-gray-300">
+                    <div className="text-xs font-semibold px-2 py-0.5 rounded-md border w-fit  text-gray-500 dark:text-white dark:border-white border-gray-300">
                       FREE
                     </div>
                   </div>
                   <p className="text-gray-500 text-sm">🌍</p>
                 </div>
                 <div className="flex flex-col items-center w-full">
-                  <p className="font-semibold my-2 text-xl">PUBLIC</p>
+                  <p className="font-semibold my-2 text-xl dark:text-white">PUBLIC</p>
                   <div className="my-3 w-full flex flex-col gap-2 p-2">
                     <div className="w-full">
                       <div className="w-full">
-                        <div className="text-gray-500 text-[10px]">RPC URL</div>
+                        <div className="text-gray-500 text-[10px] dark:text-white">RPC URL</div>
                         <div className="flex items-center">
                           <div className="flex items-center w-full">
                             <input
-                              className="text-sm outline-none w-full pr-1.5"
+                              className="text-sm outline-none w-full pr-1.5 dark:text-white"
                               placeholder=" "
                               type="text"
                               defaultValue="https://public.ligmanode.com"
@@ -87,13 +87,13 @@ const DashboardNodeScreen = () => {
                     </div>
                     <div className="w-full">
                       <div className="w-full">
-                        <div className="text-gray-500 text-[10px]">
+                        <div className="text-gray-500 text-[10px] dark:text-white">
                           WEBSOCKET RPC URL
                         </div>
                         <div className="flex items-center">
                           <div className="flex items-center w-full">
                             <input
-                              className="text-sm outline-none w-full pr-1.5"
+                              className="text-sm outline-none w-full pr-1.5 dark:text-white"
                               placeholder=" "
                               type="text"
                               defaultValue="wss://public.ligmanode.com"
@@ -133,21 +133,21 @@ const DashboardNodeScreen = () => {
                     </div>
                     <div className="w-full">
                       <div className="w-full">
-                        <div className="text-gray-500 text-[10px]">
+                        <div className="text-gray-500 text-[10px] dark:text-white">
                           GEYSER (gRPC) URL
                         </div>
                         <div className="flex items-center">
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-gray-500 dark:text-white">
                             Available with God Node
                           </p>
                         </div>
                       </div>
                     </div>
-                  </div>{" "}
+                  </div>
                 </div>
               </div>
               <Link className="mt-4" href="#">
-                <button className="flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu bg-darkPrimary text-black">
+                <button className="flex justify-center items-center dark:text-white font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu bg-darkPrimary text-black">
                   Upgrade Plan
                 </button>
               </Link>

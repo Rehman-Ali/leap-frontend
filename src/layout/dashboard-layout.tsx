@@ -16,7 +16,7 @@ export default function DashboardLayout({
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen dark:bg-bodyColor bg-white">
       {/* Sidebar */}
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 

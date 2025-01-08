@@ -1,6 +1,6 @@
 import { FaArrowRight } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
-const NodePricing = () => {
+const RPCPricing = () => {
   return (
     <section className="relative" id="pricing">
       <div
@@ -961,4 +961,4 @@ const NodePricing = () => {
   );
 };
 
-export default NodePricing;
+export default RPCPricing;

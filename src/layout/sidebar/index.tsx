@@ -20,11 +20,11 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white text-[#000000]  border-r transform ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-bodyColor dark:text-white  text-[#000000]  border-r dark:border-r-gray-600 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 ease-in-out lg:translate-x-0`}
       >
-        <div className="pl-[20px] pt-[13px]  pb-[8px] flex justify-between items-center border-b ">
+        <div className="pl-[20px] pt-[13px]  pb-[8px] flex justify-between items-center border-b  dark:border-b-gray-600">
           <Image
             src="/assets/logo1.png"
             height={102}
@@ -33,13 +33,13 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             className="h-[38px] w-[120px]"
           />
 
-          <button className="mr-[5px] lg:hidden text-[#00000]" onClick={toggleSidebar}>
-            <IoClose size={20} />
+          <button className="mr-[5px] lg:hidden text-[#00000] dark:text-white" onClick={toggleSidebar}>
+            <IoClose size={20}  />
           </button>
         </div>
         <nav className="mt-[10px] grid items-start px-2 text-sm font-medium lg:px-4 gap-1">
           <Link
-            className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all  font-inter   ${pathname === '/dashboard' ? "bg-darkPrimary text-white font-semibold" : "text-black hover:text-darkPrimary" } `}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all  font-inter   ${pathname === '/dashboard' ? "bg-darkPrimary text-white font-semibold" : "text-black dark:text-white hover:text-darkPrimary" } `}
             href="/dashboard"
           >
             <svg
@@ -60,7 +60,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             Dashboard
           </Link>
           <Link
-            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all     ${pathname === '/nodes' ? "bg-darkPrimary text-white font-semibold" : "text-black hover:text-darkPrimary" } `}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all     ${pathname === '/nodes' ? "bg-darkPrimary text-white font-semibold" : "text-black dark:text-white hover:text-darkPrimary" } `}
             href="/nodes"
           >
             <svg
@@ -83,7 +83,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             Nodes
           </Link>
           <Link
-            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${pathname === '/analytics' ? "bg-darkPrimary text-white font-semibold" : "text-black hover:text-darkPrimary" } `}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${pathname === '/analytics' ? "bg-darkPrimary text-white font-semibold" : "text-black dark:text-white hover:text-darkPrimary" } `}
             href="/analytics"
           >
             <svg
@@ -104,7 +104,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             Analytics
           </Link>
           <Link
-            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${pathname === '/orders' ? "bg-darkPrimary text-white font-semibold" : "text-black hover:text-darkPrimary" } `}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${pathname === '/orders' ? "bg-darkPrimary text-white font-semibold" : "text-black dark:text-white hover:text-darkPrimary" } `}
             href="/orders"
           >
             <svg
@@ -126,7 +126,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             Orders
           </Link>
           <Link
-            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${pathname === "/affiliate" ? "bg-darkPrimary text-white font-semibold" : "text-black hover:text-darkPrimary" } `}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${pathname === "/affiliate" ? "bg-darkPrimary text-white font-semibold" : "text-black dark:text-white hover:text-darkPrimary" } `}
             href="/affiliate"
           >
             <svg
@@ -203,7 +203,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             >
               <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
             </svg>
-            RPC Docs
+            Whitepaper
             <svg
               stroke="currentColor"
               fill="none"
@@ -221,46 +221,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
               <line x1="10" x2="21" y1="14" y2="3"></line>
             </svg>
           </a>
-          <div className="text-gray-500 mx-2 mt-6">Tools by Leap</div>
-          <a
-            className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-darkPrimary"
-            href="#"
-            target="_blank"
-          >
-            <svg
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-4 w-4"
-              height="1em"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"></path>
-              <path d="M9 8c-2 3-4 3.5-7 4l8 10c2-1 6-5 6-7"></path>
-              <path d="M14.5 17.5 4.5 15"></path>
-            </svg>
-            Vapor
-            <svg
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-4 w-4 text-gray-600"
-              height="1em"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" x2="21" y1="14" y2="3"></line>
-            </svg>
-          </a>
+       
         </nav>
       </div>
 

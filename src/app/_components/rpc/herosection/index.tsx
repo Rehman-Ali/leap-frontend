@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 
-const NodeHeroSection = () => {
+const RPCHeroSection = () => {
  const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
   const isVisible = useInView(sectionRef, { threshold: 0.4 });
   const [animationTriggered, setAnimationTriggered] = useState(false);
@@ -27,7 +27,7 @@ const NodeHeroSection = () => {
           <h1 className={` ${
               animationTriggered ? "animate-slideIn" : ""
             } text-white text-center text-4xl sm:text-5xl lg:text-6xl font-inter font-medium`}>
-            Leap <span className="text-darkPrimary">Node</span>
+            Leap <span className="text-darkPrimary">RPC</span>
           </h1>
           <p className={` ${
               animationTriggered ? "animate-slideIn" : ""
@@ -70,7 +70,7 @@ const NodeHeroSection = () => {
         </div>
 
         {/* Benchmark Section */}
-        <div className="flex flex-col items-center justify-center mt-24 px-4">
+        <div className="flex flex-col items-center justify-center mw-8:mt-[25px] mt-24 px-4">
           <p className={`${
               animationTriggered ? "animate-slideIn" : ""
             } text-white text-center text-base sm:text-lg font-inter `}>
@@ -78,12 +78,12 @@ const NodeHeroSection = () => {
           </p>
           <button className={` ${
               animationTriggered ? "animate-slideIn" : ""
-            } mt-5 w-32 sm:w-36 h-12 bg-darkPrimary text-sm sm:text-base font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}>
+            } mt-5 mw-8:mt-3 w-32 sm:w-36 h-12 bg-darkPrimary text-sm sm:text-base font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}>
             Join Now
           </button>
           <p className={` ${
               animationTriggered ? "animate-slideIn" : ""
-            } text-white pb-[20px] text-center text-4xl sm:text-5xl lg:text-6xl font-inter font-medium mt-6`}>
+            } text-white pb-[20px] mw-8:pb-[10px] text-center text-4xl sm:text-5xl lg:text-6xl font-inter font-medium mw-8:t-3 mt-6`}>
             Benchmark
           </p>
           <Image
@@ -99,4 +99,4 @@ const NodeHeroSection = () => {
   );
 };
 
-export default NodeHeroSection;
+export default RPCHeroSection;

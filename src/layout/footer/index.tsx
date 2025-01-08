@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { PiLinkSimpleBold } from "react-icons/pi";
-import { FaXTwitter, FaFacebook } from "react-icons/fa6";
+import { FaXTwitter, FaFacebook , FaDiscord} from "react-icons/fa6";
 import Link from "next/link";
 
 const Footer = () => {
@@ -23,8 +22,8 @@ const Footer = () => {
             </p>
             <div className="flex gap-3">
               {[
-                { icon: PiLinkSimpleBold, href: "#", size: 22 },
-                { icon: FaXTwitter, href: "#", size: 20 },
+                { icon: FaDiscord, href: "https://discord.gg/9UXPJgnZ5q", size: 22 },
+                { icon: FaXTwitter, href: "https://x.com/leap_io?s=21&t=CmssjaT_wwKceUeLUz12aA", size: 20 },
                 { icon: FaFacebook, href: "#", size: 22 },
               ].map(({ icon: Icon, href, size }, idx) => (
                 <a
@@ -44,9 +43,10 @@ const Footer = () => {
             <nav className="flex flex-col gap-3 mt-4">
               {[
                 { name: "Home", href: "/" },
-                { name: "Node", href: "/node" },
+                { name: "RPC", href: "/rpc" },
                 { name: "Telegram Bot", href: "/telegram-bot" },
-                { name: "Arb Bot", href: "/arb-bot" },
+                { name: "Trading Bot", href: "/trading-bot" },
+                { name: "VPS", href: "/vps" },
               ].map(({ name, href }, idx) => (
                 <Link
                   key={idx}

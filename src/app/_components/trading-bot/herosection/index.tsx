@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { LuAsterisk } from "react-icons/lu";
 
-const TelegramHeroSection = () => {
+const TradingHeroSection = () => {
    const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
     const isVisible = useInView(sectionRef, { threshold: 0.4 });
     const [animationTriggered, setAnimationTriggered] = useState(false);
@@ -29,14 +29,14 @@ const TelegramHeroSection = () => {
               animationTriggered ? "animate-slideIn" : ""
             }
           text-4xl sm:text-5xl lg:text-6xl font-medium`}>
-            Leap Telegram<span className="text-darkPrimary"> Bot</span>
+            Leap Trading<span className="text-darkPrimary"> Bot</span>
           </h1>
           <p className={`text-[#C6C7C6]
           ${
               animationTriggered ? "animate-slideIn" : ""
             }
           text-sm sm:text-base lg:text-lg max-w-xl`}>
-            Take your crypto trading to the next level with the Leap Telegram Bot, designed for speed, simplicity, and precision.
+            Take your crypto trading to the next level with the Leap Trading Bot, designed for speed, simplicity, and precision.
           </p>
           <button className={`w-36
           ${
@@ -80,11 +80,6 @@ const TelegramHeroSection = () => {
               title: "MEV Protection",
               description: "Automatically follow the trades by your selected wallets.",
             },
-            {
-              image: "/assets/telebot/telegram3.png",
-              title: "Mempool Access",
-              description: "Piggy back pending transactions and land faster than ever before.",
-            },
           ].map((feature, index) => (
             <div
               key={index}
@@ -101,7 +96,7 @@ const TelegramHeroSection = () => {
         </div>
 
         {/* Benchmark Section */}
-        <div className="mt-[120px] mw-8:mt-[60px] flex flex-col lg:flex-row mw-12:items-start items-center justify-between my-16 space-y-8 lg:space-y-0 lg:space-x-16">
+        <div className="mt-[120px] flex flex-col lg:flex-row mw-12:items-start items-center justify-between my-16 space-y-8 lg:space-y-0 lg:space-x-16">
           <div className="text-left">
             <div className={`w-28 
             ${
@@ -149,4 +144,4 @@ const TelegramHeroSection = () => {
   );
 };
 
-export default TelegramHeroSection;
+export default TradingHeroSection;

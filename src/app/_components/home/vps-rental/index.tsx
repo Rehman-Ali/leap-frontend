@@ -1,12 +1,13 @@
-'use client'
+"use client";
 import Image from "next/image";
 import { LuAsterisk } from "react-icons/lu";
 import { FaCheck } from "react-icons/fa6";
 import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
+import Link from "next/link";
 
-const RPCRental = () => {
- const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
+const VPSRental = () => {
+  const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
   const isVisible = useInView(sectionRef, { threshold: 0.4 });
   const [animationTriggered, setAnimationTriggered] = useState(false);
 
@@ -17,7 +18,7 @@ const RPCRental = () => {
 
   return (
     <div className="mx-auto px-4 mt-[100px]" ref={sectionRef}>
-      <div className="flex flex-col mw-8:flex-col md:flex-row items-center  mw-8:items-start justify-between gap-y-10 md:gap-x-[80px]">
+      <div className="flex flex-col mw-8:flex-col-reverse md:flex-row items-center  mw-8:items-start justify-between gap-y-10 md:gap-x-[80px]">
         {/* Left Content (Image) */}
         <div
           className={`flex justify-center mw-8:w-full ${
@@ -53,14 +54,16 @@ const RPCRental = () => {
               animationTriggered ? "animate-slideIn" : ""
             } text-[60px] mw-12:text-[42px] mw-8:text-[36px] font-inter font-medium leading-[70px] mw-12:leading-[48px] mw-8:leading-[42px] mt-[20px]`}
           >
-          RPC Rental
+            VPS Rental
           </p>
           <p
             className={`text-[#C5C6C5] font-inter ${
               animationTriggered ? "animate-slideIn" : ""
             } text-[16px] mw-8:max-w-[100%] max-w-[500px] my-[20px] text-left`}
           >
-           Unparalleled speed, reliability, and unlimited transactions per second (TPS). Optimise your botting with the fastest node on the Solana blockchain.
+            Unparalleled speed, reliability, and unlimited transactions per
+            second (TPS). Optimise your botting with the fastest node on the
+            Solana blockchain.
           </p>
           {/* Features */}
           {[
@@ -81,17 +84,19 @@ const RPCRental = () => {
           ))}
 
           {/* Button */}
-          <button
-            className={`w-[168px] mw-12:w-[140px] mw-12:text-[14px] h-[46px] ${
-              animationTriggered ? "animate-slideIn" : ""
-            } bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white mt-[15px]`}
-          >
-            Discover More
-          </button>
+          <Link href="/vps">
+            <button
+              className={`w-[168px] mw-12:w-[140px] mw-12:text-[14px] h-[46px] ${
+                animationTriggered ? "animate-slideIn" : ""
+              } bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white mt-[15px]`}
+            >
+              Discover More
+            </button>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default RPCRental;
+export default VPSRental;

@@ -5,7 +5,7 @@ import { LuAsterisk } from "react-icons/lu";
 import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 
-const NodeSpeedComponent = () => {
+const RPCSpeedComponent = () => {
    const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
     const isVisible = useInView(sectionRef, { threshold: 0.4 });
     const [animationTriggered, setAnimationTriggered] = useState(false);
@@ -15,7 +15,7 @@ const NodeSpeedComponent = () => {
       setAnimationTriggered(true);
     }
   return (
-    <div className="mx-auto my-[150px] px-4 max-w-7xl"
+    <div className="mx-auto mw-8:my-[70px] my-[150px] px-4 max-w-7xl"
     ref={sectionRef}
     >
       <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-8">
@@ -105,4 +105,4 @@ const NodeSpeedComponent = () => {
   );
 };
 
-export default NodeSpeedComponent;
+export default RPCSpeedComponent;

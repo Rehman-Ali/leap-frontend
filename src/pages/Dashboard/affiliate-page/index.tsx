@@ -1,13 +1,13 @@
 const AffiliateScreen = () => {
   return (
-    <div className="h-full w-full max-w-[100vw] flex justify-center bg-white">
+    <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
       <div className="h-full w-full max-w-[1500px] p-2 lg:p-5">
-        <div className="rounded-lg border p-6 md:p-8 w-full overflow-hidden">
+        <div className="rounded-lg border dark:border-gray-600 p-6 md:p-8 w-full overflow-hidden">
           <span className=" fill-green-500 text-blue-500"></span>
-          <h1 className="font-bold text-lg">
+          <h1 className="font-bold text-lg dark:text-white">
             Affiliate Statistics (last 30 days)
           </h1>
-          <div className="text-gray-500 text-md">
+          <div className="text-gray-500 text-md dark:text-white">
             Get rewarded for every successful referral
           </div>
           <div className="flex flex-col lg:flex-row gap-5 justify-center align-center">
@@ -867,7 +867,7 @@ const AffiliateScreen = () => {
               </div>
             </div>
             <div className="w-full lg:w-1/4 flex lg:flex-col gap-2.5 justify-center">
-              <div className="bg-[#f8f8f7] rounded-xl p-4 flex flex-col gap-2 w-full">
+              <div className="bg-[#f8f8f7] dark:bg-gray-900 dark:text-white rounded-xl p-4 flex flex-col gap-2 w-full">
                 <div className="font-bold flex flex-row gap-2 text-nowrap">
                   <svg
                     stroke="currentColor"
@@ -892,7 +892,7 @@ const AffiliateScreen = () => {
                   0
                 </div>
               </div>
-              <div className="bg-[#f8f8f7] rounded-xl p-4 flex flex-col gap-2 w-full">
+              <div className="bg-[#f8f8f7] dark:bg-gray-900 dark:text-white rounded-xl p-4 flex flex-col gap-2 w-full">
                 <div className="font-bold flex flex-row gap-2 text-nowrap">
                   <svg
                     stroke="currentColor"
@@ -919,48 +919,48 @@ const AffiliateScreen = () => {
             </div>
           </div>
         </div>
-        <div className="rounded-lg border p-6 md:p-8 w-full mt-5">
+        <div className="rounded-lg border dark:border-gray-600 p-6 md:p-8 w-full mt-5">
           <div className="flex flex-col lg:flex-row gap-5">
             <div className="w-full">
-              <p className="font-semibold mb-1">Affiliate URL:</p>
-              <div className="bg-gray-100 border border-gray-300 w-full p-2.5 rounded-lg flex justify-between">
+              <p className="font-semibold mb-1 dark:text-white">Affiliate URL:</p>
+              <div className="bg-gray-100 border dark:bg-gray-900 dark:text-white dark:border-gray-600 border-gray-300 w-full p-2.5 rounded-lg flex justify-between">
                 <p>https://hub.ligmanode.com/r/-</p>
-                <p className="text-center w-14 border border-gray-400 bg-gray-300 py-1 rounded-md text-xs cursor-pointer ml-5">
+                <p className="text-center w-14 border dark:text-black border-gray-400 bg-gray-300 py-1 rounded-md text-xs cursor-pointer ml-5">
                   Copy
                 </p>
               </div>
             </div>
             <div className="w-full">
-              <p className="font-semibold mb-1">Discount Code:</p>
-              <div className="bg-gray-100 border border-gray-300 w-full p-2.5 rounded-lg flex justify-between">
+              <p className="font-semibold mb-1 dark:text-white">Discount Code:</p>
+              <div className="bg-gray-100  dark:bg-gray-900 dark:text-white dark:border-gray-600 border border-gray-300 w-full p-2.5 rounded-lg flex justify-between">
                 <p>-</p>
-                <p className="text-center w-14 border border-gray-400 bg-gray-300 py-1 rounded-md text-xs cursor-pointer ml-5">
+                <p className="text-center w-14 dark:text-black border border-gray-400 bg-gray-300 py-1 rounded-md text-xs cursor-pointer ml-5">
                   Copy
                 </p>
               </div>
             </div>
           </div>
           <div className="mt-12 mb-10 w-full lg:w-1/2">
-            <p className="font-semibold">Affiliate Code</p>
-            <p className="text-gray-500 text-sm">
+            <p className="font-semibold dark:text-white">Affiliate Code</p>
+            <p className="text-gray-500 text-sm dark:text-white">
               Set your own affiliate code, which will be used as a ref link and
               discount code.
             </p>
             <input
-              className="border border-gray-400 rounded-lg h-[40px] px-2.5 mt-4 w-full"
+              className="border dark:bg-gray-900 dark:text-white dark:border-gray-600 border-gray-400 rounded-lg h-[40px] px-2.5 mt-4 w-full"
               placeholder="Affiliate Code"
               defaultValue=""
             />
             <div className="flex">
               <div className="text-sm text-red-500 mt-2"></div>
-              <button className="flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu ml-auto bg-darkPrimary text-black mt-4">
+              <button className="flex dark:text-white justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu ml-auto bg-darkPrimary text-black mt-4">
                 Update Code
               </button>
             </div>
           </div>
           <hr className="my-5" />
-          <div className="text-gray-500 text-xl">How does it work?</div>
-          <div className="mt-4">
+          <div className="text-gray-500 text-xl dark:text-white">How does it work?</div>
+          <div className="mt-4 dark:text-white">
             <p>1. Create your unique affiliate code</p>
             <p>
               2. Share your link or discount code with friends, family, or on

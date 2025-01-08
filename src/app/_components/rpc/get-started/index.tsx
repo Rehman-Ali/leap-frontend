@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 
-const NodeGetStarted = () => {
+const RPCGetStarted = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
   const isVisible = useInView(sectionRef, { threshold: 0.4 });
   const [animationTriggered, setAnimationTriggered] = useState(false);
@@ -43,4 +43,4 @@ const NodeGetStarted = () => {
   );
 };
 
-export default NodeGetStarted;
+export default RPCGetStarted;

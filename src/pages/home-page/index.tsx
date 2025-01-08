@@ -1,10 +1,10 @@
-import ArbitageBot from "@/app/_components/home/arbitrage-bot";
 import FAQComponent from "@/app/_components/home/faq";
 import HeroSection from "@/app/_components/home/herosection";
 import Services from "@/app/_components/home/services";
 import TelegramTadingBot from "@/app/_components/home/telegram-trading-bot";
 import Testimonials from "@/app/_components/home/testimonials";
-import RPCRental from "@/app/_components/home/rpc-rental";
+import VPSRental from "@/app/_components/home/vps-rental";
+import TradingBot from "@/app/_components/home/trading-bot";
 
 
 const HomePageScreen = () => {
@@ -13,8 +13,8 @@ const HomePageScreen = () => {
       <HeroSection/>
        <Services/>
       <TelegramTadingBot />
-      <ArbitageBot/>
-      <RPCRental/>
+      <TradingBot/>
+      <VPSRental/>
       <FAQComponent/>
       <Testimonials/>
      
