@@ -8,7 +8,6 @@ import DashboardLayout from "@/layout/dashboard-layout"; // Import the Dashboard
 import { inter } from "@/utils/fonts";
 import { usePathname } from "next/navigation";
 import { ThemeProvider } from "next-themes";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -16,7 +15,7 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
 
-  // Determine whether to include the DashboardLayout
+  // Determine whether to include the Header/Footer
   const includeDashboardLayout = pathname
     ? ["/dashboard", "/nodes", "/analytics", "/affiliate", "/orders"].includes(
         pathname
@@ -25,22 +24,26 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={includeDashboardLayout ? "" : "bg-bodyColor"}>
-        <ThemeProvider attribute="class" defaultTheme="dark">
-          {includeDashboardLayout ? (
+      {includeDashboardLayout ? (
+        <body className="">
+          <ThemeProvider  attribute="class" defaultTheme="dark">
             <DashboardLayout>{children}</DashboardLayout>
-          ) : (
+          </ThemeProvider>
+        </body>
+      ) : (
+        <body className="bg-bodyColor">
+          <ThemeProvider>
             <div
               className={`${inter.variable} container mx-auto min-h-screen flex flex-col`}
             >
               {/* Standard Header/Footer Layout */}
-              {pathname !== "/login" && <Header />}
+              {pathname !== "/login" ? <Header /> : ""}
               <main className="flex-grow">{children}</main>
-              {pathname !== "/login" && <Footer />}
+              {pathname !== "/login" ? <Footer /> : ""}
             </div>
-          )}
-        </ThemeProvider>
-      </body>
+          </ThemeProvider>
+        </body>
+      )}
     </html>
   );
 }

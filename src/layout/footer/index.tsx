@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FaXTwitter, FaFacebook , FaDiscord} from "react-icons/fa6";
+import { FaXTwitter, FaTelegram , FaDiscord} from "react-icons/fa6";
 import Link from "next/link";
 
 const Footer = () => {
@@ -24,7 +24,7 @@ const Footer = () => {
               {[
                 { icon: FaDiscord, href: "https://discord.gg/9UXPJgnZ5q", size: 22 },
                 { icon: FaXTwitter, href: "https://x.com/leap_io?s=21&t=CmssjaT_wwKceUeLUz12aA", size: 20 },
-                { icon: FaFacebook, href: "#", size: 22 },
+                { icon: FaTelegram, href: "https://t.me/leaptrading_bot", size: 22 },
               ].map(({ icon: Icon, href, size }, idx) => (
                 <a
                   key={idx}
