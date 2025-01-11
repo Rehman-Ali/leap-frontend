@@ -180,7 +180,7 @@ const DashboardScreen = () => {
               </div>
             </div>
           </div>
-          <div className="rounded-lg border dark:border-gray-600 p-6 md:p-8 w-full overflow-hidden">
+          {/* <div className="rounded-lg border dark:border-gray-600 p-6 md:p-8 w-full overflow-hidden">
             <h1 className="font-bold text-lg dark:text-white">Jito Tips Tracker</h1>
             <div className="text-gray-500 text-md dark:text-white">
               Track the latest landing Jito Tips. Don&apos;t waste your money with
@@ -268,7 +268,7 @@ const DashboardScreen = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="flex xl:hidden">
             <div className="bg-marble p-6 xl:p-8 rounded-lg w-full flex justify-center flex-col items-center bg-cover">
               <h1 className="font-bold text-3xl lg:text-4xl">
