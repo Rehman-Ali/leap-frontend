@@ -61,12 +61,20 @@ const VPSRental = () => {
               animationTriggered ? "animate-slideIn" : ""
             } text-[16px] mw-8:max-w-[100%] max-w-[500px] my-[20px] text-left`}
           >
-            Unparalleled speed, reliability, and unlimited transactions per
-            second (TPS). Optimise your botting with the fastest node on the
-            Solana blockchain.
+            Unlock the power of dedicated performance with our virtual private
+            servers! Enjoy fast, secure, and reliable hosting with complete
+            control over your environment.
+          </p>
+          <p
+            className={`text-[#C5C6C5] font-inter ${
+              animationTriggered ? "animate-slideIn" : ""
+            } text-[16px] mw-8:max-w-[100%] max-w-[500px] mb-[20px] text-left`}
+          >
+            Our affordable servers are also hosted in the same rack as our node
+            to give our users the lowest latency we can!
           </p>
           {/* Features */}
-          {[
+          {/* {[
             "Real Time Trade update",
             "Coin analysis",
             "Limit and DCA mode",
@@ -81,16 +89,56 @@ const VPSRental = () => {
               <FaCheck size={18} color={"#37f94e"} />
               <p className="text-[#C5C6C5] font-inter text-[14px]">{feature}</p>
             </div>
-          ))}
+          ))} */}
+
+          <div className="flex flex-row justify-between w-[100%]">
+            <div>
+              <p className=" text-[18px] font-inter font-medium text-darkPrimary">
+                Location
+              </p>
+              <p className="text-[16px] font-inter font-normal text-white">
+                VA - Virginia
+              </p>
+              <p className="pt-[10px] text-[18px] font-inter font-medium text-darkPrimary">
+                Operating Systems
+              </p>
+              <p className="text-[16px] font-inter font-normal text-white">
+                Windows + $20 per month
+              </p>
+              <p className="text-[16px] font-inter font-normal text-white">
+                Linux + $60 per month
+              </p>
+
+              <p className="pt-[10px] text-[18px] font-inter font-medium text-darkPrimary">
+                Specs
+              </p>
+              <p className="text-[16px] font-inter font-normal text-white">
+                4x 4GHz+ CPU Cores 
+              </p>
+              <p className="text-[16px] font-inter font-normal text-white">
+              16GB of RAM
+              </p>
+              <p className="text-[16px] font-inter font-normal text-white">
+                435GB PURE SSD
+              </p>
+              <p className="pt-[10px] text-[18px] font-inter font-medium text-darkPrimary">
+                Order Time
+              </p>
+              <p className="text-[16px] font-inter font-normal text-white">
+                Our servers are typically ready within 24 hours
+              </p>
+            </div>
+          
+          </div>
 
           {/* Button */}
           <Link href="/vps">
             <button
-              className={`w-[168px] mw-12:w-[140px] mw-12:text-[14px] h-[46px] ${
+              className={`w-[120px] mw-12:w-[100px] mw-12:text-[14px] h-[46px] ${
                 animationTriggered ? "animate-slideIn" : ""
               } bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white mt-[15px]`}
             >
-              Discover More
+              Order
             </button>
           </Link>
         </div>
