@@ -4,7 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-
+import {
+  DynamicWidget,
+} from "@dynamic-labs/sdk-react-core";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -107,12 +109,14 @@ const Header = () => {
             >
               VPS
             </Link>
-            <button
+            {/* <button
               className="w-[168px] h-[46px]  mw-12:w-[150px]  mw-12:text-[14px]  bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"
               onClick={toggleMenu}
             >
               Join Our Discord
-            </button>
+            </button> */}
+            
+             <DynamicWidget/>
           </div>
         </div>
       )}
