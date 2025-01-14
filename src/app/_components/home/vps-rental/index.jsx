@@ -97,7 +97,7 @@ const VPSRental = () => {
                 Location
               </p>
               <div className="flex flex-row gap-x-3">
-                <div className="flex mt-[10] gap-y-3 flex-col justify-start items-start">
+                <div className="flex mt-[10px] gap-y-3 flex-col justify-start items-start">
                   <div
                     className={`flex gap-x-1 ${
                       animationTriggered ? "animate-slideIn" : ""
