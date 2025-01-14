@@ -16,7 +16,7 @@ const TelegramTradingBot = () => {
     setAnimationTriggered(true);
   }
   return (
-    <div className="mx-auto px-4 mt-[100px]" ref={sectionRef}>
+    <div className="mx-auto px-[15px] " ref={sectionRef}>
       <div className="flex flex-col mw-8:flex-col-reverse md:flex-row items-center  mw-8:items-start justify-between gap-y-10 md:gap-x-[80px]">
         {/* Left Content (Image) */}
         <div

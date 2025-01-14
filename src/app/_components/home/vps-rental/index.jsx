@@ -91,7 +91,7 @@ const VPSRental = () => {
             </div>
           ))} */}
 
-          <div className="flex flex-row justify-between w-[100%]">
+          <div className="w-[100%]">
             <div>
               <p className=" text-[18px] font-inter font-medium text-darkPrimary">
                 Location
@@ -99,28 +99,34 @@ const VPSRental = () => {
               <p className="text-[16px] font-inter font-normal text-white">
                 VA - Virginia
               </p>
-              <p className="pt-[10px] text-[18px] font-inter font-medium text-darkPrimary">
-                Operating Systems
-              </p>
-              <p className="text-[16px] font-inter font-normal text-white">
-                Windows + $20 per month
-              </p>
-              <p className="text-[16px] font-inter font-normal text-white">
-                Linux + $60 per month
-              </p>
+              <div className="flex flex-row items-center justify-between w-[100%]">
+                <div>
+                  <p className="pt-[10px] text-[18px] font-inter font-medium text-darkPrimary">
+                    Operating Systems
+                  </p>
+                  <p className="text-[16px] font-inter font-normal text-white">
+                    Windows + $20 per month
+                  </p>
+                  <p className="text-[16px] font-inter font-normal text-white">
+                    Linux + $60 per month
+                  </p>
+                </div>
+                <div>
+                  <p className="pt-[10px] text-[18px] font-inter font-medium text-darkPrimary">
+                    Specs
+                  </p>
+                  <p className="text-[16px] font-inter font-normal text-white">
+                    4x 4GHz+ CPU Cores
+                  </p>
+                  <p className="text-[16px] font-inter font-normal text-white">
+                    16GB of RAM
+                  </p>
+                  <p className="text-[16px] font-inter font-normal text-white">
+                    435GB PURE SSD
+                  </p>
+                </div>
+              </div>
 
-              <p className="pt-[10px] text-[18px] font-inter font-medium text-darkPrimary">
-                Specs
-              </p>
-              <p className="text-[16px] font-inter font-normal text-white">
-                4x 4GHz+ CPU Cores 
-              </p>
-              <p className="text-[16px] font-inter font-normal text-white">
-              16GB of RAM
-              </p>
-              <p className="text-[16px] font-inter font-normal text-white">
-                435GB PURE SSD
-              </p>
               <p className="pt-[10px] text-[18px] font-inter font-medium text-darkPrimary">
                 Order Time
               </p>
@@ -128,7 +134,6 @@ const VPSRental = () => {
                 Our servers are typically ready within 24 hours
               </p>
             </div>
-          
           </div>
 
           {/* Button */}

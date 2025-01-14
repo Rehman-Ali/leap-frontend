@@ -16,7 +16,7 @@ const Services = () => {
     setAnimationTriggered(true);
   }
   return (
-    <div className="mx-auto px-[15px]" ref={sectionRef}>
+    <div className="mx-auto px-4   mt-[100px]" ref={sectionRef}>
       {/* Header and Description */}
       <div className="flex flex-col  mw-8:items-start mw-8:flex-col mw-8:space-y-6 md:flex-row justify-between items-center mt-[30px] space-y-0">
         {/* Left Content */}
