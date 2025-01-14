@@ -105,7 +105,7 @@ const VPSRental = () => {
                     Operating Systems
                   </p>
                   <p className="text-[16px] font-inter font-normal text-white">
-                    Windows + $20 per month
+                    Windows + $80 per month
                   </p>
                   <p className="text-[16px] font-inter font-normal text-white">
                     Linux + $60 per month
