@@ -5,19 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IoClose } from "react-icons/io5";
 
-
-interface SidebarProps {
-    isOpen: boolean;
-    toggleSidebar: () => void;
-  }
-
-export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
+export default function Sidebar({ isOpen, toggleSidebar }) {
   const pathname = usePathname();
 
   return (
     <>
-      
-
       {/* Sidebar */}
       <div
         className={`fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-bodyColor dark:text-white  text-[#000000]  border-r dark:border-r-gray-600 transform ${
@@ -33,13 +25,20 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             className="h-[38px] w-[120px]"
           />
 
-          <button className="mr-[5px] lg:hidden text-[#00000] dark:text-white" onClick={toggleSidebar}>
-            <IoClose size={20}  />
+          <button
+            className="mr-[5px] lg:hidden text-[#00000] dark:text-white"
+            onClick={toggleSidebar}
+          >
+            <IoClose size={20} />
           </button>
         </div>
         <nav className="mt-[10px] grid items-start px-2 text-sm font-medium lg:px-4 gap-1">
           <Link
-            className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all  font-inter   ${pathname === '/dashboard' ? "bg-darkPrimary text-white font-semibold" : "text-black dark:text-white hover:text-darkPrimary" } `}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all  font-inter   ${
+              pathname === "/dashboard"
+                ? "bg-darkPrimary text-white font-semibold"
+                : "text-black dark:text-white hover:text-darkPrimary"
+            } `}
             href="/dashboard"
           >
             <svg
@@ -60,7 +59,11 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             Dashboard
           </Link>
           <Link
-            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all     ${pathname === '/nodes' ? "bg-darkPrimary text-white font-semibold" : "text-black dark:text-white hover:text-darkPrimary" } `}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all     ${
+              pathname === "/nodes"
+                ? "bg-darkPrimary text-white font-semibold"
+                : "text-black dark:text-white hover:text-darkPrimary"
+            } `}
             href="/nodes"
           >
             <svg
@@ -83,7 +86,11 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             Nodes
           </Link>
           <Link
-            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${pathname === '/analytics' ? "bg-darkPrimary text-white font-semibold" : "text-black dark:text-white hover:text-darkPrimary" } `}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${
+              pathname === "/analytics"
+                ? "bg-darkPrimary text-white font-semibold"
+                : "text-black dark:text-white hover:text-darkPrimary"
+            } `}
             href="/analytics"
           >
             <svg
@@ -104,7 +111,11 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             Analytics
           </Link>
           <Link
-            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${pathname === '/orders' ? "bg-darkPrimary text-white font-semibold" : "text-black dark:text-white hover:text-darkPrimary" } `}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${
+              pathname === "/orders"
+                ? "bg-darkPrimary text-white font-semibold"
+                : "text-black dark:text-white hover:text-darkPrimary"
+            } `}
             href="/orders"
           >
             <svg
@@ -126,7 +137,11 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             Orders
           </Link>
           <Link
-            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${pathname === "/affiliate" ? "bg-darkPrimary text-white font-semibold" : "text-black dark:text-white hover:text-darkPrimary" } `}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${
+              pathname === "/affiliate"
+                ? "bg-darkPrimary text-white font-semibold"
+                : "text-black dark:text-white hover:text-darkPrimary"
+            } `}
             href="/affiliate"
           >
             <svg
@@ -150,7 +165,6 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
           <a
             className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-darkPrimary"
             href="#"
-         
           >
             <svg
               stroke="currentColor"
@@ -187,7 +201,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
           <a
             className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-darkPrimary"
             href="https://docs.leap-blockchain.com/"
-             target="_blank"
+            target="_blank"
           >
             <svg
               stroke="currentColor"
@@ -221,7 +235,6 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
               <line x1="10" x2="21" y1="14" y2="3"></line>
             </svg>
           </a>
-       
         </nav>
       </div>
 

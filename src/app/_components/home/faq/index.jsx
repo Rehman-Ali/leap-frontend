@@ -6,14 +6,11 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 const Accordion = ({
   items,
   isVisible
-}: {
-  items: { title: string; content: string }[];
-  isVisible: boolean
 }) => {
   
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(null);
 
-  const toggleAccordion = (index: number) => {
+  const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
@@ -63,7 +60,7 @@ const Accordion = ({
 
 const FAQComponent = () => {
 
-  const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
+  const sectionRef = useRef(null); // Ref for a div element
   const isVisible = useInView(sectionRef, { threshold: 0.4 });
   const [animationTriggered, setAnimationTriggered] = useState(false);
 
