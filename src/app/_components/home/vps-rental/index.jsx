@@ -99,7 +99,7 @@ const VPSRental = () => {
               <p className="text-[16px] font-inter font-normal text-white">
                 VA - Virginia
               </p>
-              <div className="flex mw-10:flex-col flex-row items-center justify-between w-[100%]">
+              <div className="flex mw-10:flex-col flex-row mw-10:items-start items-center justify-between w-[100%]">
                 <div>
                   <p className="pt-[10px] text-[18px] font-inter font-medium text-darkPrimary">
                     Operating Systems
