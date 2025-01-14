@@ -1,11 +1,9 @@
-import { useState, useEffect, RefObject } from 'react';
-
-type Options = IntersectionObserverInit;
+import { useState, useEffect, RefObject } from "react";
 
 export const useInView = (
-  ref: RefObject<Element | null>, // Allow null as part of the type
-  options: Options = {}
-): boolean => {
+  ref, // Allow null as part of the type
+  options
+) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

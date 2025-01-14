@@ -1,15 +1,14 @@
 "use client";
 
+import { DynamicWidget, useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import {
-  DynamicWidget,
-} from "@dynamic-labs/sdk-react-core";
+import { FaArrowRight } from "react-icons/fa6";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { setShowAuthFlow } = useDynamicContext();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -56,14 +55,22 @@ const Header = () => {
             VPS
           </Link>
         </div>
-        <Link
+       
+        <button
+          onClick={() => setShowAuthFlow(true)}
+          className="hidden  w-[168px]  lg:flex flex-row items-center justify-center gap-x-2 irem mw-12:w-[150px]  mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"
+        >
+          Dashboard
+          <FaArrowRight color="#231F20" size-={18} />
+        </button>
+        {/* <Link
             className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
             href="/login"
           >
-        <button className="hidden lg:block w-[168px]  mw-12:w-[150px]  mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white">
+         <button className="hidden lg:block w-[168px]  mw-12:w-[150px]  mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white">
           Dashboard
-        </button>
-        </Link>    
+        </button> 
+        </Link>  */}
         {/* Mobile Menu Toggle */}
         <div
           className="lg:hidden text-white cursor-pointer text-[24px]"
@@ -109,14 +116,13 @@ const Header = () => {
             >
               VPS
             </Link>
-            {/* <button
-              className="w-[168px] h-[46px]  mw-12:w-[150px]  mw-12:text-[14px]  bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"
-              onClick={toggleMenu}
+            <button
+              className="w-[168px] h-[46px]  mw-12:w-[150px] leading-none flex flex-row items-center justify-center gap-x-2  mw-12:text-[14px]  bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"
+              onClick={() => setShowAuthFlow(true)}
             >
-              Join Our Discord
-            </button> */}
-            
-             <DynamicWidget/>
+              Dasboard
+              <FaArrowRight color="#231F20" size-={18} />
+            </button>
           </div>
         </div>
       )}

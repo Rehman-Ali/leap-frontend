@@ -3,13 +3,11 @@ import { useTheme } from "next-themes";
 import { MdLightMode } from "react-icons/md";
 import { LuMoonStar } from "react-icons/lu";
 
-interface DashboardHeaderProps {
-  toggleSidebar: () => void;
-}
+
 
 export default function DashboardHeader({
   toggleSidebar,
-}: DashboardHeaderProps) {
+}) {
   const { theme, setTheme } = useTheme();
 
   const handelLightDarkMode = () => {

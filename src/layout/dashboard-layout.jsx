@@ -6,9 +6,7 @@ import { useState } from "react";
 
 export default function DashboardLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {

@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { LuAsterisk } from "react-icons/lu";
 
 const HeroSection = () => {
-  const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
+  const sectionRef = useRef(null); // Ref for a div element
   const isVisible = useInView(sectionRef, { threshold: 0.4 });
   const [animationTriggered, setAnimationTriggered] = useState(false);
 

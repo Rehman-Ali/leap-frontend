@@ -5,7 +5,7 @@ import Marquee from "react-fast-marquee";
 import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 const Testimonials = () => {
-  const sectionRef = useRef<HTMLDivElement | null>(null); // Ref for a div element
+  const sectionRef = useRef(null); // Ref for a div element
   const isVisible = useInView(sectionRef, { threshold: 0.4 });
   const [animationTriggered, setAnimationTriggered] = useState(false);
 
