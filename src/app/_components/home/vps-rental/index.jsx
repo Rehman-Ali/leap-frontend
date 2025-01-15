@@ -203,13 +203,13 @@ const VPSRental = () => {
                     Specs
                   </p>
                   <p className="text-[16px] font-inter font-normal text-white">
-                    4x 4GHz+ CPU Cores
+                    4x 4GHz + CPU Cores
                   </p>
                   <p className="text-[16px] font-inter font-normal text-white">
-                    16GB of RAM
+                    16GB of RAM +  435GB PURE SSD
                   </p>
                   <p className="text-[16px] font-inter font-normal text-white">
-                    435GB PURE SSD
+                   
                   </p>
                 </div>
               </div>
