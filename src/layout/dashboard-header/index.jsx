@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 export default function DashboardHeader({ toggleSidebar }) {
   const { user, handleLogOut } = useDynamicContext();
   const [clientUser, setClientUser] = useState(null);
+    console.log(user, 'user======')
 
   useEffect(() => {
     // Ensure `user` is only set after hydration
@@ -14,6 +15,7 @@ export default function DashboardHeader({ toggleSidebar }) {
 
   const onLogoutHandler = () => {
     handleLogOut();
+    localStorage.removeItem("u_t")
     setTimeout(() => {
       redirect("/");
     }, 2000);
@@ -61,7 +63,7 @@ export default function DashboardHeader({ toggleSidebar }) {
               data-tooltip-content="Account Public Key"
               className="font-semibold text-sm text-black dark:text-white"
             >
-              {clientUser.userId}
+              {clientUser.userId.slice(0, 3)}...{clientUser.userId.slice(-3)}
             </div>
           )}
         </div>
