@@ -6,7 +6,7 @@ import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import DashboardLayout from "@/layout/dashboard-layout"; // Import the DashboardLayout
 import { inter } from "@/utils/fonts";
-import { usePathname } from "next/navigation";
+import { usePathname , useRouter} from "next/navigation";
 import { ThemeProvider } from "next-themes";
 import {
   DynamicContextProvider,
@@ -31,7 +31,7 @@ const queryClient = new QueryClient();
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-
+  const router = useRouter();
   // Determine whether to include the DashboardLayout
   const includeDashboardLayout = pathname
     ? ["/dashboard", "/nodes", "/analytics", "/affiliate", "/orders"].includes(
@@ -39,14 +39,29 @@ export default function RootLayout({ children }) {
       )
     : false;
 
+  
+
   return (
     <html lang="en">
       <body className={includeDashboardLayout ? "" : "bg-bodyColor"}>
         <DynamicContextProvider
           settings={{
             // Find your environment id at https://app.dynamic.xyz/dashboard/developer
-            environmentId: "4d5e50a9-232a-4d0e-bfe9-ebb2d9734982",
-            walletConnectors: [EthereumWalletConnectors]
+            environmentId: "9108f276-4108-4240-a727-8454153e419d",
+            // environmentId: "4d5e50a9-232a-4d0e-bfe9-ebb2d9734982", // HM-comment it
+            walletConnectors: [EthereumWalletConnectors],
+            events: {
+              onAuthSuccess: (args) => {
+                console.log('first event call', args.user);
+                router.push('/dashboard')
+              }     
+            },
+            handlers: {
+              handleAuthenticatedUser: async (args) => {
+                console.log("2nd even call", args);
+                await customUserObjectProcess(args.user);
+              },
+            },
           }}
         >
           <WagmiProvider config={config}>
@@ -62,7 +77,7 @@ export default function RootLayout({ children }) {
                       {/* Standard Header/Footer Layout */}
                       {pathname !== "/login" && <Header />}
                       <main className="flex-grow">{children}</main>
-                      {pathname !== "/login" && <Footer />}
+                      {/* {pathname !== "/login" && <Footer />} */}
                     </div>
                   )}
                 </ThemeProvider>

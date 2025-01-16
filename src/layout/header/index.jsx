@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <header>
       <div className="mx-[10px] mt-[20px] border border-[#20211f] bg-[#07080699] rounded-[50px] flex flex-row items-center justify-between px-[30px] lg:px-[130px] py-[16px] backdrop-blur-[10px] opacity-[1px]">
-        <Link
+        {/* <Link
           className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
           href="/"
         >
@@ -27,9 +27,9 @@ const Header = () => {
             className="h-[45px] w-[133px] cursor-pointer"
             alt="leap logo"
           />
-        </Link>
+        </Link> */}
         {/* Desktop Links */}
-        <div className="hidden lg:flex flex-row gap-x-10">
+        {/* <div className="hidden lg:flex flex-row gap-x-10">
           <Link
             className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
             href="/telegram-bot"
@@ -54,23 +54,26 @@ const Header = () => {
           >
             VPS
           </Link>
-        </div>
-       
+        </div> */}
+{/*        
         <button
           onClick={() => setShowAuthFlow(true)}
           className="hidden  w-[168px]  lg:flex flex-row items-center justify-center gap-x-2 irem mw-12:w-[150px]  mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"
         >
           Dashboard
           <FaArrowRight color="#231F20" size-={18} />
-        </button>
-        {/* <Link
+        </button> */}
+        <Link
             className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
             href="/login"
           >
-         <button className="hidden lg:block w-[168px]  mw-12:w-[150px]  mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white">
+         <button
+          className="hidden  w-[168px]  lg:flex flex-row items-center justify-center gap-x-2 irem mw-12:w-[150px]  mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"
+        >
           Dashboard
-        </button> 
-        </Link>  */}
+          <FaArrowRight color="#231F20" size-={18} />
+        </button>
+        </Link> 
         {/* Mobile Menu Toggle */}
         <div
           className="lg:hidden text-white cursor-pointer text-[24px]"

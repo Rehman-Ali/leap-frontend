@@ -1,16 +1,9 @@
 import LightDarkButton from "@/app/_components/dashboard/light-dark-btn";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export default function DashboardHeader({ toggleSidebar }) {
   const { user, handleLogOut } = useDynamicContext();
-  const [clientUser, setClientUser] = useState(null);
-
-  useEffect(() => {
-    // Ensure `user` is only set after hydration
-    setClientUser(user);
-  }, [user]);
 
   const onLogoutHandler = () => {
     handleLogOut();
@@ -55,15 +48,13 @@ export default function DashboardHeader({ toggleSidebar }) {
             data-tooltip-content="Wallet Connected"
             className="w-2 h-2 rounded-full bg-green-500"
           />
-          {clientUser && (
-            <div
-              data-tooltip-id="tooltip"
-              data-tooltip-content="Account Public Key"
-              className="font-semibold text-sm text-black dark:text-white"
-            >
-              {clientUser.userId}
-            </div>
-          )}
+          <div
+            data-tooltip-id="tooltip"
+            data-tooltip-content="Account Public Key"
+            className="font-semibold text-sm text-black dark:text-white"
+          >
+            {user.userId}
+          </div>
         </div>
         <div onClick={() => onLogoutHandler()}>
           <svg
