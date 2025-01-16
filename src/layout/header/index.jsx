@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <header>
       <div className="mx-[10px] mt-[20px] border border-[#20211f] bg-[#07080699] rounded-[50px] flex flex-row items-center justify-between px-[30px] lg:px-[130px] py-[16px] backdrop-blur-[10px] opacity-[1px]">
-        {/* <Link
+        <Link
           className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
           href="/"
         >
@@ -27,9 +27,9 @@ const Header = () => {
             className="h-[45px] w-[133px] cursor-pointer"
             alt="leap logo"
           />
-        </Link> */}
+        </Link>
         {/* Desktop Links */}
-        {/* <div className="hidden lg:flex flex-row gap-x-10">
+        <div className="hidden lg:flex flex-row gap-x-10">
           <Link
             className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
             href="/telegram-bot"
@@ -54,7 +54,7 @@ const Header = () => {
           >
             VPS
           </Link>
-        </div> */}
+        </div>
 {/*        
         <button
           onClick={() => setShowAuthFlow(true)}
