@@ -17,9 +17,8 @@ import { http } from "viem";
 import { mainnet } from "viem/chains";
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import FullPageLoader from "./_components/loader";
-import axios from "axios";
+import axios from 'axios';
 import { SERVER_URL } from "@/utils/server";
-
 const config = createConfig({
   chains: [mainnet],
   multiInjectedProviderDiscovery: false,
@@ -35,7 +34,7 @@ export default function RootLayout({ children }) {
   const router = useRouter();
   const [isAuthorized, setIsAuthorized] = useState(false);
 
-  // Define routes
+  // Routes that require authentication (private)
   const privateRoutes = [
     "/dashboard",
     "/nodes",
@@ -43,50 +42,33 @@ export default function RootLayout({ children }) {
     "/affiliate",
     "/orders"
   ];
-  const publicRoutes = [
-    "/",
-    "/login",
-    "/telegram-bot",
-    "/rpc",
-    "/trading-bot",
-    "/vps"
-  ]; // Add all public routes here
 
-  // Check for token
+  // Check if the token exists
   const token =
     typeof window !== "undefined" ? localStorage.getItem("u_t") : null;
 
   useEffect(() => {
+    // Check if the current route is private
     const isPrivateRoute = privateRoutes.includes(pathname);
-    const isPublicRoute = publicRoutes.includes(pathname);
 
-    if (token) {
-      // If the user has a token and tries to access a public route, redirect to a private route
-      if (isPublicRoute) {
-        router.replace(privateRoutes[0]); // Redirect to the first private route (e.g., dashboard)
-      } else {
-        setIsAuthorized(true);
-      }
+    if (isPrivateRoute && !token) {
+      // If unauthorized, redirect to login immediately
+      router.replace("/login");
     } else {
-      // If the user does not have a token and tries to access a private route, redirect to login
-      if (isPrivateRoute) {
-        router.replace("/login");
-      } else {
-        setIsAuthorized(true);
-      }
+      // If authorized, allow rendering
+      setIsAuthorized(true);
     }
   }, [pathname, token, router]);
+
 
   const handleLoginAndRegister = async (userData) => {
     try {
       const response = await axios.post(
         `${SERVER_URL}/api/user/signin-and-signup`,
-        {
-          dp_user_id: userData.userId
-        }
+        { dp_user_id: userData.userId } // Directly passing an object, no need for JSON.stringify
       );
       console.log(response.data, "Response received");
-      localStorage.setItem("u_t", response.data.token.token);
+      localStorage.setItem("u_t", response.data.token.token)
       router.push("/dashboard");
     } catch (error) {
       console.error(
@@ -96,18 +78,23 @@ export default function RootLayout({ children }) {
     }
   };
 
-  // Prevent rendering until authorization check is complete
-  if (!isAuthorized) {
+
+  //Prevent rendering until authorization check is complete
+  if (!isAuthorized && privateRoutes.includes(pathname)) {
     return (
       <html lang="en">
         <body className="bg-bodyColor">
           <FullPageLoader />
         </body>
       </html>
-    );
+    ); // Block rendering entirely until redirect or authorization is confirmed
   }
 
   const includeDashboardLayout = privateRoutes.includes(pathname);
+
+
+
+
 
   return (
     <html lang="en">
@@ -129,6 +116,7 @@ export default function RootLayout({ children }) {
               }
             }
           }}
+          
         >
           <WagmiProvider config={config}>
             <QueryClientProvider client={queryClient}>
