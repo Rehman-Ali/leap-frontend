@@ -9,7 +9,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      {/* <div className="mb-[30px]">
+      <div className="mb-[30px]">
         <Image
           src="/assets/logo1.png"
           height={80}
@@ -20,7 +20,7 @@ const LoginPage = () => {
       </div>
       <p className="font-inter text-[16px] text-[#ffffff]">
         Select Wallet to Sign In to Leap
-      </p> */}
+      </p>
       {/* <Link href="/dashboard" > */}
       <button 
        onClick={() => setShowAuthFlow(true)}
