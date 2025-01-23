@@ -30,7 +30,7 @@ const VPSPricing = () => {
               nodes without the upcharge.
             </p>
           </div>
-          <div className="mw-10:hidden flex flex-wrap">
+          <div className="mw-10:hidden flex flex-wrap ">
             <div className="w-[25%] px-6  py-[50px]">
               <div className="inline-flex items-center whitespace-nowrap">
                 <div className="text-sm text-white font-medium font-inter mr-2">
@@ -217,7 +217,7 @@ const VPSPricing = () => {
                 </a>
               </div>
               <div className="border-b border-gray-800  my-[20px]"></div>
-              <div className="mt-[50px]">
+              <div className="mt-[155px]">
                 <p className="text-white font-inter font-medium text-[14px]">
                   Usage
                 </p>
@@ -273,16 +273,44 @@ const VPSPricing = () => {
                   <div className="text-base font-inter font-medium text-white pb-0.5">
                     Basic
                   </div>
-                  <div className="mb-1">
-                    <span className="text-lg font-inter font-medium text-slate-500">
-                      $
-                    </span>
-                    <span className="text-3xl font-bold font-inter text-slate-50">
-                      67
-                    </span>
-                    <span className="text-sm text-slate-600 font-inter font-medium">
-                      /mo
-                    </span>
+                  <div className="mb-1 flex flex-row items-center gap-x-3">
+                    <div className="flex flex-col items-start justify-start gap-y-3 mt-[5px]">
+                      <p className="text-base pr-[10px] font-bold font-inter text-slate-50">
+                        Windows
+                      </p>
+                      <p className="text-base pr-[10px] font-bold font-inter text-slate-50">
+                        Linux
+                      </p>
+                    </div>
+                    <div>
+                      <p>
+                        <span className="text-lg font-inter font-medium text-slate-500">
+                          $
+                        </span>
+                        <span className="text-3xl font-bold font-inter text-slate-50">
+                          80
+                        </span>
+                        <span className="text-sm text-slate-600 font-inter font-medium">
+                          /mo
+                        </span>
+                      </p>
+                      <p>
+                        <span className="text-lg font-inter font-medium text-slate-500">
+                          $
+                        </span>
+                        <span className="text-3xl font-bold font-inter text-slate-50">
+                          60
+                        </span>
+                        <span className="text-sm text-slate-600 font-inter font-medium">
+                          /mo
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-slate-500 mb-1 font-inter mw-12:text-[12px] text-[14px] font-normal">
+                    <p>Specs:</p>
+                    <p>4x 4GHz + CPU Cores</p>
+                    <p>16GB of RAM + 435GB PURE SSD</p>
                   </div>
                   <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
                     For small traders just getting started.
@@ -314,18 +342,17 @@ const VPSPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                 100
+                  100
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
-                &nbsp;
+                  &nbsp;
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
-                  
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px]">
@@ -340,7 +367,7 @@ const VPSPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                &nbsp;
+                  &nbsp;
                 </p>
 
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px]">
@@ -357,16 +384,44 @@ const VPSPricing = () => {
                   <div className="text-base font-inter font-medium text-white pb-0.5">
                     Pro
                   </div>
-                  <div className="mb-1">
-                    <span className="text-lg font-inter font-medium text-slate-500">
-                      $
-                    </span>
-                    <span className="text-3xl font-bold font-inter text-slate-50">
-                      499
-                    </span>
-                    <span className="text-sm text-slate-600 font-inter font-medium">
-                      /mo
-                    </span>
+                  <div className="mb-1 flex flex-row items-center gap-x-3">
+                    <div className="flex flex-col items-start justify-start gap-y-3 mt-[5px]">
+                      <p className="text-base pr-[10px] font-bold font-inter text-slate-50">
+                        Windows
+                      </p>
+                      <p className="text-base pr-[10px] font-bold font-inter text-slate-50">
+                        Linux
+                      </p>
+                    </div>
+                    <div>
+                      <p>
+                        <span className="text-lg font-inter font-medium text-slate-500">
+                          $
+                        </span>
+                        <span className="text-3xl font-bold font-inter text-slate-50">
+                          80
+                        </span>
+                        <span className="text-sm text-slate-600 font-inter font-medium">
+                          /mo
+                        </span>
+                      </p>
+                      <p>
+                        <span className="text-lg font-inter font-medium text-slate-500">
+                          $
+                        </span>
+                        <span className="text-3xl font-bold font-inter text-slate-50">
+                          60
+                        </span>
+                        <span className="text-sm text-slate-600 font-inter font-medium">
+                          /mo
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-slate-500 mb-1 font-inter mw-12:text-[12px] text-[14px] font-normal">
+                    <p>Specs:</p>
+                    <p>4x 4GHz + CPU Cores</p>
+                    <p>16GB of RAM + 435GB PURE SSD</p>
                   </div>
                   <div className="text-slate-500 mw-12:text-[12px] font-inter text-[14px] font-normal">
                     For botters with moderate transaction and performance needs.
@@ -398,21 +453,21 @@ const VPSPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-darkPrimary font-inter font-medium text-[14px]">
-                 1,000
+                  1,000
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
-                &nbsp;
+                  &nbsp;
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px]">
@@ -424,11 +479,11 @@ const VPSPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                &nbsp;
+                  &nbsp;
                 </p>
 
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px]">
@@ -442,16 +497,44 @@ const VPSPricing = () => {
                   <div className="text-base font-inter font-medium text-white pb-0.5">
                     God
                   </div>
-                  <div className="mb-1">
-                    <span className="text-lg font-inter font-medium text-slate-500">
-                      $
-                    </span>
-                    <span className="text-3xl font-bold font-inter text-slate-50">
-                      1349
-                    </span>
-                    <span className="text-sm text-slate-600 font-inter font-medium">
-                      /mo
-                    </span>
+                  <div className="mb-1 flex flex-row items-center gap-x-3">
+                    <div className="flex flex-col items-start justify-start gap-y-3 mt-[5px]">
+                      <p className="text-base pr-[10px] font-bold font-inter text-slate-50">
+                        Windows
+                      </p>
+                      <p className="text-base pr-[10px] font-bold font-inter text-slate-50">
+                        Linux
+                      </p>
+                    </div>
+                    <div>
+                      <p>
+                        <span className="text-lg font-inter font-medium text-slate-500">
+                          $
+                        </span>
+                        <span className="text-3xl font-bold font-inter text-slate-50">
+                          80
+                        </span>
+                        <span className="text-sm text-slate-600 font-inter font-medium">
+                          /mo
+                        </span>
+                      </p>
+                      <p>
+                        <span className="text-lg font-inter font-medium text-slate-500">
+                          $
+                        </span>
+                        <span className="text-3xl font-bold font-inter text-slate-50">
+                          60
+                        </span>
+                        <span className="text-sm text-slate-600 font-inter font-medium">
+                          /mo
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-slate-500 mb-1 font-inter mw-12:text-[12px] text-[14px] font-normal">
+                    <p>Specs:</p>
+                    <p>4x 4GHz + CPU Cores</p>
+                    <p>16GB of RAM + 435GB PURE SSD</p>
                   </div>
                   <div className="text-slate-500 mw-12:text-[12px] font-inter text-[14px] font-normal">
                     For botters looking to scale and maximize every snipe.
@@ -483,43 +566,43 @@ const VPSPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-darkPrimary font-inter font-medium text-[14px]">
-                 6,000
+                  6,000
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
-                &nbsp;
+                  &nbsp;
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                &nbsp;
+                  &nbsp;
                 </p>
 
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
               </div>
@@ -527,7 +610,7 @@ const VPSPricing = () => {
           </div>
           <div className="hidden mw-10:flex flex-col gap-y-10">
             <div>
-            <div className="flex items-center justify-center whitespace-nowrap">
+              <div className="flex items-center justify-center whitespace-nowrap">
                 <div className="text-sm text-white font-medium font-inter mr-2">
                   Monthly
                 </div>
@@ -710,25 +793,53 @@ const VPSPricing = () => {
                   Learn More
                   <FaArrowRight size={12} color={"#fff"} />
                 </a>
-              </div> 
               </div>
+            </div>
 
-              <div className=" px-6 py-[20px] bg-[#37415133] rounded-[24px]">
+            <div className=" px-6 py-[20px] bg-[#37415133] rounded-[24px]">
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
                   <div className="text-base font-inter font-medium text-white pb-0.5">
                     Basic
                   </div>
-                  <div className="mb-1">
-                    <span className="text-lg font-inter font-medium text-slate-500">
-                      $
-                    </span>
-                    <span className="text-3xl font-bold font-inter text-slate-50">
-                      67
-                    </span>
-                    <span className="text-sm text-slate-600 font-inter font-medium">
-                      /mo
-                    </span>
+                  <div className="mb-1 flex flex-row items-center gap-x-3">
+                    <div className="flex flex-col items-start justify-start gap-y-3 mt-[5px]">
+                      <p className="text-base pr-[10px] font-bold font-inter text-slate-50">
+                        Windows
+                      </p>
+                      <p className="text-base pr-[10px] font-bold font-inter text-slate-50">
+                        Linux
+                      </p>
+                    </div>
+                    <div>
+                      <p>
+                        <span className="text-lg font-inter font-medium text-slate-500">
+                          $
+                        </span>
+                        <span className="text-3xl font-bold font-inter text-slate-50">
+                          80
+                        </span>
+                        <span className="text-sm text-slate-600 font-inter font-medium">
+                          /mo
+                        </span>
+                      </p>
+                      <p>
+                        <span className="text-lg font-inter font-medium text-slate-500">
+                          $
+                        </span>
+                        <span className="text-3xl font-bold font-inter text-slate-50">
+                          60
+                        </span>
+                        <span className="text-sm text-slate-600 font-inter font-medium">
+                          /mo
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-slate-500 mb-1 font-inter mw-12:text-[12px] text-[14px] font-normal">
+                    <p>Specs:</p>
+                    <p>4x 4GHz + CPU Cores</p>
+                    <p>16GB of RAM + 435GB PURE SSD</p>
                   </div>
                   <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
                     For small traders just getting started.
@@ -745,8 +856,8 @@ const VPSPricing = () => {
                 </div>
               </div>
               <div className="mt-[50px]">
-              <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                 Usage
+                <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
+                  Usage
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                   <FaCheck size={14} color={"#fff"} />
@@ -763,23 +874,20 @@ const VPSPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                Estimated TPS 100
+                  Estimated TPS 100
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
-                Features
+                  Features
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>High Landing Rate</p>
-                  
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Websocket Support</p>
                 </div>
-              
               </div>
-            
             </div>
             <div className=" px-4 py-[20px] bg-[#37415133] border border-[#e5e7eb] rounded-[24px]">
               <div className=" flex flex-col justify-end">
@@ -787,16 +895,44 @@ const VPSPricing = () => {
                   <div className="text-base font-inter font-medium text-white pb-0.5">
                     Pro
                   </div>
-                  <div className="mb-1">
-                    <span className="text-lg font-inter font-medium text-slate-500">
-                      $
-                    </span>
-                    <span className="text-3xl font-bold font-inter text-slate-50">
-                      499
-                    </span>
-                    <span className="text-sm text-slate-600 font-inter font-medium">
-                      /mo
-                    </span>
+                  <div className="mb-1 flex flex-row items-center gap-x-3">
+                    <div className="flex flex-col items-start justify-start gap-y-3 mt-[5px]">
+                      <p className="text-base pr-[10px] font-bold font-inter text-slate-50">
+                        Windows
+                      </p>
+                      <p className="text-base pr-[10px] font-bold font-inter text-slate-50">
+                        Linux
+                      </p>
+                    </div>
+                    <div>
+                      <p>
+                        <span className="text-lg font-inter font-medium text-slate-500">
+                          $
+                        </span>
+                        <span className="text-3xl font-bold font-inter text-slate-50">
+                          80
+                        </span>
+                        <span className="text-sm text-slate-600 font-inter font-medium">
+                          /mo
+                        </span>
+                      </p>
+                      <p>
+                        <span className="text-lg font-inter font-medium text-slate-500">
+                          $
+                        </span>
+                        <span className="text-3xl font-bold font-inter text-slate-50">
+                          60
+                        </span>
+                        <span className="text-sm text-slate-600 font-inter font-medium">
+                          /mo
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-slate-500 mb-1 font-inter mw-12:text-[12px] text-[14px] font-normal">
+                    <p>Specs:</p>
+                    <p>4x 4GHz + CPU Cores</p>
+                    <p>16GB of RAM + 435GB PURE SSD</p>
                   </div>
                   <div className="text-slate-500 mw-12:text-[12px] font-inter text-[14px] font-normal">
                     For botters with moderate transaction and performance needs.
@@ -813,8 +949,8 @@ const VPSPricing = () => {
                 </div>
               </div>
               <div className="mt-[50px]">
-              <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                 Usage
+                <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
+                  Usage
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
@@ -831,35 +967,33 @@ const VPSPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-darkPrimary font-inter font-medium text-[14px]">
-                <span className="text-white" >Estimated TPS </span> 1,000
+                  <span className="text-white">Estimated TPS </span> 1,000
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
-                Features
+                  Features
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>High Landing Rate</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Websocket Support</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Dedicated Regions</p>
                 </div>
-
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                Support
+                  Support
                 </p>
 
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Premium Support</p>
                 </div>
-                
               </div>
             </div>
             <div className=" px-6 py-[20px] bg-[#37415133] rounded-[24px]">
@@ -868,16 +1002,44 @@ const VPSPricing = () => {
                   <div className="text-base font-inter font-medium text-white pb-0.5">
                     God
                   </div>
-                  <div className="mb-1">
-                    <span className="text-lg font-inter font-medium text-slate-500">
-                      $
-                    </span>
-                    <span className="text-3xl font-bold font-inter text-slate-50">
-                      1349
-                    </span>
-                    <span className="text-sm text-slate-600 font-inter font-medium">
-                      /mo
-                    </span>
+                  <div className="mb-1 flex flex-row items-center gap-x-3">
+                    <div className="flex flex-col items-start justify-start gap-y-3 mt-[5px]">
+                      <p className="text-base pr-[10px] font-bold font-inter text-slate-50">
+                        Windows
+                      </p>
+                      <p className="text-base pr-[10px] font-bold font-inter text-slate-50">
+                        Linux
+                      </p>
+                    </div>
+                    <div>
+                      <p>
+                        <span className="text-lg font-inter font-medium text-slate-500">
+                          $
+                        </span>
+                        <span className="text-3xl font-bold font-inter text-slate-50">
+                          80
+                        </span>
+                        <span className="text-sm text-slate-600 font-inter font-medium">
+                          /mo
+                        </span>
+                      </p>
+                      <p>
+                        <span className="text-lg font-inter font-medium text-slate-500">
+                          $
+                        </span>
+                        <span className="text-3xl font-bold font-inter text-slate-50">
+                          60
+                        </span>
+                        <span className="text-sm text-slate-600 font-inter font-medium">
+                          /mo
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-slate-500 mb-1 font-inter mw-12:text-[12px] text-[14px] font-normal">
+                    <p>Specs:</p>
+                    <p>4x 4GHz + CPU Cores</p>
+                    <p>16GB of RAM + 435GB PURE SSD</p>
                   </div>
                   <div className="text-slate-500 mw-12:text-[12px] font-inter text-[14px] font-normal">
                     For botters looking to scale and maximize every snipe.
@@ -894,8 +1056,8 @@ const VPSPricing = () => {
                 </div>
               </div>
               <div className="mt-[73px]">
-              <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                 Usage
+                <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
+                  Usage
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
@@ -912,48 +1074,47 @@ const VPSPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-darkPrimary font-inter font-medium text-[14px]">
-                <span className="text-white" >Estimated TPS </span>  6,000
+                  <span className="text-white">Estimated TPS </span> 6,000
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
-                Features
+                  Features
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>High Landing Rate</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Websocket Support</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Dedicated Regions</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Geyser gRPC</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Enterprise Add-ons</p>
                 </div>
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                Support
+                  Support
                 </p>
 
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Premium Support</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Dedicated Agent</p>
                 </div>
               </div>
             </div>
-           
           </div>
         </div>
       </div>
