@@ -172,7 +172,7 @@ const DashboardScreen = () => {
                     Maximum Performance.
                   </p>
                 </div>
-                <Link href="#">
+                <Link href="/buy">
                   <button className="flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu bg-darkPrimary text-black mt-4 xl:mt-6">
                     BUY NOW
                   </button>

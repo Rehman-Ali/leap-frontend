@@ -24,8 +24,8 @@ const config = createConfig({
   chains: [mainnet],
   multiInjectedProviderDiscovery: false,
   transports: {
-    [mainnet.id]: http()
-  }
+    [mainnet.id]: http(),
+  },
 });
 
 const queryClient = new QueryClient();
@@ -42,7 +42,7 @@ export default function RootLayout({ children }) {
     "/analytics",
     "/affiliate",
     "/orders",
-    "/buy"
+    "/buy",
   ];
   const publicRoutes = [
     "/",
@@ -50,7 +50,7 @@ export default function RootLayout({ children }) {
     "/telegram-bot",
     "/rpc",
     "/trading-bot",
-    "/vps"
+    "/vps",
   ]; // Add all public routes here
 
   // Check for token
@@ -71,6 +71,7 @@ export default function RootLayout({ children }) {
     } else {
       // If the user does not have a token and tries to access a private route, redirect to login
       if (isPrivateRoute) {
+        localStorage.setItem("c_path", pathname);
         router.replace("/login");
       } else {
         setIsAuthorized(true);
@@ -83,12 +84,20 @@ export default function RootLayout({ children }) {
       const response = await axios.post(
         `${SERVER_URL}/api/user/signin-and-signup`,
         {
-          dp_user_id: userData.userId
+          dp_user_id: userData.userId,
         }
       );
       console.log(response.data, "Response received");
       localStorage.setItem("u_t", response.data.token.token);
-      router.push("/dashboard");
+      let prev_path = localStorage.getItem("c_path");
+      if (prev_path === null || prev_path === undefined) {
+        console.log("if working ")
+        router.push("/dashboard");
+      } else {
+        console.log("else working")
+        router.push(prev_path);
+        localStorage.removeItem("c_path");
+      }
     } catch (error) {
       console.error(
         "Error during login or registration:",
@@ -121,14 +130,14 @@ export default function RootLayout({ children }) {
               onAuthSuccess: (args) => {
                 console.log("first event call", args.user);
                 handleLoginAndRegister(args.user);
-              }
+              },
             },
             handlers: {
               handleAuthenticatedUser: async (args) => {
                 console.log("2nd even call", args);
                 await customUserObjectProcess(args.user);
-              }
-            }
+              },
+            },
           }}
         >
           <WagmiProvider config={config}>

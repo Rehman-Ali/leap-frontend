@@ -1,11 +1,19 @@
+import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 
-
-
 const VPSPricing = () => {
 
- 
+useEffect(() =>{
+  Swal.fire({
+    title: 'Error!',
+    text: 'Do you want to continue',
+    icon: 'error',
+    confirmButtonText: 'Cool'
+  })
+}, [])
+
+
   return (
     <section className="relative" id="pricing">
       <div
@@ -322,14 +330,15 @@ const VPSPricing = () => {
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
-                  <button
-                    className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                    // href="https://hub.ligmanode.com/buy?plan=basic"
-                   
-                  >
-                    Get Started
-                    <FaArrowRight size={12} color={"#000"} />
-                  </button>
+                  <Link href="/buy">
+                    <button
+                      className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
+                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                    >
+                      Get Started
+                      <FaArrowRight size={12} color={"#000"} />
+                    </button>
+                  </Link>
                 </div>
               </div>
               <div className="mt-[73px]">
@@ -434,14 +443,15 @@ const VPSPricing = () => {
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
-                  <button
-                    className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                    // href="https://hub.ligmanode.com/buy?plan=basic"
-                    
-                  >
-                    Get Started
-                    <FaArrowRight size={12} color={"#000"} />
-                  </button>
+                  <Link href="/buy">
+                    <button
+                      className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
+                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                    >
+                      Get Started
+                      <FaArrowRight size={12} color={"#000"} />
+                    </button>
+                  </Link>
                 </div>
               </div>
               <div className="mt-[73px]">
@@ -548,13 +558,15 @@ const VPSPricing = () => {
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
-                  <button
-                    className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                    // href="https://hub.ligmanode.com/buy?plan=basic"
-                  >
-                    Get Started
-                    <FaArrowRight size={12} color={"#000"} />
-                  </button>
+                  <Link href="/buy">
+                    <button
+                      className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
+                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                    >
+                      Get Started
+                      <FaArrowRight size={12} color={"#000"} />
+                    </button>
+                  </Link>
                 </div>
               </div>
               <div className="mt-[73px]">
@@ -853,13 +865,15 @@ const VPSPricing = () => {
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
-                  <button
-                    className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                    // href="https://hub.ligmanode.com/buy?plan=basic"
-                  >
-                    Get Started
-                    <FaArrowRight size={12} color={"#000"} />
-                  </button>
+                  <Link href="/buy">
+                    <button
+                      className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
+                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                    >
+                      Get Started
+                      <FaArrowRight size={12} color={"#000"} />
+                    </button>
+                  </Link>
                 </div>
               </div>
               <div className="mt-[50px]">
@@ -946,13 +960,15 @@ const VPSPricing = () => {
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
-                  <button
-                    className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                    // href="https://hub.ligmanode.com/buy?plan=basic"
-                  >
-                    Get Started
-                    <FaArrowRight size={12} color={"#000"} />
-                  </button>
+                  <Link href="/buy">
+                    <button
+                      className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
+                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                    >
+                      Get Started
+                      <FaArrowRight size={12} color={"#000"} />
+                    </button>
+                  </Link>
                 </div>
               </div>
               <div className="mt-[50px]">
@@ -1053,13 +1069,15 @@ const VPSPricing = () => {
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
-                  <button
-                    className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                    // href="https://hub.ligmanode.com/buy?plan=basic"
-                  >
-                    Get Started
-                    <FaArrowRight size={12} color={"#000"} />
-                  </button>
+                  <Link href="/buy">
+                    <button
+                      className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
+                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                    >
+                      Get Started
+                      <FaArrowRight size={12} color={"#000"} />
+                    </button>
+                  </Link>
                 </div>
               </div>
               <div className="mt-[73px]">
