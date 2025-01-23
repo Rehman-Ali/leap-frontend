@@ -301,7 +301,7 @@ const DashboardScreen = () => {
                 No Active Nodes Found
               </h1>
               <div className="flex gap-x-4 my-4">
-                <Link href="#">
+                <Link href="/buy">
                   <button className="flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu bg-darkPrimary text-black">
                     Buy Node
                   </button>

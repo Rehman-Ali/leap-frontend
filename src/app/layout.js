@@ -41,7 +41,8 @@ export default function RootLayout({ children }) {
     "/nodes",
     "/analytics",
     "/affiliate",
-    "/orders"
+    "/orders",
+    "/buy"
   ];
   const publicRoutes = [
     "/",
