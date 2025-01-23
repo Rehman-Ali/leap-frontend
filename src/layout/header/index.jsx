@@ -13,6 +13,9 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+
+
+  
   return (
     <header>
       <div className="mx-[10px] mt-[20px] border border-[#20211f] bg-[#07080699] rounded-[50px] flex flex-row items-center justify-between px-[30px] lg:px-[130px] py-[16px] backdrop-blur-[10px] opacity-[1px]">
