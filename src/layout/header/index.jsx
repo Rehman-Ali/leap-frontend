@@ -58,22 +58,25 @@ const Header = () => {
             VPS
           </Link>
         </div>
-       
+{/*        
         <button
           onClick={() => setShowAuthFlow(true)}
           className="hidden  w-[168px]  lg:flex flex-row items-center justify-center gap-x-2 irem mw-12:w-[150px]  mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"
         >
           Dashboard
           <FaArrowRight color="#231F20" size-={18} />
-        </button>
-        {/* <Link
+        </button> */}
+        <Link
             className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
             href="/login"
           >
-         <button className="hidden lg:block w-[168px]  mw-12:w-[150px]  mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white">
+         <button
+          className="hidden  w-[168px]  lg:flex flex-row items-center justify-center gap-x-2 irem mw-12:w-[150px]  mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"
+        >
           Dashboard
-        </button> 
-        </Link>  */}
+          <FaArrowRight color="#231F20" size-={18} />
+        </button>
+        </Link> 
         {/* Mobile Menu Toggle */}
         <div
           className="lg:hidden text-white cursor-pointer text-[24px]"
