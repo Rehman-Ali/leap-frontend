@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-const { default: Image } = require("next/image");
-import Swal from "sweetalert2";
+import Image from 'next/image';
 import {
   BaseError,
   useSendTransaction,

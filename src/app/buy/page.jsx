@@ -1,10 +1,10 @@
-import BuyScreen from "@/pages/Dashboard/buy";
+import BuyScreen from "@/app/_components/buy"
 
 const BuyPage = () => {
     return (
          <div>
             <BuyScreen/>
-         </div>   
+         </div>  
     )
 }
            
