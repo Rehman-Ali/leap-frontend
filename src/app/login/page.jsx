@@ -1,7 +1,7 @@
 'use client'
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import Image from "next/image";
-import Link from "next/link";
+
 
 const LoginPage = () => {
 

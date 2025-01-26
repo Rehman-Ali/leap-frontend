@@ -4,15 +4,6 @@ import { FaCheck } from "react-icons/fa6";
 
 const VPSPricing = () => {
 
-useEffect(() =>{
-  Swal.fire({
-    title: 'Error!',
-    text: 'Do you want to continue',
-    icon: 'error',
-    confirmButtonText: 'Cool'
-  })
-}, [])
-
 
   return (
     <section className="relative" id="pricing">

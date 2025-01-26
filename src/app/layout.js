@@ -152,6 +152,7 @@ export default function RootLayout({ children }) {
                     >
                       {pathname !== "/login" && <Header />}
                       <main className="flex-grow">{children}</main>
+                      {pathname !== "/login" && <Footer />}
                     </div>
                   )}
                 </ThemeProvider>
