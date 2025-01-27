@@ -1,46 +1,111 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Image from 'next/image';
+import Image from "next/image";
 import {
-  BaseError,
-  useSendTransaction,
-  useWaitForTransactionReceipt,
-} from "wagmi";
-import { parseEther } from "viem";
+  Connection,
+  PublicKey,
+  Transaction,
+  SystemProgram,
+  sendAndConfirmTransaction
+} from "@solana/web3.js";
 import { WALLET_ADDRESS } from "@/utils/server";
 
 const BuyScreen = () => {
   const [selectPlan, setSelectedPlan] = useState("");
   const [selectRegion, setSelectedRegion] = useState("");
 
-  const {
-    data: hash,
-    error,
-    isPending,
-    sendTransaction,
-  } = useSendTransaction();
+  const [status, setStatus] = useState("");
+  const [transactionId, setTransactionId] = useState("");
+
+  const [solPrice, setSolPrice] = useState(null); // Current SOL price in USD
+  const productPriceUSD = 80; // Product price in USD
+  const [solAmount, setSolAmount] = useState(null);
+
+  useEffect(() => {
+    async function fetchSolPrice() {
+      try {
+        const response = await fetch(
+          "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
+        );
+        const data = await response.json();
+        const price = data.solana.usd; // Get SOL price in USD
+        setSolPrice(price);
+        setSolAmount((productPriceUSD / price).toFixed(4)); // Calculate price in SOL
+
+        console.log(
+          price,
+          (productPriceUSD / price).toFixed(4),
+          "hre is the price======"
+        );
+      } catch (error) {
+        console.error("Error fetching Solana price:", error);
+      }
+    }
+
+    fetchSolPrice();
+  }, []);
 
   const payOrder = async (e) => {
     e.preventDefault();
-    const to = WALLET_ADDRESS;
-    const value = "0.05";
-    console.log(value, "value is here====")
-    sendTransaction({ to, value: parseEther(value) });
+    setStatus("");
+
+    const toAddress = WALLET_ADDRESS;
+    const value = solAmount;
+
+    try {
+      // Use the appropriate endpoint for your environment
+      const connection = new Connection("https://api.devnet.solana.com"); // Devnet
+      const fromWallet = window.solana; // Assumes a wallet like Phantom is installed
+
+      if (!fromWallet || !fromWallet.isPhantom) {
+        setStatus("Please connect to a Solana wallet like Phantom.");
+        return;
+      }
+
+      // Request wallet connection
+      const { publicKey } = await fromWallet.connect();
+
+      // Fetch the latest blockhash
+      const { blockhash, lastValidBlockHeight } =
+        await connection.getLatestBlockhash();
+
+      // Create transaction
+      const transaction = new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: publicKey,
+          toPubkey: new PublicKey(toAddress),
+          lamports: parseFloat(value) * 1e9 // Convert SOL to lamports
+        })
+      );
+      transaction.recentBlockhash = blockhash;
+      transaction.feePayer = publicKey;
+
+      // Request the wallet to sign the transaction
+      const signedTransaction = await fromWallet.signTransaction(transaction);
+
+      // Send the signed transaction
+      const txId = await connection.sendRawTransaction(
+        signedTransaction.serialize()
+      );
+
+      // Confirm the transaction using the updated confirmation strategy
+      const confirmation = await connection.confirmTransaction({
+        signature: txId,
+        blockhash,
+        lastValidBlockHeight
+      });
+
+      if (confirmation.value.err) {
+        throw new Error("Transaction failed.");
+      }
+
+      setTransactionId(txId);
+      setStatus("Transaction confirmed!");
+    } catch (error) {
+      console.error(error);
+      setStatus(`Error: ${error.message}`);
+    }
   };
-
-  const { isLoading: isConfirming, isSuccess: isConfirmed } =
-    useWaitForTransactionReceipt({
-      hash,
-    });
-
-  // useEffect(() => {
-  //   Swal.fire({
-  //     title: "Error!",
-  //     text: "Do you want to continue",
-  //     icon: "error",
-  //     confirmButtonText: "Cool",
-  //   });
-  // }, []);
 
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
@@ -661,49 +726,81 @@ const BuyScreen = () => {
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             <div
               onClick={() => setSelectedRegion("Dallas, TX")}
-              className={`flex w-full p-5 ${selectRegion === "Dallas, TX" ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100": "dark:text-white"}  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+              className={`flex w-full p-5 ${
+                selectRegion === "Dallas, TX"
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               Dallas, TX
             </div>
             <div
               onClick={() => setSelectedRegion("Charlotte, NC")}
-              className={`flex dark:text-white ${selectRegion === "Charlotte, NC" ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100": "dark:text-white"} w-full p-5 items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+              className={`flex dark:text-white ${
+                selectRegion === "Charlotte, NC"
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              } w-full p-5 items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               Charlotte, NC
             </div>
             <div
               onClick={() => setSelectedRegion("AMS - Netherlands")}
-              className={`flex w-full p-5 ${selectRegion === "AMS - Netherlands" ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100": "dark:text-white"}   items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+              className={`flex w-full p-5 ${
+                selectRegion === "AMS - Netherlands"
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              }   items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               AMS - Netherlands
             </div>
             <div
               onClick={() => setSelectedRegion("Bend, OR")}
-              className={`flex dark:text-white ${selectRegion === "Bend, OR" ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100": "dark:text-white"} w-full p-5 items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+              className={`flex dark:text-white ${
+                selectRegion === "Bend, OR"
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              } w-full p-5 items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               Bend, OR
             </div>
             <div
               onClick={() => setSelectedRegion("Latham, NY")}
-              className={`flex w-full ${selectRegion === "Latham, NY" ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100": "dark:text-white"}   p-5 items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+              className={`flex w-full ${
+                selectRegion === "Latham, NY"
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              }   p-5 items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               Latham, NY
             </div>
             <div
               onClick={() => setSelectedRegion("FRS - France")}
-              className={`flex w-full ${selectRegion === "FRS - France" ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100": "dark:text-white"} p-5  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+              className={`flex w-full ${
+                selectRegion === "FRS - France"
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              } p-5  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               FRS - France
             </div>
             <div
               onClick={() => setSelectedRegion("Ashburn, VA")}
-              className={`flex w-full  ${selectRegion === "Ashburn, VA" ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100": "dark:text-white"} p-5  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100  dark:hover:text-black`}
+              className={`flex w-full  ${
+                selectRegion === "Ashburn, VA"
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              } p-5  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100  dark:hover:text-black`}
             >
               Ashburn, VA
             </div>
             <div
               onClick={() => setSelectedRegion("Staten Island, NY")}
-              className={`flex w-full p-5  ${selectRegion === "Staten Island, NY" ? "dark:bg-gray-100 dark:text-bodyColor  bg-gray-100 ": "dark:text-white"} items-center  gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-black`}
+              className={`flex w-full p-5  ${
+                selectRegion === "Staten Island, NY"
+                  ? "dark:bg-gray-100 dark:text-bodyColor  bg-gray-100 "
+                  : "dark:text-white"
+              } items-center  gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-black`}
             >
               Staten Island, NY
             </div>
@@ -745,13 +842,13 @@ const BuyScreen = () => {
                   <div className="w-full md:w-fit min-w-80">
                     <div className="flex justify-between">
                       <p className="font-medium dark:text-white">Subtotal</p>
-                      <p className="dark:text-white">$80</p>
+                      <p className="dark:text-white">{solAmount} SOL</p>
                       {/* <p className="dark:text-white">2.12 SOL</p> */}
                     </div>
                     <hr className="my-2.5" />
                     <div className="flex justify-between">
                       <p className="font-medium dark:text-white">Total</p>
-                      <p className="dark:text-white">$80</p>
+                      <p className="dark:text-white">{solAmount} SOL</p>
                       {/* <p className="dark:text-white">2.12 SOL</p> */}
                     </div>
                     <hr className="my-2.5" />
@@ -769,11 +866,19 @@ const BuyScreen = () => {
                     <p className="text-sm text-red-500 h-4"></p>
                   </div>
                 </div>
-                {hash && <p className="text-black dark:text-white">Transaction Hash: {hash}</p>}
-                {isConfirming && <p className="text-black dark:text-white">Waiting for confirmation...</p>}
-                {isConfirmed && <p className="text-darkPrimary">Transaction confirmed.</p>}
-                {error && (
-                  <p className="text-red-700">Error: {BaseError.shortMessage || error.message}</p>
+                
+                {status && <div>{status}</div>}
+                {transactionId && (
+                  <div>
+                    Transaction ID:{" "}
+                    <a
+                      href={`https://explorer.solana.com/tx/${transactionId}?cluster=mainnet-beta`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {transactionId}
+                    </a>
+                  </div>
                 )}
                 <button
                   onClick={(e) => payOrder(e)}

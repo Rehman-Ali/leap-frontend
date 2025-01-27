@@ -20,12 +20,19 @@ import FullPageLoader from "./_components/loader";
 import axios from "axios";
 import { SERVER_URL } from "@/utils/server";
 
+import {
+  ConnectionProvider,
+  WalletProvider
+} from "@solana/wallet-adapter-react";
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
+import "@solana/wallet-adapter-react-ui/styles.css"; // Optional UI styles for wallets
+
 const config = createConfig({
   chains: [mainnet],
   multiInjectedProviderDiscovery: false,
   transports: {
-    [mainnet.id]: http(),
-  },
+    [mainnet.id]: http()
+  }
 });
 
 const queryClient = new QueryClient();
@@ -34,6 +41,8 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isAuthorized, setIsAuthorized] = useState(false);
+  // Solana wallet adapters
+  const wallets = [new PhantomWalletAdapter()];
 
   // Define routes
   const privateRoutes = [
@@ -42,7 +51,7 @@ export default function RootLayout({ children }) {
     "/analytics",
     "/affiliate",
     "/orders",
-    "/buy",
+    "/buy"
   ];
   const publicRoutes = [
     "/",
@@ -50,7 +59,7 @@ export default function RootLayout({ children }) {
     "/telegram-bot",
     "/rpc",
     "/trading-bot",
-    "/vps",
+    "/vps"
   ]; // Add all public routes here
 
   // Check for token
@@ -84,17 +93,17 @@ export default function RootLayout({ children }) {
       const response = await axios.post(
         `${SERVER_URL}/api/user/signin-and-signup`,
         {
-          dp_user_id: userData.userId,
+          dp_user_id: userData.userId
         }
       );
       console.log(response.data, "Response received");
       localStorage.setItem("u_t", response.data.token.token);
       let prev_path = localStorage.getItem("c_path");
       if (prev_path === null || prev_path === undefined) {
-        console.log("if working ")
+        console.log("if working ");
         router.push("/dashboard");
       } else {
-        console.log("else working")
+        console.log("else working");
         router.push(prev_path);
         localStorage.removeItem("c_path");
       }
@@ -130,14 +139,14 @@ export default function RootLayout({ children }) {
               onAuthSuccess: (args) => {
                 console.log("first event call", args.user);
                 handleLoginAndRegister(args.user);
-              },
+              }
             },
             handlers: {
               handleAuthenticatedUser: async (args) => {
                 console.log("2nd even call", args);
                 await customUserObjectProcess(args.user);
-              },
-            },
+              }
+            }
           }}
         >
           <WagmiProvider config={config}>
@@ -145,7 +154,12 @@ export default function RootLayout({ children }) {
               <DynamicWagmiConnector>
                 <ThemeProvider attribute="class" defaultTheme="dark">
                   {includeDashboardLayout ? (
-                    <DashboardLayout>{children}</DashboardLayout>
+                    //  {/* Solana Payment Checkout */}
+                    <ConnectionProvider endpoint="https://api.devnet.solana.com">
+                      <WalletProvider wallets={wallets} autoConnect>
+                        <DashboardLayout>{children}</DashboardLayout>
+                      </WalletProvider>
+                    </ConnectionProvider>
                   ) : (
                     <div
                       className={`${inter.variable} container mx-auto min-h-screen flex flex-col`}
