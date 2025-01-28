@@ -8,18 +8,20 @@ import {
   SystemProgram,
   sendAndConfirmTransaction
 } from "@solana/web3.js";
-import { WALLET_ADDRESS } from "@/utils/server";
+import { SERVER_URL, WALLET_ADDRESS } from "@/utils/server";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const BuyScreen = () => {
   const [selectPlan, setSelectedPlan] = useState("");
   const [selectRegion, setSelectedRegion] = useState("");
-
+  const [operatingSystem, setOperatingSystem] = useState("");
   const [status, setStatus] = useState("");
   const [transactionId, setTransactionId] = useState("");
 
   const [solPrice, setSolPrice] = useState(null); // Current SOL price in USD
-  const productPriceUSD = 80; // Product price in USD
-  const [solAmount, setSolAmount] = useState(null);
+  // const productPriceUSD = 80; // Product price in USD
+  // const [solAmount, setSolAmount] = useState(null);
 
   useEffect(() => {
     async function fetchSolPrice() {
@@ -30,13 +32,7 @@ const BuyScreen = () => {
         const data = await response.json();
         const price = data.solana.usd; // Get SOL price in USD
         setSolPrice(price);
-        setSolAmount((productPriceUSD / price).toFixed(4)); // Calculate price in SOL
-
-        console.log(
-          price,
-          (productPriceUSD / price).toFixed(4),
-          "hre is the price======"
-        );
+        // setSolAmount((productPriceUSD / price).toFixed(4)); // Calculate price in SOL
       } catch (error) {
         console.error("Error fetching Solana price:", error);
       }
@@ -50,7 +46,9 @@ const BuyScreen = () => {
     setStatus("");
 
     const toAddress = WALLET_ADDRESS;
-    const value = solAmount;
+    const value = (
+      (operatingSystem === "windows" ? 80 : 60) / solPrice
+    ).toFixed(4);
 
     try {
       // Use the appropriate endpoint for your environment
@@ -101,11 +99,70 @@ const BuyScreen = () => {
 
       setTransactionId(txId);
       setStatus("Transaction confirmed!");
+      onConfirmOrder();
     } catch (error) {
       console.error(error);
       setStatus(`Error: ${error.message}`);
+
+      onConfirmOrder();
     }
   };
+
+  const onConfirmOrder = async () => {
+    try {
+      let body = {
+        duration: "month",
+        status: "success",
+        price: operatingSystem === "windows" ? "80" : "60",
+        price_in_SOL: (
+          (operatingSystem === "windows" ? 80 : 60) / solPrice
+        ).toFixed(4),
+        order_category: "vps",
+        operating_system: operatingSystem,
+        region: setSelectedRegion,
+        plan: setSelectedPlan
+      };
+      let token = JSON.parse(localStorage.getItem("u_t"));
+      const response = await axios.post(
+        `${SERVER_URL}/api/order/create`,
+        body,
+        {
+          headers: {
+            "x-auth-token": token
+          }
+        }
+      );
+      console.log(response.data, "Response received");
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your order has been placed successfully",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: `Error during placed order ${
+          error.response?.data || error.message
+        }`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      console.error(
+        "Error during placed order",
+        error.response?.data || error.message
+      );
+    }
+  };
+
+  console.log(
+    operatingSystem === "windows" ? 80 : 60,
+    solPrice,
+    "price of in SOL"
+  );
 
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
@@ -720,6 +777,38 @@ const BuyScreen = () => {
               2
             </div>
             <h1 className="text-xl dark:text-white font-semibold">
+              Select Operating System
+            </h1>
+          </div>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            <div
+              onClick={() => setOperatingSystem("windows")}
+              className={`flex w-full p-5 ${
+                operatingSystem === "windows"
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+            >
+              Windows
+            </div>
+            <div
+              onClick={() => setOperatingSystem("linux")}
+              className={`flex dark:text-white ${
+                operatingSystem === "linux"
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              } w-full p-5 items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+            >
+              Linux
+            </div>
+          </div>
+        </div>
+        <div className="mt-6">
+          <div className="flex flex-row items-center gap-x-4 mb-5">
+            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center">
+              3
+            </div>
+            <h1 className="text-xl dark:text-white font-semibold">
               Select Region
             </h1>
           </div>
@@ -830,25 +919,39 @@ const BuyScreen = () => {
                     <p className="dark:text-white">{selectRegion}</p>
                   </div>
                   <div className="">
-                    <p className="dark:text-white">$80</p>
+                    <p className="dark:text-white">
+                      ${operatingSystem === "windows" ? 80 : 60}
+                    </p>
                   </div>
                   <div className="">
                     <p className="dark:text-white">1 Month</p>
                   </div>
-                  <p className="dark:text-white">$80</p>
+                  <p className="dark:text-white">
+                    ${operatingSystem === "windows" ? 80 : 60}
+                  </p>
                 </div>
                 <hr className="my-2.5" />
                 <div className="flex justify-end">
                   <div className="w-full md:w-fit min-w-80">
                     <div className="flex justify-between">
                       <p className="font-medium dark:text-white">Subtotal</p>
-                      <p className="dark:text-white">{solAmount} SOL</p>
+                      <p className="dark:text-white">
+                        {(
+                          (operatingSystem === "windows" ? 80 : 60) / solPrice
+                        ).toFixed(4)}{" "}
+                        SOL
+                      </p>
                       {/* <p className="dark:text-white">2.12 SOL</p> */}
                     </div>
                     <hr className="my-2.5" />
                     <div className="flex justify-between">
                       <p className="font-medium dark:text-white">Total</p>
-                      <p className="dark:text-white">{solAmount} SOL</p>
+                      <p className="dark:text-white">
+                        {(
+                          (operatingSystem === "windows" ? 80 : 60) / solPrice
+                        ).toFixed(4)}{" "}
+                        SOL
+                      </p>
                       {/* <p className="dark:text-white">2.12 SOL</p> */}
                     </div>
                     <hr className="my-2.5" />
@@ -866,7 +969,7 @@ const BuyScreen = () => {
                     <p className="text-sm text-red-500 h-4"></p>
                   </div>
                 </div>
-                
+
                 {status && <div>{status}</div>}
                 {transactionId && (
                   <div>
