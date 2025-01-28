@@ -970,7 +970,7 @@ const BuyScreen = () => {
                   </div>
                 </div>
 
-                {status && <div>{status}</div>}
+                {status && <p className="text-red-700>{status}</p}
                 {transactionId && (
                   <div>
                     Transaction ID:{" "}
