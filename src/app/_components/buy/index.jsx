@@ -105,7 +105,7 @@ const BuyScreen = () => {
       console.error(error);
       setStatus(`Error: ${error.message}`);
 
-      onConfirmOrder();
+      // onConfirmOrder();
     }
   };
 
@@ -770,7 +770,7 @@ const BuyScreen = () => {
         </div>
         <div className="mt-6">
           <div className="flex flex-row items-center gap-x-4 mb-5">
-            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center">
+            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black ">
               2
             </div>
             <h1 className="text-xl dark:text-white font-semibold">
@@ -822,7 +822,7 @@ const BuyScreen = () => {
         </div>
         <div className="mt-6">
           <div className="flex flex-row items-center gap-x-4 mb-5">
-            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center">
+            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black">
               3
             </div>
             <h1 className="text-xl dark:text-white font-semibold">
@@ -854,7 +854,7 @@ const BuyScreen = () => {
         </div>
         <div className="mt-6">
           <div className="flex flex-row items-center gap-x-4 mb-5">
-            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center">
+            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black">
               4
             </div>
             <h1 className="text-xl dark:text-white font-semibold">
