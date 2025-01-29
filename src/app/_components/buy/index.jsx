@@ -205,7 +205,7 @@ const BuyScreen = () => {
           </ol>
         </nav>
         <div className="flex flex-row items-center gap-x-4 mb-5 mt-8">
-          <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center">
+          <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black">
             1
           </div>
           <h1 className="text-xl font-semibold dark:text-white">Select Plan</h1>
