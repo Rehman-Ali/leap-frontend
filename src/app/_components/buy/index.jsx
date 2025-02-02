@@ -18,6 +18,7 @@ const BuyScreen = () => {
   const [operatingSystem, setOperatingSystem] = useState("");
   const [status, setStatus] = useState("");
   const [transactionId, setTransactionId] = useState("");
+  const [selectedDuration, setSelectedDuration] = useState(null);
 
   const [solPrice, setSolPrice] = useState(null); // Current SOL price in USD
   // const productPriceUSD = 80; // Product price in USD
@@ -104,18 +105,18 @@ const BuyScreen = () => {
       console.error(error);
       setStatus(`Error: ${error.message}`);
 
-      onConfirmOrder();
+      // onConfirmOrder();
     }
   };
 
   const onConfirmOrder = async () => {
     try {
       let body = {
-        duration: "month",
+        duration: selectedDuration +  " month",
         status: "success",
-        price: operatingSystem === "windows" ? "80" : "60",
+        price: operatingSystem === "windows" ? (80 * selectedDuration) : (60 * selectedDuration),
         price_in_SOL: (
-          (operatingSystem === "windows" ? 80 : 60) / solPrice
+          ((operatingSystem === "windows" ? 80 : 60) / solPrice) * selectedDuration
         ).toFixed(4),
         order_category: "vps",
         operating_system: operatingSystem,
@@ -158,11 +159,7 @@ const BuyScreen = () => {
     }
   };
 
-  console.log(
-    operatingSystem === "windows" ? 80 : 60,
-    solPrice,
-    "price of in SOL"
-  );
+ 
 
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
@@ -208,7 +205,7 @@ const BuyScreen = () => {
           </ol>
         </nav>
         <div className="flex flex-row items-center gap-x-4 mb-5 mt-8">
-          <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center">
+          <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black">
             1
           </div>
           <h1 className="text-xl font-semibold dark:text-white">Select Plan</h1>
@@ -773,8 +770,60 @@ const BuyScreen = () => {
         </div>
         <div className="mt-6">
           <div className="flex flex-row items-center gap-x-4 mb-5">
-            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center">
+            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black ">
               2
+            </div>
+            <h1 className="text-xl dark:text-white font-semibold">
+              Select Duration
+            </h1>
+          </div>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            <div
+              onClick={() => setSelectedDuration(1)}
+              className={`flex w-full p-5 ${
+                selectedDuration === 1
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+            >
+              1 month
+            </div>
+            <div
+              onClick={() => setSelectedDuration(3)}
+              className={`flex w-full p-5 ${
+                selectedDuration === 3
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+            >
+              3 month
+            </div>
+            <div
+              onClick={() => setSelectedDuration(6)}
+              className={`flex w-full p-5 ${
+                selectedDuration === 6
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+            >
+              6 month
+            </div>
+            <div
+              onClick={() => setSelectedDuration(12)}
+              className={`flex w-full p-5 ${
+                selectedDuration === 12
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+            >
+              12 month
+            </div>
+          </div>
+        </div>
+        <div className="mt-6">
+          <div className="flex flex-row items-center gap-x-4 mb-5">
+            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black">
+              3
             </div>
             <h1 className="text-xl dark:text-white font-semibold">
               Select Operating System
@@ -793,11 +842,11 @@ const BuyScreen = () => {
             </div>
             <div
               onClick={() => setOperatingSystem("linux")}
-              className={`flex dark:text-white ${
+              className={`flex w-full p-5 ${
                 operatingSystem === "linux"
                   ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
                   : "dark:text-white"
-              } w-full p-5 items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               Linux
             </div>
@@ -805,8 +854,8 @@ const BuyScreen = () => {
         </div>
         <div className="mt-6">
           <div className="flex flex-row items-center gap-x-4 mb-5">
-            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center">
-              3
+            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black">
+              4
             </div>
             <h1 className="text-xl dark:text-white font-semibold">
               Select Region
@@ -920,14 +969,14 @@ const BuyScreen = () => {
                   </div>
                   <div className="">
                     <p className="dark:text-white">
-                      ${operatingSystem === "windows" ? 80 : 60}
+                      ${operatingSystem === "windows" ? (80 * selectedDuration) : (60 * selectedDuration)}
                     </p>
                   </div>
                   <div className="">
-                    <p className="dark:text-white">1 Month</p>
+                    <p className="dark:text-white">{selectedDuration} Month</p>
                   </div>
                   <p className="dark:text-white">
-                    ${operatingSystem === "windows" ? 80 : 60}
+                    ${operatingSystem === "windows" ? (80 * selectedDuration) : (60 * selectedDuration)}
                   </p>
                 </div>
                 <hr className="my-2.5" />
@@ -937,7 +986,7 @@ const BuyScreen = () => {
                       <p className="font-medium dark:text-white">Subtotal</p>
                       <p className="dark:text-white">
                         {(
-                          (operatingSystem === "windows" ? 80 : 60) / solPrice
+                          ((operatingSystem === "windows" ? 80 : 60) / solPrice) * selectedDuration
                         ).toFixed(4)}{" "}
                         SOL
                       </p>
@@ -948,7 +997,7 @@ const BuyScreen = () => {
                       <p className="font-medium dark:text-white">Total</p>
                       <p className="dark:text-white">
                         {(
-                          (operatingSystem === "windows" ? 80 : 60) / solPrice
+                          ((operatingSystem === "windows" ? 80 : 60) / solPrice) * selectedDuration
                         ).toFixed(4)}{" "}
                         SOL
                       </p>
