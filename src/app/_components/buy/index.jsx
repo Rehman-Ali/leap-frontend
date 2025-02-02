@@ -825,11 +825,11 @@ const BuyScreen = () => {
             </div>
             <div
               onClick={() => setSelectedRegion("Charlotte, NC")}
-              className={`flex dark:text-white ${
+              className={`flex w-full p-5 ${
                 selectRegion === "Charlotte, NC"
                   ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
                   : "dark:text-white"
-              } w-full p-5 items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               Charlotte, NC
             </div>
@@ -970,7 +970,7 @@ const BuyScreen = () => {
                   </div>
                 </div>
 
-                {status && <div>{status}</div>}
+                {status && <p className="text-red-700">{status}</p>}
                 {transactionId && (
                   <div>
                     Transaction ID:{" "}

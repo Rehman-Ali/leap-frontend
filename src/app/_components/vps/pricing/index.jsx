@@ -36,7 +36,7 @@ const VPSPricing = () => {
           </div>
           <div className="mw-10:hidden flex flex-wrap ">
             <div className="w-[25%] px-6  py-[50px]">
-              <div className="inline-flex items-center whitespace-nowrap">
+              {/* <div className="inline-flex items-center whitespace-nowrap">
                 <div className="text-sm text-white font-medium font-inter mr-2">
                   Monthly
                 </div>
@@ -52,7 +52,7 @@ const VPSPricing = () => {
                 <div className="text-sm text-white font-medium font-inter  ml-2">
                   Yearly <span className="text-darkPrimary">(-10%)</span>
                 </div>
-              </div>
+              </div> */}
               <div className="font-light font-inter text-slate-400 mt-6 leading-tight">
                 Additional Discounts based on $Leap Staked
               </div>
@@ -271,11 +271,11 @@ const VPSPricing = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[25%] px-6 py-[20px] bg-[#37415133] rounded-tl-[24px] rounded-bl-[24px]">
+            <div className="w-[75%] px-6 py-[20px] bg-[#37415133] rounded-[24px] ">
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
-                  <div className="text-base font-inter font-medium text-white pb-0.5">
-                    Basic
+                  <div className="text-base font-inter font-medium text-darkPrimary pb-0.5">
+                    Leap VPS
                   </div>
                   <div className="mb-1 flex flex-row items-center gap-x-3">
                     <div className="flex flex-col items-start justify-start gap-y-3 mt-[5px]">
@@ -384,7 +384,7 @@ const VPSPricing = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[25%]  px-4 py-[20px] bg-[#37415133] border border-[#e5e7eb]">
+            {/* <div className="w-[25%]  px-4 py-[20px] bg-[#37415133] border border-[#e5e7eb]">
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
                   <div className="text-base font-inter font-medium text-white pb-0.5">
@@ -616,11 +616,11 @@ const VPSPricing = () => {
                   <p>&nbsp;</p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="hidden mw-10:flex flex-col gap-y-10">
             <div>
-              <div className="flex items-center justify-center whitespace-nowrap">
+              {/* <div className="flex items-center justify-center whitespace-nowrap">
                 <div className="text-sm text-white font-medium font-inter mr-2">
                   Monthly
                 </div>
@@ -636,7 +636,7 @@ const VPSPricing = () => {
                 <div className="text-sm text-white font-medium font-inter  ml-2">
                   Yearly <span className="text-darkPrimary">(-10%)</span>
                 </div>
-              </div>
+              </div> */}
               <div className="font-light font-inter text-slate-400 mt-6 leading-tight">
                 Additional Discounts based on $Leap Staked
               </div>
@@ -809,8 +809,8 @@ const VPSPricing = () => {
             <div className=" px-6 py-[20px] bg-[#37415133] rounded-[24px]">
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
-                  <div className="text-base font-inter font-medium text-white pb-0.5">
-                    Basic
+                  <div className="text-base font-inter font-medium text-darkPrimary pb-0.5">
+                  Leap VPS
                   </div>
                   <div className="mb-1 flex flex-row items-center gap-x-3">
                     <div className="flex flex-col items-start justify-start gap-y-3 mt-[5px]">
@@ -901,7 +901,7 @@ const VPSPricing = () => {
                 </div>
               </div>
             </div>
-            <div className=" px-4 py-[20px] bg-[#37415133] border border-[#e5e7eb] rounded-[24px]">
+            {/* <div className=" px-4 py-[20px] bg-[#37415133] border border-[#e5e7eb] rounded-[24px]">
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
                   <div className="text-base font-inter font-medium text-white pb-0.5">
@@ -1130,7 +1130,7 @@ const VPSPricing = () => {
                   <p>Dedicated Agent</p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

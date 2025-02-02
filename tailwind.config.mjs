@@ -41,6 +41,7 @@ export default {
         "mw-7": { max: "768px" },
         "mw-6": { max: "640px" },
         "mw-5": { max: "575px" },
+        "mw-9": { max: "450px" },
         "mw-4": { max: "420px" },
         "mw-3": { max: "360px" },
       },

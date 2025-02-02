@@ -22,7 +22,7 @@ import { SERVER_URL } from "@/utils/server";
 
 import {
   ConnectionProvider,
-  WalletProvider
+  WalletProvider,
 } from "@solana/wallet-adapter-react";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import "@solana/wallet-adapter-react-ui/styles.css"; // Optional UI styles for wallets
@@ -31,8 +31,8 @@ const config = createConfig({
   chains: [mainnet],
   multiInjectedProviderDiscovery: false,
   transports: {
-    [mainnet.id]: http()
-  }
+    [mainnet.id]: http(),
+  },
 });
 
 const queryClient = new QueryClient();
@@ -51,7 +51,11 @@ export default function RootLayout({ children }) {
     "/analytics",
     "/affiliate",
     "/orders",
-    "/buy"
+    "/buy",
+    "/admin-dashboard",
+    "/subscriptions",
+    "/users",
+    "/articles",
   ];
   const publicRoutes = [
     "/",
@@ -59,7 +63,7 @@ export default function RootLayout({ children }) {
     "/telegram-bot",
     "/rpc",
     "/trading-bot",
-    "/vps"
+    "/vps",
   ]; // Add all public routes here
 
   // Check for token
@@ -73,7 +77,12 @@ export default function RootLayout({ children }) {
     if (token) {
       // If the user has a token and tries to access a public route, redirect to a private route
       if (isPublicRoute) {
-        router.replace(privateRoutes[0]); // Redirect to the first private route (e.g., dashboard)
+        let role = JSON.parse(localStorage.getItem("role"));
+        if (role === "admin") {
+          router.replace("/admin-dashboard"); // Redirect to the first private route (e.g., dashboard)
+        } else {
+          router.replace(privateRoutes[0]); // Redirect to the first private route (e.g., dashboard)
+        }
       } else {
         setIsAuthorized(true);
       }
@@ -93,15 +102,19 @@ export default function RootLayout({ children }) {
       const response = await axios.post(
         `${SERVER_URL}/api/user/signin-and-signup`,
         {
-          dp_user_id: userData.userId
+          dp_user_id: userData.userId,
         }
       );
       console.log(response.data, "Response received");
       localStorage.setItem("u_t", JSON.stringify(response.data.token.token));
+      localStorage.setItem("role", JSON.stringify(response.data.token.role));
       let prev_path = localStorage.getItem("c_path");
       if (prev_path === null || prev_path === undefined) {
-        console.log("if working ");
-        router.push("/dashboard");
+        if (response.data.token.role === "admin") {
+          router.push("/admin-dashboard");
+        } else {
+          router.push("/dashboard");
+        }
       } else {
         console.log("else working");
         router.push(prev_path);
@@ -139,14 +152,14 @@ export default function RootLayout({ children }) {
               onAuthSuccess: (args) => {
                 console.log("first event call", args.user);
                 handleLoginAndRegister(args.user);
-              }
+              },
             },
             handlers: {
               handleAuthenticatedUser: async (args) => {
                 console.log("2nd even call", args);
                 await customUserObjectProcess(args.user);
-              }
-            }
+              },
+            },
           }}
         >
           <WagmiProvider config={config}>
