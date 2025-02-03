@@ -329,7 +329,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                   ? "bg-darkPrimary text-white font-semibold"
                   : "text-black dark:text-white hover:text-darkPrimary"
               } `}
-              href="/articles"
+              href="/articles-list"
             >
               <svg
                 stroke="currentColor"

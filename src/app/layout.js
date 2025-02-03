@@ -55,7 +55,8 @@ export default function RootLayout({ children }) {
     "/admin-dashboard",
     "/subscriptions",
     "/users",
-    "/articles",
+    "/articles-list",
+    "/add-article",
   ];
   const publicRoutes = [
     "/",

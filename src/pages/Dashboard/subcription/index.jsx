@@ -34,17 +34,18 @@ const SubscriptionScreen = () => {
   const paginatedData = orderList.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
 
-
-  // useEffect(() => {
-  //   axios
-  //     .get(SERVER_URL + "/api/order/all")
-  //     .then((res) => {
-  //       setOrderList(res.data.data);
-  //     })
-  //     .catch((err) => console.log(err));
-
-  //   }, []);
-
+  useEffect(() => {
+    axios
+      .get(SERVER_URL + "/api/order/all")
+      .then((res) => {
+        if (res.data && res.data.data) {
+          setOrderList(res.data.data);
+        } else {
+          console.error("Invalid response format", res);
+        }
+      })
+      .catch((err) => console.error("Error fetching data", err));
+  }, []);
 
 
   return (
@@ -78,7 +79,7 @@ const SubscriptionScreen = () => {
                     <td className="py-2 px-4 border-b">{user.price_in_SOL}</td>
                     <td className="py-2 px-4 border-b">{user.order_category}</td>
                     <td className="py-2 px-4 border-b">{user.operating_system}</td>
-                    <td className="py-2 px-4 border-b">{user.createdAt.toLocalString()}</td>
+                    <td className="py-2 px-4 border-b"> {new Date(user.createdAt).toLocaleString()}</td>
 
 
 

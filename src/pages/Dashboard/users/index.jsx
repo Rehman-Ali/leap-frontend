@@ -63,8 +63,8 @@ const UserScreen = () => {
                 </tr>
               </thead>
               <tbody>
-                {paginatedData.map((user) => (
-                  <tr key={user.id} className=" dark:text-white text-black">
+                {paginatedData.map((user, index) => (
+                  <tr key={index} className=" dark:text-white text-black">
                     <td className="py-2 px-4 border-b">{user._id}</td>
                     <td className="py-2 px-4 border-b">{user.dp_user_id}</td>
                     <td className="py-2 px-4 border-b">{user.role}</td>
