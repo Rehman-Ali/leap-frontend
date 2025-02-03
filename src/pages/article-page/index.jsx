@@ -3,6 +3,7 @@ import { useInView } from "@/hooks/useInView";
 import { SERVER_URL } from "@/utils/server";
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
@@ -32,7 +33,7 @@ const ArticleScreen = () => {
         "x-auth-token": token
       }
     })
-    .then(res => setArticleList(response.data.data ))
+    .then(res => setArticleList(res.data.data ))
     .catch(err => console.log(err, "err is here==="))
     
     // getArticleList();
@@ -41,7 +42,7 @@ const ArticleScreen = () => {
   console.log(articleList, "articleList=====");
 
   return (
-    <div ref={sectionRef} className="bg-bodycolor max-w-[1200px] mx-auto">
+    <div ref={sectionRef} className="bg-bodycolor max-w-[1200px] mx-auto mt-[50px]">
       <div className="flex flex-row items-center justify-center">
         <h1
           className={`text-darkPrimary
@@ -83,10 +84,11 @@ const ArticleScreen = () => {
           <FaSearch size={30} color={"#37F94E"} />
         </div>
       </div>
-      <div className="flex flex-row flex-wrap gap-4">
+      <div className="flex flex-row flex-wrap gap-4 mt-[40px]">
         {articleList.length > 0 ? (
           articleList.map((item, index) => (
-            <div
+            <Link
+              href={`/articles/${item._id}`}
               className="bg-gray-500 h-[300px] w-[24%] rounded-[8px]"
               key={index}
             >
@@ -95,6 +97,7 @@ const ArticleScreen = () => {
                 height={157}
                 width={300}
                 className="h-[157px] w-[100%] rounded-t-[8px]"
+                alt="article"
               />
               <div className="p-[10px] h-[143px] bg-white flex flex-col justify-between rounded-b-[8px]">
                 <div className="flex flex-col gap-y-2">
@@ -114,7 +117,7 @@ const ArticleScreen = () => {
                   &nbsp; | item
                 </p>
               </div>
-            </div>
+            </Link>
           ))
         ) : (
           <div className="flex flex-row items-center justify-center">

@@ -48,7 +48,7 @@ const ArticleListScreen = () => {
       <div className="h-full w-full max-w-[1500px] p-2 lg:p-5">
         <div className="">
           <div className="">
-            <h2 className="text-[26px] font-medium mb-8 text-white dark:text-black" >Subscriptions List</h2>
+            <h2 className="text-[26px] font-medium mb-8 text-black dark:text-white" >Subscriptions List</h2>
             <Link href="/add-article">
             <button
               className="flex mb-5 justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu bg-darkPrimary text-black mt-4 xl:mt-6"
@@ -83,6 +83,7 @@ const ArticleListScreen = () => {
                      height={100}
                      width={500}
                      className="h-[100px] w-[500px]"
+                     alt="article"
                      />
                      } 
 
