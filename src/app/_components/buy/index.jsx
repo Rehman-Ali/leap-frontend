@@ -110,7 +110,7 @@ const BuyScreen = () => {
       let body = {
         duration:
           selectedDuration === 7 ? "1 week" : selectedDuration / 30 + "month",
-        status: "success",
+        status: "active",
         price:
           selectPlan === "Basic"
             ? (400 / 30) * selectedDuration

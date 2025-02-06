@@ -110,7 +110,7 @@ const BuyVPSScreen = () => {
       let body = {
         duration:
           selectedDuration === 7 ? "1 week" : selectedDuration / 30 + "month",
-        status: "success",
+        status: "active",
         price:
          operatingSystem === "windows"
             ? (80 / 30) * selectedDuration
