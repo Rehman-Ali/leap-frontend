@@ -34,8 +34,7 @@ const RPCPricing = () => {
             <div className="w-[25%] px-6  py-[50px]">
               
              
-              <div className="border-b border-gray-800  my-[20px]"></div>
-              <div className="mt-[50px]">
+              <div className="mt-[190px]">
                 <p className="text-white font-inter font-medium text-[14px]">
                   Usage
                 </p>
