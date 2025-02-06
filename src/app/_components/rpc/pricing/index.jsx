@@ -32,8 +32,6 @@ const RPCPricing = () => {
           </div>
           <div className="mw-10:hidden flex flex-wrap">
             <div className="w-[25%] px-6  py-[50px]">
-              
-             
               <div className="mt-[190px]">
                 <p className="text-white font-inter font-medium text-[14px]">
                   Usage

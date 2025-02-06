@@ -50,7 +50,7 @@ const DashboardNodeScreen = () => {
                               className="text-sm outline-none w-full pr-1.5 dark:text-white"
                               placeholder=" "
                               type="text"
-                              defaultValue="https://public.ligmanode.com"
+                              defaultValue="https://public.blockchain.com"
                             />
                             <svg
                               stroke="currentColor"
@@ -96,7 +96,7 @@ const DashboardNodeScreen = () => {
                               className="text-sm outline-none w-full pr-1.5 dark:text-white"
                               placeholder=" "
                               type="text"
-                              defaultValue="wss://public.ligmanode.com"
+                              defaultValue="wss://public.leap-blockchain.com"
                             />
                             <svg
                               stroke="currentColor"
@@ -131,18 +131,7 @@ const DashboardNodeScreen = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="w-full">
-                      <div className="w-full">
-                        <div className="text-gray-500 text-[10px] dark:text-white">
-                          GEYSER (gRPC) URL
-                        </div>
-                        <div className="flex items-center">
-                          <p className="text-sm text-gray-500 dark:text-white">
-                            Available with God Node
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                   
                   </div>
                 </div>
               </div>
