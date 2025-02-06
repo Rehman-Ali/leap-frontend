@@ -5,8 +5,7 @@ import {
   Connection,
   PublicKey,
   Transaction,
-  SystemProgram,
-  sendAndConfirmTransaction
+  SystemProgram
 } from "@solana/web3.js";
 import { SERVER_URL, WALLET_ADDRESS } from "@/utils/server";
 import axios from "axios";
@@ -21,8 +20,6 @@ const BuyScreen = () => {
   const [selectedDuration, setSelectedDuration] = useState(null);
 
   const [solPrice, setSolPrice] = useState(null); // Current SOL price in USD
-  // const productPriceUSD = 80; // Product price in USD
-  // const [solAmount, setSolAmount] = useState(null);
 
   useEffect(() => {
     async function fetchSolPrice() {
@@ -33,7 +30,6 @@ const BuyScreen = () => {
         const data = await response.json();
         const price = data.solana.usd; // Get SOL price in USD
         setSolPrice(price);
-        // setSolAmount((productPriceUSD / price).toFixed(4)); // Calculate price in SOL
       } catch (error) {
         console.error("Error fetching Solana price:", error);
       }
@@ -104,19 +100,21 @@ const BuyScreen = () => {
     } catch (error) {
       console.error(error);
       setStatus(`Error: ${error.message}`);
-
-      // onConfirmOrder();
     }
   };
 
   const onConfirmOrder = async () => {
     try {
       let body = {
-        duration: selectedDuration +  " month",
+        duration: selectedDuration + " month",
         status: "success",
-        price: operatingSystem === "windows" ? (80 * selectedDuration) : (60 * selectedDuration),
+        price:
+          operatingSystem === "windows"
+            ? 80 * selectedDuration
+            : 60 * selectedDuration,
         price_in_SOL: (
-          ((operatingSystem === "windows" ? 80 : 60) / solPrice) * selectedDuration
+          ((operatingSystem === "windows" ? 80 : 60) / solPrice) *
+          selectedDuration
         ).toFixed(4),
         order_category: "vps",
         operating_system: operatingSystem,
@@ -158,8 +156,6 @@ const BuyScreen = () => {
       );
     }
   };
-
- 
 
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
@@ -945,17 +941,6 @@ const BuyScreen = () => {
           </div>
         </div>
         <div className="my-20 min-h-96">
-          {/* <div className="flex justify-between mt-10 align-center flex-col md:flex-row gap-2">
-            <h1 className="text-xl font-semibold dark:text-white">Summary</h1>
-            <div className="rounded-xl border flex gap-2 text-sm p-1.5 w-fit">
-              <div className="px-2.5 py-1.5 rounded-md dark:text-white cursor-pointer select-none bg-black text-white">
-                Monthly
-              </div>
-              <div className="px-2.5 py-1.5 rounded-md cursor-pointer dark:text-white select-none border text-black">
-                Yearly (Save 10%)
-              </div>
-            </div>
-          </div> */}
           {selectPlan !== "" && (
             <>
               <hr className="my-4" />
@@ -969,14 +954,20 @@ const BuyScreen = () => {
                   </div>
                   <div className="">
                     <p className="dark:text-white">
-                      ${operatingSystem === "windows" ? (80 * selectedDuration) : (60 * selectedDuration)}
+                      $
+                      {operatingSystem === "windows"
+                        ? 80 * selectedDuration
+                        : 60 * selectedDuration}
                     </p>
                   </div>
                   <div className="">
                     <p className="dark:text-white">{selectedDuration} Month</p>
                   </div>
                   <p className="dark:text-white">
-                    ${operatingSystem === "windows" ? (80 * selectedDuration) : (60 * selectedDuration)}
+                    $
+                    {operatingSystem === "windows"
+                      ? 80 * selectedDuration
+                      : 60 * selectedDuration}
                   </p>
                 </div>
                 <hr className="my-2.5" />
@@ -986,7 +977,9 @@ const BuyScreen = () => {
                       <p className="font-medium dark:text-white">Subtotal</p>
                       <p className="dark:text-white">
                         {(
-                          ((operatingSystem === "windows" ? 80 : 60) / solPrice) * selectedDuration
+                          ((operatingSystem === "windows" ? 80 : 60) /
+                            solPrice) *
+                          selectedDuration
                         ).toFixed(4)}{" "}
                         SOL
                       </p>
@@ -997,24 +990,15 @@ const BuyScreen = () => {
                       <p className="font-medium dark:text-white">Total</p>
                       <p className="dark:text-white">
                         {(
-                          ((operatingSystem === "windows" ? 80 : 60) / solPrice) * selectedDuration
+                          ((operatingSystem === "windows" ? 80 : 60) /
+                            solPrice) *
+                          selectedDuration
                         ).toFixed(4)}{" "}
                         SOL
                       </p>
-                      {/* <p className="dark:text-white">2.12 SOL</p> */}
                     </div>
                     <hr className="my-2.5" />
-                    <div className="flex gap-2.5">
-                      {/* <input
-                    className="border border-gray-400 rounded-md h-[40px] px-2.5 w-full text-sm"
-                    placeholder="Discount Code"
-                  /> */}
-                      {/* <button
-                        className={` mw-8:mt-3 w-32 sm:w-36 h-10 bg-darkPrimary text-sm sm:text-base font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}
-                      >
-                        Apply
-                      </button> */}
-                    </div>
+
                     <p className="text-sm text-red-500 h-4"></p>
                   </div>
                 </div>

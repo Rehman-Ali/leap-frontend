@@ -52,7 +52,7 @@ const TradingBot = () => {
             "Fully automated trading",
             "Identifies and capitalises on profitable opportunities",
             "Built for serious traders on the Solana blockchain",
-            "Leverages unmatched speed and efficiency for maximum profitability",
+            "Leverages unmatched speed and efficiency for maximum profitability"
           ].map((feature, index) => (
             <div
               key={index}

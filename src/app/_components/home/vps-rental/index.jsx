@@ -73,23 +73,6 @@ const VPSRental = () => {
             Our affordable servers are also hosted in the same rack as our node
             to give our users the lowest latency we can!
           </p>
-          {/* Features */}
-          {/* {[
-            "Real Time Trade update",
-            "Coin analysis",
-            "Limit and DCA mode",
-            "Copy Trading and more….",
-          ].map((feature, index) => (
-            <div
-              key={index}
-              className={`flex flex-row items-left gap-x-2 mb-[10px] ${
-                animationTriggered ? "animate-slideIn" : ""
-              }`}
-            >
-              <FaCheck size={18} color={"#37f94e"} />
-              <p className="text-[#C5C6C5] font-inter text-[14px]">{feature}</p>
-            </div>
-          ))} */}
 
           <div className="w-[100%]">
             <div>
@@ -206,11 +189,9 @@ const VPSRental = () => {
                     4x 4GHz + CPU Cores
                   </p>
                   <p className="text-[16px] font-inter font-normal text-white">
-                    16GB of RAM +  435GB PURE SSD
+                    16GB of RAM + 435GB PURE SSD
                   </p>
-                  <p className="text-[16px] font-inter font-normal text-white">
-                   
-                  </p>
+                  <p className="text-[16px] font-inter font-normal text-white"></p>
                 </div>
               </div>
 

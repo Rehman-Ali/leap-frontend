@@ -3,7 +3,7 @@ import ArticleScreen from "@/pages/Dashboard/articles";
 const ArticlesdPage = () => {
   return (
     <div>
-      <ArticleScreen/>
+      <ArticleScreen />
     </div>
   );
 };

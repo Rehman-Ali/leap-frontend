@@ -13,8 +13,9 @@ const RPCGetStarted = () => {
     setAnimationTriggered(true);
   }
   return (
-    <div className="flex items-center justify-center mb-16 md:mb-20 lg:mb-24 px-4"
-    ref={sectionRef}
+    <div
+      className="flex items-center justify-center mb-16 md:mb-20 lg:mb-24 px-4"
+      ref={sectionRef}
     >
       <div className="flex flex-col items-center justify-center border border-[#131412] rounded-lg w-full max-w-[960px] bg-gradient-to-b from-[#121311] to-[#070806] h-auto py-8 md:py-12">
         <p

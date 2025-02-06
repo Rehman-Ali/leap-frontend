@@ -76,11 +76,13 @@ const VPSHeroSection = () => {
             } text-white text-center text-base sm:text-lg font-inter `}>
             Land transactions faster and more consistently than ever before
           </p>
+          <a href="https://discord.gg/9UXPJgnZ5q" target="_blank">
           <button className={` ${
               animationTriggered ? "animate-slideIn" : ""
             } mt-5 mw-8:mt-3 w-32 sm:w-36 h-12 bg-darkPrimary text-sm sm:text-base font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}>
             Join Now
           </button>
+          </a>
           <p className={` ${
               animationTriggered ? "animate-slideIn" : ""
             } text-white pb-[20px] mw-8:pb-[10px] text-center text-4xl sm:text-5xl lg:text-6xl font-inter font-medium mw-8:t-3 mt-6`}>
