@@ -52,6 +52,7 @@ export default function RootLayout({ children }) {
     "/affiliate",
     "/orders",
     "/buy",
+    "/buy-vps",
     "/admin-dashboard",
     "/subscriptions",
     "/users",

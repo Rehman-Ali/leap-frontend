@@ -48,7 +48,7 @@ const RPCPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                  Estimated RPS
+                  Estimated TPS
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
                   Features
@@ -214,7 +214,7 @@ const RPCPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-darkPrimary font-inter font-medium text-[14px]">
-                 6,000
+                 1,000
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
                 &nbsp;

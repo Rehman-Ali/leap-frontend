@@ -30,6 +30,7 @@ const BuyScreen = () => {
         const data = await response.json();
         const price = data.solana.usd; // Get SOL price in USD
         setSolPrice(price);
+        console.log(data, price, "====SOL======");
       } catch (error) {
         console.error("Error fetching Solana price:", error);
       }
@@ -43,9 +44,10 @@ const BuyScreen = () => {
     setStatus("");
 
     const toAddress = WALLET_ADDRESS;
-    const value = (
-      (operatingSystem === "windows" ? 80 : 60) / solPrice
-    ).toFixed(4);
+    const value =
+      ((selectPlan === "Basic"
+        ? (400 / 30) * selectedDuration
+        : (600 / 30) * selectedDuration) / solPrice).toFixed(4);
 
     try {
       // Use the appropriate endpoint for your environment
@@ -106,18 +108,20 @@ const BuyScreen = () => {
   const onConfirmOrder = async () => {
     try {
       let body = {
-        duration: selectedDuration + " month",
+        duration:
+          selectedDuration === 7 ? "1 week" : selectedDuration / 30 + "month",
         status: "success",
         price:
-          operatingSystem === "windows"
-            ? 80 * selectedDuration
-            : 60 * selectedDuration,
+          selectPlan === "Basic"
+            ? (400 / 30) * selectedDuration
+            : (600 / 30) * selectedDuration,
         price_in_SOL: (
-          ((operatingSystem === "windows" ? 80 : 60) / solPrice) *
-          selectedDuration
+          (selectPlan === "Basic"
+            ? (400 / 30) * selectedDuration
+            : (600 / 30) * selectedDuration) / solPrice
         ).toFixed(4),
-        order_category: "vps",
-        operating_system: operatingSystem,
+        order_category: "rpc",
+        operating_system: null,
         region: setSelectedRegion,
         plan: setSelectedPlan
       };
@@ -339,19 +343,125 @@ const BuyScreen = () => {
                 </div>
                 <div className="flex-1">Websocket Support</div>
               </li>
+              <li className="flex flex-row items-center gap-x-2">
+                <div className="flex-none text-[#6840FD]">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="0.723633"
+                      y="0.220703"
+                      width="23.9443"
+                      height="23.9443"
+                      rx="11.9722"
+                      fill="white"
+                    ></rect>
+                    <path
+                      d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                      stroke="currentColor"
+                      strokeWidth="1.99536"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                <div className="flex-1">Dedicated Regions</div>
+              </li>
+              <li className="flex flex-row items-center gap-x-2">
+                <div className="flex-none text-[#6840FD]">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="0.723633"
+                      y="0.220703"
+                      width="23.9443"
+                      height="23.9443"
+                      rx="11.9722"
+                      fill="white"
+                    ></rect>
+                    <path
+                      d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                      stroke="currentColor"
+                      strokeWidth="1.99536"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                <div className="flex-1">Geyser gRPC</div>
+              </li>
+              <li className="flex flex-row items-center gap-x-2">
+                <div className="flex-none text-[#6840FD]">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="0.723633"
+                      y="0.220703"
+                      width="23.9443"
+                      height="23.9443"
+                      rx="11.9722"
+                      fill="white"
+                    ></rect>
+                    <path
+                      d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                      stroke="currentColor"
+                      strokeWidth="1.99536"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                <div className="flex-1">Enterprise Add-ons</div>
+              </li>
+              <li className="flex flex-row items-center gap-x-2">
+                <div className="flex-none text-[#6840FD]">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="0.723633"
+                      y="0.220703"
+                      width="23.9443"
+                      height="23.9443"
+                      rx="11.9722"
+                      fill="white"
+                    ></rect>
+                    <path
+                      d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                      stroke="currentColor"
+                      strokeWidth="1.99536"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                <div className="flex-1">Premium Support</div>
+              </li>
             </ul>
             <div className="flex flex-row gap-x-4 text-xl text-white my-6">
               <div className="text-white font-semibold">TPS</div>
-              <div className="text-white/50">~100</div>
+              <div className="text-white/50">~500</div>
             </div>
             <div className="text-white/50 text-3xl">
-              Windows
-              <span className="text-white font-semibold pl-[10px]">$80</span>
-              /month
-            </div>
-            <div className="text-white/50 text-3xl">
-              Linux
-              <span className="text-white font-semibold pl-[60px]">$60</span>
+              <span className="text-white font-semibold pl-[10px]">$400</span>
               /month
             </div>
           </div>
@@ -432,7 +542,7 @@ const BuyScreen = () => {
                 <div className="flex-1">No Rate Limit</div>
               </li>
               <li className="flex flex-row items-center gap-x-2">
-                <div className="flex-none text-[#41BF6D]">
+                <div className="flex-none text-[#6840FD]">
                   <svg
                     width="20"
                     height="20"
@@ -460,7 +570,7 @@ const BuyScreen = () => {
                 <div className="flex-1">High Landing Rate</div>
               </li>
               <li className="flex flex-row items-center gap-x-2">
-                <div className="flex-none text-[#41BF6D]">
+                <div className="flex-none text-[#6840FD]">
                   <svg
                     width="20"
                     height="20"
@@ -488,7 +598,7 @@ const BuyScreen = () => {
                 <div className="flex-1">Websocket Support</div>
               </li>
               <li className="flex flex-row items-center gap-x-2">
-                <div className="flex-none text-[#41BF6D]">
+                <div className="flex-none text-[#6840FD]">
                   <svg
                     width="20"
                     height="20"
@@ -515,23 +625,100 @@ const BuyScreen = () => {
                 </div>
                 <div className="flex-1">Dedicated Regions</div>
               </li>
+              <li className="flex flex-row items-center gap-x-2">
+                <div className="flex-none text-[#6840FD]">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="0.723633"
+                      y="0.220703"
+                      width="23.9443"
+                      height="23.9443"
+                      rx="11.9722"
+                      fill="white"
+                    ></rect>
+                    <path
+                      d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                      stroke="currentColor"
+                      strokeWidth="1.99536"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                <div className="flex-1">Geyser gRPC</div>
+              </li>
+              <li className="flex flex-row items-center gap-x-2">
+                <div className="flex-none text-[#6840FD]">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="0.723633"
+                      y="0.220703"
+                      width="23.9443"
+                      height="23.9443"
+                      rx="11.9722"
+                      fill="white"
+                    ></rect>
+                    <path
+                      d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                      stroke="currentColor"
+                      strokeWidth="1.99536"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                <div className="flex-1">Enterprise Add-ons</div>
+              </li>
+              <li className="flex flex-row items-center gap-x-2">
+                <div className="flex-none text-[#6840FD]">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="0.723633"
+                      y="0.220703"
+                      width="23.9443"
+                      height="23.9443"
+                      rx="11.9722"
+                      fill="white"
+                    ></rect>
+                    <path
+                      d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                      stroke="currentColor"
+                      strokeWidth="1.99536"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                <div className="flex-1">Premium Support</div>
+              </li>
             </ul>
             <div className="flex flex-row gap-x-4 text-xl text-white my-6">
               <div className="text-white font-semibold">TPS</div>
               <div className="text-white/50">~1000</div>
             </div>
             <div className="text-white/50 text-3xl">
-              Windows
-              <span className="text-white font-semibold pl-[10px]">$80</span>
-              /month
-            </div>
-            <div className="text-white/50 text-3xl">
-              Linux
-              <span className="text-white font-semibold pl-[60px]">$60</span>
+              <span className="text-white font-semibold pl-[10px]">$600</span>
               /month
             </div>
           </div>
-         
         </div>
         <div className="mt-6">
           <div className="flex flex-row items-center gap-x-4 mb-5">
@@ -544,9 +731,19 @@ const BuyScreen = () => {
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             <div
-              onClick={() => setSelectedDuration(1)}
+              onClick={() => setSelectedDuration(7)}
               className={`flex w-full p-5 ${
-                selectedDuration === 1
+                selectedDuration === 7
+                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                  : "dark:text-white"
+              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+            >
+              1 week
+            </div>
+            <div
+              onClick={() => setSelectedDuration(30)}
+              className={`flex w-full p-5 ${
+                selectedDuration === 30
                   ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
                   : "dark:text-white"
               }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
@@ -554,9 +751,9 @@ const BuyScreen = () => {
               1 month
             </div>
             <div
-              onClick={() => setSelectedDuration(3)}
+              onClick={() => setSelectedDuration(90)}
               className={`flex w-full p-5 ${
-                selectedDuration === 3
+                selectedDuration === 90
                   ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
                   : "dark:text-white"
               }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
@@ -564,63 +761,22 @@ const BuyScreen = () => {
               3 month
             </div>
             <div
-              onClick={() => setSelectedDuration(6)}
+              onClick={() => setSelectedDuration(180)}
               className={`flex w-full p-5 ${
-                selectedDuration === 6
+                selectedDuration === 180
                   ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
                   : "dark:text-white"
               }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               6 month
             </div>
-            <div
-              onClick={() => setSelectedDuration(12)}
-              className={`flex w-full p-5 ${
-                selectedDuration === 12
-                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
-                  : "dark:text-white"
-              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
-            >
-              12 month
-            </div>
           </div>
         </div>
+
         <div className="mt-6">
           <div className="flex flex-row items-center gap-x-4 mb-5">
             <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black">
               3
-            </div>
-            <h1 className="text-xl dark:text-white font-semibold">
-              Select Operating System
-            </h1>
-          </div>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            <div
-              onClick={() => setOperatingSystem("windows")}
-              className={`flex w-full p-5 ${
-                operatingSystem === "windows"
-                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
-                  : "dark:text-white"
-              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
-            >
-              Windows
-            </div>
-            <div
-              onClick={() => setOperatingSystem("linux")}
-              className={`flex w-full p-5 ${
-                operatingSystem === "linux"
-                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
-                  : "dark:text-white"
-              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
-            >
-              Linux
-            </div>
-          </div>
-        </div>
-        <div className="mt-6">
-          <div className="flex flex-row items-center gap-x-4 mb-5">
-            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black">
-              4
             </div>
             <h1 className="text-xl dark:text-white font-semibold">
               Select Region
@@ -724,19 +880,23 @@ const BuyScreen = () => {
                   <div className="">
                     <p className="dark:text-white">
                       $
-                      {operatingSystem === "windows"
-                        ? 80 * selectedDuration
-                        : 60 * selectedDuration}
+                      {selectPlan === "Basic"
+                        ? ((400 / 30) * selectedDuration).toFixed(2)
+                        : ((600 / 30) * selectedDuration).toFixed(2)}
                     </p>
                   </div>
                   <div className="">
-                    <p className="dark:text-white">{selectedDuration} Month</p>
+                    <p className="dark:text-white">
+                      {selectedDuration === 7
+                        ? "1 week"
+                        : selectedDuration / 30 + "month"}{" "}
+                    </p>
                   </div>
                   <p className="dark:text-white">
                     $
-                    {operatingSystem === "windows"
-                      ? 80 * selectedDuration
-                      : 60 * selectedDuration}
+                    {selectPlan === "Basic"
+                      ? ((400 / 30) * selectedDuration).toFixed(2)
+                      : ((600 / 30) * selectedDuration).toFixed(2)}
                   </p>
                 </div>
                 <hr className="my-2.5" />
@@ -746,11 +906,11 @@ const BuyScreen = () => {
                       <p className="font-medium dark:text-white">Subtotal</p>
                       <p className="dark:text-white">
                         {(
-                          ((operatingSystem === "windows" ? 80 : 60) /
-                            solPrice) *
-                          selectedDuration
-                        ).toFixed(4)}{" "}
-                        SOL
+                          (selectPlan === "Basic"
+                            ? (400 / 30) * selectedDuration
+                            : (600 / 30) * selectedDuration) / solPrice
+                        ).toFixed(4)}
+                        &nbsp; SOL
                       </p>
                       {/* <p className="dark:text-white">2.12 SOL</p> */}
                     </div>
@@ -759,11 +919,11 @@ const BuyScreen = () => {
                       <p className="font-medium dark:text-white">Total</p>
                       <p className="dark:text-white">
                         {(
-                          ((operatingSystem === "windows" ? 80 : 60) /
-                            solPrice) *
-                          selectedDuration
-                        ).toFixed(4)}{" "}
-                        SOL
+                          (selectPlan === "Basic"
+                            ? (400 / 30) * selectedDuration
+                            : (600 / 30) * selectedDuration) / solPrice
+                        ).toFixed(4)}
+                        &nbsp; SOL
                       </p>
                     </div>
                     <hr className="my-2.5" />

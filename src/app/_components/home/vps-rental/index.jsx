@@ -205,7 +205,7 @@ const VPSRental = () => {
           </div>
 
           {/* Button */}
-          <Link href="/buy">
+          <Link href="/buy-vps">
             <button
               className={`w-[120px] mw-12:w-[100px] mw-12:text-[14px] h-[46px] ${
                 animationTriggered ? "animate-slideIn" : ""

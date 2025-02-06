@@ -36,10 +36,7 @@ const VPSPricing = () => {
           </div>
           <div className="mw-10:hidden flex flex-wrap ">
             <div className="w-[25%] px-6  py-[50px]">
-            
-             
-              <div className="border-b border-gray-800  my-[20px]"></div>
-              <div className="mt-[155px]">
+              <div className="mt-[230px]">
                 <p className="text-white font-inter font-medium text-[14px]">
                   Usage
                 </p>
