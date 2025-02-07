@@ -50,7 +50,7 @@ const ArticleListScreen = () => {
         <div className="">
           <div className="">
             <h2 className="text-[26px] font-medium mb-8 text-black dark:text-white">
-              Subscriptions List
+              Articles List
             </h2>
             <Link href="/add-article">
               <button className="flex mb-5 justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu bg-darkPrimary text-black mt-4 xl:mt-6">
@@ -60,7 +60,7 @@ const ArticleListScreen = () => {
             <div className="overflow-x-auto mw-9:w-[300px]">
               <table className="min-w-full bg-white dark:bg-bodyColor   rounded-lg shadow-md">
                 <thead>
-                  <tr className="bg-darkPrimary">
+                  <tr className="bg-darkPrimary text-black">
                     <th className="py-2 border">Sr</th>
                     <th className="py-2 border">Title</th>
                     <th className="py-2  border">Category</th>
@@ -68,6 +68,7 @@ const ArticleListScreen = () => {
                     <th className="py-2 border">Written By</th>
                     <th className="py-2 border">Content</th>
                     <th className="py-2 border">Created At</th>
+                    <th className="py-2 border">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -92,8 +93,21 @@ const ArticleListScreen = () => {
                       </td>
                       <td className="py-2 px-4 border-b">{article.content}</td>
                       <td className="py-2 px-4 border-b">
-                        {" "}
-                        {new Date(article.createdAt).toLocaleString()}
+                        {new Date(article.createdAt).toLocaleDateString()}
+                      </td>
+                      <td className="py-2   px-4 border-b">
+                        <span
+                          className="px-3 py-1 mr-[10px] bg-green-700 text-white text-[14px] rounded-md disabled:opacity-50"
+                          // onClick={() => onClickDeleteButton()}
+                        >
+                          Edit
+                        </span>
+                        <span
+                          className="px-3 py-1 bg-red-700 text-white text-[14px] rounded-md disabled:opacity-50"
+                          // onClick={() => onClickDeleteButton()}
+                        >
+                          Delete
+                        </span>
                       </td>
                     </tr>
                   ))}

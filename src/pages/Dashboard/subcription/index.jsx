@@ -5,7 +5,6 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const SubscriptionScreen = () => {
-
   const [orderList, setOrderList] = useState([]);
 
   const ITEMS_PER_PAGE = 5;
@@ -32,6 +31,29 @@ const SubscriptionScreen = () => {
       .catch((err) => console.error("Error fetching data", err));
   }, []);
 
+  const getExpiryDate = (date, duration) => {
+    const serviceStartDate = new Date(date);
+       console.log(duration, "duration=====")
+    // Assuming the service lasts 30 days (adjust according to your actual duration)
+    const serviceDuration = parseInt(duration.split(" ")[0] ); // in days
+    console.log(serviceDuration, "servive duration")
+     
+    // Calculate the service end date
+    let serviceEndDate = new Date(serviceStartDate);
+    serviceEndDate.setDate(serviceEndDate.getDate() + (serviceDuration * 30));
+
+    // Return the calculated expiry date
+    return serviceEndDate;
+  };
+
+  const getFormattedDate = (date) => {
+    const serviceEndDate = new Date(date);
+    const year = serviceEndDate.getFullYear();
+    const month = (serviceEndDate.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-indexed
+    const day = serviceEndDate.getDate().toString().padStart(2, "0");
+    return `${month}/${day}/${year}`;
+  };
+
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
       <div className="h-full w-full max-w-[1500px] p-2 lg:p-5">
@@ -41,7 +63,7 @@ const SubscriptionScreen = () => {
         <div className="overflow-x-auto mw-9:w-[300px]">
           <table className="min-w-full bg-white dark:bg-bodyColor   rounded-lg shadow-md">
             <thead>
-              <tr className="bg-darkPrimary">
+              <tr className="bg-darkPrimary text-black">
                 <th className="py-2 border">Sr</th>
                 <th className="py-2 border">User ID</th>
                 <th className="py-2  border">Duration</th>
@@ -50,6 +72,8 @@ const SubscriptionScreen = () => {
                 <th className="py-2 border">Category</th>
                 <th className="py-2 border">Operating System</th>
                 <th className="py-2 border">Order Date</th>
+                <th className="py-2 border">Expiry Date</th>
+                <th className="py-2 border">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -65,8 +89,20 @@ const SubscriptionScreen = () => {
                     {user.operating_system}
                   </td>
                   <td className="py-2 px-4 border-b">
-                    {" "}
-                    {new Date(user.createdAt).toLocaleString()}
+                    
+                    {new Date(user.createdAt).toLocaleDateString()}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    {getFormattedDate(getExpiryDate(user.createdAt, user.duration))}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                 
+                    <button
+                      className="px-2 py-1 bg-red-700 text-white text-[12px] rounded-md disabled:opacity-50"
+                      // onClick={() => onClickDeleteButton()}
+                    >
+                      Cancel
+                    </button>
                   </td>
                 </tr>
               ))}
