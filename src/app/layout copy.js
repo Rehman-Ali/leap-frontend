@@ -41,11 +41,10 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isAuthorized, setIsAuthorized] = useState(false);
-
   // Solana wallet adapters
   const wallets = [new PhantomWalletAdapter()];
 
-  // Define private routes and admin routes
+  // Define routes
   const privateRoutes = [
     "/dashboard",
     "/nodes",
@@ -54,8 +53,6 @@ export default function RootLayout({ children }) {
     "/orders",
     "/buy",
     "/buy-vps",
-  ];
-  const adminRoutes = [
     "/admin-dashboard",
     "/subscriptions",
     "/users",
@@ -77,40 +74,23 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     const isPrivateRoute = privateRoutes.includes(pathname);
-    const isAdminRoute = adminRoutes.includes(pathname);
     const isPublicRoute = publicRoutes.includes(pathname);
 
-    const role = JSON.parse(localStorage.getItem("role"));
-
     if (token) {
-      // If the user has a token
+      // If the user has a token and tries to access a public route, redirect to a private route
       if (isPublicRoute) {
-        // If it's a public route, redirect based on role
+        let role = JSON.parse(localStorage.getItem("role"));
         if (role === "admin") {
-          router.replace("/admin-dashboard");
+          router.replace("/admin-dashboard"); // Redirect to the first private route (e.g., dashboard)
         } else {
-          router.replace(privateRoutes[0]); // Default redirect to dashboard
+          router.replace(privateRoutes[0]); // Redirect to the first private route (e.g., dashboard)
         }
-      } else if (isPrivateRoute) {
-        // If it's a private route (for non-admins)
-        if (role === "admin") {
-          // If the user is admin, redirect to the first admin route or current route
-          router.replace(adminRoutes[0]);
-        } else {
-          setIsAuthorized(true);
-        }
-      } else if (isAdminRoute) {
-        // If it's an admin route
-        if (role !== "admin") {
-          // If the user is not an admin, redirect to private route
-          router.replace(privateRoutes[0]);
-        } else {
-          setIsAuthorized(true);
-        }
+      } else {
+        setIsAuthorized(true);
       }
     } else {
       // If the user does not have a token and tries to access a private route, redirect to login
-      if (isPrivateRoute || isAdminRoute) {
+      if (isPrivateRoute) {
         localStorage.setItem("c_path", pathname);
         router.replace("/login");
       } else {
@@ -138,6 +118,7 @@ export default function RootLayout({ children }) {
           router.push("/dashboard");
         }
       } else {
+        console.log("else working");
         router.push(prev_path);
         localStorage.removeItem("c_path");
       }
@@ -160,7 +141,7 @@ export default function RootLayout({ children }) {
     );
   }
 
-  const includeDashboardLayout = privateRoutes.includes(pathname) || adminRoutes.includes(pathname) ;
+  const includeDashboardLayout = privateRoutes.includes(pathname);
 
   return (
     <html lang="en">
@@ -171,11 +152,13 @@ export default function RootLayout({ children }) {
             walletConnectors: [EthereumWalletConnectors],
             events: {
               onAuthSuccess: (args) => {
+                console.log("first event call", args.user);
                 handleLoginAndRegister(args.user);
               },
             },
             handlers: {
               handleAuthenticatedUser: async (args) => {
+                console.log("2nd even call", args);
                 await customUserObjectProcess(args.user);
               },
             },
@@ -186,6 +169,7 @@ export default function RootLayout({ children }) {
               <DynamicWagmiConnector>
                 <ThemeProvider attribute="class" defaultTheme="dark">
                   {includeDashboardLayout ? (
+                    //  {/* Solana Payment Checkout */}
                     <ConnectionProvider endpoint="https://api.devnet.solana.com">
                       <WalletProvider wallets={wallets} autoConnect>
                         <DashboardLayout>{children}</DashboardLayout>

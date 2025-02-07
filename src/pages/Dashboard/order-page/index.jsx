@@ -114,7 +114,7 @@ const OrderScreen = () => {
                       className="px-3 py-1 bg-red-700  text-sm text-white rounded-md disabled:opacity-50"
                       onClick={() => onClickDeleteButton()}
                     >
-                      Renew
+                      Cancel
                     </button>
                   </td>
                 </tr>
