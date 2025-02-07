@@ -279,10 +279,10 @@ const BuyVPSScreen = () => {
                 <div className="flex-1">Premium Support</div>
               </li>
             </ul>
-            <div className="flex flex-row gap-x-4 text-xl text-white my-6">
+            {/* <div className="flex flex-row gap-x-4 text-xl text-white my-6">
               <div className="text-white font-semibold">TPS</div>
               <div className="text-white/50">~100</div>
-            </div>
+            </div> */}
             <div className="text-white/50 text-3xl">
               Windows
               <span className="text-white font-semibold pl-[10px]">$80</span>
@@ -339,7 +339,7 @@ const BuyVPSScreen = () => {
             </h1>
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            <div
+            {/* <div
               onClick={() => setSelectedDuration(7)}
               className={`flex w-full p-5 ${
                 selectedDuration === 7
@@ -348,7 +348,7 @@ const BuyVPSScreen = () => {
               }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               1 week
-            </div>
+            </div> */}
             <div
               onClick={() => setSelectedDuration(30)}
               className={`flex w-full p-5 ${

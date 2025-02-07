@@ -34,9 +34,9 @@ const VPSPricing = () => {
               nodes without the upcharge.
             </p>
           </div>
-          <div className="mw-10:hidden flex flex-wrap ">
+          <div className="mw-10:hidden flex flex-wrap items-center justify-center">
             <div className="w-[25%] px-6  py-[50px]">
-              <div className="mt-[230px]">
+              <div className="mt-[275px]">
                 <p className="text-white font-inter font-medium text-[14px]">
                   Usage
                 </p>
@@ -51,9 +51,9 @@ const VPSPricing = () => {
                 </div>
               </div>
               <div>
-                <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
+                {/* <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
                   Estimated TPS
-                </p>
+                </p> */}
             
               </div>
               <div>
@@ -69,7 +69,7 @@ const VPSPricing = () => {
                 </div> */}
               </div>
             </div>
-            <div className="w-[75%] px-6 py-[20px] bg-[#37415133] rounded-[24px] ">
+            <div className="w-[35%] px-6 py-[20px] bg-[#37415133] rounded-[24px] ">
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
                   <div className="text-base font-inter font-medium text-darkPrimary pb-0.5">
@@ -145,9 +145,9 @@ const VPSPricing = () => {
                 </div>
               </div>
               <div>
-                <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
+                {/* <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
                   100
-                </p>
+                </p> */}
                
               </div>
               <div>
@@ -248,9 +248,9 @@ const VPSPricing = () => {
                 </div>
               </div>
               <div>
-                <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
+                {/* <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
                   Estimated TPS 100
-                </p>
+                </p> */}
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
                   Support
                 </p>

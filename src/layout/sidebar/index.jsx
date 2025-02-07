@@ -144,7 +144,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
               </svg>
               Orders
             </Link>
-            <Link
+            {/* <Link
               className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${
                 pathname === "/affiliate"
                   ? "bg-darkPrimary text-white font-semibold"
@@ -169,7 +169,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                 <path d="M12 18V6"></path>
               </svg>
               Affiliate
-            </Link>
+            </Link> */}
             <a
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-darkPrimary"
               href="#"

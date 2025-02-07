@@ -26,9 +26,9 @@ const DashboardNodeScreen = () => {
               Get started by buying one and fly by the competition.
               <br />
               <br />
-              <span className="text-base">Want to test the waters first? </span>
+              {/* <span className="text-base">Want to test the waters first? </span> */}
             </div>
-            <div className="border-2 border-dashed text-center rounded-lg flex justify-center flex-col items-center mt-4 p-4">
+            {/* <div className="border-2 border-dashed text-center rounded-lg flex justify-center flex-col items-center mt-4 p-4">
               <div className="border border-gray-200 p-3 rounded-lg justify-center dark:bg-gray-900 bg-white">
                 <div className="flex justify-between mb-5">
                   <div className="flex items-center gap-2">
@@ -140,7 +140,7 @@ const DashboardNodeScreen = () => {
                   Upgrade Plan
                 </button>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

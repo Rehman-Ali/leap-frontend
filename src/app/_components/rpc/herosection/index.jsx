@@ -90,11 +90,11 @@ const RPCHeroSection = () => {
           <button
             className={` ${
               animationTriggered ? "animate-slideIn" : ""
-            } mt-5 mw-8:mt-3 w-32 sm:w-36 h-12 bg-darkPrimary text-sm sm:text-base font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}
+            } mt-5 mw-8:mt-3 w-32 mb-10 sm:w-36 h-12 bg-darkPrimary text-sm sm:text-base font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}
           >
             Join Now
           </button>
-          <p
+          {/* <p
             className={` ${
               animationTriggered ? "animate-slideIn" : ""
             } text-white pb-[20px] mw-8:pb-[10px] text-center text-4xl sm:text-5xl lg:text-6xl font-inter font-medium mw-8:t-3 mt-6`}
@@ -106,8 +106,8 @@ const RPCHeroSection = () => {
             height={600}
             width={1170}
             alt="benchmark logo"
-            className="mt-6 w-full max-w-4xl h-auto object-cover rounded-lg"
-          />
+            className="mt-6 w-full max-w-4xl h-auto object-cover rounded-lg" 
+          />*/}
         </div>
       </div>
     </div>
