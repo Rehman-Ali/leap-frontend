@@ -325,7 +325,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
             </Link>
             <Link
               className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${
-                pathname === "/articles"
+                pathname === "/articles-list" || pathname === "/add-article" 
                   ? "bg-darkPrimary text-white font-semibold"
                   : "text-black dark:text-white hover:text-darkPrimary"
               } `}
