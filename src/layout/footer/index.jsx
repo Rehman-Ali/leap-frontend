@@ -45,7 +45,7 @@ const Footer = () => {
                 { name: "Home", href: "/" },
                 { name: "RPC", href: "/rpc" },
                 { name: "Telegram Bot", href: "/telegram-bot" },
-                { name: "Trading Bot", href: "/trading-bot" },
+                // { name: "Trading Bot", href: "/trading-bot" },
                 { name: "VPS", href: "/vps" },
                 { name: "Articles", href: "/articles" },
               ].map(({ name, href }, idx) => (

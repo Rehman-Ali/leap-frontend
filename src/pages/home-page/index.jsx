@@ -13,9 +13,9 @@ const HomePageScreen = () => {
       <HeroSection/>
       <TelegramTadingBot />
        <Services/>
-      <TradingBot/>
+      {/* <TradingBot/> */}
       <VPSRental/>
-      <FAQComponent/>
+     
       <Testimonials/>
      
     </div>

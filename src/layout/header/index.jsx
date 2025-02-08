@@ -13,9 +13,6 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-
-
-  
   return (
     <header>
       <div className="mx-[10px] mt-[20px] border border-[#20211f] bg-[#07080699] rounded-[50px] flex flex-row items-center justify-between px-[30px] lg:px-[130px] py-[16px] backdrop-blur-[10px] opacity-[1px]">
@@ -45,38 +42,35 @@ const Header = () => {
           >
             RPC
           </Link>
-          <Link
+          {/* <Link
             className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
             href="/trading-bot"
           >
             Trading Bot
-          </Link>
+          </Link> */}
           <Link
             className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
             href="/vps"
           >
             VPS
           </Link>
-        </div>
-{/*        
-        <button
-          onClick={() => setShowAuthFlow(true)}
-          className="hidden  w-[168px]  lg:flex flex-row items-center justify-center gap-x-2 irem mw-12:w-[150px]  mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"
-        >
-          Dashboard
-          <FaArrowRight color="#231F20" size-={18} />
-        </button> */}
-        <Link
+          <Link
             className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
-            href="/login"
+            href="/articles"
           >
-         <button
-          className="hidden  w-[168px]  lg:flex flex-row items-center justify-center gap-x-2 irem mw-12:w-[150px]  mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"
+            Articles
+          </Link>
+        </div>
+
+        <Link
+          className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
+          href="/login"
         >
-          Dashboard
-          <FaArrowRight color="#231F20" size-={18} />
-        </button>
-        </Link> 
+          <button className="hidden  w-[168px]  lg:flex flex-row items-center justify-center gap-x-2 irem mw-12:w-[150px]  mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white">
+            Dashboard
+            <FaArrowRight color="#231F20" size-={18} />
+          </button>
+        </Link>
         {/* Mobile Menu Toggle */}
         <div
           className="lg:hidden text-white cursor-pointer text-[24px]"
@@ -108,19 +102,26 @@ const Header = () => {
             >
               RPC
             </Link>
-            <Link
+            {/* <Link
               className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
               href="/Trading-bot"
               onClick={toggleMenu}
             >
               Trading Bot
-            </Link>
+            </Link> */}
             <Link
               className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
               href="/vps"
               onClick={toggleMenu}
             >
               VPS
+            </Link>
+            <Link
+              className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
+              href="/articles"
+              onClick={toggleMenu}
+            >
+              Articles
             </Link>
             <button
               className="w-[168px] h-[46px]  mw-12:w-[150px] leading-none flex flex-row items-center justify-center gap-x-2  mw-12:text-[14px]  bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"

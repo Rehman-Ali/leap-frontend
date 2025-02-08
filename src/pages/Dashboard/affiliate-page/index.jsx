@@ -24,7 +24,7 @@ const AffiliateScreen = () => {
                     width: "100%",
                     height: "100%",
                     maxHeight: "288px",
-                    maxWidth: "1031px",
+                    maxWidth: "1031px"
                   }}
                 >
                   <svg
@@ -816,7 +816,7 @@ const AffiliateScreen = () => {
                       width: "1031px",
                       height: "44px",
                       left: "0px",
-                      top: "5px",
+                      top: "5px"
                     }}
                   >
                     <div className="flex items-center justify-end">
@@ -860,7 +860,7 @@ const AffiliateScreen = () => {
                       top: "0px",
                       left: "0px",
                       outline: "none",
-                      transform: "translate(140.083px, 0px)",
+                      transform: "translate(140.083px, 0px)"
                     }}
                   ></div>
                 </div>
@@ -922,7 +922,9 @@ const AffiliateScreen = () => {
         <div className="rounded-lg border dark:border-gray-600 p-6 md:p-8 w-full mt-5">
           <div className="flex flex-col lg:flex-row gap-5">
             <div className="w-full">
-              <p className="font-semibold mb-1 dark:text-white">Affiliate URL:</p>
+              <p className="font-semibold mb-1 dark:text-white">
+                Affiliate URL:
+              </p>
               <div className="bg-gray-100 border dark:bg-gray-900 dark:text-white dark:border-gray-600 border-gray-300 w-full p-2.5 rounded-lg flex justify-between">
                 <p>https://hub.ligmanode.com/r/-</p>
                 <p className="text-center w-14 border dark:text-black border-gray-400 bg-gray-300 py-1 rounded-md text-xs cursor-pointer ml-5">
@@ -931,7 +933,9 @@ const AffiliateScreen = () => {
               </div>
             </div>
             <div className="w-full">
-              <p className="font-semibold mb-1 dark:text-white">Discount Code:</p>
+              <p className="font-semibold mb-1 dark:text-white">
+                Discount Code:
+              </p>
               <div className="bg-gray-100  dark:bg-gray-900 dark:text-white dark:border-gray-600 border border-gray-300 w-full p-2.5 rounded-lg flex justify-between">
                 <p>-</p>
                 <p className="text-center w-14 dark:text-black border border-gray-400 bg-gray-300 py-1 rounded-md text-xs cursor-pointer ml-5">
@@ -959,7 +963,9 @@ const AffiliateScreen = () => {
             </div>
           </div>
           <hr className="my-5" />
-          <div className="text-gray-500 text-xl dark:text-white">How does it work?</div>
+          <div className="text-gray-500 text-xl dark:text-white">
+            How does it work?
+          </div>
           <div className="mt-4 dark:text-white">
             <p>1. Create your unique affiliate code</p>
             <p>

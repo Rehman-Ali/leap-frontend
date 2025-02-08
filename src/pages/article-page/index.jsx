@@ -17,32 +17,27 @@ const ArticleScreen = () => {
     setAnimationTriggered(true);
   }
 
-  // const getArticleList = (token) => {
-  //   const response = axios.get(`${SERVER_URL}/api/article/all`, {
-  //     headers: {
-  //       "x-auth-token": token
-  //     }
-  //   });
-  //   setArticleList(response.data.data);
-  // };
-
   useEffect(() => {
     let token = JSON.parse(localStorage.getItem("u_t"));
-    axios.get(`${SERVER_URL}/api/article/all`, {
-      headers: {
-        "x-auth-token": token
-      }
-    })
-    .then(res => setArticleList(res.data.data ))
-    .catch(err => console.log(err, "err is here==="))
-    
+    axios
+      .get(`${SERVER_URL}/api/article/all`, {
+        headers: {
+          "x-auth-token": token
+        }
+      })
+      .then((res) => setArticleList(res.data.data))
+      .catch((err) => console.log(err, "err is here==="));
+
     // getArticleList();
   }, []);
 
   console.log(articleList, "articleList=====");
 
   return (
-    <div ref={sectionRef} className="bg-bodycolor max-w-[1200px] mx-auto mt-[50px]">
+    <div
+      ref={sectionRef}
+      className="bg-bodycolor max-w-[1200px] mx-auto mt-[50px]"
+    >
       <div className="flex flex-row items-center justify-center">
         <h1
           className={`text-darkPrimary

@@ -15,8 +15,8 @@ const AdminDashboardScreen = () => {
       .get(SERVER_URL + "/api/order/all")
       .then((res) => {
         setOrderList(res.data.data);
-        for(var i=0; i < res.data.data.length; i++){
-              setTotalRevenuce(totalRevenue + res.data.data[i].price_in_SOL)
+        for (var i = 0; i < res.data.data.length; i++) {
+          setTotalRevenuce(totalRevenue + res.data.data[i].price_in_SOL);
         }
       })
       .catch((err) => console.log(err));
@@ -90,7 +90,7 @@ const AdminDashboardScreen = () => {
                         <span className="text-white text-[16px]">(SOL)</span>
                       </div>
                       <div className=" font-normal font-inter text-[24px] mt-4 dark:text-white">
-                      {totalRevenue.toFixed(4)}
+                        {totalRevenue.toFixed(4)}
                       </div>
                     </div>
                   </div>

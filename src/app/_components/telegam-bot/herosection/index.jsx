@@ -1,6 +1,7 @@
 "use client";
 import { useInView } from "@/hooks/useInView";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { LuAsterisk } from "react-icons/lu";
 
@@ -37,13 +38,15 @@ const TelegramHeroSection = () => {
             Take your crypto trading to the next level with the Leap Telegram
             Bot, designed for speed, simplicity, and precision.
           </p>
-          <button
-            className={`w-36
+          <a href="https://t.me/leaptrading_bot" target="_blank">
+            <button
+              className={`w-36
           ${animationTriggered ? "animate-slideIn" : ""}
           mw-12:w-[110px] mw-12:text-[14px]  sm:w-40 h-12 bg-darkPrimary font-medium text-[#231F20] rounded-full cursor-pointer hover:bg-white`}
-          >
-            Get Started
-          </button>
+            >
+              Get Started
+            </button>
+          </a>
         </div>
 
         {/* Features Section */}
@@ -105,42 +108,42 @@ const TelegramHeroSection = () => {
               image: "/assets/telebot/telebot2.png",
               title: "Copy Trading",
               description:
-                "Automatically follow the trades by your selected wallets.",
+                "Automatically follow the trades by your selected wallets."
             },
             {
               image: "/assets/node/node1.png",
               title: "Limit & DCA Trades",
-              description: "Plan your entries and exits with precision.",
+              description: "Plan your entries and exits with precision."
             },
             {
               image: "/assets/telebot/telebot1.png",
               title: "Coin Analytics",
               description:
-                "Automatically follow the trades by your selected wallets.",
+                "Automatically follow the trades by your selected wallets."
             },
             {
               image: "/assets/node/node2.png",
               title: "Jito",
               description:
-                "Execute trades at lightning speed during high-volume events.",
+                "Execute trades at lightning speed during high-volume events."
             },
             {
               image: "/assets/node/node3.png",
               title: "Bloxroute",
-              description: "Land faster than ever before.",
+              description: "Land faster than ever before."
             },
             {
               image: "/assets/telebot/telegram3.png",
               title: "MEV Protection",
               description:
-                "Automatically follow the trades by your selected wallets.",
+                "Automatically follow the trades by your selected wallets."
             },
             {
               image: "/assets/telebot/telegram3.png",
               title: "Mempool Access",
               description:
-                "Piggy back pending transactions and land faster than ever before.",
-            },
+                "Piggy back pending transactions and land faster than ever before."
+            }
           ].map((feature, index) => (
             <div
               key={index}
@@ -152,7 +155,7 @@ const TelegramHeroSection = () => {
                   : ""
               }`}
               style={{
-                animationDelay: `${index * 0.1}s`,
+                animationDelay: `${index * 0.1}s`
               }}
             >
               <Image

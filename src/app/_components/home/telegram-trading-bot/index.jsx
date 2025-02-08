@@ -68,7 +68,7 @@ const TelegramTradingBot = () => {
             "Real Time Trade update",
             "Coin analysis",
             "Limit and DCA mode",
-            "Copy Trading and more….",
+            "Copy Trading and more…."
           ].map((feature, index) => (
             <div
               key={index}

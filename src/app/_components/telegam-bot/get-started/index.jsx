@@ -1,11 +1,10 @@
 "use client";
 
-
 import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 
 const TelegramGetStarted = () => {
- const sectionRef = useRef(null); // Ref for a div element
+  const sectionRef = useRef(null); // Ref for a div element
   const isVisible = useInView(sectionRef, { threshold: 0.4 });
   const [animationTriggered, setAnimationTriggered] = useState(false);
 
@@ -32,15 +31,17 @@ const TelegramGetStarted = () => {
         ${animationTriggered ? "animate-slideIn" : ""}
         text-[#c6c7c6] text-center mb-6`}
         >
-          Join today and claim a free trial of Leap Node
+          Join today and take your crypto trading to the next level with the Leap Telegram Bot
         </p>
-        <button
-          className={`w-40 h-12
+        <a href="https://t.me/leaptrading_bot" target="_blank">
+          <button
+            className={`w-40 h-12
         ${animationTriggered ? "animate-slideIn" : ""}
         bg-darkPrimary font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}
-        >
-          Get Started Today
-        </button>
+          >
+            Get Started Today
+          </button>
+        </a>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
+import Link from "next/link";
 
 const RPCGetStarted = () => {
   const sectionRef = useRef(null); // Ref for a div element
@@ -13,8 +14,9 @@ const RPCGetStarted = () => {
     setAnimationTriggered(true);
   }
   return (
-    <div className="flex items-center justify-center mb-16 md:mb-20 lg:mb-24 px-4"
-    ref={sectionRef}
+    <div
+      className="flex items-center justify-center mb-16 md:mb-20 lg:mb-24 px-4 mt-[100px]"
+      ref={sectionRef}
     >
       <div className="flex flex-col items-center justify-center border border-[#131412] rounded-lg w-full max-w-[960px] bg-gradient-to-b from-[#121311] to-[#070806] h-auto py-8 md:py-12">
         <p
@@ -29,8 +31,9 @@ const RPCGetStarted = () => {
             animationTriggered ? "animate-slideIn" : ""
           } text-sm md:text-base text-[#c6c7c6] text-center mb-6`}
         >
-          Join today and claim a free trial of Leap Node
+         Land transactions faster and more consistently than ever before
         </p>
+        <Link href="/buy">
         <button
           className={` ${
             animationTriggered ? "animate-slideIn" : ""
@@ -38,6 +41,7 @@ const RPCGetStarted = () => {
         >
           Get Started Today
         </button>
+        </Link>
       </div>
     </div>
   );

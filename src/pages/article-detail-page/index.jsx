@@ -31,7 +31,7 @@ const ArticleDetailScreen = ({ id }) => {
   }, []);
 
   const htmlString = `<h1 class="text-2xl font-bold">Hello, World!</h1><p class="text-gray-600">This is a sample HTML content.</p>`;
- 
+
   return articleData === null ? (
     <FullPageLoader />
   ) : (

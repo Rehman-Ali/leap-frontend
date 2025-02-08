@@ -15,7 +15,7 @@ const RPCSpeedComponent = () => {
       setAnimationTriggered(true);
     }
   return (
-    <div className="mx-auto mw-8:my-[70px] my-[150px] px-4 max-w-7xl"
+    <div className="mx-auto mw-8:my-[35px] my-[70px] px-4 max-w-7xl"
     ref={sectionRef}
     >
       <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-8">
@@ -37,11 +37,11 @@ const RPCSpeedComponent = () => {
           </p>
 
           {/* Subheading */}
-          <p className={` ${
+          {/* <p className={` ${
               animationTriggered ? "animate-slideIn" : ""
             } text-white font-inter text-base sm:text-lg max-w-xl mt-4`}>
             Whack a cool graphic next to it?
-          </p>
+          </p> */}
 
           {/* Metrics */}
           <div className="grid grid-cols-2 gap-6 mt-6">
@@ -92,13 +92,13 @@ const RPCSpeedComponent = () => {
         <div className={`flex justify-center  
            ${animationTriggered ? "animate__animated animate__fadeInRight" : ""}
           mw-8:w-[100%]`}>
-          <Image
+          {/* <Image
             src="/assets/node/speed.jpg"
             height={570}
             width={600}
             alt="telegram trading bot"
             className="mw-8:w-full w-lg h-auto rounded-lg object-cover"
-          />
+          /> */}
         </div>
       </div>
     </div>

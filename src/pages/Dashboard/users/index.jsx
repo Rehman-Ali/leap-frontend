@@ -56,7 +56,7 @@ const UserScreen = () => {
             <div className="overflow-x-auto mw-9:w-[300px]">
             <table className="min-w-full bg-white dark:bg-bodyColor   rounded-lg shadow-md">
               <thead>
-                <tr className="bg-darkPrimary">
+                <tr className="bg-darkPrimary text-black">
                   <th className="py-2 border">ID</th>
                   <th className="py-2 border">Dynamic Platfrom ID</th>
                   <th className="py-2 border">Role</th>

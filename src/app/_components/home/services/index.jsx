@@ -55,7 +55,7 @@ const Services = () => {
             "IP authorization",
             "GRPC",
             "Bloxroute BDM",
-            "Jito Shred",
+            "Jito Shred"
           ].map((item, index) => (
             <div
               key={index}

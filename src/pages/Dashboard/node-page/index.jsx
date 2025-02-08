@@ -26,9 +26,9 @@ const DashboardNodeScreen = () => {
               Get started by buying one and fly by the competition.
               <br />
               <br />
-              <span className="text-base">Want to test the waters first? </span>
+              {/* <span className="text-base">Want to test the waters first? </span> */}
             </div>
-            <div className="border-2 border-dashed text-center rounded-lg flex justify-center flex-col items-center mt-4 p-4">
+            {/* <div className="border-2 border-dashed text-center rounded-lg flex justify-center flex-col items-center mt-4 p-4">
               <div className="border border-gray-200 p-3 rounded-lg justify-center dark:bg-gray-900 bg-white">
                 <div className="flex justify-between mb-5">
                   <div className="flex items-center gap-2">
@@ -50,7 +50,7 @@ const DashboardNodeScreen = () => {
                               className="text-sm outline-none w-full pr-1.5 dark:text-white"
                               placeholder=" "
                               type="text"
-                              defaultValue="https://public.ligmanode.com"
+                              defaultValue="https://public.blockchain.com"
                             />
                             <svg
                               stroke="currentColor"
@@ -96,7 +96,7 @@ const DashboardNodeScreen = () => {
                               className="text-sm outline-none w-full pr-1.5 dark:text-white"
                               placeholder=" "
                               type="text"
-                              defaultValue="wss://public.ligmanode.com"
+                              defaultValue="wss://public.leap-blockchain.com"
                             />
                             <svg
                               stroke="currentColor"
@@ -131,18 +131,7 @@ const DashboardNodeScreen = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="w-full">
-                      <div className="w-full">
-                        <div className="text-gray-500 text-[10px] dark:text-white">
-                          GEYSER (gRPC) URL
-                        </div>
-                        <div className="flex items-center">
-                          <p className="text-sm text-gray-500 dark:text-white">
-                            Available with God Node
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                   
                   </div>
                 </div>
               </div>
@@ -151,7 +140,7 @@ const DashboardNodeScreen = () => {
                   Upgrade Plan
                 </button>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

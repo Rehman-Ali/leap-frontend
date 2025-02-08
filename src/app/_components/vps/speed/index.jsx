@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import { LuAsterisk } from "react-icons/lu";
@@ -6,48 +6,54 @@ import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 
 const VPSSpeedComponent = () => {
-   const sectionRef = useRef(null); // Ref for a div element
-    const isVisible = useInView(sectionRef, { threshold: 0.4 });
-    const [animationTriggered, setAnimationTriggered] = useState(false);
-  
-    // Trigger animation only once
-    if (isVisible && !animationTriggered) {
-      setAnimationTriggered(true);
-    }
+  const sectionRef = useRef(null); // Ref for a div element
+  const isVisible = useInView(sectionRef, { threshold: 0.4 });
+  const [animationTriggered, setAnimationTriggered] = useState(false);
+
+  // Trigger animation only once
+  if (isVisible && !animationTriggered) {
+    setAnimationTriggered(true);
+  }
   return (
-    <div className="mx-auto mw-8:my-[70px] my-[150px] px-4 max-w-7xl"
-    ref={sectionRef}
+    <div
+      className="mx-auto mw-8:my-[70px] my-[150px] px-4 max-w-7xl"
+      ref={sectionRef}
     >
       <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-8">
         {/* Text Content */}
         <div className="lg:w-1/2">
           {/* Badge */}
-          <div className={` ${
+          <div
+            className={` ${
               animationTriggered ? "animate-slideIn" : ""
-            } w-28 h-9 bg-[#131412] rounded-full border border-[#07210a] flex items-center justify-center gap-2`}>
+            } w-28 h-9 bg-[#131412] rounded-full border border-[#07210a] flex items-center justify-center gap-2`}
+          >
             <LuAsterisk size={14} color={"#37f94e"} />
             <p className="text-sm font-inter text-darkPrimary">SPEEDS</p>
           </div>
 
           {/* Heading */}
-          <p className={` ${
+          <p
+            className={` ${
               animationTriggered ? "animate-slideIn" : ""
-            } text-white text-3xl sm:text-4xl lg:text-5xl font-inter font-medium leading-tight mt-6`}>
-            Could Put <span className="text-darkPrimary">Something</span> About The Speeds <span className="text-darkPrimary">Here</span>?
+            } text-white text-3xl sm:text-4xl lg:text-5xl font-inter font-medium leading-tight mt-6`}
+          >
+            Could Put <span className="text-darkPrimary">Something</span> About
+            The Speeds <span className="text-darkPrimary">Here</span>?
           </p>
 
           {/* Subheading */}
-          <p className={` ${
+          <p
+            className={` ${
               animationTriggered ? "animate-slideIn" : ""
-            } text-white font-inter text-base sm:text-lg max-w-xl mt-4`}>
+            } text-white font-inter text-base sm:text-lg max-w-xl mt-4`}
+          >
             Whack a cool graphic next to it?
           </p>
 
           {/* Metrics */}
           <div className="grid grid-cols-2 gap-6 mt-6">
-            <div className={`${
-              animationTriggered ? "animate-slideIn" : ""
-            }`}>
+            <div className={`${animationTriggered ? "animate-slideIn" : ""}`}>
               <p className="text-sm sm:text-base font-inter font-medium text-[#C6C7C6]">
                 Average landing time
               </p>
@@ -55,9 +61,7 @@ const VPSSpeedComponent = () => {
                 671ms
               </p>
             </div>
-            <div className={`${
-              animationTriggered ? "animate-slideIn" : ""
-            }`}>
+            <div className={`${animationTriggered ? "animate-slideIn" : ""}`}>
               <p className="text-sm sm:text-base font-inter font-medium text-[#C6C7C6]">
                 Average Response Time
               </p>
@@ -65,9 +69,7 @@ const VPSSpeedComponent = () => {
                 1.365ms
               </p>
             </div>
-            <div className={`${
-              animationTriggered ? "animate-slideIn" : ""
-            }`}>
+            <div className={`${animationTriggered ? "animate-slideIn" : ""}`}>
               <p className="text-sm sm:text-base font-inter font-medium text-[#C6C7C6]">
                 Staked
               </p>
@@ -75,9 +77,7 @@ const VPSSpeedComponent = () => {
                 200,000+ SOL
               </p>
             </div>
-            <div className={`${
-              animationTriggered ? "animate-slideIn" : ""
-            }`}>
+            <div className={`${animationTriggered ? "animate-slideIn" : ""}`}>
               <p className="text-sm sm:text-base font-inter font-medium text-[#C6C7C6]">
                 TPS
               </p>
@@ -89,9 +89,11 @@ const VPSSpeedComponent = () => {
         </div>
 
         {/* Image */}
-        <div className={`flex justify-center  
+        <div
+          className={`flex justify-center  
            ${animationTriggered ? "animate__animated animate__fadeInRight" : ""}
-          mw-8:w-[100%]`}>
+          mw-8:w-[100%]`}
+        >
           <Image
             src="/assets/node/speed.jpg"
             height={570}

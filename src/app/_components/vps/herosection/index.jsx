@@ -14,7 +14,7 @@ const VPSHeroSection = () => {
   }
   
   return (
-    <div className="relative mt-24 min-h-screen overflow-hidden"
+    <div className="relative mt-24 min-h-[80vh] overflow-hidden"
     ref={sectionRef}
     >
       {/* Background Image */}
@@ -37,14 +37,14 @@ const VPSHeroSection = () => {
         </div>
 
         {/* Features Section */}
-        <div className="flex flex-col items-center justify-center mt-16">
+        {/* <div className="flex flex-col items-center justify-center mt-16">
           <p className={` ${
               animationTriggered ? "animate-slideIn" : ""
             } text-white text-center text-3xl sm:text-4xl lg:text-5xl font-inter font-medium`}>
             Features
           </p>
-        </div>
-        <div className="flex flex-wrap justify-center gap-6 mt-8 px-4">
+        </div> */}
+        {/* <div className="flex flex-wrap justify-center gap-6 mt-8 px-4">
           {[
             { src: "/assets/node/node1.png", text: "GRPC" },
             { src: "/assets/node/node2.png", text: "JitoShred" },
@@ -67,21 +67,23 @@ const VPSHeroSection = () => {
               </p>
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* Benchmark Section */}
-        <div className="flex flex-col items-center justify-center mw-8:mt-[25px] mt-24 px-4">
-          <p className={`${
+        <div className="flex flex-col items-center justify-center mw-8:mt-[25px] mt-10 px-4">
+          {/* <p className={`${
               animationTriggered ? "animate-slideIn" : ""
             } text-white text-center text-base sm:text-lg font-inter `}>
             Land transactions faster and more consistently than ever before
-          </p>
+          </p> */}
+          <a href="https://discord.gg/9UXPJgnZ5q" target="_blank">
           <button className={` ${
               animationTriggered ? "animate-slideIn" : ""
-            } mt-5 mw-8:mt-3 w-32 sm:w-36 h-12 bg-darkPrimary text-sm sm:text-base font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}>
+            }  mw-8:mt-3 w-32 sm:w-36 h-12 bg-darkPrimary text-sm sm:text-base font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}>
             Join Now
           </button>
-          <p className={` ${
+          </a>
+          {/* <p className={` ${
               animationTriggered ? "animate-slideIn" : ""
             } text-white pb-[20px] mw-8:pb-[10px] text-center text-4xl sm:text-5xl lg:text-6xl font-inter font-medium mw-8:t-3 mt-6`}>
             Benchmark
@@ -92,7 +94,7 @@ const VPSHeroSection = () => {
             width={1170}
             alt="benchmark logo"
             className="mt-6 w-full max-w-4xl h-auto object-cover rounded-lg"
-          />
+          /> */}
         </div>
       </div>
     </div>

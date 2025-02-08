@@ -1,3 +1,4 @@
+import FAQComponent from "@/app/_components/home/faq";
 import RPCGetStarted from "@/app/_components/rpc/get-started";
 import RPCHeroSection from "@/app/_components/rpc/herosection";
 import RPCPricing from "@/app/_components/rpc/pricing";
@@ -9,6 +10,7 @@ const RPCScreen = () => {
       <RPCHeroSection/>
       <RPCSpeedComponent/>
       <RPCPricing/>
+      <FAQComponent/> 
       <RPCGetStarted/>
      
     </div>

@@ -48,23 +48,23 @@ const TradingHeroSection = () => {
         </div>
 
         {/* Features Section */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
           {[
             {
               image: "/assets/telebot/telebot2.png",
               title: "Copy Trading",
               description: "Automatically follow the trades by your selected wallets.",
             },
-            {
-              image: "/assets/node/node1.png",
-              title: "Limit & DCA Trades",
-              description: "Plan your entries and exits with precision.",
-            },
-            {
-              image: "/assets/telebot/telebot1.png",
-              title: "Coin Analytics",
-              description: "Automatically follow the trades by your selected wallets.",
-            },
+            // {
+            //   image: "/assets/node/node1.png",
+            //   title: "Limit & DCA Trades",
+            //   description: "Plan your entries and exits with precision.",
+            // },
+            // {
+            //   image: "/assets/telebot/telebot1.png",
+            //   title: "Coin Analytics",
+            //   description: "Automatically follow the trades by your selected wallets.",
+            // },
             {
               image: "/assets/node/node2.png",
               title: "Jito",

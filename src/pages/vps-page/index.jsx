@@ -9,7 +9,7 @@ const VPSScreen = () => {
   return (
     <div className="bg-bodycolor max-w-[1200px] mx-auto">
       <VPSHeroSection />
-      <VPSSpeedComponent />
+      {/* <VPSSpeedComponent /> */}
       <VPSPricing />
       <VPSGetStarted />
     </div>

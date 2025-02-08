@@ -1,59 +1,99 @@
-// components/custom-editor.js
-"use client"; // only in App Router
+'use client'
 
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import {
-  ClassicEditor,
-  Essentials,
-  Paragraph,
-  Bold,
-  Italic,
-  Heading
-} from "ckeditor5";
-import { FormatPainter } from "ckeditor5-premium-features";
-import { useTheme } from "next-themes";
-
-import "ckeditor5/ckeditor5.css";
-import "ckeditor5-premium-features/ckeditor5-premium-features.css";
+import { useEditor, EditorContent } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+import { BulletList, OrderedList, ListItem } from '@tiptap/extension-list'
+import './style.css'
 
 function CustomEditor({ content }) {
-  const { theme } = useTheme();
-  // Handle editor content changes
-  const handleEditorChange = (event, editor) => {
-    const data = editor.getData();
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      BulletList,
+      OrderedList,
+      ListItem,
+    ],
+    content: '<p>Hello World! 🌎️</p>',
+  })
 
-    content(data);
-  };
+  if (!editor) {
+    return null // Ensure the editor is ready before rendering
+  }
+
+  // Handle actions for bold, italic, heading, and lists
+  const handleBold = () => editor.chain().focus().toggleBold().run()
+  const handleItalic = () => editor.chain().focus().toggleItalic().run()
+  // const handleHeading = (level) => {
+  //   editor.chain().focus().setNode('heading', { level }).run()
+  // }
+  const handleHeading = (level) => editor.chain().focus().toggleHeading({ level }).run()
+  // const handleList = (type) => {
+  //   if (type === 'bullet') {
+  //     editor.chain().focus().toggleList(BulletList).run()
+  //   } else if (type === 'ordered') {
+  //     editor.chain().focus().toggleList(OrderedList).run()
+  //   }
+  // }
+
+  const handleUndo = () => editor.chain().focus().undo().run()
+  const handleRedo = () => editor.chain().focus().redo().run()
+
+  // Check if the editor has active formatting (e.g., bold, italic, heading, list)
+  const isBoldActive = editor.isActive('bold')
+  const isItalicActive = editor.isActive('italic')
+  const isHeadingActive = (level) => editor.isActive('heading', { level })
+  const isBulletListActive = editor.isActive(BulletList)
+  const isOrderedListActive = editor.isActive(OrderedList)
 
   return (
-    <div
-      className={`ckeditor-container ${
-        theme === "dark" ? "ckeditor-dark" : "ckeditor-light"
-      }`}
-    >
-      <CKEditor
-        editor={ClassicEditor}
-        config={{
-          licenseKey:
-            "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3Mzk3NTAzOTksImp0aSI6IjgzNmYwMmIzLWIxMjYtNDljMC1iMjU2LWU5MzQ1ZTVmMDZkZiIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6ImE1OTAyOTE2In0.ssbXsLgubTQKAKdFk0_WfJBuUmBkK_yG349aBkzaBOLjbjcLxQcV6E1dAbWb78YCN3SAl4e9BS5bifCc57v3SQ", // Or 'GPL'.
-          plugins: [Essentials, Paragraph, Bold, Italic, FormatPainter],
-          toolbar: [
-            "undo",
-            "redo",
-            "|",
-            "bold",
-            "italic",
-            "|",
-            "formatPainter",
-            "|",
-            "heading"
-          ],
-          initialData: "<p>This is the dummy conent</p>"
-        }}
-        onChange={handleEditorChange}
-      />
+    <div>
+      {/* Toolbar */}
+      <div className="toolbar  space-x-2 border-gray-700 border rounded">
+       
+        <button
+          onClick={handleBold}
+          className={`btn ${isBoldActive ?  "bg-darkPrimary" : ''} p-2 rounded-[5px]`}
+        >
+          Bold
+        </button>
+        <button
+          onClick={handleItalic}
+          className={`btn ${isItalicActive ? 'bg-darkPrimary' : ''}  p-2 rounded-[5px]`}
+        >
+          Italic
+        </button>
+        <button
+          onClick={() => handleHeading(1)}
+          className={`btn ${isHeadingActive(1) ? 'bg-darkPrimary' : ''}  p-2 rounded-[5px]`}
+        >
+          H1
+        </button>
+        <button
+          onClick={() => handleHeading(2)}
+          className={`btn ${isHeadingActive(2) ? 'bg-darkPrimary' : ''}  p-2 rounded-[5px]`}
+        >
+          H2
+        </button>
+        {/* <button
+          onClick={() => handleList('bullet')}
+          className={`btn ${isBulletListActive ? 'bg-darkPrimary' : ''}  p-2 rounded-[5px]`}
+        >
+          Bullet List
+        </button>
+        <button
+          onClick={() => handleList('ordered')}
+          className={`btn ${isOrderedListActive ? 'bg-darkPrimary' : ''}  p-2 rounded-[5px]`}
+        >
+          Ordered List
+        </button> */}
+        <button onClick={handleUndo} className="btn">Undo</button>
+        <button onClick={handleRedo} className="btn">Redo</button>
+      </div>
+
+      {/* Editor Content */}
+      <EditorContent editor={editor} className="border border-gray-700  p-4 rounded" />
     </div>
-  );
+  )
 }
 
-export default CustomEditor;
+export default CustomEditor

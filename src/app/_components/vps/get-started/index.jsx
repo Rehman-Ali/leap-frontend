@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
+import Link from "next/link";
 
 const VPSGetStarted = () => {
   const sectionRef = useRef(null); // Ref for a div element
@@ -29,8 +30,9 @@ const VPSGetStarted = () => {
             animationTriggered ? "animate-slideIn" : ""
           } text-sm md:text-base text-[#c6c7c6] text-center mb-6`}
         >
-          Join today and claim a free trial of Leap Node
+          Buy today Leap VPS
         </p>
+        <Link href="/buy-vps">
         <button
           className={` ${
             animationTriggered ? "animate-slideIn" : ""
@@ -38,6 +40,7 @@ const VPSGetStarted = () => {
         >
           Get Started Today
         </button>
+        </Link>
       </div>
     </div>
   );

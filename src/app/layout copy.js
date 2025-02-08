@@ -20,6 +20,13 @@ import FullPageLoader from "./_components/loader";
 import axios from "axios";
 import { SERVER_URL } from "@/utils/server";
 
+import {
+  ConnectionProvider,
+  WalletProvider,
+} from "@solana/wallet-adapter-react";
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
+import "@solana/wallet-adapter-react-ui/styles.css"; // Optional UI styles for wallets
+
 const config = createConfig({
   chains: [mainnet],
   multiInjectedProviderDiscovery: false,
@@ -34,6 +41,8 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isAuthorized, setIsAuthorized] = useState(false);
+  // Solana wallet adapters
+  const wallets = [new PhantomWalletAdapter()];
 
   // Define routes
   const privateRoutes = [
@@ -43,6 +52,12 @@ export default function RootLayout({ children }) {
     "/affiliate",
     "/orders",
     "/buy",
+    "/buy-vps",
+    "/admin-dashboard",
+    "/subscriptions",
+    "/users",
+    "/articles-list",
+    "/add-article",
   ];
   const publicRoutes = [
     "/",
@@ -64,7 +79,12 @@ export default function RootLayout({ children }) {
     if (token) {
       // If the user has a token and tries to access a public route, redirect to a private route
       if (isPublicRoute) {
-        router.replace(privateRoutes[0]); // Redirect to the first private route (e.g., dashboard)
+        let role = JSON.parse(localStorage.getItem("role"));
+        if (role === "admin") {
+          router.replace("/admin-dashboard"); // Redirect to the first private route (e.g., dashboard)
+        } else {
+          router.replace(privateRoutes[0]); // Redirect to the first private route (e.g., dashboard)
+        }
       } else {
         setIsAuthorized(true);
       }
@@ -88,13 +108,17 @@ export default function RootLayout({ children }) {
         }
       );
       console.log(response.data, "Response received");
-      localStorage.setItem("u_t", response.data.token.token);
+      localStorage.setItem("u_t", JSON.stringify(response.data.token.token));
+      localStorage.setItem("role", JSON.stringify(response.data.token.role));
       let prev_path = localStorage.getItem("c_path");
       if (prev_path === null || prev_path === undefined) {
-        console.log("if working ")
-        router.push("/dashboard");
+        if (response.data.token.role === "admin") {
+          router.push("/admin-dashboard");
+        } else {
+          router.push("/dashboard");
+        }
       } else {
-        console.log("else working")
+        console.log("else working");
         router.push(prev_path);
         localStorage.removeItem("c_path");
       }
@@ -145,7 +169,12 @@ export default function RootLayout({ children }) {
               <DynamicWagmiConnector>
                 <ThemeProvider attribute="class" defaultTheme="dark">
                   {includeDashboardLayout ? (
-                    <DashboardLayout>{children}</DashboardLayout>
+                    //  {/* Solana Payment Checkout */}
+                    <ConnectionProvider endpoint="https://api.devnet.solana.com">
+                      <WalletProvider wallets={wallets} autoConnect>
+                        <DashboardLayout>{children}</DashboardLayout>
+                      </WalletProvider>
+                    </ConnectionProvider>
                   ) : (
                     <div
                       className={`${inter.variable} container mx-auto min-h-screen flex flex-col`}
