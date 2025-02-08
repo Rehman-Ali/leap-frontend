@@ -22,12 +22,18 @@ const ArticleListScreen = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-
+    let token = JSON.parse(localStorage.getItem("u_t"))
     const fetchData = async () => {
       try {
         const response = await axios.get(SERVER_URL + "/api/article/all", {
           signal: controller.signal
-        });
+        },
+        {
+          headers: {
+            "x-auth-token": token
+          }
+        }
+      );
         if (response.data?.data) {
           setArticleList(response.data.data);
         }

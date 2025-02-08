@@ -10,8 +10,11 @@ import {
 import { SERVER_URL, WALLET_ADDRESS } from "@/utils/server";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import { useSearchParams } from 'next/navigation'
 const BuyScreen = () => {
+  const searchParams = useSearchParams()
+ 
+  const search = searchParams.get('id')
   const [selectPlan, setSelectedPlan] = useState("");
   const [selectRegion, setSelectedRegion] = useState("");
   const [operatingSystem, setOperatingSystem] = useState("");
@@ -101,15 +104,41 @@ const BuyScreen = () => {
       onConfirmOrder();
     } catch (error) {
       console.error(error);
+      // onConfirmOrder();
       setStatus(`Error: ${error.message}`);
     }
   };
 
+
+  const getExpiryDate = (date) => {
+    const serviceStartDate = new Date(date);
+
+    // Assuming the service lasts 30 days (adjust according to your actual duration)
+    const serviceDuration = selectedDuration; // in days
+
+    // Calculate the service end date
+    let serviceEndDate = new Date(serviceStartDate);
+    serviceEndDate.setDate(serviceEndDate.getDate() + serviceDuration);
+
+    // Return the calculated expiry date
+    return serviceEndDate;
+  };
+
+  const getFormattedDate = (date) => {
+    const serviceEndDate = new Date(date);
+    const year = serviceEndDate.getFullYear();
+    const month = (serviceEndDate.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-indexed
+    const day = serviceEndDate.getDate().toString().padStart(2, "0");
+    return `${month}/${day}/${year}`;
+  };
+
+  console.log(search, "search here====")
+
   const onConfirmOrder = async () => {
     try {
+
       let body = {
-        duration:
-          selectedDuration === 7 ? "1 week" : selectedDuration / 30 + "month",
+        duration: selectedDuration,
         status: "active",
         price:
           selectPlan === "Basic"
@@ -120,30 +149,52 @@ const BuyScreen = () => {
             ? (400 / 30) * selectedDuration
             : (600 / 30) * selectedDuration) / solPrice
         ).toFixed(4),
-        order_category: "rpc",
+        order_category: "rpc-" + selectPlan.toLowerCase(),
         operating_system: null,
         region: setSelectedRegion,
-        plan: setSelectedPlan
+        plan: setSelectedPlan,
+        expiry_date: getFormattedDate(getExpiryDate(Date.now()))
       };
       let token = JSON.parse(localStorage.getItem("u_t"));
-      const response = await axios.post(
-        `${SERVER_URL}/api/order/create`,
-        body,
-        {
-          headers: {
-            "x-auth-token": token
+       if(search === null){
+        const response = await axios.post(
+          `${SERVER_URL}/api/order/create`,
+          body,
+          {
+            headers: {
+              "x-auth-token": token
+            }
           }
-        }
-      );
-      console.log(response.data, "Response received");
-
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Your order has been placed successfully",
-        showConfirmButton: false,
-        timer: 1500
-      });
+        );
+        console.log(response.data, "Response received");
+  
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your order has been placed successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
+       }else{
+        const response = await axios.put(
+          `${SERVER_URL}/api/order/update/${search}`,
+          body,
+          {
+            headers: {
+              "x-auth-token": token
+            }
+          }
+        );
+  
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your order has been renew successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
+       }
+      
     } catch (error) {
       Swal.fire({
         position: "center",
@@ -160,6 +211,9 @@ const BuyScreen = () => {
       );
     }
   };
+
+
+
 
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
@@ -230,7 +284,7 @@ const BuyScreen = () => {
             <div className="text-white font-semibold h-6 lg:h-8">
               For small traders just getting started.
             </div>
-            <ul className="mx-2 my-8 text-white text-sm xl:text-base list-none space-y-1.5 h-[200px]">
+            <ul className="mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none space-y-1.5 h-[200px]">
               <li className="flex flex-row items-center gap-x-2">
                 <div className="flex-none text-[#6840FD]">
                   <svg
@@ -456,7 +510,7 @@ const BuyScreen = () => {
                 <div className="flex-1">Premium Support</div>
               </li>
             </ul>
-            <div className="flex flex-row gap-x-4 text-xl text-white my-6">
+            <div className="flex flex-row  gap-x-4 text-xl text-white my-6">
               <div className="text-white font-semibold">TPS</div>
               <div className="text-white/50">~500</div>
             </div>
@@ -484,7 +538,7 @@ const BuyScreen = () => {
             <div className="text-white font-semibold h-6 lg:h-8">
               For botters with moderate transaction and performance needs.
             </div>
-            <ul className="mx-2 my-8 text-white text-sm xl:text-base list-none space-y-1.5 h-[200px]">
+            <ul className="mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none space-y-1.5 h-[200px]">
               <li className="flex flex-row items-center gap-x-2">
                 <div className="flex-none text-[#41BF6D]">
                   <svg

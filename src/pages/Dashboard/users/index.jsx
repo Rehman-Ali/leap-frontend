@@ -37,9 +37,15 @@ const UserScreen = () => {
 
 
   useEffect(() => {
-
+    let token = JSON.parse(localStorage.getItem("u_t"))
     axios
-      .get(SERVER_URL + "/api/user/all")
+      .get(SERVER_URL + "/api/user/all",
+        {
+          headers: {
+            "x-auth-token": token
+          }
+        }
+      )
       .then((res) => {
         setUserList(res.data.data);
       })

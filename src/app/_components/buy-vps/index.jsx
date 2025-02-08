@@ -10,8 +10,11 @@ import {
 import { SERVER_URL, WALLET_ADDRESS } from "@/utils/server";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import { useSearchParams } from 'next/navigation'
 const BuyVPSScreen = () => {
+  const searchParams = useSearchParams()
+   
+  const search = searchParams.get('id')
   const [selectPlan, setSelectedPlan] = useState("Basic");
   const [selectRegion, setSelectedRegion] = useState("");
   const [operatingSystem, setOperatingSystem] = useState("");
@@ -101,15 +104,39 @@ const BuyVPSScreen = () => {
       onConfirmOrder();
     } catch (error) {
       console.error(error);
+      // onConfirmOrder();
       setStatus(`Error: ${error.message}`);
     }
   };
 
+
+  const getExpiryDate = (date) => {
+    const serviceStartDate = new Date(date);
+
+    // Assuming the service lasts 30 days (adjust according to your actual duration)
+    const serviceDuration = selectedDuration; // in days
+
+    // Calculate the service end date
+    let serviceEndDate = new Date(serviceStartDate);
+    serviceEndDate.setDate(serviceEndDate.getDate() + serviceDuration);
+
+    // Return the calculated expiry date
+    return serviceEndDate;
+  };
+
+  const getFormattedDate = (date) => {
+    const serviceEndDate = new Date(date);
+    const year = serviceEndDate.getFullYear();
+    const month = (serviceEndDate.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-indexed
+    const day = serviceEndDate.getDate().toString().padStart(2, "0");
+    return `${month}/${day}/${year}`;
+  };
+
+
   const onConfirmOrder = async () => {
     try {
       let body = {
-        duration:
-          selectedDuration === 7 ? "1 week" : selectedDuration / 30 + "month",
+        duration: selectedDuration,
         status: "active",
         price:
          operatingSystem === "windows"
@@ -123,9 +150,11 @@ const BuyVPSScreen = () => {
         order_category: "vps",
         operating_system: operatingSystem,
         region: setSelectedRegion,
-        plan: setSelectedPlan
+        plan: setSelectedPlan,
+        expiry_date: getFormattedDate(getExpiryDate(Date.now()))
       };
       let token = JSON.parse(localStorage.getItem("u_t"));
+      if(search === null){
       const response = await axios.post(
         `${SERVER_URL}/api/order/create`,
         body,
@@ -135,8 +164,7 @@ const BuyVPSScreen = () => {
           }
         }
       );
-      console.log(response.data, "Response received");
-
+    
       Swal.fire({
         position: "center",
         icon: "success",
@@ -144,6 +172,25 @@ const BuyVPSScreen = () => {
         showConfirmButton: false,
         timer: 1500
       });
+    }else{
+      const response = await axios.put(
+        `${SERVER_URL}/api/order/update/${search}`,
+        body,
+        {
+          headers: {
+            "x-auth-token": token
+          }
+        }
+      );
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your order has been renew successfully",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
     } catch (error) {
       Swal.fire({
         position: "center",

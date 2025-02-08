@@ -20,7 +20,7 @@ const ArticleScreen = () => {
   console.log(title, category, writtenBy, image, content, "===========");
   const onSubmitData = (e) => {
     e.preventDefault();
-
+    let token = JSON.parse(localStorage.getItem("u_t"))
     const formData = new FormData();
     formData.append("image", image);
     formData.append("title", title);
@@ -29,7 +29,11 @@ const ArticleScreen = () => {
     formData.append("content", content);
 
     axios
-      .post(SERVER_URL + "/api/article/", formData) // Remove the headers and data wrapper
+      .post(SERVER_URL + "/api/article/", formData,{
+        headers: {
+          "x-auth-token": token
+        }
+      }) // Remove the headers and data wrapper
       .then((res) => {
         Swal.fire({
           position: "center",

@@ -11,8 +11,16 @@ const AdminDashboardScreen = () => {
   const [totalRevenue, setTotalRevenuce] = useState(0);
 
   useEffect(() => {
+   let token = JSON.parse(localStorage.getItem("u_t"))
+
     axios
-      .get(SERVER_URL + "/api/order/all")
+      .get(SERVER_URL + "/api/order/all", 
+        {
+          headers: {
+            "x-auth-token": token
+          }
+        }
+      )
       .then((res) => {
         setOrderList(res.data.data);
         for (var i = 0; i < res.data.data.length; i++) {
@@ -22,7 +30,11 @@ const AdminDashboardScreen = () => {
       .catch((err) => console.log(err));
 
     axios
-      .get(SERVER_URL + "/api/user/all")
+      .get(SERVER_URL + "/api/user/all",{
+        headers: {
+          "x-auth-token": token
+        }
+      })
       .then((res) => {
         setUserList(res.data.data);
       })
