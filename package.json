@@ -33,7 +33,6 @@
     "sweetalert2": "^11.15.10",
     "viem": "^2.22.8",
     "wagmi": "^2.14.7"
-    
   },
   "devDependencies": {
     "postcss": "^8",

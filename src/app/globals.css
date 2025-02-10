@@ -35,76 +35,21 @@ body {
   min-height: 200px; /* Ensure editor is large enough */
 }
 
-
-
-
-:root {
-  --ck-dark-bg: #1a1a1a;
-  --ck-dark-text: #ffffff;
-  --ck-dark-border: #404040;
-  --ck-dark-toolbar-bg: #2d2d2d;
-  --ck-dark-hover-bg: #404040;
+.modal-enter {
+  opacity: 0;
+}
+.modal-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
 }
 
-.ckeditor-light .ck.ck-editor__main {
-  color: #171717;
+.modal-exit {
+  opacity: 1;
 }
-.ckeditor-dark .ck.ck-editor__main {
-  background: var(--ck-dark-bg);
-  color: var(--ck-dark-text);
+.modal-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
 }
 
 
-.ckeditor-dark .ck.ck-editor__main {
-  background: #1a1a1a;
-  color: #ffffff;
-}
 
-.ckeditor-dark .ck.ck-toolbar {
-  background: #2d2d2d !important;
-  border-color: #404040 !important;
-}
-
-.ckeditor-dark .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
-  background: #1a1a1a;
-  color: #ffffff;
-  border-color: #404040;
-}
-
-.ckeditor-dark .ck.ck-button:not(.ck-disabled):hover,
-.ckeditor-dark .ck.ck-button.ck-on {
-  background: #404040 !important;
-}
-
-.ckeditor-dark .ck.ck-dropdown__panel {
-  background: #2d2d2d;
-  border-color: #404040;
-}
-
-.ckeditor-dark .ck.ck-list__item:hover {
-  background: #404040;
-}
-
-.ckeditor-dark .ck.ck-input-text {
-  background: #2d2d2d;
-  color: #ffffff;
-  border-color: #404040;
-}
-
-.ckeditor-dark .ck.ck-icon {
-  filter: invert(1);
-}
-
-.ckeditor-dark .ck.ck-toolbar__separator {
-  background: #404040 !important;
-}
-
-.ckeditor-dark .ck.ck-link-form {
-  background: #2d2d2d;
-  border-color: #404040;
-}
-
-.ckeditor-dark .ck.ck-reset_all,
-.ckeditor-dark .ck.ck-reset_all * {
-  color: #ffffff;
-}

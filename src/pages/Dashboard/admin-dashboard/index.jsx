@@ -62,9 +62,8 @@ const AdminDashboardScreen = () => {
                 </div>
               </div>
               <Link
-                href="#"
-                target="_blank"
-                className="text-gray-400 dark:text-white text-xs self-end mt-4"
+                href="/users"
+                className="text-gray-400 cursor-pointer dark:text-white text-xs self-end mt-4"
               >
                 View More
               </Link>
@@ -85,9 +84,8 @@ const AdminDashboardScreen = () => {
                 </div>
               </div>
               <Link
-                href="#"
-                target="_blank"
-                className="text-gray-400 dark:text-white text-xs self-end mt-4"
+                href="/subscriptions"
+                className="text-gray-400 cursor-pointer dark:text-white text-xs self-end mt-4"
               >
                 View More
               </Link>
@@ -98,8 +96,8 @@ const AdminDashboardScreen = () => {
                   <div className="grid grid-cols-3">
                     <div>
                       <div className="text-gray-500 dark:text-darkPrimary text-[24px] font-inter font-medium">
-                        Total Revenue{" "}
-                        <span className="text-white text-[16px]">(SOL)</span>
+                        Total Revenue
+                        <span className="text-white text-[16px]">&nbsp;(SOL)</span>
                       </div>
                       <div className=" font-normal font-inter text-[24px] mt-4 dark:text-white">
                         {totalRevenue.toFixed(4)}

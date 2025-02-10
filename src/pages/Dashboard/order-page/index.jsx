@@ -62,7 +62,7 @@ const OrderScreen = () => {
   const onClickDeleteButton = (id) => {
     setIsDelete(false);
     Swal.fire({
-      title: "Do you realy want to delete it. This will not reversable?",
+      title: "Do you really want to delete it. This will not reversable?",
       showDenyButton: true,
       icon: "warning",
       showCancelButton: false,
@@ -110,27 +110,27 @@ const OrderScreen = () => {
     });
   };
 
-  const getExpiryDate = (date) => {
-    const serviceStartDate = new Date(date);
+  // const getExpiryDate = (date) => {
+  //   const serviceStartDate = new Date(date);
 
-    // Assuming the service lasts 30 days (adjust according to your actual duration)
-    const serviceDuration = 30; // in days
+  //   // Assuming the service lasts 30 days (adjust according to your actual duration)
+  //   const serviceDuration = 30; // in days
 
-    // Calculate the service end date
-    let serviceEndDate = new Date(serviceStartDate);
-    serviceEndDate.setDate(serviceEndDate.getDate() + serviceDuration);
+  //   // Calculate the service end date
+  //   let serviceEndDate = new Date(serviceStartDate);
+  //   serviceEndDate.setDate(serviceEndDate.getDate() + serviceDuration);
 
-    // Return the calculated expiry date
-    return serviceEndDate;
-  };
+  //   // Return the calculated expiry date
+  //   return serviceEndDate;
+  // };
 
-  const getFormattedDate = (date) => {
-    const serviceEndDate = new Date(date);
-    const year = serviceEndDate.getFullYear();
-    const month = (serviceEndDate.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-indexed
-    const day = serviceEndDate.getDate().toString().padStart(2, "0");
-    return `${month}/${day}/${year}`;
-  };
+  // const getFormattedDate = (date) => {
+  //   const serviceEndDate = new Date(date);
+  //   const year = serviceEndDate.getFullYear();
+  //   const month = (serviceEndDate.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-indexed
+  //   const day = serviceEndDate.getDate().toString().padStart(2, "0");
+  //   return `${month}/${day}/${year}`;
+  // };
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
       <div className="h-full w-full max-w-[1500px] p-2 lg:p-5">
@@ -208,7 +208,7 @@ const OrderScreen = () => {
                        <Link href={`${order.order_category === "vps" ? `/buy-vps?id=${order._id}` : `/buy?id=${order._id}`}`}>
                        <span
                           className="px-2 cursor-pointer mr-[10px] py-1 bg-darkPrimary text-black text-[12px] rounded-md disabled:opacity-50"
-                          onClick={() => onClickRenewButton()}
+                          // onClick={() => onClickRenewButton()}
                         >
                           Renew
                         </span>

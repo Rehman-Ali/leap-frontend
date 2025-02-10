@@ -7,6 +7,8 @@ const LoginPage = () => {
 
  const { setShowAuthFlow } = useDynamicContext();
 
+
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="mb-[30px]">

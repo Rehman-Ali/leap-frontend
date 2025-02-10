@@ -21,33 +21,19 @@ const ArticleListScreen = () => {
   );
 
   useEffect(() => {
-    const controller = new AbortController();
+
     let token = JSON.parse(localStorage.getItem("u_t"))
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(SERVER_URL + "/api/article/all", {
-          signal: controller.signal
-        },
+     axios.get(SERVER_URL + "/api/article/all",
         {
           headers: {
             "x-auth-token": token
           }
         }
-      );
-        if (response.data?.data) {
-          setArticleList(response.data.data);
-        }
-        // ... rest of the code
-      } catch (error) {
-        if (!axios.isCancel(error)) {
-          console.error("Error:", error);
-        }
-      }
-    };
+      ).then((res) => {
+        setArticleList(res.data.data);
+      })
+      .catch((err) => console.log(err));
 
-    fetchData();
-
-    return () => controller.abort(); // Cleanup on unmount
   }, []);
 
   return (
@@ -80,10 +66,10 @@ const ArticleListScreen = () => {
                 <tbody>
                   {paginatedData.map((article, index) => (
                     <tr key={index} className=" dark:text-white text-black">
-                      <td className="py-2 px-4 border-b">{index + 1}</td>
-                      <td className="py-2 px-4 border-b">{article.title}</td>
-                      <td className="py-2 px-4 border-b">{article.category}</td>
-                      <td className="py-2 px-4 border-b">
+                      <td className="py-2 px-4 border-b text-center">{index + 1}</td>
+                      <td className="py-2 px-4 border-b text-center">{article.title}</td>
+                      <td className="py-2 px-4 border-b text-center">{article.category}</td>
+                      <td className="py-2 px-4 border-b text-center">
                         {article.image_url !== undefined && (
                           <Image
                             src={article.image_url}
@@ -94,23 +80,23 @@ const ArticleListScreen = () => {
                           />
                         )}
                       </td>
-                      <td className="py-2 px-4 border-b">
+                      <td className="py-2 px-4 border-b text-center">
                         {article.written_by}
                       </td>
-                      <td className="py-2 px-4 border-b">{article.content}</td>
-                      <td className="py-2 px-4 border-b">
+                      <td className="py-2 px-4 border-b text-center">{article.content}</td>
+                      <td className="py-2 px-4 border-b text-center">
                         {new Date(article.createdAt).toLocaleDateString()}
                       </td>
-                      <td className="py-2   px-4 border-b">
+                      <td className="py-2   px-4 border-b text-center">
                         <span
                           className="px-3 py-1 mr-[10px] bg-green-700 text-white text-[14px] rounded-md disabled:opacity-50"
                           // onClick={() => onClickDeleteButton()}
                         >
-                          Edit
+                          Update
                         </span>
                         <span
                           className="px-3 py-1 bg-red-700 text-white text-[14px] rounded-md disabled:opacity-50"
-                          // onClick={() => onClickDeleteButton()}
+                          onClick={() => onDeleteUser()}
                         >
                           Delete
                         </span>
