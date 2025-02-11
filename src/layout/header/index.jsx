@@ -20,13 +20,13 @@ const Header = () => {
           className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
           href="/"
         >
-          {/* <Image
+          <Image
             src="/assets/layout/logo.png"
             height={45}
             width={133}
             className="h-[45px] w-[133px] cursor-pointer"
             alt="leap logo"
-          /> */}
+          />
         </Link>
         {/* Desktop Links */}
         <div className="hidden lg:flex flex-row gap-x-10">
