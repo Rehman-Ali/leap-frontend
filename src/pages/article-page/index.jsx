@@ -12,31 +12,43 @@ const ArticleScreen = () => {
   const isVisible = useInView(sectionRef, { threshold: 0.4 });
   const [animationTriggered, setAnimationTriggered] = useState(false);
   const [articleList, setArticleList] = useState([]);
+  const [filterData, setFilterData] = useState([]);
+  const [selectedTitle, setSelectedTitle] = useState("all");
   // Trigger animation only once
   if (isVisible && !animationTriggered) {
     setAnimationTriggered(true);
   }
 
   useEffect(() => {
-    let token = JSON.parse(localStorage.getItem("u_t"));
     axios
-      .get(`${SERVER_URL}/api/article/all`, {
-        headers: {
-          "x-auth-token": token
-        }
+      .get(`${SERVER_URL}/api/article/all`)
+      .then((res) => {
+        setArticleList(res.data.data);
+        setFilterData(res.data.data);
       })
-      .then((res) => setArticleList(res.data.data))
       .catch((err) => console.log(err, "err is here==="));
-
-    // getArticleList();
   }, []);
 
-  console.log(articleList, "articleList=====");
+  const onFilterData = (type) => {
+    if (type === "all") {
+      setFilterData(articleList);
+      setSelectedTitle("all");
+    } else if (type === "crypto") {
+      setFilterData(articleList.filter((item) => item.category === "crypto"));
+      setSelectedTitle("crypto");
+    } else if (type === "stock") {
+      setSelectedTitle("stock");
+      setFilterData(articleList.filter((item) => item.category === "stock"));
+    } else {
+      setSelectedTitle("forex");
+      setFilterData(articleList.filter((item) => item.category === "forex"));
+    }
+  };
 
   return (
     <div
       ref={sectionRef}
-      className="bg-bodycolor max-w-[1200px] mx-auto mt-[50px]"
+      className="bg-bodycolor max-w-[1200px] mx-auto mt-[50px] min-h-[500px]  mw-11:p-[20px]"
     >
       <div className="flex flex-row items-center justify-center">
         <h1
@@ -49,54 +61,106 @@ const ArticleScreen = () => {
       </div>
       <div className="mt-10 flex flex-row items-center justify-between">
         <div className="flex flex-row items-start gap-x-5">
-          <div className="border-b-darkPrimary border-b-[2px]">
-            <p className="text-darkPrimary font-inter font-semibold text-[24px]">
+          <div
+            className={`${
+              selectedTitle === "all"
+                ? "border-b-darkPrimary border-b-[2px]"
+                : ""
+            }`}
+          >
+            <p
+              onClick={() => onFilterData("all")}
+              className={`${
+                selectedTitle === "all" ? "text-darkPrimary" : "text-white"
+              }  cursor-pointer font-inter font-semibold text-[24px]`}
+            >
               All
             </p>
           </div>
-          <div>
-            <p className="text-darkPrimary font-inter font-semibold text-[24px]">
+          <div
+            className={`${
+              selectedTitle === "crypto"
+                ? "border-b-darkPrimary border-b-[2px]"
+                : ""
+            }`}
+          >
+            <p
+              onClick={() => onFilterData("crypto")}
+              className={`${
+                selectedTitle === "crypto" ? "text-darkPrimary" : "text-white"
+              }  font-inter cursor-pointer font-semibold text-[24px]`}
+            >
               Crypto
             </p>
           </div>
-          <div>
-            <p className="text-darkPrimary font-inter font-semibold text-[24px]">
+          <div
+            className={`${
+              selectedTitle === "forex"
+                ? "border-b-darkPrimary border-b-[2px]"
+                : ""
+            }`}
+          >
+            <p
+              onClick={() => onFilterData("forex")}
+              className={`${
+                selectedTitle === "forex" ? "text-darkPrimary" : "text-white"
+              } font-inter font-semibold cursor-pointer text-[24px]`}
+            >
               Forex
             </p>
           </div>
-          <div>
-            <p className="text-darkPrimary font-inter font-semibold text-[24px]">
+          <div
+            className={`${
+              selectedTitle === "stock"
+                ? "border-b-darkPrimary border-b-[2px]"
+                : ""
+            }`}
+          >
+            <p
+              onClick={() => onFilterData("stock")}
+              className={`${
+                selectedTitle === "stock" ? "text-darkPrimary" : "text-white"
+              } font-inter font-semibold text-[24px] cursor-pointer`}
+            >
               Stock
             </p>
           </div>
         </div>
-        <div className="flex flex-row items-center gap-x-3">
+        {/* <div className="flex flex-row items-center gap-x-3">
           <input
             className="border border-gray-400 h-[50px] w-[300px] rounded-[8px] pl-[10px]"
             type="text"
             placeholder="search..."
           />
           <FaSearch size={30} color={"#37F94E"} />
-        </div>
+        </div> */}
       </div>
-      <div className="flex flex-row flex-wrap gap-4 mt-[40px]">
-        {articleList.length > 0 ? (
-          articleList.map((item, index) => (
+      <div className="flex flex-row flex-wrap gap-4 mt-[40px] ">
+        {filterData.length > 0 ? (
+          filterData.map((item, index) => (
             <Link
               href={`/articles/${item._id}`}
-              className="bg-gray-500 h-[300px] w-[24%] rounded-[8px]"
+              className="bg-gray-500 h-auto mw-6:w-[100%] mw-10:w-[48%] mw-11:w-[48%] mw-12:w-[32%] w-[24%] rounded-[8px]"
               key={index}
             >
-              <Image
+              {/* <Image
                 src={item.image_url}
                 height={157}
                 width={300}
                 className="h-[157px] w-[100%] rounded-t-[8px]"
                 alt="article"
+              /> */}
+              <Image
+                src={item.image_url}
+                height={157}
+                width={300}
+                className="h-auto min-h-[157px] w-full rounded-t-[8px]"
+                alt="article"
               />
+
               <div className="p-[10px] h-[143px] bg-white flex flex-col justify-between rounded-b-[8px]">
                 <div className="flex flex-col gap-y-2">
-                  <p className="text-red-700 font-inter text-[16px] font-medium">
+                  <p className="text-red-700 font-inter text-[16px] font-medium capitalize">
                     {item.category}
                   </p>
                   <p className="text-black font-inter font-medium text-[16px]">
@@ -109,7 +173,7 @@ const ArticleScreen = () => {
                     &nbsp;
                     {item.written_by}
                   </span>
-                  &nbsp; | item
+                  &nbsp; | {item.createdAt.split("T")[0]}
                 </p>
               </div>
             </Link>

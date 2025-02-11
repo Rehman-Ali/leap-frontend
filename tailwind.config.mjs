@@ -36,6 +36,7 @@ export default {
       },
       screens: {
         "mw-12": { max: "1280px" },
+        "mw-11": { max: "1080px" },
         "mw-10": { max: "1023px" },
         "mw-8": { max: "840px" },
         "mw-7": { max: "768px" },

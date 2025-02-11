@@ -23,8 +23,8 @@ const ArticleDetailScreen = ({ id }) => {
     axios
       .get(`${SERVER_URL}/api/article/${id}`, {
         headers: {
-          "x-auth-token": token,
-        },
+          "x-auth-token": token
+        }
       })
       .then((res) => setArticleData(res.data.data))
       .catch((err) => console.log(err, "err is here==="));
@@ -37,9 +37,9 @@ const ArticleDetailScreen = ({ id }) => {
   ) : (
     <div
       ref={sectionRef}
-      className="bg-bodycolor max-w-[1200px] mx-auto mt-[50px]"
+      className="bg-bodycolor max-w-[1200px] mx-auto mt-[50px] mw-11:p-[20px]"
     >
-      <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-row items-center justify-between mw-10:flex-col mw-10:gap-5">
         <div>
           <p className="text-white font-inter font-bold text-[28px]">
             {articleData !== null ? articleData.title : ""}
@@ -48,7 +48,7 @@ const ArticleDetailScreen = ({ id }) => {
             {new Date(articleData.createdAt).toLocaleDateString()}
           </p>
         </div>
-        <div className="bg-gray-800 p-[20px] rounded-[8px] flex flex-row items-start justify-start max-w-[500px] gap-5">
+        <div className="bg-gray-800 p-[20px] rounded-[8px] flex flex-row mw-10:flex-col items-start justify-start max-w-[500px] gap-5">
           <Image
             src={"/assets/articles/arran.jpg"}
             height={100}
@@ -73,7 +73,7 @@ const ArticleDetailScreen = ({ id }) => {
         </div>
       </div>
       <div className="flex flex-col items-start mt-[50px]">
-        <Image
+        {/* <Image
           src={
             articleData !== null
               ? articleData.image_url
@@ -83,12 +83,28 @@ const ArticleDetailScreen = ({ id }) => {
           width={985}
           className="h-[515px] w-[100%]"
           alt="article image"
-        />
+        /> */}
+        {articleData.image_url !== null &&
+          (articleData.image_url !== "") &&
+          (
+            <Image
+              src={
+                articleData !== null
+                  ? articleData.image_url
+                  : "/assets/articles/pic1.jpg"
+              }
+              height={515}
+              width={985}
+              className="h-auto min-h-[157px] w-full "
+              alt="article"
+            />
+          )}
+
         <div className=" mt-[50px]">
           <div
             className="prose max-w-none text-white"
             dangerouslySetInnerHTML={{
-              __html: articleData !== null ? articleData.content : htmlString,
+              __html: articleData !== null ? articleData.content : htmlString
             }}
           />
         </div>

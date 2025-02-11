@@ -5,9 +5,12 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 
 const ArticleListScreen = () => {
   const [articleList, setArticleList] = useState([]);
+  const [userToken, setUserToken] = useState("");
+  const [isDelete, setIsDelete] = useState(false);
 
   const ITEMS_PER_PAGE = 5;
 
@@ -21,20 +24,63 @@ const ArticleListScreen = () => {
   );
 
   useEffect(() => {
-
-    let token = JSON.parse(localStorage.getItem("u_t"))
-     axios.get(SERVER_URL + "/api/article/all",
-        {
-          headers: {
-            "x-auth-token": token
-          }
+    let token = JSON.parse(localStorage.getItem("u_t"));
+    setUserToken(token);
+    axios
+      .get(SERVER_URL + "/api/article/all", {
+        headers: {
+          "x-auth-token": token
         }
-      ).then((res) => {
+      })
+      .then((res) => {
         setArticleList(res.data.data);
       })
       .catch((err) => console.log(err));
+  }, [isDelete]);
 
-  }, []);
+  const onClickDeleteButton = (id) => {
+    setIsDelete(false);
+    Swal.fire({
+      title: "Do you really want to delete it. This will not reversable?",
+      showDenyButton: true,
+      icon: "warning",
+      showCancelButton: false,
+      confirmButtonText: "Yes Delete",
+      confirmButtonColor: "#37F94E",
+      denyButtonText: `Cancel`
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        axios
+          .delete(SERVER_URL + `/api/article/${id}`, {
+            headers: {
+              "x-auth-token": userToken
+            }
+          })
+          .then((res) => {
+            if (res.data.success === 1) {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Article has been deleted successfully",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              setIsDelete(true);
+            }
+          })
+          .catch((err) =>
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: err.response.data.message,
+              showConfirmButton: false,
+              timer: 1500
+            })
+          );
+      }
+    });
+  };
 
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
@@ -66,9 +112,15 @@ const ArticleListScreen = () => {
                 <tbody>
                   {paginatedData.map((article, index) => (
                     <tr key={index} className=" dark:text-white text-black">
-                      <td className="py-2 px-4 border-b text-center">{index + 1}</td>
-                      <td className="py-2 px-4 border-b text-center">{article.title}</td>
-                      <td className="py-2 px-4 border-b text-center">{article.category}</td>
+                      <td className="py-2 px-4 border-b text-center">
+                        {index + 1}
+                      </td>
+                      <td className="py-2 px-4 border-b text-center">
+                        {article.title}
+                      </td>
+                      <td className="py-2 px-4 border-b text-center">
+                        {article.category}
+                      </td>
                       <td className="py-2 px-4 border-b text-center">
                         {article.image_url !== undefined && (
                           <Image
@@ -83,20 +135,22 @@ const ArticleListScreen = () => {
                       <td className="py-2 px-4 border-b text-center">
                         {article.written_by}
                       </td>
-                      <td className="py-2 px-4 border-b text-center">{article.content}</td>
+                      <td className="py-2 px-4 border-b text-center">
+                        {article.content}
+                      </td>
                       <td className="py-2 px-4 border-b text-center">
                         {new Date(article.createdAt).toLocaleDateString()}
                       </td>
                       <td className="py-2   px-4 border-b text-center">
                         <span
-                          className="px-3 py-1 mr-[10px] bg-green-700 text-white text-[14px] rounded-md disabled:opacity-50"
+                          className="px-3 cursor-pointer py-1 mr-[10px] bg-green-700 text-white text-[14px] rounded-md disabled:opacity-50"
                           // onClick={() => onClickDeleteButton()}
                         >
                           Update
                         </span>
                         <span
-                          className="px-3 py-1 bg-red-700 text-white text-[14px] rounded-md disabled:opacity-50"
-                          onClick={() => onDeleteUser()}
+                          className="px-3 py-1 cursor-pointer bg-red-700 text-white text-[14px] rounded-md disabled:opacity-50"
+                          onClick={() => onClickDeleteButton(article._id)}
                         >
                           Delete
                         </span>

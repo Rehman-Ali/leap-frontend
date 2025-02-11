@@ -3,24 +3,29 @@
 import { SERVER_URL } from "@/utils/server";
 import axios from "axios";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Swal from "sweetalert2";
+
 
 const CustomEditor = dynamic(() => import("./_component/custom-editor"), {
   ssr: false
 });
 
 const ArticleScreen = () => {
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [writtenBy, setWrittenBy] = useState("");
   const [image, setImage] = useState(null);
   const [content, setContent] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  console.log(title, category, writtenBy, image, content, "===========");
   const onSubmitData = (e) => {
     e.preventDefault();
-    let token = JSON.parse(localStorage.getItem("u_t"))
+    setIsLoading(true);
+    let token = JSON.parse(localStorage.getItem("u_t"));
+
     const formData = new FormData();
     formData.append("image", image);
     formData.append("title", title);
@@ -46,13 +51,16 @@ const ArticleScreen = () => {
         setCategory("");
         setImage(null);
         setContent("");
-        setWrittenBy("")
+        setWrittenBy("");
+        setIsLoading(false);
+        router.push('/articles-list')
       })
       .catch((err) => {
+        setIsLoading(false);
         Swal.fire({
           position: "center",
           icon: "error",
-          title: "Invalid request please try again",
+          title: err.response.data.message,
           showConfirmButton: false,
           timer: 1500
         });
@@ -72,7 +80,7 @@ const ArticleScreen = () => {
             <input
               type="text"
               placeholder="Article title"
-              className="h-[50px] border border-gray-600 rounded-[12px] pl-3 text-black"
+              className="h-[50px] border border-gray-600 rounded-[12px] pl-3 text-black dark:text-white"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -98,7 +106,7 @@ const ArticleScreen = () => {
             <input
               type="text"
               placeholder="Author name"
-              className="h-[50px] border border-gray-600 rounded-[12px] pl-3 text-black"
+              className="h-[50px] border border-gray-600 rounded-[12px] pl-3 text-black dark:text-white"
               value={writtenBy}
               onChange={(e) => setWrittenBy(e.target.value)}
             />
@@ -109,7 +117,7 @@ const ArticleScreen = () => {
             </label>
             <input
               type="file"
-              className="h-[50px] rounded-[12px] pl-3"
+              className="h-[50px] rounded-[12px] pl-3 dark:text-white"
               onChange={(e) => setImage(e.target.files[0])}
             />
           </div>
@@ -124,7 +132,7 @@ const ArticleScreen = () => {
               onClick={(e) => onSubmitData(e)}
               className="flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu bg-darkPrimary text-black mt-4 xl:mt-6"
             >
-              Create Article
+              {isLoading? 'Please wait...' : "Create Article" }
             </button>
           </div>
         </div>

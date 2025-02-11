@@ -14,6 +14,11 @@ function CustomEditor({ content }) {
       ListItem,
     ],
     content: '<p>Hello World! 🌎️</p>',
+    onUpdate: ({ editor }) => {
+      // This triggers whenever there is a change in the editor content
+      const updatedContent = editor.getHTML() // Get the updated HTML content
+      content(updatedContent) // Call the onChange callback to pass the updated content back to the parent
+    },
   })
 
   if (!editor) {

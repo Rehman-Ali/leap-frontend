@@ -3,6 +3,7 @@
 import { SERVER_URL } from "@/utils/server";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 
 const SubscriptionScreen = () => {
   const [orderList, setOrderList] = useState([]);
@@ -10,6 +11,7 @@ const SubscriptionScreen = () => {
   const ITEMS_PER_PAGE = 5;
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [isDelete, setIsDelete] = useState(false);
 
   const totalPages = Math.ceil(orderList.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -34,7 +36,7 @@ const SubscriptionScreen = () => {
         }
       })
       .catch((err) => console.error("Error fetching data", err));
-  }, []);
+  }, [isDelete]);
 
   const onClickDeleteButton = (id) => {
     setIsDelete(false);
@@ -86,29 +88,6 @@ const SubscriptionScreen = () => {
       }
     });
   };
-
-  // const getExpiryDate = (date, duration) => {
-  //   const serviceStartDate = new Date(date);
-  //   console.log(duration, "duration=====");
-  //   // Assuming the service lasts 30 days (adjust according to your actual duration)
-  //   const serviceDuration = parseInt(duration.split(" ")[0]); // in days
-  //   console.log(serviceDuration, "servive duration");
-
-  //   // Calculate the service end date
-  //   let serviceEndDate = new Date(serviceStartDate);
-  //   serviceEndDate.setDate(serviceEndDate.getDate() + serviceDuration * 30);
-
-  //   // Return the calculated expiry date
-  //   return serviceEndDate;
-  // };
-
-  // const getFormattedDate = (date) => {
-  //   const serviceEndDate = new Date(date);
-  //   const year = serviceEndDate.getFullYear();
-  //   const month = (serviceEndDate.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-indexed
-  //   const day = serviceEndDate.getDate().toString().padStart(2, "0");
-  //   return `${month}/${day}/${year}`;
-  // };
 
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
