@@ -5,7 +5,7 @@ import StarterKit from '@tiptap/starter-kit'
 import { BulletList, OrderedList, ListItem } from '@tiptap/extension-list'
 import './style.css'
 
-function CustomEditor({ content }) {
+function CustomEditor({ content, initialContent }) {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -13,7 +13,7 @@ function CustomEditor({ content }) {
       OrderedList,
       ListItem,
     ],
-    content: '<p>Hello World! 🌎️</p>',
+    content: initialContent,
     onUpdate: ({ editor }) => {
       // This triggers whenever there is a change in the editor content
       const updatedContent = editor.getHTML() // Get the updated HTML content

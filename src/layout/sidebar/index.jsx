@@ -30,7 +30,6 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
             alt="logo"
             className="h-[38px] w-[120px]"
           />
-
           <button
             className="mr-[5px] lg:hidden text-[#00000] dark:text-white"
             onClick={toggleSidebar}

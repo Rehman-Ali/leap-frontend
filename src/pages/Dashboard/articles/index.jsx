@@ -18,7 +18,7 @@ const ArticleScreen = () => {
   const [category, setCategory] = useState("");
   const [writtenBy, setWrittenBy] = useState("");
   const [image, setImage] = useState(null);
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState("<p>Hello World! 🌎️</p>");
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmitData = (e) => {
@@ -125,7 +125,7 @@ const ArticleScreen = () => {
             <label className="dark:text-white text-black font-inter font-medium mb-2">
               Article Content
             </label>
-            <CustomEditor content={setContent} />
+            <CustomEditor initialContent={content} content={setContent} />
           </div>
           <div>
             <button

@@ -142,12 +142,14 @@ const ArticleListScreen = () => {
                         {new Date(article.createdAt).toLocaleDateString()}
                       </td>
                       <td className="py-2   px-4 border-b text-center">
+                        <Link href={`/update-article?id=${article._id}`}>
                         <span
                           className="px-3 cursor-pointer py-1 mr-[10px] bg-green-700 text-white text-[14px] rounded-md disabled:opacity-50"
                           // onClick={() => onClickDeleteButton()}
                         >
                           Update
                         </span>
+                        </Link>
                         <span
                           className="px-3 py-1 cursor-pointer bg-red-700 text-white text-[14px] rounded-md disabled:opacity-50"
                           onClick={() => onClickDeleteButton(article._id)}
