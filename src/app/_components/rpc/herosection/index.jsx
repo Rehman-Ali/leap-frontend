@@ -15,7 +15,7 @@ const RPCHeroSection = () => {
 
   return (
     <div
-      className="relative mt-24 min-h-screen overflow-hidden"
+      className="relative mt-24 min-h-[500px] overflow-hidden"
       ref={sectionRef}
     >
       {/* Background Image */}
@@ -79,7 +79,7 @@ const RPCHeroSection = () => {
         </div>
 
         {/* Benchmark Section */}
-        <div className="flex flex-col items-center justify-center mw-8:mt-[25px] mt-24 px-4">
+        <div className="flex flex-col items-center justify-center mw-8:mt-[25px] mt-[50px] px-4">
           <p
             className={`${
               animationTriggered ? "animate-slideIn" : ""
@@ -87,14 +87,14 @@ const RPCHeroSection = () => {
           >
             Land transactions faster and more consistently than ever before
           </p>
-          <a href="https://discord.gg/9UXPJgnZ5q" target="_blank" >
-          <button
-            className={` ${
-              animationTriggered ? "animate-slideIn" : ""
-            } mt-5 mw-8:mt-3 w-32 mb-10 sm:w-36 h-12 bg-darkPrimary text-sm sm:text-base font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}
-          >
-            Join Now
-          </button>
+          <a href="https://discord.gg/9UXPJgnZ5q" target="_blank">
+            <button
+              className={` ${
+                animationTriggered ? "animate-slideIn" : ""
+              } mt-5 mw-8:mt-3 w-32 mb-10 sm:w-36 h-12 bg-darkPrimary text-sm sm:text-base font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}
+            >
+              Join Now
+            </button>
           </a>
           {/* <p
             className={` ${

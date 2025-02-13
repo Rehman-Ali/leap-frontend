@@ -14,14 +14,14 @@ const VPSHeroSection = () => {
   }
   
   return (
-    <div className="relative mt-24 min-h-[80vh] overflow-hidden"
+    <div className="relative mt-[50px] min-h-[300px] overflow-hidden"
     ref={sectionRef}
     >
       {/* Background Image */}
       <div className="absolute inset-0 bg-[url('/assets/home/hero-section/bg.png')] bg-cover bg-center scale-[1.2] transition-transform duration-1000 -z-10"></div>
 
       {/* Content */}
-      <div className="relative flex flex-col h-full z-10">
+      <div className="relative mt-[50px] flex flex-col h-full z-10">
         {/* Hero Section */}
         <div className="flex flex-col justify-center items-center px-4 space-y-4">
           <h1 className={` ${
