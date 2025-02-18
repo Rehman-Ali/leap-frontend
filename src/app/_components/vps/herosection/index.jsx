@@ -14,14 +14,14 @@ const VPSHeroSection = () => {
   }
   
   return (
-    <div className="relative mt-[50px] min-h-[300px] overflow-hidden"
+    <div className="relative mw-6:mt-[20px] mt-[50px] mw-6:min-h-[200px] min-h-[300px] overflow-hidden"
     ref={sectionRef}
     >
       {/* Background Image */}
       <div className="absolute inset-0 bg-[url('/assets/home/hero-section/bg.png')] bg-cover bg-center scale-[1.2] transition-transform duration-1000 -z-10"></div>
 
       {/* Content */}
-      <div className="relative mt-[50px] flex flex-col h-full z-10">
+      <div className="relative mw-6:mt-[10px] mt-[50px] flex flex-col h-full z-10">
         {/* Hero Section */}
         <div className="flex flex-col justify-center items-center px-4 space-y-4">
           <h1 className={` ${
@@ -70,7 +70,7 @@ const VPSHeroSection = () => {
         </div> */}
 
         {/* Benchmark Section */}
-        <div className="flex flex-col items-center justify-center mw-8:mt-[25px] mt-10 px-4">
+        <div className="flex flex-col items-center justify-center mw-8:mt-[25px] mw-6:mt-[10px] mt-10 px-4">
           {/* <p className={`${
               animationTriggered ? "animate-slideIn" : ""
             } text-white text-center text-base sm:text-lg font-inter `}>

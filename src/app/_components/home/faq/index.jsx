@@ -11,7 +11,7 @@ const Accordion = ({ items, isVisible }) => {
   };
 
   return (
-    <div className="mt-10 space-y-4 w-full max-w-[800px] mx-auto">
+    <div className="mw-6:mt-[30px] mt-10 space-y-4 w-full max-w-[800px] mx-auto">
       {items.map((item, index) =>
         <div
           key={index}
@@ -117,7 +117,7 @@ const FAQComponent = () => {
         <p
           className={`text-white ${animationTriggered
             ? "animate-slideIn"
-            : ""}  text-[42px] mw-8:text-[36px] font-inter font-medium mt-[20px]`}
+            : ""}  text-[42px] mw-8:text-[36px] font-inter font-medium mw-6:mt-[0px] mt-[20px]`}
         >
           Frequently Asked Questions (FAQs)
         </p>

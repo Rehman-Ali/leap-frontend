@@ -14,7 +14,7 @@ const Testimonials = () => {
     setAnimationTriggered(true);
   }
   return (
-    <div className="mx-auto my-[150px] " ref={sectionRef}>
+    <div className="mx-auto mw-6:my-[70px] my-[150px] " ref={sectionRef}>
       <div className={`flex flex-col items-center justify-center
         ${
           animationTriggered ? "animate-slideIn" : ""
@@ -34,7 +34,7 @@ const Testimonials = () => {
           Testimonials
         </p>
       </div>
-      <div className="relative mt-[100px]">
+      <div className="relative mw-6:mt-[30px] mt-[100px]">
         {/* Left Overlay */}
         <div className="absolute top-0 left-0 z-10 h-full w-[100px] bg-gradient-to-r from-[#070806] to-transparent pointer-events-none"></div>
         {/* Right Overlay */}
@@ -144,7 +144,7 @@ const Testimonials = () => {
         </Marquee>
       </div>
 
-      <div className="relative mt-[80px]">
+      <div className="relative mw-6:mt-[30px] mt-[80px]">
         {/* Left Overlay */}
         <div className="absolute top-0 left-0 z-10 h-full w-[100px] bg-gradient-to-r from-[#070806] to-transparent pointer-events-none"></div>
         {/* Right Overlay */}

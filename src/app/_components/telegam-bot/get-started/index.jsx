@@ -16,7 +16,7 @@ const TelegramGetStarted = () => {
   return (
     <div
       ref={sectionRef}
-      className="flex items-center justify-center my-16 md:mb-20 lg:my-24 px-4"
+      className="flex items-center justify-center mw-6:mt-[0px] mw-6:mb-[20px] my-16 md:mb-20 lg:my-24 px-4"
     >
       <div className="flex flex-col items-center justify-center border border-[#131412] rounded-lg w-full max-w-[960px] bg-gradient-to-b from-[#121311] to-[#070806] h-auto py-8 md:py-12">
         <p
@@ -27,7 +27,7 @@ const TelegramGetStarted = () => {
           Get Started Today
         </p>
         <p
-          className={`text-sm md:text-base
+          className={`text-sm md:text-base px-[15px]
         ${animationTriggered ? "animate-slideIn" : ""}
         text-[#c6c7c6] text-center mb-6`}
         >

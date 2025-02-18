@@ -15,7 +15,7 @@ const RPCHeroSection = () => {
 
   return (
     <div
-      className="relative mt-24 min-h-[500px] overflow-hidden"
+      className="relative mw-6:mt-[40px] mt-24 min-h-[500px] overflow-hidden"
       ref={sectionRef}
     >
       {/* Background Image */}
@@ -42,7 +42,7 @@ const RPCHeroSection = () => {
         </div>
 
         {/* Features Section */}
-        <div className="flex flex-col items-center justify-center mt-16">
+        <div className="flex flex-col items-center justify-center mw-6:mt-[20px] mt-16">
           <p
             className={` ${
               animationTriggered ? "animate-slideIn" : ""

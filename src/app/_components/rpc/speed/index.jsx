@@ -15,7 +15,7 @@ const RPCSpeedComponent = () => {
       setAnimationTriggered(true);
     }
   return (
-    <div className="mx-auto mw-8:my-[35px] my-[70px] px-4 max-w-7xl"
+    <div className="mx-auto mw-8:my-[35px] mw-6:mt-[10px] my-[70px] px-4 max-w-7xl"
     ref={sectionRef}
     >
       <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-8">

@@ -16,10 +16,10 @@ const VPSPricing = () => {
         </div>
       </div>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="py-12 md:py-20">
+        <div className="py-12 mw-6:py-[40px]">
           <div className="max-w-4xl mx-auto text-center pb-5 md:pb-5">
             <div>
-              <div className="inline-flex text-[28px] mw-10:text-[16px] font-inter font-medium text-white pb-3">
+              <div className="inline-flex text-[28px] mw-10:text-[22px] font-inter font-medium text-white pb-3">
                 Pricing Plans
               </div>
             </div>
@@ -165,11 +165,9 @@ const VPSPricing = () => {
            
           </div>
           <div className="hidden mw-10:flex flex-col gap-y-10">
-            <div>
-             
-            </div>
+            
 
-            <div className=" px-6 py-[20px] bg-[#37415133] rounded-[24px]">
+            <div className=" px-6  py-[20px] bg-[#37415133] rounded-[24px]">
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
                   <div className="text-base font-inter font-medium text-darkPrimary pb-0.5">

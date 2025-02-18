@@ -14,7 +14,7 @@ const HeroSection = () => {
   }
   return (
     <div
-      className="relative mt-[100px] min-h-screen overflow-hidden"
+      className="relative mw-6:mt-[40px] mt-[100px] min-h-screen overflow-hidden"
       ref={sectionRef}
     >
       {/* Background Image */}
@@ -40,7 +40,7 @@ const HeroSection = () => {
           </p>
         </div>
 
-        <div className="flex flex-col items-center justify-center mt-[70px]">
+        <div className="flex flex-col items-center justify-center mw-6:mt-[30px] mt-[70px]">
           <div
             className={`w-[150px] h-[34px] ${animationTriggered
               ? "animate-slideIn"
@@ -103,7 +103,7 @@ const HeroSection = () => {
         </div>
 
         <div
-          className={`flex flex-col items-center justify-center mt-[150px] `}
+          className={`flex flex-col items-center justify-center mw-6:mt-[70px] mt-[150px] `}
         >
           <div className="w-[170px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a] flex flex-row gap-x-1 justify-center items-center">
             <LuAsterisk size={14} color={"#37f94e"} />

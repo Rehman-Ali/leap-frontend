@@ -16,7 +16,7 @@ const TelegramHeroSection = () => {
   }
 
   return (
-    <div ref={sectionRef} className="relative mt-16 min-h-screen">
+    <div ref={sectionRef} className="relative mw-6:mt-[40px] mt-16 min-h-screen">
       {/* Background Image */}
       <div className="absolute inset-0 bg-[url('/assets/home/hero-section/bg.png')] bg-cover bg-center transform scale-100 transition-transform duration-1000 -z-10"></div>
 
@@ -102,7 +102,7 @@ const TelegramHeroSection = () => {
           ))}
         </div> */}
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mw-6:mt-[25px] mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
             {
               image: "/assets/telebot/telebot2.png",
@@ -173,7 +173,7 @@ const TelegramHeroSection = () => {
         </div>
 
         {/* Benchmark Section */}
-        <div className="mt-[120px] mw-8:mt-[60px] flex flex-col lg:flex-row mw-12:items-start items-center justify-between my-16 space-y-8 lg:space-y-0 lg:space-x-16">
+        <div className="mt-[120px] mw-8:mt-[50px] flex flex-col lg:flex-row mw-12:items-start items-center justify-between my-16 space-y-8 lg:space-y-0 lg:space-x-16">
           <div className="text-left">
             <div
               className={`w-28 

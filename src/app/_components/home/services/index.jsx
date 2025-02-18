@@ -16,7 +16,7 @@ const Services = () => {
     setAnimationTriggered(true);
   }
   return (
-    <div className="mx-auto px-4   mt-[100px]" ref={sectionRef}>
+    <div className="mx-auto px-4  mw-6:mt-[70px]  mt-[100px]" ref={sectionRef}>
       {/* Header and Description */}
       <div className="flex flex-col  mw-8:items-start mw-8:flex-col mw-8:space-y-6 md:flex-row justify-between items-center mt-[30px] space-y-0">
         {/* Left Content */}
@@ -62,7 +62,7 @@ const Services = () => {
 
           <Link href="/rpc">
             <button
-              className={`w-[168px]   mw-8:mb-[50px] mw-12:w-[140px] mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white mt-[15px]`}
+              className={`w-[168px]   mw-12:w-[140px] mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white mt-[15px]`}
             >
               Discover More
             </button>
