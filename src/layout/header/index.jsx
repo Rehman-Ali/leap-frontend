@@ -54,12 +54,12 @@ const Header = () => {
           >
             VPS
           </Link>
-          <Link
+          {/* <Link
             className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
             href="/articles"
           >
             Articles
-          </Link>
+          </Link> */}
         </div>
 
         <Link
@@ -116,13 +116,13 @@ const Header = () => {
             >
               VPS
             </Link>
-            <Link
+            {/* <Link
               className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
               href="/articles"
               onClick={toggleMenu}
             >
               Articles
-            </Link>
+            </Link> */}
             <button
               className="w-[168px] h-[46px]  mw-12:w-[150px] leading-none flex flex-row items-center justify-center gap-x-2  mw-12:text-[14px]  bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"
               onClick={() => setShowAuthFlow(true)}

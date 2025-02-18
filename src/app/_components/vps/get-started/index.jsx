@@ -25,20 +25,20 @@ const VPSGetStarted = () => {
         >
           Don&apos;t waste any more time
         </p>
-        <p
+        {/* <p
           className={`${
             animationTriggered ? "animate-slideIn" : ""
           } text-sm md:text-base text-[#c6c7c6] text-center mb-6`}
         >
           Buy today Leap VPS
-        </p>
+        </p> */}
         <Link href="/buy-vps">
         <button
           className={` ${
             animationTriggered ? "animate-slideIn" : ""
-          } w-40 h-12 bg-darkPrimary font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}
+          } w-40 h-12 bg-darkPrimary mt-4 font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}
         >
-          Get Started Today
+          Get Started
         </button>
         </Link>
       </div>

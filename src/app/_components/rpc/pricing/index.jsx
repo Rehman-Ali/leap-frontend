@@ -24,11 +24,7 @@ const RPCPricing = () => {
               Flexible plans and features
             </h2>
             <p className="text-[18px] mw-10:text-[16px] font-inter text-white">
-              In a competitive market where some node providers charge as much
-              as 500 SOL, we prioritize affordability and flexibility. Our
-              pricing plans are designed to meet the diverse needs of our
-              clients, ensuring that you have access to secure and reliable
-              nodes without the upcharge.
+            Our node is designed for maximum performance and reliability, equipped with cutting-edge technologies to meet the demands of professional crypto traders and developers.
             </p>
           </div>
           <div className="mw-10:hidden flex flex-wrap">
@@ -99,7 +95,7 @@ const RPCPricing = () => {
                     </span>
                   </div>
                   <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
-                    For small traders just getting started.
+                    For better looking to scale just getting started.
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
@@ -281,7 +277,7 @@ const RPCPricing = () => {
                     </span>
                   </div>
                   <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
-                    For small traders just getting started.
+                  For better looking to scale just getting started.
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
@@ -460,7 +456,7 @@ const RPCPricing = () => {
                     </span>
                   </div>
                   <div className="text-slate-500 mw-12:text-[12px] font-inter text-[14px] font-normal">
-                    For botters looking to scale and maximize every snipe.
+                    {/* For botters looking to scale and maximize every snipe. */}
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">

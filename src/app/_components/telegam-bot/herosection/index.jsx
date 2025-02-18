@@ -148,15 +148,15 @@ const TelegramHeroSection = () => {
             <div
               key={index}
               className={`flex ${
-                animationTriggered ? "animate-slideInFade" : ""
+                animationTriggered ? "animate-slideIn" : ""
               } flex-col bg-[#131412] rounded-lg p-6 text-center items-center space-y-4 ${
                 index === 6
                   ? "col-span-1 sm:col-span-2 lg:col-span-3 w-full"
                   : ""
               }`}
-              style={{
-                animationDelay: `${index * 0.1}s`
-              }}
+              // style={{
+              //   animationDelay: `${index * 0.1}s`
+              // }}
             >
               <Image
                 src={feature.image}

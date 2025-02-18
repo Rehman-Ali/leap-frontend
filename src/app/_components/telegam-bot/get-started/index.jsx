@@ -39,7 +39,7 @@ const TelegramGetStarted = () => {
         ${animationTriggered ? "animate-slideIn" : ""}
         bg-darkPrimary font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}
           >
-            Get Started Today
+            Get Started
           </button>
         </a>
       </div>

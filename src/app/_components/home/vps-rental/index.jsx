@@ -38,9 +38,7 @@ const VPSRental = () => {
         <div className="flex flex-col items-start text-left">
           {/* Badge */}
           <div
-            className={`flex gap-x-1 ${
-              animationTriggered ? "animate-slideIn" : ""
-            } items-center justify-center w-[112px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
+            className={`flex gap-x-1  items-center justify-center w-[112px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
           >
             <LuAsterisk size={14} color={"#37f94e"} />
             <p className="text-[14px] mw-12:text-[12px] font-inter text-darkPrimary">
@@ -50,25 +48,19 @@ const VPSRental = () => {
 
           {/* Title */}
           <p
-            className={`text-white mb-[10px] ${
-              animationTriggered ? "animate-slideIn" : ""
-            } text-[60px] mw-12:text-[42px] mw-8:text-[36px] font-inter font-medium leading-[70px] mw-12:leading-[48px] mw-8:leading-[42px] mt-[20px]`}
+            className={`text-white mb-[10px]  text-[60px] mw-12:text-[42px] mw-8:text-[36px] font-inter font-medium leading-[70px] mw-12:leading-[48px] mw-8:leading-[42px] mt-[20px]`}
           >
             VPS Rental
           </p>
           <p
-            className={`text-[#C5C6C5] font-inter ${
-              animationTriggered ? "animate-slideIn" : ""
-            } text-[16px] mw-8:max-w-[100%] max-w-[500px] my-[20px] text-left`}
+            className={`text-[#C5C6C5] font-inter  text-[16px] mw-8:max-w-[100%] max-w-[500px] my-[20px] text-left`}
           >
             Unlock the power of dedicated performance with our virtual private
             servers! Enjoy fast, secure, and reliable hosting with complete
             control over your environment.
           </p>
           <p
-            className={`text-[#C5C6C5] font-inter ${
-              animationTriggered ? "animate-slideIn" : ""
-            } text-[16px] mw-8:max-w-[100%] max-w-[500px] mb-[20px] text-left`}
+            className={`text-[#C5C6C5] font-inter $ text-[16px] mw-8:max-w-[100%] max-w-[500px] mb-[20px] text-left`}
           >
             Our affordable servers are also hosted in the same rack as our node
             to give our users the lowest latency we can!
@@ -82,18 +74,14 @@ const VPSRental = () => {
               <div className="flex flex-row gap-x-3">
                 <div className="flex mt-[10px] gap-y-3 flex-col justify-start items-start">
                   <div
-                    className={`flex gap-x-1 ${
-                      animationTriggered ? "animate-slideIn" : ""
-                    } items-center justify-center w-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
+                    className={`flex gap-x-1  items-center justify-center w-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
                   >
                     <p className="text-[14px] mw-12:text-[10px] font-inter text-white">
                       Dallas, TX
                     </p>
                   </div>
                   <div
-                    className={`flex gap-x-1 ${
-                      animationTriggered ? "animate-slideIn" : ""
-                    } items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
+                    className={`flex gap-x-1  items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
                   >
                     <p className="text-[14px] mw-12:text-[10px] font-inter text-white">
                       Bend, OR
@@ -101,9 +89,7 @@ const VPSRental = () => {
                   </div>
 
                   <div
-                    className={`flex gap-x-1 ${
-                      animationTriggered ? "animate-slideIn" : ""
-                    } items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
+                    className={`flex gap-x-1  items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
                   >
                     <p className="text-[14px] mw-12:text-[10px] font-inter text-white">
                       Ashburn, VA
@@ -112,27 +98,21 @@ const VPSRental = () => {
                 </div>
                 <div className="flex  mt-[10px] flex-col  gap-y-3 justify-start items-start">
                   <div
-                    className={`flex gap-x-1 ${
-                      animationTriggered ? "animate-slideIn" : ""
-                    } items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
+                    className={`flex gap-x-1  items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
                   >
                     <p className="text-[14px] mw-12:text-[10px] font-inter text-white">
                       Charlotte, NC
                     </p>
                   </div>
                   <div
-                    className={`flex gap-x-1 ${
-                      animationTriggered ? "animate-slideIn" : ""
-                    } items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
+                    className={`flex gap-x-1  items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
                   >
                     <p className="text-[14px] mw-12:text-[10px] font-inter text-white">
                       Latham, NY
                     </p>
                   </div>
                   <div
-                    className={`flex gap-x-1 ${
-                      animationTriggered ? "animate-slideIn" : ""
-                    } items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
+                    className={`flex gap-x-1 items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
                   >
                     <p className="text-[14px] mw-12:text-[10px] font-inter text-white">
                       Staten Island, NY
@@ -141,27 +121,21 @@ const VPSRental = () => {
                 </div>
                 <div className="flex mt-[10px] flex-col gap-y-3 justify-start items-start">
                   <div
-                    className={`flex gap-x-1 ${
-                      animationTriggered ? "animate-slideIn" : ""
-                    } items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
+                    className={`flex gap-x-1  items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
                   >
                     <p className="text-[14px] mw-12:text-[10px] font-inter text-white">
                       AMS - Netherlands
                     </p>
                   </div>
                   <div
-                    className={`flex gap-x-1 ${
-                      animationTriggered ? "animate-slideIn" : ""
-                    } items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
+                    className={`flex gap-x-1  items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
                   >
                     <p className="text-[14px] mw-12:text-[10px] font-inter text-white">
                       FRS - France
                     </p>
                   </div>
                   <div
-                    className={`flex gap-x-1 ${
-                      animationTriggered ? "animate-slideIn" : ""
-                    } items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
+                    className={`flex gap-x-1  items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
                   >
                     <p className="text-[14px] mw-12:text-[10px] font-inter text-white">
                       VA - Virginia
@@ -207,9 +181,7 @@ const VPSRental = () => {
           {/* Button */}
           <Link href="/buy-vps">
             <button
-              className={`w-[120px] mw-12:w-[100px] mw-12:text-[14px] h-[46px] ${
-                animationTriggered ? "animate-slideIn" : ""
-              } bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white mt-[15px]`}
+              className={`w-[120px] mw-12:w-[100px] mw-12:text-[14px] h-[46px]  bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white mt-[15px]`}
             >
               Order
             </button>

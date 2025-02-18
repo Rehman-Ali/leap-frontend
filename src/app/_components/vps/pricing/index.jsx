@@ -17,13 +17,13 @@ const VPSPricing = () => {
       </div>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="py-12 md:py-20">
-          <div className="max-w-4xl mx-auto text-center pb-12 md:pb-20">
+          <div className="max-w-4xl mx-auto text-center pb-5 md:pb-5">
             <div>
-              <div className="inline-flex text-[20px] mw-10:text-[16px] font-inter font-medium text-white pb-3">
+              <div className="inline-flex text-[28px] mw-10:text-[16px] font-inter font-medium text-white pb-3">
                 Pricing Plans
               </div>
             </div>
-            <h2 className="h2 font-inter text-[44px] mw-10:text-[32px] font-bold bg-clip-text bg-transparent text-white  pb-4">
+            {/* <h2 className="h2 font-inter text-[44px] mw-10:text-[32px] font-bold bg-clip-text bg-transparent text-white  pb-4">
               Flexible plans and features
             </h2>
             <p className="text-[18px] mw-10:text-[16px] font-inter text-white">
@@ -31,8 +31,8 @@ const VPSPricing = () => {
               as 500 SOL, we prioritize affordability and flexibility. Our
               pricing plans are designed to meet the diverse needs of our
               clients, ensuring that you have access to secure and reliable
-              nodes without the upcharge.
-            </p>
+              nodes without the upcharge. 
+            </p>*/}
           </div>
           <div className="mw-10:hidden flex flex-wrap items-center justify-center">
             <div className="w-[25%] px-6  py-[50px]">
@@ -115,7 +115,7 @@ const VPSPricing = () => {
                     <p>16GB of RAM + 435GB PURE SSD</p>
                   </div>
                   <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
-                    For small traders just getting started.
+                    {/* For small traders just getting started. */}
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
@@ -130,7 +130,7 @@ const VPSPricing = () => {
                   </Link>
                 </div>
               </div>
-              <div className="mt-[20px]">
+              <div className="mt-[40px]">
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
                   <p>Unlimited</p>
@@ -215,7 +215,7 @@ const VPSPricing = () => {
                     <p>16GB of RAM + 435GB PURE SSD</p>
                   </div>
                   <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
-                    For small traders just getting started.
+                    {/* For small traders just getting started. */}
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">

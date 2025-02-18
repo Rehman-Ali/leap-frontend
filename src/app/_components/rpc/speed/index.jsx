@@ -33,7 +33,8 @@ const RPCSpeedComponent = () => {
           <p className={` ${
               animationTriggered ? "animate-slideIn" : ""
             } text-white text-3xl sm:text-4xl lg:text-5xl font-inter font-medium leading-tight mt-6`}>
-            Could Put <span className="text-darkPrimary">Something</span> About The Speeds <span className="text-darkPrimary">Here</span>?
+            {/* Could Put <span className="text-darkPrimary">Something</span> About The Speeds <span className="text-darkPrimary">Here</span>? */}
+            Here's the  <span className="text-darkPrimary">stats</span> to back up our claim
           </p>
 
           {/* Subheading */}

@@ -103,9 +103,7 @@ const HeroSection = () => {
         </div>
 
         <div
-          className={`flex flex-col items-center justify-center mt-[150px] ${animationTriggered
-            ? "animate-slideIn"
-            : ""}`}
+          className={`flex flex-col items-center justify-center mt-[150px] `}
         >
           <div className="w-[170px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a] flex flex-row gap-x-1 justify-center items-center">
             <LuAsterisk size={14} color={"#37f94e"} />

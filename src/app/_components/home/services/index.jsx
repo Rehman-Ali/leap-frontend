@@ -21,9 +21,7 @@ const Services = () => {
       <div className="flex flex-col  mw-8:items-start mw-8:flex-col mw-8:space-y-6 md:flex-row justify-between items-center mt-[30px] space-y-0">
         {/* Left Content */}
         <div
-          className={`flex flex-col  items-start ${
-            animationTriggered ? "animate-slideIn" : ""
-          }`}
+          className={`flex flex-col  items-start `}
         >
           <div className="flex items-center justify-center w-[112px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]">
             <LuAsterisk size={14} color={"#37f94e"} />
@@ -33,16 +31,12 @@ const Services = () => {
           </div>
 
           <p
-            className={`text-white ${
-              animationTriggered ? "animate-slideIn" : ""
-            } text-[60px] mw-12:text-[42px] mw-8:text-[36px] font-inter font-medium mt-[10px] mw-8:mt-[20px] leading-[70px] mw-8:leading-[40px] text-left`}
+            className={`text-white  text-[60px] mw-12:text-[42px] mw-8:text-[36px] font-inter font-medium mt-[10px] mw-8:mt-[20px] leading-[70px] mw-8:leading-[40px] text-left`}
           >
             RPC Rental
           </p>
           <p
-            className={`text-[#C5C6C5] ${
-              animationTriggered ? "animate-slideIn" : ""
-            } font-inter text-[16px] mw-8:max-w-[100%] max-w-[500px] my-[20px] text-left`}
+            className={`text-[#C5C6C5]  font-inter text-[16px] mw-8:max-w-[100%] max-w-[500px] my-[20px] text-left`}
           >
             Unparalleled speed, reliability, and unlimited transactions per
             second (TPS). Optimise your botting with the fastest node on the
@@ -59,9 +53,7 @@ const Services = () => {
           ].map((item, index) => (
             <div
               key={index}
-              className={`flex flex-row items-center ${
-                animationTriggered ? "animate-slideIn" : ""
-              } gap-x-2 mb-[10px]`}
+              className={`flex flex-row items-center $ gap-x-2 mb-[10px]`}
             >
               <FaCheck size={18} color={"#37f94e"} />
               <p className="text-[#C5C6C5] font-inter text-[14px]">{item}</p>
@@ -70,9 +62,7 @@ const Services = () => {
 
           <Link href="/rpc">
             <button
-              className={`w-[168px] ${
-                animationTriggered ? "animate-slideIn" : ""
-              }  mw-8:mb-[50px] mw-12:w-[140px] mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white mt-[15px]`}
+              className={`w-[168px]   mw-8:mb-[50px] mw-12:w-[140px] mw-12:text-[14px] h-[46px] bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white mt-[15px]`}
             >
               Discover More
             </button>

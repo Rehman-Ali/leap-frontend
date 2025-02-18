@@ -25,7 +25,7 @@ const TradingGetStarted = () => {
         ${animationTriggered ? "animate-slideIn" : ""}
         md:text-4xl lg:text-5xl font-inter font-medium text-white text-center mb-4`}
         >
-          Get Started Today
+          Get Started
         </p>
         <p
           className={`text-sm md:text-base
@@ -39,7 +39,7 @@ const TradingGetStarted = () => {
         ${animationTriggered ? "animate-slideIn" : ""}
         bg-darkPrimary font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}
         >
-          Get Started Today
+          Get Started
         </button>
       </div>
     </div>

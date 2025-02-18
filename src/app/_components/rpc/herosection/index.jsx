@@ -93,7 +93,7 @@ const RPCHeroSection = () => {
                 animationTriggered ? "animate-slideIn" : ""
               } mt-5 mw-8:mt-3 w-32 mb-10 sm:w-36 h-12 bg-darkPrimary text-sm sm:text-base font-inter text-[#231F20] font-medium rounded-full cursor-pointer hover:bg-white transition duration-300`}
             >
-              Join Now
+              Get Started
             </button>
           </a>
           {/* <p
