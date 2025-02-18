@@ -24,12 +24,14 @@ const RPCPricing = () => {
               Flexible plans and features
             </h2>
             <p className="text-[18px] mw-10:text-[16px] font-inter text-white">
-            Our node is designed for maximum performance and reliability, equipped with cutting-edge technologies to meet the demands of professional crypto traders and developers.
+              Our node is designed for maximum performance and reliability,
+              equipped with cutting-edge technologies to meet the demands of
+              professional crypto traders and developers.
             </p>
           </div>
           <div className="mw-10:hidden flex flex-wrap">
             <div className="w-[25%] px-6  py-[50px]">
-              <div className="mt-[190px]">
+              <div className="mt-[215px]">
                 <p className="text-white font-inter font-medium text-[14px]">
                   Usage
                 </p>
@@ -74,7 +76,6 @@ const RPCPricing = () => {
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px]">
                   <p>Premium Support</p>
                 </div>
-              
               </div>
             </div>
             <div className="w-[25%] px-6 py-[20px] bg-[#37415133] rounded-tl-[24px] rounded-bl-[24px]">
@@ -99,16 +100,15 @@ const RPCPricing = () => {
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
-                <Link href="/buy">
-                 
-                  <button
-                    className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                    // href="https://hub.ligmanode.com/buy?plan=basic"
-                  >
-                    Get Started
-                    <FaArrowRight size={12} color={"#000"} />
-                  </button>
-               </Link>
+                  <Link href="/buy">
+                    <button
+                      className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
+                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                    >
+                      Get Started
+                      <FaArrowRight size={12} color={"#000"} />
+                    </button>
+                  </Link>
                 </div>
               </div>
               <div className="mt-[73px]">
@@ -127,46 +127,44 @@ const RPCPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                 500
+                  500
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
-                &nbsp;
+                  &nbsp;
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
-                  <p>&nbsp;</p>
-                  
-                </div>
-                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
-                <p>&nbsp;</p>
+                  <FaCheck size={14} color={"#fff"} />
+                  <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
+                  <p>&nbsp;</p>
+                </div>
+                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
+                  <FaCheck size={14} color={"#fff"} />
                   <p> &nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p> &nbsp;</p>
                 </div>
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                &nbsp;
+                  &nbsp;
                 </p>
 
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p> &nbsp;</p>
                 </div>
-                
               </div>
             </div>
-         
+
             <div className="w-[25%]  px-6 py-[20px] bg-[#37415133] ">
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
@@ -189,16 +187,15 @@ const RPCPricing = () => {
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
-                <Link href="/buy">
-                 
-                  <button
-                    className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                    // href="https://hub.ligmanode.com/buy?plan=basic"
-                  >
-                    Get Started
-                    <FaArrowRight size={12} color={"#000"} />
-                  </button>
-               </Link>
+                  <Link href="/buy">
+                    <button
+                      className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
+                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                    >
+                      Get Started
+                      <FaArrowRight size={12} color={"#000"} />
+                    </button>
+                  </Link>
                 </div>
               </div>
               <div className="mt-[73px]">
@@ -217,39 +214,39 @@ const RPCPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-darkPrimary font-inter font-medium text-[14px]">
-                 1,000
+                  1,000
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
-                &nbsp;
+                  &nbsp;
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                &nbsp;
+                  &nbsp;
                 </p>
 
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 {/*   */}
@@ -259,14 +256,14 @@ const RPCPricing = () => {
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
                   <div className="text-base font-inter font-medium text-white pb-0.5">
-                  Enterprise
+                    Enterprise
                   </div>
                   <div className="mb-1">
                     <span className="text-lg font-inter font-medium text-slate-500">
                       $
                     </span>
                     <span className="text-3xl font-bold font-inter text-slate-50">
-                     ~
+                      ~
                     </span>
                     <span className="text-sm text-slate-600 font-inter font-medium">
                       /mo
@@ -277,16 +274,15 @@ const RPCPricing = () => {
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
-                <Link href="#">
-                 
-                  <button
-                    className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                    // href="https://hub.ligmanode.com/buy?plan=basic"
-                  >
-                    Contact Us
-                    <FaArrowRight size={12} color={"#000"} />
-                  </button>
-               </Link>
+                  <a href="https://discord.gg/9UXPJgnZ5q" target="_blank">
+                    <button
+                      className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
+                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                    >
+                      Contact Us
+                      <FaArrowRight size={12} color={"#000"} />
+                    </button>
+                  </a>
                 </div>
               </div>
               <div className="mt-[73px]">
@@ -305,39 +301,39 @@ const RPCPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-darkPrimary font-inter font-medium text-[14px]">
-                 ~
+                  ~
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
-                &nbsp;
+                  &nbsp;
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                &nbsp;
+                  &nbsp;
                 </p>
 
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
                 {/*   */}
@@ -345,9 +341,7 @@ const RPCPricing = () => {
             </div>
           </div>
           <div className="hidden mw-10:flex flex-col gap-y-10">
-           
-
-              <div className=" px-6 py-[20px] bg-[#37415133] rounded-[24px]">
+            <div className=" px-6 py-[20px] bg-[#37415133] rounded-[24px]">
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
                   <div className="text-base font-inter font-medium text-white pb-0.5">
@@ -365,25 +359,24 @@ const RPCPricing = () => {
                     </span>
                   </div>
                   <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
-                  For better looking to scale just getting started.
+                    For better looking to scale just getting started.
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
-                <Link href="/buy">
-                 
-                  <button
-                    className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                    // href="https://hub.ligmanode.com/buy?plan=basic"
-                  >
-                    Get Started
-                    <FaArrowRight size={12} color={"#000"} />
-                  </button>
-               </Link>
+                  <Link href="/buy">
+                    <button
+                      className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
+                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                    >
+                      Get Started
+                      <FaArrowRight size={12} color={"#000"} />
+                    </button>
+                  </Link>
                 </div>
               </div>
-              <div className="mt-[50px]">
-              <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                 Usage
+              <div className="mw-6:mt-[20px] mt-[50px]">
+                <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
+                  Usage
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                   <FaCheck size={14} color={"#fff"} />
@@ -397,53 +390,50 @@ const RPCPricing = () => {
                   <FaCheck size={14} color={"#fff"} />
                   <p>200/10 secs Rate Limit</p>
                 </div>
-               
-              <div>
-                <p className="pt-[20px] text-darkPrimary font-inter font-medium text-[14px]">
-                <span className="text-white" >Estimated TPS </span>  500
-                </p>
-                <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
-                Features
-                </p>
-                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
-                  <p>High Landing Rate</p>
-                </div>
-                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
-                  <p>Websocket Support</p>
-                </div>
-                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
-                  <p>Dedicated Regions</p>
-                </div>
-                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
-                  <p>Geyser gRPC</p>
-                </div>
-                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
-                  <p>Enterprise Add-ons</p>
-                </div>
-              </div>
-              <div>
-                <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                Support
-                </p>
 
-                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
-                  <p>Premium Support</p>
+                <div>
+                  <p className="pt-[20px] text-darkPrimary font-inter font-medium text-[14px]">
+                    <span className="text-white">Estimated TPS </span> 500
+                  </p>
+                  <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
+                    Features
+                  </p>
+                  <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
+                    <FaCheck size={14} color={"#fff"} />
+                    <p>High Landing Rate</p>
+                  </div>
+                  <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
+                    <FaCheck size={14} color={"#fff"} />
+                    <p>Websocket Support</p>
+                  </div>
+                  <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
+                    <FaCheck size={14} color={"#fff"} />
+                    <p>Dedicated Regions</p>
+                  </div>
+                  <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
+                    <FaCheck size={14} color={"#fff"} />
+                    <p>Geyser gRPC</p>
+                  </div>
+                  <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
+                    <FaCheck size={14} color={"#fff"} />
+                    <p>Enterprise Add-ons</p>
+                  </div>
                 </div>
-                {/* <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
+                <div>
+                  <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
+                    Support
+                  </p>
+
+                  <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
+                    <FaCheck size={14} color={"#fff"} />
+                    <p>Premium Support</p>
+                  </div>
+                  {/* <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                 <FaCheck size={14} color={"#fff"} />
                   <p>Dedicated Agent</p>
                 </div> */}
+                </div>
               </div>
-                
-              
-              </div>
-            
             </div>
             {/* <div className=" px-4 py-[20px] bg-[#37415133] border border-[#e5e7eb] rounded-[24px]">
               <div className=" flex flex-col justify-end">
@@ -548,20 +538,20 @@ const RPCPricing = () => {
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
-                 <Link href="/buy">
-                  <button
-                    className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                    // href="https://hub.ligmanode.com/buy?plan=basic"
-                  >
-                    Get Started
-                    <FaArrowRight size={12} color={"#000"} />
-                  </button>
+                  <Link href="/buy">
+                    <button
+                      className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
+                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                    >
+                      Get Started
+                      <FaArrowRight size={12} color={"#000"} />
+                    </button>
                   </Link>
                 </div>
               </div>
-              <div className="mt-[73px]">
-              <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                 Usage
+              <div className="mw-6:mt-[20px] mt-[73px]">
+                <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
+                  Usage
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
@@ -578,39 +568,39 @@ const RPCPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-darkPrimary font-inter font-medium text-[14px]">
-                <span className="text-white" >Estimated TPS </span>  6,000
+                  <span className="text-white">Estimated TPS </span> 6,000
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
-                Features
+                  Features
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>High Landing Rate</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Websocket Support</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Dedicated Regions</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Geyser gRPC</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Enterprise Add-ons</p>
                 </div>
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                Support
+                  Support
                 </p>
 
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Premium Support</p>
                 </div>
                 {/* <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
@@ -642,20 +632,20 @@ const RPCPricing = () => {
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
-                 <Link href="#">
-                  <button
-                    className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                    // href="https://hub.ligmanode.com/buy?plan=basic"
-                  >
-                    Contact Us
-                    <FaArrowRight size={12} color={"#000"} />
-                  </button>
-                  </Link>
+                  <a href="https://discord.gg/9UXPJgnZ5q" target="_blank">
+                    <button
+                      className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
+                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                    >
+                      Contact Us
+                      <FaArrowRight size={12} color={"#000"} />
+                    </button>
+                  </a>
                 </div>
               </div>
-              <div className="mt-[73px]">
-              <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                 Usage
+              <div className=" mw-6:mt-[20px] mt-[73px]">
+                <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
+                  Usage
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
@@ -672,39 +662,39 @@ const RPCPricing = () => {
               </div>
               <div>
                 <p className="pt-[20px] text-darkPrimary font-inter font-medium text-[14px]">
-                <span className="text-white" >Estimated TPS </span>  6,000
+                  <span className="text-white">Estimated TPS </span> 6,000
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
-                Features
+                  Features
                 </p>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>High Landing Rate</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Websocket Support</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Dedicated Regions</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Geyser gRPC</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Enterprise Add-ons</p>
                 </div>
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                Support
+                  Support
                 </p>
 
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                <FaCheck size={14} color={"#fff"} />
+                  <FaCheck size={14} color={"#fff"} />
                   <p>Premium Support</p>
                 </div>
                 {/* <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
@@ -713,7 +703,6 @@ const RPCPricing = () => {
                 </div> */}
               </div>
             </div>
-           
           </div>
         </div>
       </div>
