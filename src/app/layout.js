@@ -187,7 +187,7 @@ export default function RootLayout({ children }) {
       <Suspense fallback={<FullPageLoader />}>
         <DynamicContextProvider
           settings={{
-            environmentId: "9108f276-4108-4240-a727-8454153e419d",
+            environmentId: "bba18406-90b4-4f4a-afc8-43778dd6c123",
             walletConnectors: [EthereumWalletConnectors],
             events: {
               onAuthSuccess: (args) => {
