@@ -12,27 +12,30 @@ import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
 import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
 import { createConfig, WagmiProvider } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { http } from "viem";
 import { mainnet } from "viem/chains";
-import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
+// import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
+import { SolanaWalletConnectors } from '@dynamic-labs/solana';
+
 import FullPageLoader from "./_components/loader";
 import axios from "axios";
-import { SERVER_URL } from "@/utils/server";
+import { DYNAMIC_XYZ_TOKEN, SERVER_URL } from "@/utils/server";
 
 import {
   ConnectionProvider,
-  WalletProvider,
+  WalletProvider
 } from "@solana/wallet-adapter-react";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import "@solana/wallet-adapter-react-ui/styles.css"; // Optional UI styles for wallets
+import Swal from "sweetalert2";
 
 const config = createConfig({
   chains: [mainnet],
   multiInjectedProviderDiscovery: false,
   transports: {
-    [mainnet.id]: http(),
-  },
+    [mainnet.id]: http()
+  }
 });
 
 const queryClient = new QueryClient();
@@ -41,10 +44,11 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isAuthorized, setIsAuthorized] = useState(false);
+
   // Solana wallet adapters
   const wallets = [new PhantomWalletAdapter()];
 
-  // Define routes
+  // Define private routes and admin routes
   const privateRoutes = [
     "/dashboard",
     "/nodes",
@@ -52,12 +56,15 @@ export default function RootLayout({ children }) {
     "/affiliate",
     "/orders",
     "/buy",
-    "/buy-vps",
+    "/buy-vps"
+  ];
+  const adminRoutes = [
     "/admin-dashboard",
     "/subscriptions",
     "/users",
     "/articles-list",
     "/add-article",
+    "/update-article"
   ];
   const publicRoutes = [
     "/",
@@ -65,7 +72,7 @@ export default function RootLayout({ children }) {
     "/telegram-bot",
     "/rpc",
     "/trading-bot",
-    "/vps",
+    "/vps"
   ]; // Add all public routes here
 
   // Check for token
@@ -74,23 +81,40 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     const isPrivateRoute = privateRoutes.includes(pathname);
+    const isAdminRoute = adminRoutes.includes(pathname);
     const isPublicRoute = publicRoutes.includes(pathname);
 
+    const role = JSON.parse(localStorage.getItem("role"));
+
     if (token) {
-      // If the user has a token and tries to access a public route, redirect to a private route
+      // If the user has a token
       if (isPublicRoute) {
-        let role = JSON.parse(localStorage.getItem("role"));
+        // If it's a public route, redirect based on role
         if (role === "admin") {
-          router.replace("/admin-dashboard"); // Redirect to the first private route (e.g., dashboard)
+          router.replace("/admin-dashboard");
         } else {
-          router.replace(privateRoutes[0]); // Redirect to the first private route (e.g., dashboard)
+          router.replace(privateRoutes[0]); // Default redirect to dashboard
         }
-      } else {
-        setIsAuthorized(true);
+      } else if (isPrivateRoute) {
+        // If it's a private route (for non-admins)
+        if (role === "admin") {
+          // If the user is admin, redirect to the first admin route or current route
+          router.replace(adminRoutes[0]);
+        } else {
+          setIsAuthorized(true);
+        }
+      } else if (isAdminRoute) {
+        // If it's an admin route
+        if (role !== "admin") {
+          // If the user is not an admin, redirect to private route
+          router.replace(privateRoutes[0]);
+        } else {
+          setIsAuthorized(true);
+        }
       }
     } else {
       // If the user does not have a token and tries to access a private route, redirect to login
-      if (isPrivateRoute) {
+      if (isPrivateRoute || isAdminRoute) {
         localStorage.setItem("c_path", pathname);
         router.replace("/login");
       } else {
@@ -104,7 +128,7 @@ export default function RootLayout({ children }) {
       const response = await axios.post(
         `${SERVER_URL}/api/user/signin-and-signup`,
         {
-          dp_user_id: userData.userId,
+          dp_user_id: userData.userId
         }
       );
       console.log(response.data, "Response received");
@@ -118,7 +142,6 @@ export default function RootLayout({ children }) {
           router.push("/dashboard");
         }
       } else {
-        console.log("else working");
         router.push(prev_path);
         localStorage.removeItem("c_path");
       }
@@ -127,6 +150,22 @@ export default function RootLayout({ children }) {
         "Error during login or registration:",
         error.response?.data || error.message
       );
+
+      /// delete wallet session
+      setTimeout(() => {
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.reload();
+      }, 1000);
+
+     
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: error.response?.data.message,
+        showConfirmButton: false,
+        timer: 2500
+      });
     }
   };
 
@@ -141,27 +180,29 @@ export default function RootLayout({ children }) {
     );
   }
 
-  const includeDashboardLayout = privateRoutes.includes(pathname);
+  const includeDashboardLayout =
+    privateRoutes.includes(pathname) || adminRoutes.includes(pathname);
 
   return (
     <html lang="en">
       <body className={includeDashboardLayout ? "" : "bg-bodyColor"}>
+      <Suspense fallback={<FullPageLoader />}>
         <DynamicContextProvider
           settings={{
-            environmentId: "9108f276-4108-4240-a727-8454153e419d",
-            walletConnectors: [EthereumWalletConnectors],
+            environmentId: "890bd12b-48e4-4363-869d-e092bac005da", /// live key used alchemy site for RPC url
+            // environmentId: "bba18406-90b4-4f4a-afc8-43778dd6c123", //// sandbox
+            // walletConnectors: [EthereumWalletConnectors],
+            walletConnectors: [SolanaWalletConnectors],
             events: {
               onAuthSuccess: (args) => {
-                console.log("first event call", args.user);
                 handleLoginAndRegister(args.user);
-              },
+              }
             },
             handlers: {
               handleAuthenticatedUser: async (args) => {
-                console.log("2nd even call", args);
                 await customUserObjectProcess(args.user);
-              },
-            },
+              }
+            }
           }}
         >
           <WagmiProvider config={config}>
@@ -169,8 +210,8 @@ export default function RootLayout({ children }) {
               <DynamicWagmiConnector>
                 <ThemeProvider attribute="class" defaultTheme="dark">
                   {includeDashboardLayout ? (
-                    //  {/* Solana Payment Checkout */}
-                    <ConnectionProvider endpoint="https://api.devnet.solana.com">
+                    <ConnectionProvider endpoint="https://solana-mainnet.g.alchemy.com/v2/4VXLhF5hI-rUSBOadb5UeDp4YZ0Gc31p">
+                    {/* <ConnectionProvider endpoint="https://solana-devnet.g.alchemy.com/v2/4VXLhF5hI-rUSBOadb5UeDp4YZ0Gc31p"> */}
                       <WalletProvider wallets={wallets} autoConnect>
                         <DashboardLayout>{children}</DashboardLayout>
                       </WalletProvider>
@@ -189,6 +230,7 @@ export default function RootLayout({ children }) {
             </QueryClientProvider>
           </WagmiProvider>
         </DynamicContextProvider>
+        </Suspense>
       </body>
     </html>
   );
