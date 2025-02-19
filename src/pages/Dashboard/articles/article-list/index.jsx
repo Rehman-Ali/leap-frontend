@@ -12,7 +12,7 @@ const ArticleListScreen = () => {
   const [userToken, setUserToken] = useState("");
   const [isDelete, setIsDelete] = useState(false);
 
-  const ITEMS_PER_PAGE = 5;
+  const ITEMS_PER_PAGE = 10;
 
   const [currentPage, setCurrentPage] = useState(1);
 

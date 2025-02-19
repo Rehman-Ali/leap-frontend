@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const SubscriptionScreen = () => {
   const [orderList, setOrderList] = useState([]);
 
-  const ITEMS_PER_PAGE = 5;
+  const ITEMS_PER_PAGE = 10;
 
   const [currentPage, setCurrentPage] = useState(1);
   const [isDelete, setIsDelete] = useState(false);
@@ -92,7 +92,7 @@ const SubscriptionScreen = () => {
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
       <div className="h-full w-full max-w-[1500px] p-2 lg:p-5">
-        <h2 className="text-[26px] font-medium mb-8 text-white">
+        <h2 className="text-[26px] font-medium mb-8 text-black dark:text-white">
           Subscriptions List
         </h2>
         {paginatedData.length > 0 ? (
@@ -186,7 +186,7 @@ const SubscriptionScreen = () => {
             </div>
             <div className="flex justify-end items-center mt-4 gap-2">
               <button
-                className="px-3 py-1 bg-gray-300 dark:bg-darkPrimary text-sm rounded-md disabled:opacity-50"
+                className="px-3 py-1 text-black dark:text-white bg-gray-300 dark:bg-darkPrimary text-sm rounded-md disabled:opacity-50"
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
               >
@@ -199,7 +199,7 @@ const SubscriptionScreen = () => {
                 Page {currentPage} of {totalPages}
               </span>
               <button
-                className="px-3 py-1 bg-gray-300 dark:bg-darkPrimary text-sm rounded-md disabled:opacity-50"
+                className="px-3 py-1 text-black dark:text-white bg-gray-300 dark:bg-darkPrimary text-sm rounded-md disabled:opacity-50"
                 onClick={() =>
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }

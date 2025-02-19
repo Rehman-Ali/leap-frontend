@@ -51,10 +51,10 @@ const AdminDashboardScreen = () => {
                 <div className="flex flex-col w-full gap-5 text-nowrap">
                   <div className="grid grid-cols-3">
                     <div>
-                      <div className="text-gray-500 dark:text-darkPrimary text-[24px] font-inter font-medium">
+                      <div className="text-black dark:text-darkPrimary text-[24px] font-inter font-medium">
                         Total Users
                       </div>
-                      <div className=" font-normal font-inter text-[24px] mt-4 dark:text-white">
+                      <div className=" font-normal font-inter text-[24px] mt-4 text-black dark:text-white">
                         {userList.length}
                       </div>
                     </div>
@@ -63,7 +63,7 @@ const AdminDashboardScreen = () => {
               </div>
               <Link
                 href="/users"
-                className="text-gray-400 cursor-pointer dark:text-white text-xs self-end mt-4"
+                className="text-black cursor-pointer  dark:text-white text-xs self-end mt-4"
               >
                 View More
               </Link>
@@ -73,10 +73,10 @@ const AdminDashboardScreen = () => {
                 <div className="flex flex-col w-full gap-5 text-nowrap">
                   <div className="grid grid-cols-3">
                     <div>
-                      <div className="text-gray-500 dark:text-darkPrimary text-[24px] font-inter font-medium">
+                      <div className="text-black dark:text-darkPrimary text-[24px] font-inter font-medium">
                         Total Orders
                       </div>
-                      <div className=" font-normal font-inter text-[24px] mt-4 dark:text-white">
+                      <div className=" font-normal text-black font-inter text-[24px] mt-4 dark:text-white">
                         {orderList.length}
                       </div>
                     </div>
@@ -85,7 +85,7 @@ const AdminDashboardScreen = () => {
               </div>
               <Link
                 href="/subscriptions"
-                className="text-gray-400 cursor-pointer dark:text-white text-xs self-end mt-4"
+                className="text-black cursor-pointer dark:text-white text-xs self-end mt-4"
               >
                 View More
               </Link>
@@ -95,11 +95,11 @@ const AdminDashboardScreen = () => {
                 <div className="flex flex-col w-full gap-5 text-nowrap">
                   <div className="grid grid-cols-3">
                     <div>
-                      <div className="text-gray-500 dark:text-darkPrimary text-[24px] font-inter font-medium">
+                      <div className="text-black dark:text-darkPrimary text-[24px] font-inter font-medium">
                         Total Revenue
-                        <span className="text-white text-[16px]">&nbsp;(SOL)</span>
+                        <span className="dark:text-white text-black text-[16px]">&nbsp;(SOL)</span>
                       </div>
-                      <div className=" font-normal font-inter text-[24px] mt-4 dark:text-white">
+                      <div className=" font-normal font-inter text-black text-[24px] mt-4 dark:text-white">
                         {totalRevenue.toFixed(4)}
                       </div>
                     </div>

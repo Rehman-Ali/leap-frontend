@@ -181,7 +181,7 @@ const UserScreen = () => {
       <div className="h-full w-full max-w-[1500px] p-2 lg:p-5">
         <div className="">
           <div className="">
-            <h2 className="text-[26px] font-medium mb-8 text-white">
+            <h2 className="text-[26px] font-medium mb-8 text-black dark:text-white">
               Users List
             </h2>
             <div className="overflow-x-auto mw-9:w-[300px]">
@@ -234,7 +234,7 @@ const UserScreen = () => {
             </div>
             <div className="flex justify-end items-center mt-4 gap-2">
               <button
-                className="px-3 py-1 bg-gray-300 dark:bg-darkPrimary text-sm rounded-md disabled:opacity-50"
+                className="px-3 py-1 text-black dark:text-white bg-gray-300 dark:bg-darkPrimary text-sm rounded-md disabled:opacity-50"
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
               >
@@ -247,7 +247,7 @@ const UserScreen = () => {
                 Page {currentPage} of {totalPages}
               </span>
               <button
-                className="px-3 py-1 bg-gray-300 dark:bg-darkPrimary text-sm rounded-md disabled:opacity-50"
+                className="px-3 py-1 text-black dark:text-white bg-gray-300 dark:bg-darkPrimary text-sm rounded-md disabled:opacity-50"
                 onClick={() =>
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }

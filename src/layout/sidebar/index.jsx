@@ -322,7 +322,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
               </svg>
               Subscriptions
             </Link>
-            <Link
+            {/* <Link
               className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${
                 pathname === "/articles-list" || pathname === "/add-article" 
                   ? "bg-darkPrimary text-white font-semibold"
@@ -346,7 +346,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                 <path d="m19 9-5 5-4-4-3 3"></path>
               </svg>
               Articles
-            </Link>
+            </Link> */}
           </nav>
         )}
       </div>

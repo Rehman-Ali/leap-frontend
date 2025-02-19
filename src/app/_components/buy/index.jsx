@@ -105,7 +105,7 @@ const BuyScreen = () => {
       onConfirmOrder();
     } catch (error) {
       console.error(error);
-      onConfirmOrder();
+      // onConfirmOrder();
       setStatus(`Error: ${error.message}`);
     }
   };

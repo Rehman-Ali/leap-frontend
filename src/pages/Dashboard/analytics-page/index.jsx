@@ -6,10 +6,10 @@ const AnalyticsScreen = () => {
           <span className="bg-gradient-to-b from-darkPrimary to-transparent bg-clip-text text-7xl lg:text-[8rem] text-blackfont-extrabold leading-none text-transparent">
             Analytics
           </span>
-          <h2 className="font-heading my-2 text-2xl lg:text-3xl font-bold dark:text-white">
+          <h2 className="font-heading my-2 text-2xl lg:text-3xl font-bold text-black dark:text-white">
             Coming Soon
           </h2>
-          <p className="text-sm lg:text-base dark:text-white">
+          <p className="text-sm lg:text-base dark:text-white text-black">
             Track your nodes performance and more with our analytics page.
             <br />
             Check back soon for updates.

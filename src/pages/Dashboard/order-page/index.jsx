@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 const OrderScreen = () => {
   const [orderList, setOrderList] = useState([]);
 
-  const ITEMS_PER_PAGE = 5;
+  const ITEMS_PER_PAGE = 10;
 
   const [currentPage, setCurrentPage] = useState(1);
   const [isDelete, setIsDelete] = useState(false);
@@ -93,7 +93,7 @@ const OrderScreen = () => {
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
       <div className="h-full w-full max-w-[1500px] p-2 lg:p-5">
         <div className="flex justify-between">
-          <h1 className="font-semibold text-xl flex items-center dark:text-white">
+          <h1 className="font-semibold text-xl flex items-center text-black dark:text-white">
             Orders List
           </h1>
         </div>
@@ -200,7 +200,7 @@ const OrderScreen = () => {
             </div>
             <div className="flex justify-end items-center mt-4 gap-2">
               <button
-                className="px-3 py-1 bg-gray-300 dark:bg-darkPrimary text-sm rounded-md disabled:opacity-50"
+                className="px-3 py-1 text-black dark:text-white bg-gray-300 dark:bg-darkPrimary text-sm rounded-md disabled:opacity-50"
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
               >
@@ -213,7 +213,7 @@ const OrderScreen = () => {
                 Page {currentPage} of {totalPages}
               </span>
               <button
-                className="px-3 py-1 bg-gray-300 dark:bg-darkPrimary text-sm rounded-md disabled:opacity-50"
+                className="px-3 py-1 text-black dark:text-white bg-gray-300 dark:bg-darkPrimary text-sm rounded-md disabled:opacity-50"
                 onClick={() =>
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }
