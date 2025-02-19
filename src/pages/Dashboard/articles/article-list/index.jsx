@@ -95,9 +95,10 @@ const ArticleListScreen = () => {
                 Create Article
               </button>
             </Link>
-            <div className="overflow-x-auto mw-9:w-[300px]">
-              <table className="min-w-full bg-white dark:bg-bodyColor   rounded-lg shadow-md">
-                <thead>
+            <div className="overflow-x-auto w-full">
+              <div className="min-w-[360px]">
+                <table className="w-full bg-white dark:bg-bodyColor rounded-lg shadow-md">
+                  <thead>
                   <tr className="bg-darkPrimary text-black">
                     <th className="py-2 border">Sr</th>
                     <th className="py-2 border">Title</th>
@@ -161,6 +162,7 @@ const ArticleListScreen = () => {
                   ))}
                 </tbody>
               </table>
+              </div>
             </div>
             <div className="flex justify-end items-center mt-4 gap-2">
               <button

@@ -25,7 +25,7 @@ export default function DashboardHeader({ toggleSidebar }) {
   return (
     <header className="sticky top-0 z-40 bg-white dark:bg-bodyColor w-full flex h-14 items-center justify-between gap-4 border-b dark:border-b-gray-600 px-4 lg:h-[60px] lg:px-6">
       <button
-        className="mw-10:flex dark:text-white justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu shrink-0 hidden"
+        className="mw-10:flex text-black dark:text-white justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu shrink-0 hidden"
         type="button"
         aria-haspopup="dialog"
         aria-expanded="false"

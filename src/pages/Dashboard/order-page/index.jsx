@@ -101,102 +101,104 @@ const OrderScreen = () => {
 
         {paginatedData.length > 0 ? (
           <>
-            <div className="overflow-x-auto mw-9:w-[300px]">
-              <table className="min-w-full bg-white dark:bg-bodyColor   rounded-lg shadow-md">
-                <thead>
-                  <tr className="bg-darkPrimary text-black">
-                    <th className="py-2 border">Sr</th>
-                    <th className="py-2 border">Order Category</th>
-                    <th className="py-2 border">API Key</th>
-                    <th className="py-2  border">Duration</th>
-                    <th className="py-2 border">Price ($)</th>
-                    <th className="py-2 border">Price (SOL)</th>
-                    <th className="py-2 border">Operating System</th>
-                    <th className="py-2 border">Status</th>
-                    <th className="py-2 border">Order Date</th>
-                    <th className="py-2 border">Expiry Date</th>
-                    <th className="py-2 border">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {paginatedData.map((order, index) => (
-                    <tr key={index} className=" dark:text-white text-black">
-                      <td className="py-2 px-4 border-b text-center">
-                        {index + 1}
-                      </td>
-                      <td className="py-2 px-4 border-b uppercase text-center">
-                        {order.order_category}
-                      </td>
-                      <td className="py-2 px-4 border-b text-start">
-                        {order.api_key}
-                      </td>
-                      <td className="py-2 px-4 border-b text-center">
-                        {order.duration === 7
-                          ? "1 week"
-                          : order.duration / 30 + " month"}
-                      </td>
-                      <td className="py-2 px-4 border-b text-center">
-                        $ {order.price.toFixed(2)}
-                      </td>
-                      <td className="py-2 px-4 border-b text-center">
-                        {order.price_in_SOL} SOL
-                      </td>
-                      <td className="py-2 px-4 border-b capitalize text-center">
-                        {order.operating_system === null
-                          ? "N/A"
-                          : order.operating_system}
-                      </td>
-                      <td className="py-2 px-4 border-b text-center capitalize">
-                        <span
-                          className={`px-2 cursor-pointer mr-[5px] py-1 ${
-                            order.status === "active"
-                              ? "bg-darkPrimary text-black "
-                              : "bg-red-700 text-white"
-                          }  text-[12px] rounded-md disabled:opacity-50`}
-                        >
-                          {order.status}
-                        </span>
-                        {order.isExpiryNear && order.status === "active" && (
-                          <span className="px-2 cursor-pointer py-1 bg-yellow-500 text-white text-[12px] rounded-md disabled:opacity-50">
-                            Expiry
-                          </span>
-                        )}
-                      </td>
-                      <td className="py-2 px-4 border-b text-center">
-                        {new Date(order.createdAt).toLocaleDateString()}
-                      </td>
-                      <td className="py-2 px-4 border-b text-center">
-                        {new Date(order.expiry_date).toLocaleDateString()}
-                      </td>
-                      <td className="py-2  px-4 border-b text-center">
-                        {(order.isExpiryNear ||
-                          order.status === "inactive") && (
-                          <Link
-                            href={`${
-                              order.order_category === "vps"
-                                ? `/buy-vps?id=${order._id}`
-                                : `/buy?id=${order._id}`
-                            }`}
-                          >
-                            <span
-                              className="px-2 cursor-pointer mr-[10px] py-1 bg-darkPrimary text-black text-[12px] rounded-md disabled:opacity-50"
-                              // onClick={() => onClickRenewButton()}
-                            >
-                              Renew
-                            </span>
-                          </Link>
-                        )}
-                        <span
-                          className="px-2 cursor-pointer py-1 bg-red-700 text-white text-[12px] rounded-md disabled:opacity-50"
-                          onClick={() => onClickDeleteButton(order._id)}
-                        >
-                          Delete
-                        </span>
-                      </td>
+            <div className="overflow-x-auto w-full">
+              <div className="min-w-[360px] ">
+                <table className="w-full bg-white dark:bg-bodyColor rounded-lg shadow-md">
+                  <thead>
+                    <tr className="bg-darkPrimary text-black">
+                      <th className="py-2 border">Sr</th>
+                      <th className="py-2 border">Order Category</th>
+                      <th className="py-2 border">API Key</th>
+                      <th className="py-2  border">Duration</th>
+                      <th className="py-2 border">Price ($)</th>
+                      <th className="py-2 border">Price (SOL)</th>
+                      <th className="py-2 border">Operating System</th>
+                      <th className="py-2 border">Status</th>
+                      <th className="py-2 border">Order Date</th>
+                      <th className="py-2 border">Expiry Date</th>
+                      <th className="py-2 border">Action</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {paginatedData.map((order, index) => (
+                      <tr key={index} className=" dark:text-white text-black">
+                        <td className="py-2 px-4 border-b text-center">
+                          {index + 1}
+                        </td>
+                        <td className="py-2 px-4 border-b uppercase text-center">
+                          {order.order_category}
+                        </td>
+                        <td className="py-2 px-4 border-b text-start">
+                          {order.api_key}
+                        </td>
+                        <td className="py-2 px-4 border-b text-center">
+                          {order.duration === 7
+                            ? "1 week"
+                            : order.duration / 30 + " month"}
+                        </td>
+                        <td className="py-2 px-4 border-b text-center">
+                          $ {order.price.toFixed(2)}
+                        </td>
+                        <td className="py-2 px-4 border-b text-center">
+                          {order.price_in_SOL} SOL
+                        </td>
+                        <td className="py-2 px-4 border-b capitalize text-center">
+                          {order.operating_system === null
+                            ? "N/A"
+                            : order.operating_system}
+                        </td>
+                        <td className="py-2 px-4 border-b text-center capitalize">
+                          <span
+                            className={`px-2 cursor-pointer mr-[5px] py-1 ${
+                              order.status === "active"
+                                ? "bg-darkPrimary text-black "
+                                : "bg-red-700 text-white"
+                            }  text-[12px] rounded-md disabled:opacity-50`}
+                          >
+                            {order.status}
+                          </span>
+                          {order.isExpiryNear && order.status === "active" && (
+                            <span className="px-2 cursor-pointer py-1 bg-yellow-500 text-white text-[12px] rounded-md disabled:opacity-50">
+                              Expiry
+                            </span>
+                          )}
+                        </td>
+                        <td className="py-2 px-4 border-b text-center">
+                          {new Date(order.createdAt).toLocaleDateString()}
+                        </td>
+                        <td className="py-2 px-4 border-b text-center">
+                          {new Date(order.expiry_date).toLocaleDateString()}
+                        </td>
+                        <td className="py-2  px-4 border-b text-center">
+                          {(order.isExpiryNear ||
+                            order.status === "inactive") && (
+                            <Link
+                              href={`${
+                                order.order_category === "vps"
+                                  ? `/buy-vps?id=${order._id}`
+                                  : `/buy?id=${order._id}`
+                              }`}
+                            >
+                              <span
+                                className="px-2 cursor-pointer mr-[10px] py-1 bg-darkPrimary text-black text-[12px] rounded-md disabled:opacity-50"
+                                // onClick={() => onClickRenewButton()}
+                              >
+                                Renew
+                              </span>
+                            </Link>
+                          )}
+                          <span
+                            className="px-2 cursor-pointer py-1 bg-red-700 text-white text-[12px] rounded-md disabled:opacity-50"
+                            onClick={() => onClickDeleteButton(order._id)}
+                          >
+                            Delete
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
             <div className="flex justify-end items-center mt-4 gap-2">
               <button

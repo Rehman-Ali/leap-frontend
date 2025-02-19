@@ -184,53 +184,55 @@ const UserScreen = () => {
             <h2 className="text-[26px] font-medium mb-8 text-black dark:text-white">
               Users List
             </h2>
-            <div className="overflow-x-auto mw-9:w-[300px]">
-              <table className="min-w-full bg-white dark:bg-bodyColor   rounded-lg shadow-md">
-                <thead>
-                  <tr className="bg-darkPrimary text-black">
-                    <th className="py-2 border">ID</th>
-                    <th className="py-2 border">Dynamic Platfrom ID</th>
-                    <th className="py-2 border">Role</th>
-                    <th className="py-2 border">Status</th>
-                    <th className="py-2 border">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {paginatedData.map((user, index) => (
-                    <tr key={index} className=" dark:text-white text-black">
-                      <td className="py-2 px-4 border-b text-center">
-                        {user._id}
-                      </td>
-                      <td className="py-2 px-4 border-b text-center">
-                        {user.dp_user_id}
-                      </td>
-                      <td className="py-2 px-4 border-b text-center capitalize">
-                        {user.role}
-                      </td>
-                      <td className="py-2 px-4 border-b text-center capitalize">
-                        {user.status}
-                      </td>
-                      <td className="py-2  px-4 border-b text-center">
-                        <span
-                          className="px-2 cursor-pointer mr-[10px] py-1 bg-darkPrimary text-black text-[12px] rounded-md disabled:opacity-50"
-                          onClick={() => {
-                            openModal();
-                            setSelectUserId(user._id);
-                          }}
-                        >
-                          Update
-                        </span>
-                        <span
-                          className="px-2 cursor-pointer py-1 bg-red-700 text-white text-[12px] rounded-md disabled:opacity-50"
-                          onClick={() => onDeleteUser(user._id)}
-                        >
-                          Delete
-                        </span>
-                      </td>
+            <div className="overflow-x-auto w-full">
+              <div className="min-w-[360px]">
+                <table className="w-full bg-white dark:bg-bodyColor rounded-lg shadow-md">
+                  <thead>
+                    <tr className="bg-darkPrimary text-black">
+                      <th className="py-2 px-3 border">ID</th>
+                      <th className="py-2 px-3 border">Dynamic Platform ID</th>
+                      <th className="py-2 px-3 border">Role</th>
+                      <th className="py-2 px-3 border">Status</th>
+                      <th className="py-2 px-3 border">Action</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {paginatedData.map((user, index) => (
+                      <tr key={index} className="dark:text-white text-black">
+                        <td className="py-2 px-3 border-b text-center break-words">
+                          {user._id}
+                        </td>
+                        <td className="py-2 px-3 border-b text-center break-words">
+                          {user.dp_user_id}
+                        </td>
+                        <td className="py-2 px-3 border-b text-center capitalize break-words">
+                          {user.role}
+                        </td>
+                        <td className="py-2 px-3 border-b text-center capitalize break-words">
+                          {user.status}
+                        </td>
+                        <td className="py-2 px-3 border-b text-center">
+                          <span
+                            className="px-2 cursor-pointer mr-[10px] py-1 bg-darkPrimary text-black text-[12px] rounded-md disabled:opacity-50"
+                            onClick={() => {
+                              openModal();
+                              setSelectUserId(user._id);
+                            }}
+                          >
+                            Update
+                          </span>
+                          <span
+                            className="px-2 cursor-pointer py-1 bg-red-700 text-white text-[12px] rounded-md disabled:opacity-50"
+                            onClick={() => onDeleteUser(user._id)}
+                          >
+                            Delete
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
             <div className="flex justify-end items-center mt-4 gap-2">
               <button

@@ -1,6 +1,6 @@
 "use client";
 
-import { DynamicWidget, useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
