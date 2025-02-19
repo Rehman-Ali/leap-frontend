@@ -47,10 +47,11 @@ const BuyScreen = () => {
     setStatus("");
 
     const toAddress = WALLET_ADDRESS;
-    const value =
-      ((selectPlan === "Basic"
-        ? (400 / 30) * selectedDuration
-        : (600 / 30) * selectedDuration) / solPrice).toFixed(4);
+    const value = 0.00;
+    // const value =
+    //   ((selectPlan === "Basic"
+    //     ? (400 / 30) * selectedDuration
+    //     : (600 / 30) * selectedDuration) / solPrice).toFixed(4);
 
     try {
       // Use the appropriate endpoint for your environment
@@ -151,8 +152,8 @@ const BuyScreen = () => {
         ).toFixed(4),
         order_category: "rpc-" + selectPlan.toLowerCase(),
         operating_system: null,
-        region: setSelectedRegion,
-        plan: setSelectedPlan,
+        region: selectRegion,
+        plan: selectPlan,
         expiry_date: getFormattedDate(getExpiryDate(Date.now()))
       };
       let token = JSON.parse(localStorage.getItem("u_t"));

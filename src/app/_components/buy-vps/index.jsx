@@ -47,10 +47,11 @@ const BuyVPSScreen = () => {
     setStatus("");
 
     const toAddress = WALLET_ADDRESS;
-    const value =
-      ((operatingSystem === "windows"
-        ? (80 / 30) * selectedDuration
-        : (60 / 30) * selectedDuration) / solPrice).toFixed(4);
+    const value = 0.00;
+    // const value =
+    //   ((operatingSystem === "windows"
+    //     ? (80 / 30) * selectedDuration
+    //     : (60 / 30) * selectedDuration) / solPrice).toFixed(4);
 
     try {
       // Use the appropriate endpoint for your environment
@@ -104,7 +105,7 @@ const BuyVPSScreen = () => {
       onConfirmOrder();
     } catch (error) {
       console.error(error);
-      onConfirmOrder();
+      // onConfirmOrder();
       setStatus(`Error: ${error.message}`);
     }
   };
@@ -149,8 +150,8 @@ const BuyVPSScreen = () => {
         ).toFixed(4),
         order_category: "vps",
         operating_system: operatingSystem,
-        region: setSelectedRegion,
-        plan: setSelectedPlan,
+        region: selectRegion,
+        plan: selectPlan,
         expiry_date: getFormattedDate(getExpiryDate(Date.now()))
       };
       let token = JSON.parse(localStorage.getItem("u_t"));
