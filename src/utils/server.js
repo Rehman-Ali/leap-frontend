@@ -1,5 +1,5 @@
-// export const SERVER_URL = "http://localhost:5001";
-export const SERVER_URL = "https://leap-backend.vercel.app";
+export const SERVER_URL = "http://localhost:5001";
+// export const SERVER_URL = "https://leap-backend.vercel.app";
 // client X wallet address
 export const WALLET_ADDRESS = "G28ABSiZBcdQV57fmPYTUjwZuWMSJKUwoiUSfxPs6SRE"
 export const DEVELOPMENT_EDITOR = "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NzAwNzY3OTksImp0aSI6IjFkMDhhYTQ5LTMyOTMtNDU5OC05MGI2LTExM2QwNjc4ZDYwNSIsImxpY2Vuc2VkSG9zdHMiOlsiMTI3LjAuMC4xIiwibG9jYWxob3N0IiwiMTkyLjE2OC4qLioiLCIxMC4qLiouKiIsIjE3Mi4qLiouKiIsIioudGVzdCIsIioubG9jYWxob3N0IiwiKi5sb2NhbCJdLCJ1c2FnZUVuZHBvaW50IjoiaHR0cHM6Ly9wcm94eS1ldmVudC5ja2VkaXRvci5jb20iLCJkaXN0cmlidXRpb25DaGFubmVsIjpbImNsb3VkIiwiZHJ1cGFsIl0sImxpY2Vuc2VUeXBlIjoiZGV2ZWxvcG1lbnQiLCJmZWF0dXJlcyI6WyJEUlVQIl0sInZjIjoiODliYzg3MTgifQ.g5V26QJztT7u0y4In-SjtHMNVdjk5HrzixQMoUL6x9EqcUh66m99V9KwsnGfD3DmkL_dQ4SkThX4l85G9GVjdw";

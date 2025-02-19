@@ -103,6 +103,7 @@ const SubscriptionScreen = () => {
                   <tr className="bg-darkPrimary text-black">
                     <th className="py-2 border">Sr</th>
                     <th className="py-2 border">Order Category</th>
+                    <th className="py-2 border">API Key</th>
                     <th className="py-2  border">Duration</th>
                     <th className="py-2 border">Price ($)</th>
                     <th className="py-2 border">Price (SOL)</th>
@@ -121,6 +122,9 @@ const SubscriptionScreen = () => {
                       </td>
                       <td className="py-2 px-4 border-b uppercase text-center">
                         {order.order_category}
+                      </td>
+                      <td className="py-2 px-4 border-b text-start">
+                        {order.api_key}
                       </td>
                       <td className="py-2 px-4 border-b text-center">
                         {order.duration === 7
