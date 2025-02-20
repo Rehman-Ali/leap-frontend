@@ -10,14 +10,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { ThemeProvider } from "next-themes";
 import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
 import { SolanaWalletConnectors } from "@dynamic-labs/solana";
-// import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
+import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import { useEffect, useState, Suspense } from "react";
 import FullPageLoader from "./_components/loader";
 import axios from "axios";
 import { DYNAMIC_XYZ_TOKEN, SERVER_URL } from "@/utils/server";
-// import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
-// import { PhantomWalletAdapter, SolflareWalletAdapter } from "@solana/wallet-adapter-wallets";
-// import "@solana/wallet-adapter-react-ui/styles.css";
+import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
+import { PhantomWalletAdapter, SolflareWalletAdapter } from "@solana/wallet-adapter-wallets";
+import "@solana/wallet-adapter-react-ui/styles.css";
 import Swal from "sweetalert2";
 
 export default function RootLayout({ children }) {
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
 
  
   // Solana wallet adapters
-  // const wallets = [new PhantomWalletAdapter(), new SolflareWalletAdapter()];
+  const wallets = [new PhantomWalletAdapter(), new SolflareWalletAdapter()];
 
   // Define private routes and admin routes
   const privateRoutes = ["/dashboard", "/nodes", "/analytics", "/affiliate", "/orders", "/buy", "/buy-vps"];
@@ -126,11 +126,12 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-       <DynamicContextProvider
-            theme="auto"
+      <body className={includeDashboardLayout ? "" : "bg-bodyColor"}>
+        <Suspense fallback={<FullPageLoader />}>
+          <DynamicContextProvider
             settings={{
               environmentId: "890bd12b-48e4-4363-869d-e092bac005da",
-              walletConnectors: [SolanaWalletConnectors],
+              walletConnectors: [EthereumWalletConnectors],
               events: {
                 onAuthSuccess: (args) => {
                   handleLoginAndRegister(args.user);
@@ -138,16 +139,13 @@ export default function RootLayout({ children }) {
               }
             }}
           >
-      <body className={includeDashboardLayout ? "" : "bg-bodyColor"}>
-        <Suspense fallback={<FullPageLoader />}>
-         
             <ThemeProvider attribute="class" defaultTheme="dark">
               {includeDashboardLayout ? (
-                // <ConnectionProvider endpoint="https://solana-mainnet.g.alchemy.com/v2/4VXLhF5hI-rUSBOadb5UeDp4YZ0Gc31p">
-                  // <WalletProvider wallets={wallets} autoConnect>
+                <ConnectionProvider endpoint="https://solana-mainnet.g.alchemy.com/v2/4VXLhF5hI-rUSBOadb5UeDp4YZ0Gc31p">
+                  <WalletProvider wallets={wallets} autoConnect>
                     <DashboardLayout>{children}</DashboardLayout>
-                  // </WalletProvider>
-                // </ConnectionProvider>
+                  </WalletProvider>
+                </ConnectionProvider>
               ) : (
                 <div className={`${inter.variable} container mx-auto min-h-screen flex flex-col`}>
                   {pathname !== "/login" && <Header />}
@@ -156,9 +154,9 @@ export default function RootLayout({ children }) {
                 </div>
               )}
             </ThemeProvider>
+          </DynamicContextProvider>
         </Suspense>
       </body>
-      </DynamicContextProvider>
     </html>
   );
 }
