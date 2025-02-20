@@ -10,11 +10,11 @@ import {
 import { SERVER_URL, WALLET_ADDRESS } from "@/utils/server";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 const BuyScreen = () => {
-  const searchParams = useSearchParams()
- 
-  const search = searchParams.get('id')
+  const searchParams = useSearchParams();
+
+  const search = searchParams.get("id");
   const [selectPlan, setSelectedPlan] = useState("");
   const [selectRegion, setSelectedRegion] = useState("");
   const [operatingSystem, setOperatingSystem] = useState("");
@@ -47,11 +47,16 @@ const BuyScreen = () => {
     setStatus("");
 
     const toAddress = WALLET_ADDRESS;
-    const value = 0.00;
-    // const value =
-    //   ((selectPlan === "Basic"
-    //     ? (400 / 30) * selectedDuration
-    //     : (600 / 30) * selectedDuration) / solPrice).toFixed(4);
+    const value = 0.0;
+    // const value = (
+    //   (selectPlan === "Basic"
+    //     ? selectedDuration === 7
+    //       ? 400
+    //       : (1200 / 30) * selectedDuration
+    //     : selectedDuration === 7
+    //     ? 600
+    //     : (1800 / 30) * selectedDuration) / solPrice
+    // ).toFixed(4);
 
     try {
       // Use the appropriate endpoint for your environment
@@ -110,7 +115,6 @@ const BuyScreen = () => {
     }
   };
 
-
   const getExpiryDate = (date) => {
     const serviceStartDate = new Date(date);
 
@@ -133,22 +137,29 @@ const BuyScreen = () => {
     return `${month}/${day}/${year}`;
   };
 
-  console.log(search, "search here====")
+  console.log(search, "search here====");
 
   const onConfirmOrder = async () => {
     try {
-
       let body = {
         duration: selectedDuration,
         status: "active",
         price:
           selectPlan === "Basic"
-            ? (400 / 30) * selectedDuration
-            : (600 / 30) * selectedDuration,
+            ? selectedDuration === 7
+            ? 400
+            : ((1200 / 30) * selectedDuration)
+            : selectedDuration === 7
+            ? 600
+            : ((1800 / 30) * selectedDuration),
         price_in_SOL: (
           (selectPlan === "Basic"
-            ? (400 / 30) * selectedDuration
-            : (600 / 30) * selectedDuration) / solPrice
+            ? selectedDuration === 7
+            ? 400
+            : ((1200 / 30) * selectedDuration)
+            : selectedDuration === 7
+            ? 600
+            : ((1800 / 30) * selectedDuration).toFixed(2)) / solPrice
         ).toFixed(4),
         order_category: "rpc-" + selectPlan.toLowerCase(),
         operating_system: null,
@@ -157,7 +168,7 @@ const BuyScreen = () => {
         expiry_date: getFormattedDate(getExpiryDate(Date.now()))
       };
       let token = JSON.parse(localStorage.getItem("u_t"));
-       if(search === null){
+      if (search === null) {
         const response = await axios.post(
           `${SERVER_URL}/api/order/create`,
           body,
@@ -168,7 +179,7 @@ const BuyScreen = () => {
           }
         );
         console.log(response.data, "Response received");
-  
+
         Swal.fire({
           position: "center",
           icon: "success",
@@ -176,7 +187,7 @@ const BuyScreen = () => {
           showConfirmButton: false,
           timer: 1500
         });
-       }else{
+      } else {
         const response = await axios.put(
           `${SERVER_URL}/api/order/update/${search}`,
           body,
@@ -186,7 +197,7 @@ const BuyScreen = () => {
             }
           }
         );
-  
+
         Swal.fire({
           position: "center",
           icon: "success",
@@ -194,8 +205,7 @@ const BuyScreen = () => {
           showConfirmButton: false,
           timer: 1500
         });
-       }
-      
+      }
     } catch (error) {
       Swal.fire({
         position: "center",
@@ -212,9 +222,6 @@ const BuyScreen = () => {
       );
     }
   };
-
-
-
 
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
@@ -283,7 +290,7 @@ const BuyScreen = () => {
               Basic
             </div>
             <div className="text-white font-semibold h-6 lg:h-8">
-              For small traders just getting started.
+              For 1 location just getting started.
             </div>
             <ul className="mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none space-y-1.5 h-[200px]">
               <li className="flex flex-row items-center gap-x-2">
@@ -516,7 +523,7 @@ const BuyScreen = () => {
               <div className="text-white/50">~500</div>
             </div>
             <div className="text-white/50 text-3xl">
-              <span className="text-white font-semibold pl-[10px]">$400</span>
+              <span className="text-white font-semibold pl-[10px]">$1200</span>
               /month
             </div>
           </div>
@@ -537,7 +544,8 @@ const BuyScreen = () => {
               Pro
             </div>
             <div className="text-white font-semibold h-6 lg:h-8">
-              For botters with moderate transaction and performance needs.
+              For all location. All locations would be Virginia, Amsterdam,
+              France.
             </div>
             <ul className="mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none space-y-1.5 h-[200px]">
               <li className="flex flex-row items-center gap-x-2">
@@ -770,7 +778,7 @@ const BuyScreen = () => {
               <div className="text-white/50">~1000</div>
             </div>
             <div className="text-white/50 text-3xl">
-              <span className="text-white font-semibold pl-[10px]">$600</span>
+              <span className="text-white font-semibold pl-[10px]">$1800</span>
               /month
             </div>
           </div>
@@ -936,22 +944,30 @@ const BuyScreen = () => {
                     <p className="dark:text-white">
                       $
                       {selectPlan === "Basic"
-                        ? ((400 / 30) * selectedDuration).toFixed(2)
-                        : ((600 / 30) * selectedDuration).toFixed(2)}
+                        ? selectedDuration === 7
+                          ? 400
+                          : ((1200 / 30) * selectedDuration).toFixed(2)
+                        : selectedDuration === 7
+                        ? 600
+                        : ((1800 / 30) * selectedDuration).toFixed(2)}
                     </p>
                   </div>
                   <div className="">
                     <p className="dark:text-white">
                       {selectedDuration === 7
                         ? "1 week"
-                        : selectedDuration / 30 + "month"}{" "}
+                        : selectedDuration / 30 + " month"}
                     </p>
                   </div>
                   <p className="dark:text-white">
                     $
                     {selectPlan === "Basic"
-                      ? ((400 / 30) * selectedDuration).toFixed(2)
-                      : ((600 / 30) * selectedDuration).toFixed(2)}
+                      ? selectedDuration === 7
+                        ? 400
+                        : ((1200 / 30) * selectedDuration).toFixed(2)
+                      : selectedDuration === 7
+                      ? 600
+                      : ((1800 / 30) * selectedDuration).toFixed(2)}
                   </p>
                 </div>
                 <hr className="my-2.5" />
@@ -962,8 +978,12 @@ const BuyScreen = () => {
                       <p className="dark:text-white">
                         {(
                           (selectPlan === "Basic"
-                            ? (400 / 30) * selectedDuration
-                            : (600 / 30) * selectedDuration) / solPrice
+                            ? selectedDuration === 7
+                              ? 400
+                              : (1200 / 30) * selectedDuration
+                            : selectedDuration === 7
+                            ? 600
+                            : (1800 / 30) * selectedDuration) / solPrice
                         ).toFixed(4)}
                         &nbsp; SOL
                       </p>
@@ -975,8 +995,12 @@ const BuyScreen = () => {
                       <p className="dark:text-white">
                         {(
                           (selectPlan === "Basic"
-                            ? (400 / 30) * selectedDuration
-                            : (600 / 30) * selectedDuration) / solPrice
+                            ? selectedDuration === 7
+                              ? 400
+                              : (1200 / 30) * selectedDuration
+                            : selectedDuration === 7
+                            ? 600
+                            : (1800 / 30) * selectedDuration) / solPrice
                         ).toFixed(4)}
                         &nbsp; SOL
                       </p>

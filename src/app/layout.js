@@ -25,16 +25,38 @@ export default function RootLayout({ children }) {
   const router = useRouter();
   const [isAuthorized, setIsAuthorized] = useState(false);
 
- 
   // Solana wallet adapters
   // const wallets = [new PhantomWalletAdapter(), new SolflareWalletAdapter()];
 
   // Define private routes and admin routes
-  const privateRoutes = ["/dashboard", "/nodes", "/analytics", "/affiliate", "/orders", "/buy", "/buy-vps"];
-  const adminRoutes = ["/admin-dashboard", "/subscriptions", "/users", "/articles-list", "/add-article", "/update-article"];
-  const publicRoutes = ["/", "/login", "/telegram-bot", "/rpc", "/trading-bot", "/vps"];
+  const privateRoutes = [
+    "/dashboard",
+    "/nodes",
+    "/analytics",
+    "/affiliate",
+    "/orders",
+    "/buy",
+    "/buy-vps"
+  ];
+  const adminRoutes = [
+    "/admin-dashboard",
+    "/subscriptions",
+    "/users",
+    "/articles-list",
+    "/add-article",
+    "/update-article"
+  ];
+  const publicRoutes = [
+    "/",
+    "/login",
+    "/telegram-bot",
+    "/rpc",
+    "/trading-bot",
+    "/vps"
+  ];
 
-  const token = typeof window !== "undefined" ? localStorage.getItem("u_t") : null;
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("u_t") : null;
 
   useEffect(() => {
     const isPrivateRoute = privateRoutes.includes(pathname);
@@ -73,14 +95,17 @@ export default function RootLayout({ children }) {
   }, [pathname, token, router]);
 
   useEffect(() => {
-    console.log("Available Wallets:",  SolanaWalletConnectors);
+    console.log("Available Wallets:", SolanaWalletConnectors);
   }, []);
 
   const handleLoginAndRegister = async (userData) => {
     try {
-      const response = await axios.post(`${SERVER_URL}/api/user/signin-and-signup`, {
-        dp_user_id: userData.userId
-      });
+      const response = await axios.post(
+        `${SERVER_URL}/api/user/signin-and-signup`,
+        {
+          dp_user_id: userData.userId
+        }
+      );
 
       console.log(response.data, "Response received");
       localStorage.setItem("u_t", JSON.stringify(response.data.token.token));
@@ -88,13 +113,20 @@ export default function RootLayout({ children }) {
       let prev_path = localStorage.getItem("c_path");
 
       if (!prev_path) {
-        router.push(response.data.token.role === "admin" ? "/admin-dashboard" : "/dashboard");
+        router.push(
+          response.data.token.role === "admin"
+            ? "/admin-dashboard"
+            : "/dashboard"
+        );
       } else {
         router.push(prev_path);
         localStorage.removeItem("c_path");
       }
     } catch (error) {
-      console.error("Error during login or registration:", error.response?.data || error.message);
+      console.error(
+        "Error during login or registration:",
+        error.response?.data || error.message
+      );
 
       setTimeout(() => {
         localStorage.clear();
@@ -122,42 +154,45 @@ export default function RootLayout({ children }) {
     );
   }
 
-  const includeDashboardLayout = privateRoutes.includes(pathname) || adminRoutes.includes(pathname);
+  const includeDashboardLayout =
+    privateRoutes.includes(pathname) || adminRoutes.includes(pathname);
 
   return (
     <html lang="en">
-       <DynamicContextProvider
-            theme="auto"
-            settings={{
-              environmentId: "890bd12b-48e4-4363-869d-e092bac005da",
-              walletConnectors: [SolanaWalletConnectors],
-              events: {
-                onAuthSuccess: (args) => {
-                  handleLoginAndRegister(args.user);
-                }
-              }
-            }}
-          >
-      <body className={includeDashboardLayout ? "" : "bg-bodyColor"}>
-        <Suspense fallback={<FullPageLoader />}>
-         
+      <DynamicContextProvider
+        theme="auto"
+        settings={{
+          environmentId: "890bd12b-48e4-4363-869d-e092bac005da", /// live key used alchemy site for RPC url
+          // environmentId: "bba18406-90b4-4f4a-afc8-43778dd6c123", //// sandbox
+          walletConnectors: [SolanaWalletConnectors],
+          events: {
+            onAuthSuccess: (args) => {
+              handleLoginAndRegister(args.user);
+            }
+          }
+        }}
+      >
+        <body className={includeDashboardLayout ? "" : "bg-bodyColor"}>
+          <Suspense fallback={<FullPageLoader />}>
             <ThemeProvider attribute="class" defaultTheme="dark">
               {includeDashboardLayout ? (
                 // <ConnectionProvider endpoint="https://solana-mainnet.g.alchemy.com/v2/4VXLhF5hI-rUSBOadb5UeDp4YZ0Gc31p">
-                  // <WalletProvider wallets={wallets} autoConnect>
-                    <DashboardLayout>{children}</DashboardLayout>
-                  // </WalletProvider>
-                // </ConnectionProvider>
+                // <WalletProvider wallets={wallets} autoConnect>
+                <DashboardLayout>{children}</DashboardLayout>
               ) : (
-                <div className={`${inter.variable} container mx-auto min-h-screen flex flex-col`}>
+                // </WalletProvider>
+                // </ConnectionProvider>
+                <div
+                  className={`${inter.variable} container mx-auto min-h-screen flex flex-col`}
+                >
                   {pathname !== "/login" && <Header />}
                   <main className="flex-grow">{children}</main>
                   {pathname !== "/login" && <Footer />}
                 </div>
               )}
             </ThemeProvider>
-        </Suspense>
-      </body>
+          </Suspense>
+        </body>
       </DynamicContextProvider>
     </html>
   );
