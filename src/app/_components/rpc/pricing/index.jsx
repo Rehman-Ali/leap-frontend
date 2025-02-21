@@ -95,7 +95,7 @@ const RPCPricing = () => {
                       /mo
                     </span>
                   </div>
-                  <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
+                  <div className="text-slate-500 font-inter mw-12:text-[12px] min-h-[65px] text-[14px] font-normal">
                     For 1 location just getting started.
                   </div>
                 </div>
@@ -111,7 +111,7 @@ const RPCPricing = () => {
                   </Link>
                 </div>
               </div>
-              <div className="mt-[73px]">
+              <div className="mt-[53px]">
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
                   <p>Unlimited</p>
@@ -182,7 +182,7 @@ const RPCPricing = () => {
                       /mo
                     </span>
                   </div>
-                  <div className="text-slate-500 mw-12:text-[12px] font-inter text-[14px] font-normal">
+                  <div className="text-slate-500 mw-12:text-[12px] min-h-[65px] font-inter text-[14px] font-normal">
                     For all location. All locations would be Virginia,
                     Amsterdam, France.
                   </div>
@@ -199,7 +199,7 @@ const RPCPricing = () => {
                   </Link>
                 </div>
               </div>
-              <div className="mt-[73px]">
+              <div className="mt-[53px]">
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
                   <p>Unlimited</p>
@@ -270,7 +270,7 @@ const RPCPricing = () => {
                       /mo
                     </span>
                   </div>
-                  <div className="text-slate-500 mw-12:text-[12px] font-inter text-[14px] font-normal">
+                  <div className="text-slate-500 mw-12:text-[12px] min-h-[65px] font-inter text-[14px] font-normal">
                     Contact us to get more detail of Node
                   </div>
                 </div>
@@ -286,7 +286,7 @@ const RPCPricing = () => {
                   </a>
                 </div>
               </div>
-              <div className="mt-[73px]">
+              <div className="mt-[53px]">
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
                   <p>Unlimited</p>
