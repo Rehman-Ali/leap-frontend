@@ -36,7 +36,7 @@ const VPSPricing = () => {
           </div>
           <div className="mw-10:hidden flex flex-wrap items-center justify-center">
             <div className="w-[25%] px-6  py-[50px]">
-              <div className="mt-[275px]">
+              <div className="mt-[360px]">
                 <p className="text-white font-inter font-medium text-[14px]">
                   Usage
                 </p>
@@ -114,9 +114,14 @@ const VPSPricing = () => {
                     <p>4x 4GHz + CPU Cores</p>
                     <p>16GB of RAM + 435GB PURE SSD</p>
                   </div>
-                  <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
-                    {/* For small traders just getting started. */}
+                  <div className="text-slate-500 mb-1 font-inter mw-12:text-[12px] text-[14px] font-normal">
+                    <p>Locations:</p>
+                    <p><span>Dallas - TX,</span><span className="pr-[10px] pl-[10px]">Charlotte - NC,</span><span>AMS - Netherlands</span></p>
+                    <p><span>Bend - OR,</span><span className="pr-[10px] pl-[10px]">Latham - NY,</span><span>FRS - France</span></p>
+                    <p><span>Ashburn - VA,</span><span className="pr-[10px] pl-[10px]">Staten Island - NY,</span><span>VA - Virginia</span></p>
+                   
                   </div>
+                  
                 </div>
                 <div className="pb-4 border-b border-slate-800">
                   <Link href="/buy-vps">
@@ -212,8 +217,12 @@ const VPSPricing = () => {
                     <p>4x 4GHz + CPU Cores</p>
                     <p>16GB of RAM + 435GB PURE SSD</p>
                   </div>
-                  <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
-                    {/* For small traders just getting started. */}
+                  <div className="text-slate-500 mb-1 font-inter mw-12:text-[12px] text-[14px] font-normal">
+                    <p>Locations:</p>
+                    <p><span>Dallas - TX,</span><span className="pr-[10px] pl-[10px]">Charlotte - NC,</span><span>AMS - Netherlands</span></p>
+                    <p><span>Bend - OR,</span><span className="pr-[10px] pl-[10px]">Latham - NY,</span><span>FRS - France</span></p>
+                    <p><span>Ashburn - VA,</span><span className="pr-[10px] pl-[10px]">Staten Island - NY,</span><span>VA - Virginia</span></p>
+                   
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
