@@ -78,7 +78,7 @@ const FAQComponent = () => {
   const accordionItems = [
     {
       title: "Is our Node Staked?",
-      content: "Yes, our node has over 200,000 Solana staked."
+      content: "Yes, our node has over 1,000,00 Solana staked."
     },
     {
       title: "What are the TPS limits?",
