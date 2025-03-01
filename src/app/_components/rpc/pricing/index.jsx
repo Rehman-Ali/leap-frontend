@@ -89,14 +89,14 @@ const RPCPricing = () => {
                       $
                     </span>
                     <span className="text-3xl font-bold font-inter text-slate-50">
-                      400
+                      1200
                     </span>
                     <span className="text-sm text-slate-600 font-inter font-medium">
                       /mo
                     </span>
                   </div>
-                  <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
-                    For better looking to scale just getting started.
+                  <div className="text-slate-500 font-inter mw-12:text-[12px] min-h-[65px] text-[14px] font-normal">
+                    For 1 location just getting started.
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
@@ -111,7 +111,7 @@ const RPCPricing = () => {
                   </Link>
                 </div>
               </div>
-              <div className="mt-[73px]">
+              <div className="mt-[53px]">
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
                   <p>Unlimited</p>
@@ -176,14 +176,15 @@ const RPCPricing = () => {
                       $
                     </span>
                     <span className="text-3xl font-bold font-inter text-slate-50">
-                      600
+                      1800
                     </span>
                     <span className="text-sm text-slate-600 font-inter font-medium">
                       /mo
                     </span>
                   </div>
-                  <div className="text-slate-500 mw-12:text-[12px] font-inter text-[14px] font-normal">
-                    For botters looking to scale and maximize every snipe.
+                  <div className="text-slate-500 mw-12:text-[12px] min-h-[65px] font-inter text-[14px] font-normal">
+                    For all location. All locations would be Virginia,
+                    Amsterdam, France.
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
@@ -198,7 +199,7 @@ const RPCPricing = () => {
                   </Link>
                 </div>
               </div>
-              <div className="mt-[73px]">
+              <div className="mt-[53px]">
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
                   <p>Unlimited</p>
@@ -269,7 +270,7 @@ const RPCPricing = () => {
                       /mo
                     </span>
                   </div>
-                  <div className="text-slate-500 mw-12:text-[12px] font-inter text-[14px] font-normal">
+                  <div className="text-slate-500 mw-12:text-[12px] min-h-[65px] font-inter text-[14px] font-normal">
                     Contact us to get more detail of Node
                   </div>
                 </div>
@@ -285,7 +286,7 @@ const RPCPricing = () => {
                   </a>
                 </div>
               </div>
-              <div className="mt-[73px]">
+              <div className="mt-[53px]">
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
                   <p>Unlimited</p>
@@ -352,14 +353,14 @@ const RPCPricing = () => {
                       $
                     </span>
                     <span className="text-3xl font-bold font-inter text-slate-50">
-                      400
+                      1200
                     </span>
                     <span className="text-sm text-slate-600 font-inter font-medium">
                       /mo
                     </span>
                   </div>
                   <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
-                    For better looking to scale just getting started.
+                    For 1 location just getting started.
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
@@ -527,14 +528,15 @@ const RPCPricing = () => {
                       $
                     </span>
                     <span className="text-3xl font-bold font-inter text-slate-50">
-                      600
+                      1800
                     </span>
                     <span className="text-sm text-slate-600 font-inter font-medium">
                       /mo
                     </span>
                   </div>
                   <div className="text-slate-500 mw-12:text-[12px] font-inter text-[14px] font-normal">
-                    {/* For botters looking to scale and maximize every snipe. */}
+                    For all location. All locations would be Virginia,
+                    Amsterdam, France.
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">

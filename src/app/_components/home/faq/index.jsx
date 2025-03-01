@@ -10,6 +10,21 @@ const Accordion = ({ items, isVisible }) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+
+
+  const DiscordLinkify = ({ text }) => {
+    return text.split(/(https?:\/\/\S+)/g).map((part, index) => {
+      if (part.startsWith("http")) {
+        return (
+          <a key={index} href={part} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+            Discord 
+          </a>
+        );
+      }
+      return part;
+    });
+  };
+
   return (
     <div className="mw-6:mt-[30px] mt-10 space-y-4 w-full max-w-[800px] mx-auto">
       {items.map((item, index) =>
@@ -42,7 +57,7 @@ const Accordion = ({ items, isVisible }) => {
               : "max-h-0 opacity-0"}`}
           >
             <div className="px-6 pb-4 bg-[#131412] text-[#C6C7C6] font-inter text-[16px] mw-12:text-[14px] transition-opacity duration-500 ease-in-out">
-              {item.content}
+            <DiscordLinkify text={item.content} />
             </div>
           </div>
         </div>
@@ -63,7 +78,7 @@ const FAQComponent = () => {
   const accordionItems = [
     {
       title: "Is our Node Staked?",
-      content: "Yes, our node has over 200,000 Solana staked."
+      content: "Yes, our node has over 1,000,00 Solana staked."
     },
     {
       title: "What are the TPS limits?",
@@ -87,12 +102,12 @@ const FAQComponent = () => {
     {
       title: "How do I get started?",
       content:
-        "Simply join our discord here (insert discord link) Our team will guide you through the onboarding process."
+        "Simply join our discord here https://discord.gg/9UXPJgnZ5q Our team will guide you through the onboarding process."
     },
     {
       title: "Do Leap offer a free trial?",
       content:
-        "Simply join our discord here (insert discord link) Our team will guide you through the onboarding process."
+        "Simply join our discord here https://discord.gg/9UXPJgnZ5q Our team will guide you through the onboarding process."
     },
     {
       title: "Where is Leaps Node located?",
@@ -110,6 +125,7 @@ const FAQComponent = () => {
         "You can authorise 1 IP per subscription unless you purchase a private node and then you can do as you please."
     }
   ];
+
 
   return (
     <div className="mx-auto  px-4" ref={sectionRef}>

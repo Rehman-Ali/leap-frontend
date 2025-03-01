@@ -1,19 +1,17 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import {
-  Connection,
-  PublicKey,
-  Transaction,
-  SystemProgram
-} from "@solana/web3.js";
 import { SERVER_URL, WALLET_ADDRESS } from "@/utils/server";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from "next/navigation";
+import { isSolanaWallet } from "@dynamic-labs/solana-core";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
+
 const BuyVPSScreen = () => {
   const searchParams = useSearchParams()
-   
+  const router = useRouter();   
   const search = searchParams.get('id')
   const [selectPlan, setSelectedPlan] = useState("Basic");
   const [selectRegion, setSelectedRegion] = useState("");
@@ -23,6 +21,8 @@ const BuyVPSScreen = () => {
   const [selectedDuration, setSelectedDuration] = useState(null);
 
   const [solPrice, setSolPrice] = useState(null); // Current SOL price in USD
+
+  const { primaryWallet } = useDynamicContext();
 
   useEffect(() => {
     async function fetchSolPrice() {
@@ -42,74 +42,83 @@ const BuyVPSScreen = () => {
     fetchSolPrice();
   }, []);
 
-  const payOrder = async (e) => {
-    e.preventDefault();
-    setStatus("");
-
-    const toAddress = WALLET_ADDRESS;
-    const value = 0.00;
-    // const value =
-    //   ((operatingSystem === "windows"
-    //     ? (80 / 30) * selectedDuration
-    //     : (60 / 30) * selectedDuration) / solPrice).toFixed(4);
-
-    try {
-      // Use the appropriate endpoint for your environment
-      const connection = new Connection("https://api.devnet.solana.com"); // Devnet
-      const fromWallet = window.solana; // Assumes a wallet like Phantom is installed
-
-      if (!fromWallet || !fromWallet.isPhantom) {
-        setStatus("Please connect to a Solana wallet like Phantom.");
-        return;
-      }
-
-      // Request wallet connection
-      const { publicKey } = await fromWallet.connect();
-
-      // Fetch the latest blockhash
-      const { blockhash, lastValidBlockHeight } =
-        await connection.getLatestBlockhash();
-
-      // Create transaction
-      const transaction = new Transaction().add(
-        SystemProgram.transfer({
-          fromPubkey: publicKey,
-          toPubkey: new PublicKey(toAddress),
-          lamports: parseFloat(value) * 1e9 // Convert SOL to lamports
-        })
-      );
-      transaction.recentBlockhash = blockhash;
-      transaction.feePayer = publicKey;
-
-      // Request the wallet to sign the transaction
-      const signedTransaction = await fromWallet.signTransaction(transaction);
-
-      // Send the signed transaction
-      const txId = await connection.sendRawTransaction(
-        signedTransaction.serialize()
-      );
-
-      // Confirm the transaction using the updated confirmation strategy
-      const confirmation = await connection.confirmTransaction({
-        signature: txId,
-        blockhash,
-        lastValidBlockHeight
-      });
-
-      if (confirmation.value.err) {
-        throw new Error("Transaction failed.");
-      }
-
-      setTransactionId(txId);
-      setStatus("Transaction confirmed!");
-      onConfirmOrder();
-    } catch (error) {
-      console.error(error);
-      // onConfirmOrder();
-      setStatus(`Error: ${error.message}`);
-    }
-  };
-
+ 
+   const payOrder = async () => {
+     if (!primaryWallet || !isSolanaWallet(primaryWallet)) {
+       return;
+     }
+ 
+     const connection = await primaryWallet.getConnection();
+     const cluster = connection.rpcEndpoint.includes("devnet")
+       ? "devnet"
+       : "mainnet";
+ 
+     const fromKey = new PublicKey(primaryWallet.address);
+     const toKey = new PublicKey(WALLET_ADDRESS);
+ 
+     const balance = await connection.getBalance(fromKey);
+ 
+     // const amountInLamports = 0.0;
+     const value = (
+       (selectPlan === "Basic"
+         ? selectedDuration === 7
+           ? 400
+           : (1200 / 30) * selectedDuration
+         : selectedDuration === 7
+         ? 600
+         : (1800 / 30) * selectedDuration) / solPrice
+     ).toFixed(4);
+ 
+     const amountInLamports = 0 * 1000000000;
+     // const amountInLamports = Math.round(value * 1000000000);
+ 
+     // check if wallet have balance or not
+     const estimatedFee = 5000; // Solana transactions typically cost around 5000 lamports
+     // const totalCost = amountInLamports + estimatedFee;
+     const totalCost = 0;
+ 
+     if (balance < totalCost) {
+       Swal.fire({
+         position: "center",
+         icon: "error",
+         title: "Insufficient balance to complete this transaction.",
+         showConfirmButton: false,
+         timer: 2000
+       });
+       return;
+     }
+ 
+     const transferTransaction = new Transaction().add(
+       SystemProgram.transfer({
+         fromPubkey: fromKey,
+         lamports: amountInLamports,
+         toPubkey: toKey
+       })
+     );
+     const blockhash = await connection.getLatestBlockhash();
+     transferTransaction.recentBlockhash = blockhash.blockhash;
+     transferTransaction.feePayer = fromKey;
+ 
+     const signer = await primaryWallet.getSigner();
+ 
+     await signer
+       .signAndSendTransaction(transferTransaction)
+       .then((value) => {
+         onConfirmOrder();
+         console.log(
+           `Transaction successful: https://solscan.io/tx/${value.signature}?cluster=${cluster}`
+         );
+       })
+       .catch((error) => {
+         Swal.fire({
+           position: "center",
+           icon: "error",
+           title: error || "Transaction failed. Try again!.",
+           showConfirmButton: false,
+           timer: 2500
+         });
+       });
+   };
 
   const getExpiryDate = (date) => {
     const serviceStartDate = new Date(date);
@@ -173,6 +182,7 @@ const BuyVPSScreen = () => {
         showConfirmButton: false,
         timer: 1500
       });
+      router.push("/orders")
     }else{
       const response = await axios.put(
         `${SERVER_URL}/api/order/update/${search}`,
@@ -183,6 +193,7 @@ const BuyVPSScreen = () => {
           }
         }
       );
+      router.push("/orders")
 
       Swal.fire({
         position: "center",
