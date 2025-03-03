@@ -34,9 +34,10 @@ export default function RootLayout({ children }) {
     "/nodes",
     "/analytics",
     "/affiliate",
-    "/orders",
+    "/invoices",
     "/buy",
-    "/buy-vps"
+    "/buy-vps",
+    "/vps-info"
   ];
   const adminRoutes = [
     "/admin-dashboard",

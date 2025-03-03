@@ -23,13 +23,15 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
         } transition-transform duration-300 ease-in-out lg:translate-x-0`}
       >
         <div className="pl-[20px] pt-[13px]  pb-[8px] flex justify-between items-center border-b  dark:border-b-gray-600">
-          <Image
+         <Link href="/">
+          {/* <Image
             src="/assets/logo1.png"
             height={102}
             width={300}
             alt="logo"
             className="h-[38px] w-[120px]"
-          />
+          /> */}
+          </Link>
           <button
             className="mr-[5px] lg:hidden text-[#00000] dark:text-white"
             onClick={toggleSidebar}
@@ -93,6 +95,33 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
               Nodes
             </Link>
             <Link
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all     ${
+                pathname === "/vps-info"
+                  ? "bg-darkPrimary text-white font-semibold"
+                  : "text-black dark:text-white hover:text-darkPrimary"
+              } `}
+              href="/vps-info"
+            >
+              <svg
+                stroke="currentColor"
+                fill="none"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-4 w-4"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+                <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+                <line x1="6" x2="6.01" y1="6" y2="6"></line>
+                <line x1="6" x2="6.01" y1="18" y2="18"></line>
+              </svg>
+              VPS
+            </Link>
+            <Link
               className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${
                 pathname === "/analytics"
                   ? "bg-darkPrimary text-white font-semibold"
@@ -119,11 +148,11 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
             </Link>
             <Link
               className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${
-                pathname === "/orders"
+                pathname === "/invoices"
                   ? "bg-darkPrimary text-white font-semibold"
                   : "text-black dark:text-white hover:text-darkPrimary"
               } `}
-              href="/orders"
+              href="/invoices"
             >
               <svg
                 stroke="currentColor"
@@ -141,7 +170,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                 <circle cx="19" cy="21" r="1"></circle>
                 <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
               </svg>
-              Orders
+              Invoices
             </Link>
             {/* <Link
               className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all  ${

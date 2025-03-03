@@ -182,7 +182,7 @@ const BuyVPSScreen = () => {
         showConfirmButton: false,
         timer: 1500
       });
-      router.push("/orders")
+      router.push("/vps-info")
     }else{
       const response = await axios.put(
         `${SERVER_URL}/api/order/update/${search}`,
@@ -193,7 +193,7 @@ const BuyVPSScreen = () => {
           }
         }
       );
-      router.push("/orders")
+      router.push("/vps-info")
 
       Swal.fire({
         position: "center",

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
-const DashboardNodeScreen = () => {
+const DashboardVpsScreen = () => {
   const [orderList, setOrderList] = useState([]);
 
   const ITEMS_PER_PAGE = 10;
@@ -30,7 +30,9 @@ const DashboardNodeScreen = () => {
       })
       .then((res) => {
         if (res.data && res.data.data) {
-          let arr = res.data.data.filter(item => item.order_category.includes("rpc"));
+          let arr = res.data.data.filter((item) =>
+            item.order_category.includes("vps")
+          );
           setOrderList(arr);
         } else {
           console.error("Invalid response format", res);
@@ -94,14 +96,14 @@ const DashboardNodeScreen = () => {
       <div className="h-full w-full max-w-[1500px] p-2 lg:p-5">
         <div className="flex justify-between">
           <h1 className="font-semibold text-xl flex items-center text-black dark:text-white">
-            Your Nodes
+            Your VPS
             <span className="bg-darkPrimary text-black dark:text-white text-sm px-2 py-0.5 h-fit ml-5 rounded-lg">
               {orderList.length}
             </span>
           </h1>
-          <Link href="/buy">
+          <Link href="/buy-vps">
             <button className="flex justify-center dark:text-white items-center font-semibold gap-2.5 text-sm px-5 py-2 rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu bg-darkPrimary text-black">
-              Buy Node
+              Buy VPS
             </button>
           </Link>
         </div>
@@ -111,11 +113,11 @@ const DashboardNodeScreen = () => {
             <>
               <div className="overflow-x-auto w-full">
                 <div className="min-w-[360px] ">
+                  
                   <table className="w-full bg-white dark:bg-bodyColor rounded-lg shadow-md">
                     <thead>
                       <tr className="bg-darkPrimary text-black">
                         <th className="py-2 border">Sr</th>
-                        <th className="py-2 border">Node Category</th>
                         <th className="py-2 border">API Key</th>
                         <th className="py-2  border">Duration</th>
                         <th className="py-2 border">Price ($)</th>
@@ -133,9 +135,7 @@ const DashboardNodeScreen = () => {
                           <td className="py-2 px-4 border-b text-center">
                             {index + 1}
                           </td>
-                          <td className="py-2 px-4 border-b uppercase text-center">
-                            {order.order_category}
-                          </td>
+
                           <td className="py-2 px-4 border-b text-start">
                             {order.api_key}
                           </td>
@@ -180,21 +180,21 @@ const DashboardNodeScreen = () => {
                           </td>
                           <td className="py-2  px-4 border-b text-center">
                             {/* {(order.isExpiryNear ||
-                              order.status === "inactive") && ( */}
-                              <Link
-                                href={`${
-                                  order.order_category === "vps"
-                                    ? `/buy-vps?id=${order._id}`
-                                    : `/buy?id=${order._id}`
-                                }`}
+                                order.status === "inactive") && ( */}
+                            <Link
+                              href={`${
+                                order.order_category === "vps"
+                                  ? `/buy-vps?id=${order._id}`
+                                  : `/buy?id=${order._id}`
+                              }`}
+                            >
+                              <span
+                                className="px-2 cursor-pointer mr-[10px] py-1 bg-darkPrimary text-black text-[12px] rounded-md disabled:opacity-50"
+                                // onClick={() => onClickRenewButton()}
                               >
-                                <span
-                                  className="px-2 cursor-pointer mr-[10px] py-1 bg-darkPrimary text-black text-[12px] rounded-md disabled:opacity-50"
-                                  // onClick={() => onClickRenewButton()}
-                                >
-                                  Renew
-                                </span>
-                              </Link>
+                                Renew
+                              </span>
+                            </Link>
                             {/* )} */}
                             <span
                               className="px-2 cursor-pointer py-1 bg-red-700 text-white text-[12px] rounded-md disabled:opacity-50"
@@ -254,4 +254,4 @@ const DashboardNodeScreen = () => {
   );
 };
 
-export default DashboardNodeScreen;
+export default DashboardVpsScreen;

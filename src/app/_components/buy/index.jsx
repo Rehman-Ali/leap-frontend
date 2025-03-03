@@ -183,7 +183,7 @@ const BuyScreen = () => {
           }
         );
         console.log(response.data, "Response received");
-        router.push("/orders")
+        router.push("/nodes")
     
         Swal.fire({
           position: "center",
@@ -202,7 +202,7 @@ const BuyScreen = () => {
             }
           }
         );
-        router.push("/orders")
+        router.push("/nodes")
 
         Swal.fire({
           position: "center",
