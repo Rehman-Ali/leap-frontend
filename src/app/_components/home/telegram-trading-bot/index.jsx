@@ -25,11 +25,11 @@ const TelegramTradingBot = () => {
           } `}
         >
           <Image
-            src="/assets/home/telegram-trading-bot.jpg"
+            src="/assets/telebot/pricing.png"
             alt="Telegram Trading Bot"
-            width={535}
-            height={422}
-            className=" mw-8:w-full w-[535px] h-auto rounded-[10px]"
+            width={635}
+            height={522}
+            className=" mw-8:w-full w-[635px] h-auto rounded-[10px]"
           />
         </div>
 
@@ -63,9 +63,9 @@ const TelegramTradingBot = () => {
           </p>
           {/* Features */}
           {[
-            "Real Time Trade update",
-            "Coin analysis",
-            "Limit and DCA mode",
+            "Real time trade updates",
+            "Coin analytics",
+            "Limit and DCA oreders",
             "Copy Trading and more…."
           ].map((feature, index) => (
             <div

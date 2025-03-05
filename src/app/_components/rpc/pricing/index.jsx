@@ -82,7 +82,7 @@ const RPCPricing = () => {
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
                   <div className="text-base font-inter font-medium text-white pb-0.5">
-                    Basic
+                    Getting Started
                   </div>
                   <div className="mb-1">
                     <span className="text-lg font-inter font-medium text-slate-500">
@@ -96,14 +96,14 @@ const RPCPricing = () => {
                     </span>
                   </div>
                   <div className="text-slate-500 font-inter mw-12:text-[12px] min-h-[65px] text-[14px] font-normal">
-                    For 1 location just getting started.
+                  Instant access to any location of your choice
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
                   <Link href="/buy">
                     <button
                       className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                      // href="https://hub.ligmanode.com/buy?plan=Getting Started"
                     >
                       Get Started
                       <FaArrowRight size={12} color={"#000"} />
@@ -169,7 +169,7 @@ const RPCPricing = () => {
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
                   <div className="text-base font-inter font-medium text-white pb-0.5">
-                    Pro
+                    Professional
                   </div>
                   <div className="mb-1">
                     <span className="text-lg font-inter font-medium text-slate-500">
@@ -183,15 +183,14 @@ const RPCPricing = () => {
                     </span>
                   </div>
                   <div className="text-slate-500 mw-12:text-[12px] min-h-[65px] font-inter text-[14px] font-normal">
-                    For all location. All locations would be Virginia,
-                    Amsterdam, France.
+                    Take your trading to the next level with no rate limits and Instant access to all our node locations including, VA, Frankfurt and Amsterdam.
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
                   <Link href="/buy">
                     <button
                       className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                      // href="https://hub.ligmanode.com/buy?plan=Getting Started"
                     >
                       Get Started
                       <FaArrowRight size={12} color={"#000"} />
@@ -271,14 +270,14 @@ const RPCPricing = () => {
                     </span>
                   </div>
                   <div className="text-slate-500 mw-12:text-[12px] min-h-[65px] font-inter text-[14px] font-normal">
-                    Contact us to get more detail of Node
+                  Fully managed private nodes designed for the fastest speeds at any scale. Contact us to get started.
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
                   <a href="https://discord.gg/9UXPJgnZ5q" target="_blank">
                     <button
                       className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                      // href="https://hub.ligmanode.com/buy?plan=Getting Started"
                     >
                       Contact Us
                       <FaArrowRight size={12} color={"#000"} />
@@ -346,7 +345,7 @@ const RPCPricing = () => {
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
                   <div className="text-base font-inter font-medium text-white pb-0.5">
-                    Basic
+                    Getting Started
                   </div>
                   <div className="mb-1">
                     <span className="text-lg font-inter font-medium text-slate-500">
@@ -360,14 +359,14 @@ const RPCPricing = () => {
                     </span>
                   </div>
                   <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
-                    For 1 location just getting started.
+                    Instant access to any location of your choice.
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
                   <Link href="/buy">
                     <button
                       className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                      // href="https://hub.ligmanode.com/buy?plan=Getting Started"
                     >
                       Get Started
                       <FaArrowRight size={12} color={"#000"} />
@@ -460,7 +459,7 @@ const RPCPricing = () => {
                 <div className="pb-4 border-b border-slate-800">
                   <button
                     className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                    // href="https://hub.ligmanode.com/buy?plan=basic"
+                    // href="https://hub.ligmanode.com/buy?plan=Getting Started"
                   >
                     Get Started
                     <FaArrowRight size={12} color={"#000"} />
@@ -521,7 +520,7 @@ const RPCPricing = () => {
               <div className=" flex flex-col justify-end">
                 <div className="grow pb-4 mb-4 border-b border-slate-800">
                   <div className="text-base font-inter font-medium text-white pb-0.5">
-                    Pro
+                   Professional
                   </div>
                   <div className="mb-1">
                     <span className="text-lg font-inter font-medium text-slate-500">
@@ -535,15 +534,14 @@ const RPCPricing = () => {
                     </span>
                   </div>
                   <div className="text-slate-500 mw-12:text-[12px] font-inter text-[14px] font-normal">
-                    For all location. All locations would be Virginia,
-                    Amsterdam, France.
+                   Take your trading to the next level with no rate limits and Instant access to all our node locations including, VA, Frankfurt and Amsterdam.
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
                   <Link href="/buy">
                     <button
                       className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                      // href="https://hub.ligmanode.com/buy?plan=Getting Started"
                     >
                       Get Started
                       <FaArrowRight size={12} color={"#000"} />
@@ -630,14 +628,14 @@ const RPCPricing = () => {
                     </span>
                   </div>
                   <div className="text-slate-500 mw-12:text-[12px] font-inter text-[14px] font-normal">
-                    Contact us to get more detail about Node.
+                   Fully managed private nodes designed for the fastest speeds at any scale. Contact us to get started.
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
                   <a href="https://discord.gg/9UXPJgnZ5q" target="_blank">
                     <button
                       className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
-                      // href="https://hub.ligmanode.com/buy?plan=basic"
+                      // href="https://hub.ligmanode.com/buy?plan=Getting Started"
                     >
                       Contact Us
                       <FaArrowRight size={12} color={"#000"} />

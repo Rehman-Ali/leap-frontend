@@ -80,7 +80,7 @@ const HeroSection = () => {
             {
               title: "Flexible Pricing",
               description:
-                "Leap offers a pricing model tailored to your needs. With subscription-based plans for nodes and transaction-based fees for our trading bots, you pay only for the services you use."
+                "Leap offers a pricing model tailored to your needs. With subscription-based plans for nodes and transaction-based fees for our trading bots, you only pay for the services you use."
             }
           ].map((item, index) =>
             <div

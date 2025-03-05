@@ -73,7 +73,7 @@ const RPCSpeedComponent = () => {
                 Staked
               </p>
               <p className="text-2xl sm:text-3xl text-white font-inter font-semibold">
-                1,000,00 + SOL
+                1,000,000 + SOL
               </p>
             </div>
             <div className={`${

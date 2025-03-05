@@ -230,7 +230,7 @@ const BuyVPSScreen = () => {
           </div>
           <h1 className="text-xl font-semibold dark:text-white">Select Plan</h1>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-5">
+        <div className="grid mw-11:grid-cols-1 mw-12:grid-cols-2  lg:grid-cols-3 gap-5">
           <div
             onClick={() => setSelectedPlan("Basic")}
             className={`${

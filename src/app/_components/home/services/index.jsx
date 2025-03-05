@@ -46,7 +46,7 @@ const Services = () => {
           {/* List Items */}
           {[
             "Staked node",
-            "IP authorization",
+            "IP authorisation",
             "GRPC",
             "Bloxroute BDM",
             "Jito Shred"

@@ -78,17 +78,17 @@ const FAQComponent = () => {
   const accordionItems = [
     {
       title: "Is our Node Staked?",
-      content: "Yes, our node has over 1,000,00 Solana staked."
+      content: "Yes, our node has over 1,000,000 Solana staked."
     },
     {
       title: "What are the TPS limits?",
       content:
         "We currently have unlimited TPS limits when using websockets, GRPC does have limits though."
     },
-    {
-      title: "What are the costs?",
-      content: "Node Rentals are 2 Solana a week or 6 Solana a month."
-    },
+    // {
+    //   title: "What are the costs?",
+    //   content: "Node Rentals are 2 Solana a week or 6 Solana a month."
+    // },
     {
       title: "Can Leap handle high network congestion on Solana?",
       content:
@@ -112,7 +112,7 @@ const FAQComponent = () => {
     {
       title: "Where is Leaps Node located?",
       content:
-        "Currently we are located in VA, however we are looking to expand over the coming months."
+        "For our shared nodes you can choose between Virginia,Frankfurt and Amsterdam. However for private node we have a lot more location available."
     },
     {
       title: "Can I cancel my Subscription at any time?",
