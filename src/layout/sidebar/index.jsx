@@ -24,13 +24,13 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
       >
         <div className="pl-[20px] pt-[13px]  pb-[8px] flex justify-between items-center border-b  dark:border-b-gray-600">
          <Link href="/">
-          {/* <Image
+          <Image
             src="/assets/logo1.png"
             height={102}
             width={300}
             alt="logo"
             className="h-[38px] w-[120px]"
-          /> */}
+          />
           </Link>
           <button
             className="mr-[5px] lg:hidden text-[#00000] dark:text-white"
