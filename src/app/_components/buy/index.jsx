@@ -59,13 +59,13 @@ const BuyScreen = () => {
 
     // const amountInLamports = 0.0;
     const value = (
-      (selectPlan === "Basic"
+      (selectPlan === "Getting-Started"
         ? selectedDuration === 7
           ? 400
-          : (1200 / 30) * selectedDuration
+          : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
         : selectedDuration === 7
         ? 600
-        : (1800 / 30) * selectedDuration) / solPrice
+        : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  "") / solPrice
     ).toFixed(4);
 
     const amountInLamports = 0 * 1000000000;
@@ -149,23 +149,23 @@ const BuyScreen = () => {
         duration: selectedDuration,
         status: "active",
         price:
-          selectPlan === "Basic"
-            ? selectedDuration === 7
-              ? 400
-              : (1200 / 30) * selectedDuration
-            : selectedDuration === 7
-            ? 600
-            : (1800 / 30) * selectedDuration,
+        (selectPlan === "Getting-Started"
+          ? selectedDuration === 7
+            ? 400
+            : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
+          : selectedDuration === 7
+          ? 600
+          : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  ""),
         price_in_SOL: (
-          (selectPlan === "Basic"
+          (selectPlan === "Getting-Started"
             ? selectedDuration === 7
               ? 400
-              : (1200 / 30) * selectedDuration
+              : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
             : selectedDuration === 7
             ? 600
-            : ((1800 / 30) * selectedDuration).toFixed(2)) / solPrice
+            : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  "") / solPrice
         ).toFixed(4),
-        order_category: "rpc-" + selectPlan.toLowerCase(),
+        order_category: "RPC-" + selectPlan.toLowerCase(),
         operating_system: null,
         region: selectRegion,
         plan: selectPlan,
@@ -280,9 +280,9 @@ const BuyScreen = () => {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <div
-            onClick={() => setSelectedPlan("Basic")}
+            onClick={() => setSelectedPlan("Getting-Started")}
             className={`${
-              selectPlan === "Basic" ? "opacity-90" : "opacity-50"
+              selectPlan === "Getting-Started" ? "opacity-90" : "opacity-50"
             } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#6840FD] to-[#6840FD] bg-[linear-gradient(324.64deg,rgba(104,64,253,0)0%,rgba(255,255,255,0.2)100%)] `}
           >
             <Image
@@ -295,10 +295,10 @@ const BuyScreen = () => {
             <div className="text-white font-semibold rounded-full w-[150px] text-center py-1 mb-3 bg-white/20 border border-white/50">
               Getting Started
             </div>
-            <div className="text-white font-semibold h-6 lg:h-8">
+            <div className="text-white font-semibold lg:h-[50px] mw-12:h-[70px]">
               Instant access to any location of your choice
             </div>
-            <ul className="flex flex-row  items-start gap-x-10 mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none  h-[90px]">
+            <ul className="flex flex-row  items-start gap-x-10 mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none  h-[120px]">
               <li className="flex flex-col items-start gap-y-2">
                 <div className="flex flex-row items-center gap-x-2">
                   <div className="flex-none text-[#6840FD]">
@@ -559,7 +559,7 @@ const BuyScreen = () => {
                 </div>
                 <div className="text-white/50 text-3xl">
                   <span className="text-white font-semibold pl-[10px]  ">
-                    $6000
+                    6000
                   </span>
                   /6 month
                 </div>
@@ -567,9 +567,9 @@ const BuyScreen = () => {
             </div>
           </div>
           <div
-            onClick={() => setSelectedPlan("Pro")}
+            onClick={() => setSelectedPlan("Professional")}
             className={`${
-              selectPlan === "Pro" ? "opacity-90" : "opacity-50"
+              selectPlan === "Professional" ? "opacity-90" : "opacity-50"
             } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#41BF6D] to-[#41BF6D] bg-[linear-gradient(324.64deg,rgba(65,191,109,0)0%,rgba(255,255,255,0.2)100%)]`}
           >
             <Image
@@ -582,12 +582,12 @@ const BuyScreen = () => {
             <div className="text-white font-semibold rounded-full w-[150px] text-center py-1 mb-3 bg-white/20 border border-white/50">
               Professional
             </div>
-            <div className="text-white font-semibold h-6 lg:h-8">
+            <div className="text-white font-semibold lg:h-[50px] mw-12:h-[70px]">
               Take your trading to the next level with no rate limits and
               Instant access to all our node locations including, VA, Frankfurt
               and Amsterdam.
             </div>
-            <ul className="flex flex-row  items-start gap-x-10  mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none  h-[90px]">
+            <ul className="flex flex-row  items-start gap-x-10  mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none  h-[120px]">
               <li className="flex flex-col items-start gap-y-2">
                 <div className="flex flex-row items-center gap-x-2">
                   <div className="flex-none text-[#41BF6D]">
@@ -921,26 +921,26 @@ const BuyScreen = () => {
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             <div
-              onClick={() => setSelectedRegion("Dallas, TX")}
+              onClick={() => setSelectedRegion("Frankfurt")}
               className={`flex w-full p-5 ${
-                selectRegion === "Dallas, TX"
+                selectRegion === "Frankfurt"
                   ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
                   : "dark:text-white"
               }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
-              Dallas, TX
+              Frankfurt
             </div>
             <div
-              onClick={() => setSelectedRegion("Charlotte, NC")}
+              onClick={() => setSelectedRegion("Amsterdam")}
               className={`flex w-full p-5 ${
-                selectRegion === "Charlotte, NC"
+                selectRegion === "Amsterdam"
                   ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
                   : "dark:text-white"
               }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
-              Charlotte, NC
+              Amsterdam
             </div>
-            <div
+            {/* <div
               onClick={() => setSelectedRegion("AMS - Netherlands")}
               className={`flex w-full p-5 ${
                 selectRegion === "AMS - Netherlands"
@@ -949,8 +949,8 @@ const BuyScreen = () => {
               }   items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               AMS - Netherlands
-            </div>
-            <div
+            </div> */}
+            {/* <div
               onClick={() => setSelectedRegion("Bend, OR")}
               className={`flex dark:text-white ${
                 selectRegion === "Bend, OR"
@@ -959,8 +959,8 @@ const BuyScreen = () => {
               } w-full p-5 items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               Bend, OR
-            </div>
-            <div
+            </div> */}
+            {/* <div
               onClick={() => setSelectedRegion("Latham, NY")}
               className={`flex w-full ${
                 selectRegion === "Latham, NY"
@@ -969,8 +969,8 @@ const BuyScreen = () => {
               }   p-5 items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               Latham, NY
-            </div>
-            <div
+            </div> */}
+            {/* <div
               onClick={() => setSelectedRegion("FRS - France")}
               className={`flex w-full ${
                 selectRegion === "FRS - France"
@@ -979,7 +979,7 @@ const BuyScreen = () => {
               } p-5  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               FRS - France
-            </div>
+            </div> */}
             <div
               onClick={() => setSelectedRegion("Ashburn, VA")}
               className={`flex w-full  ${
@@ -990,7 +990,7 @@ const BuyScreen = () => {
             >
               Ashburn, VA
             </div>
-            <div
+            {/* <div
               onClick={() => setSelectedRegion("Staten Island, NY")}
               className={`flex w-full p-5  ${
                 selectRegion === "Staten Island, NY"
@@ -999,11 +999,11 @@ const BuyScreen = () => {
               } items-center  gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-black`}
             >
               Staten Island, NY
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="my-20 min-h-96">
-          {selectPlan !== "" && (
+          {selectedDuration !== null && (
             <>
               <hr className="my-4" />
               <div>
@@ -1017,13 +1017,13 @@ const BuyScreen = () => {
                   <div className="">
                     <p className="dark:text-white">
                       $
-                      {selectPlan === "Basic"
+                      {selectPlan === "Getting-Started"
                         ? selectedDuration === 7
                           ? 400
-                          : ((1200 / 30) * selectedDuration).toFixed(2)
+                          : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
                         : selectedDuration === 7
                         ? 600
-                        : ((1800 / 30) * selectedDuration).toFixed(2)}
+                        : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  "" }
                     </p>
                   </div>
                   <div className="">
@@ -1035,13 +1035,13 @@ const BuyScreen = () => {
                   </div>
                   <p className="dark:text-white">
                     $
-                    {selectPlan === "Basic"
-                      ? selectedDuration === 7
-                        ? 400
-                        : ((1200 / 30) * selectedDuration).toFixed(2)
-                      : selectedDuration === 7
-                      ? 600
-                      : ((1800 / 30) * selectedDuration).toFixed(2)}
+                    {selectPlan === "Getting-Started"
+                        ? selectedDuration === 7
+                          ? 400
+                          : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
+                        : selectedDuration === 7
+                        ? 600
+                        : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  ""}
                   </p>
                 </div>
                 <hr className="my-2.5" />
@@ -1051,13 +1051,13 @@ const BuyScreen = () => {
                       <p className="font-medium dark:text-white">Subtotal</p>
                       <p className="dark:text-white">
                         {(
-                          (selectPlan === "Basic"
+                          (selectPlan === "Getting-Started"
                             ? selectedDuration === 7
                               ? 400
-                              : (1200 / 30) * selectedDuration
+                              : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
                             : selectedDuration === 7
                             ? 600
-                            : (1800 / 30) * selectedDuration) / solPrice
+                            : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  "") / solPrice
                         ).toFixed(4)}
                         &nbsp; SOL
                       </p>
@@ -1068,13 +1068,13 @@ const BuyScreen = () => {
                       <p className="font-medium dark:text-white">Total</p>
                       <p className="dark:text-white">
                         {(
-                          (selectPlan === "Basic"
+                          (selectPlan === "Getting-Started"
                             ? selectedDuration === 7
                               ? 400
-                              : (1200 / 30) * selectedDuration
+                              : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
                             : selectedDuration === 7
                             ? 600
-                            : (1800 / 30) * selectedDuration) / solPrice
+                            : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  "") / solPrice
                         ).toFixed(4)}
                         &nbsp; SOL
                       </p>

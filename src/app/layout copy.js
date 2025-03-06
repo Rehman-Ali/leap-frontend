@@ -66,14 +66,13 @@ export default function RootLayout({ children }) {
     const role = JSON.parse(localStorage.getItem("role"));
 
     if (token) {
-      // if (isPublicRoute) {
-      //   if (role === "admin") {
-      //     router.replace("/admin-dashboard");
-      //   } else {
-      //     router.replace(privateRoutes[0]);
-      //   }
-      // } else 
-      if (isPrivateRoute) {
+      if (isPublicRoute) {
+        if (role === "admin") {
+          router.replace("/admin-dashboard");
+        } else {
+          router.replace(privateRoutes[0]);
+        }
+      } else if (isPrivateRoute) {
         if (role === "admin") {
           router.replace(adminRoutes[0]);
         } else {

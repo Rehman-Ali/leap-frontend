@@ -6,28 +6,21 @@ import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import DashboardLayout from "@/layout/dashboard-layout";
 import { inter } from "@/utils/fonts";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, notFound } from "next/navigation";
 import { ThemeProvider } from "next-themes";
 import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
 import { SolanaWalletConnectors } from "@dynamic-labs/solana";
-// import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import { useEffect, useState, Suspense } from "react";
 import FullPageLoader from "./_components/loader";
 import axios from "axios";
-import { DYNAMIC_XYZ_TOKEN, SERVER_URL } from "@/utils/server";
-// import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
-// import { PhantomWalletAdapter, SolflareWalletAdapter } from "@solana/wallet-adapter-wallets";
-// import "@solana/wallet-adapter-react-ui/styles.css";
+import { SERVER_URL } from "@/utils/server";
 import Swal from "sweetalert2";
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isAuthorized, setIsAuthorized] = useState(false);
-
-  // Solana wallet adapters
-  // const wallets = [new PhantomWalletAdapter(), new SolflareWalletAdapter()];
-
+  const [isLoading, setIsLoading] = useState(true); // New loading state
   // Define private routes and admin routes
   const privateRoutes = [
     "/dashboard",
@@ -53,51 +46,101 @@ export default function RootLayout({ children }) {
     "/telegram-bot",
     "/rpc",
     "/trading-bot",
-    "/vps"
+    "/vps",
+    "/not-found"
   ];
 
   const token =
     typeof window !== "undefined" ? localStorage.getItem("u_t") : null;
+
+  // useEffect(() => {
+  //   const isPrivateRoute = privateRoutes.includes(pathname);
+  //   const isAdminRoute = adminRoutes.includes(pathname);
+  //   const isPublicRoute = publicRoutes.includes(pathname);
+  //   const role = JSON.parse(localStorage.getItem("role"));
+  //   const allRoutes = [...privateRoutes, ...adminRoutes, ...publicRoutes];
+
+  //   if (!allRoutes.includes(pathname)) {
+  //     if (pathname !== "/not-found") {
+  //       router.replace("/not-found");
+  //     }
+  //     setIsLoading(false);
+  //     return;
+  //   }
+
+  //   if (token) {
+  //     if (isPrivateRoute) {
+  //       if (role === "admin") {
+  //         router.replace("/admin-dashboard");
+  //       } else {
+  //         setIsAuthorized(true);
+  //       }
+  //     } else if (isAdminRoute) {
+  //       if (role !== "admin") {
+  //         router.replace("/dashboard");
+  //       } else {
+  //         setIsAuthorized(true);
+  //       }
+  //     } else if (isPublicRoute) {
+  //       setIsAuthorized(true); // ✅ Allow public route
+  //     }
+  //   } else {
+  //     if (isPrivateRoute || isAdminRoute) {
+  //       localStorage.setItem("c_path", pathname);
+  //       router.replace("/login");
+  //     } else if (isPublicRoute) {
+  //       setIsAuthorized(true); // Allow public routes without login
+  //     }
+  //   }
+
+  //   setIsLoading(false);
+  // }, [pathname, token, router]);
 
   useEffect(() => {
     const isPrivateRoute = privateRoutes.includes(pathname);
     const isAdminRoute = adminRoutes.includes(pathname);
     const isPublicRoute = publicRoutes.includes(pathname);
     const role = JSON.parse(localStorage.getItem("role"));
+    const allRoutes = [...privateRoutes, ...adminRoutes, ...publicRoutes];
+
+    // 🔹 Check invalid route
+    if (!allRoutes.includes(pathname)) {
+      if (pathname !== "/not-found") {
+        router.replace("/not-found");
+      }
+      setIsLoading(false);
+      return;
+    }
 
     if (token) {
-      if (isPublicRoute) {
+      // 🔹 Token exists, so no redirect to login ever
+      if (isPrivateRoute) {
         if (role === "admin") {
           router.replace("/admin-dashboard");
-        } else {
-          router.replace(privateRoutes[0]);
-        }
-      } else if (isPrivateRoute) {
-        if (role === "admin") {
-          router.replace(adminRoutes[0]);
         } else {
           setIsAuthorized(true);
         }
       } else if (isAdminRoute) {
         if (role !== "admin") {
-          router.replace(privateRoutes[0]);
+          router.replace("/dashboard");
         } else {
           setIsAuthorized(true);
         }
+      } else if (isPublicRoute) {
+        setIsAuthorized(true); // ✅ Allow public routes with token
       }
     } else {
+      // 🔹 No token, handle access control
       if (isPrivateRoute || isAdminRoute) {
         localStorage.setItem("c_path", pathname);
         router.replace("/login");
-      } else {
-        setIsAuthorized(true);
+      } else if (isPublicRoute) {
+        setIsAuthorized(true); // Allow public routes without login
       }
     }
-  }, [pathname, token, router]);
 
-  useEffect(() => {
-    console.log("Available Wallets:", SolanaWalletConnectors);
-  }, []);
+    setIsLoading(false);
+  }, [pathname, token, router]);
 
   const handleLoginAndRegister = async (userData) => {
     try {
@@ -145,7 +188,7 @@ export default function RootLayout({ children }) {
     }
   };
 
-  if (!isAuthorized) {
+  if (isLoading) {
     return (
       <html lang="en">
         <body className="bg-bodyColor">
@@ -155,6 +198,9 @@ export default function RootLayout({ children }) {
     );
   }
 
+  if (!isAuthorized) {
+    return null; // Or a redirect component, or just null if already redirected
+  }
   const includeDashboardLayout =
     privateRoutes.includes(pathname) || adminRoutes.includes(pathname);
 
@@ -177,12 +223,8 @@ export default function RootLayout({ children }) {
           <Suspense fallback={<FullPageLoader />}>
             <ThemeProvider attribute="class" defaultTheme="dark">
               {includeDashboardLayout ? (
-                // <ConnectionProvider endpoint="https://solana-mainnet.g.alchemy.com/v2/4VXLhF5hI-rUSBOadb5UeDp4YZ0Gc31p">
-                // <WalletProvider wallets={wallets} autoConnect>
                 <DashboardLayout>{children}</DashboardLayout>
               ) : (
-                // </WalletProvider>
-                // </ConnectionProvider>
                 <div
                   className={`${inter.variable} container mx-auto min-h-screen flex flex-col`}
                 >
