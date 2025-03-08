@@ -140,7 +140,7 @@ const DashboardVpsScreen = () => {
                         <th className="py-2 border">Order Date</th>
                         <th className="py-2 border">Expiry Date</th>
                         <th className="py-2 border">Action</th>
-                        <th className="py-2 border">Connection URL</th>
+                        {/* <th className="py-2 border">Connection URL</th> */}
 
                       </tr>
                     </thead>
@@ -218,14 +218,14 @@ const DashboardVpsScreen = () => {
                               Delete
                             </span>
                           </td>
-                          <td className="py-2 px-4 border-b text-center capitalize">
+                          {/* <td className="py-2 px-4 border-b text-center capitalize">
                             <span
                               onClick={() => handleOpenModal(order)}
                               className="px-2 cursor-pointer mr-[5px] py-1 bg-gray-300 text-black text-[12px] rounded-md disabled:opacity-50"
                             >
                               Click Here
                             </span>
-                          </td>
+                          </td> */}
                         </tr>
                       ))}
                     </tbody>
