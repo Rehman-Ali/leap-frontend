@@ -12,7 +12,6 @@ const OrderScreen = () => {
   const ITEMS_PER_PAGE = 10;
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [isDelete, setIsDelete] = useState(false);
   const totalPages = Math.ceil(orderList.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const paginatedData = orderList.slice(
@@ -36,58 +35,8 @@ const OrderScreen = () => {
         }
       })
       .catch((err) => console.error("Error fetching data", err));
-  }, [isDelete]);
+  }, []);
 
-  const onClickDeleteButton = (id) => {
-    setIsDelete(false);
-    Swal.fire({
-      title: "Do you really want to delete it. This will not reversable?",
-      showDenyButton: true,
-      icon: "warning",
-      showCancelButton: false,
-      confirmButtonText: "Yes Delete",
-      confirmButtonColor: "#37F94E",
-      denyButtonText: `Cancel`
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        let token = JSON.parse(localStorage.getItem("u_t"));
-        axios
-          .put(
-            SERVER_URL + `/api/order/update/${id}`,
-            {
-              status: "cancelled"
-            },
-            {
-              headers: {
-                "x-auth-token": token
-              }
-            }
-          )
-          .then((res) => {
-            if (res.data.success === 1) {
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Your order has been deleted successfully",
-                showConfirmButton: false,
-                timer: 1500
-              });
-              setIsDelete(true);
-            }
-          })
-          .catch((err) =>
-            Swal.fire({
-              position: "center",
-              icon: "error",
-              title: "Server error. Please try again.",
-              showConfirmButton: false,
-              timer: 1500
-            })
-          );
-      }
-    });
-  };
 
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
@@ -107,7 +56,7 @@ const OrderScreen = () => {
                   <thead>
                     <tr className="bg-darkPrimary text-black">
                       <th className="py-2 border">Sr</th>
-                      <th className="py-2 border">Order Category</th>
+                      <th className="py-2 border">Category</th>
                       <th className="py-2 border">API Key</th>
                       <th className="py-2  border">Duration</th>
                       <th className="py-2 border">Price ($)</th>

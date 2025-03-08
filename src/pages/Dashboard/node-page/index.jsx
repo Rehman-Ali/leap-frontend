@@ -1,5 +1,6 @@
 "use client";
 
+import Modal from "@/app/_components/connectionUrl-modal";
 import { SERVER_URL } from "@/utils/server";
 import axios from "axios";
 import Link from "next/link";
@@ -25,12 +26,14 @@ const DashboardNodeScreen = () => {
     axios
       .get(SERVER_URL + "/api/order/user", {
         headers: {
-          "x-auth-token": token
-        }
+          "x-auth-token": token,
+        },
       })
       .then((res) => {
         if (res.data && res.data.data) {
-          let arr = res.data.data.filter(item => item.order_category.includes("rpc"));
+          let arr = res.data.data.filter((item) =>
+            item.order_category.toLowerCase().includes("rpc")
+          );
           setOrderList(arr);
         } else {
           console.error("Invalid response format", res);
@@ -48,7 +51,7 @@ const DashboardNodeScreen = () => {
       showCancelButton: false,
       confirmButtonText: "Yes Delete",
       confirmButtonColor: "#37F94E",
-      denyButtonText: `Cancel`
+      denyButtonText: `Cancel`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -57,12 +60,12 @@ const DashboardNodeScreen = () => {
           .put(
             SERVER_URL + `/api/order/update/${id}`,
             {
-              status: "cancelled"
+              status: "cancelled",
             },
             {
               headers: {
-                "x-auth-token": token
-              }
+                "x-auth-token": token,
+              },
             }
           )
           .then((res) => {
@@ -72,7 +75,7 @@ const DashboardNodeScreen = () => {
                 icon: "success",
                 title: "Your order has been deleted successfully",
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1500,
               });
               setIsDelete(true);
             }
@@ -83,12 +86,22 @@ const DashboardNodeScreen = () => {
               icon: "error",
               title: "Server error. Please try again.",
               showConfirmButton: false,
-              timer: 1500
+              timer: 1500,
             })
           );
       }
     });
   };
+
+  /// Modal of connection URL
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selected, setSelected] = useState(null);
+
+  const handleOpenModal = (order) => {
+    setIsModalOpen(true);
+    setSelected(order);
+  };
+
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
       <div className="h-full w-full max-w-[1500px] p-2 lg:p-5">
@@ -125,6 +138,7 @@ const DashboardNodeScreen = () => {
                         <th className="py-2 border">Order Date</th>
                         <th className="py-2 border">Expiry Date</th>
                         <th className="py-2 border">Action</th>
+                        <th className="py-2 border">Connection URL</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -181,26 +195,34 @@ const DashboardNodeScreen = () => {
                           <td className="py-2  px-4 border-b text-center">
                             {/* {(order.isExpiryNear ||
                               order.status === "inactive") && ( */}
-                              <Link
-                                href={`${
-                                  order.order_category === "vps"
-                                    ? `/buy-vps?id=${order._id}`
-                                    : `/buy?id=${order._id}`
-                                }`}
+                            <Link
+                              href={`${
+                                order.order_category === "vps"
+                                  ? `/buy-vps?id=${order._id}`
+                                  : `/buy?id=${order._id}`
+                              }`}
+                            >
+                              <span
+                                className="px-2 cursor-pointer mr-[10px] py-1 bg-darkPrimary text-black text-[12px] rounded-md disabled:opacity-50"
+                                // onClick={() => onClickRenewButton()}
                               >
-                                <span
-                                  className="px-2 cursor-pointer mr-[10px] py-1 bg-darkPrimary text-black text-[12px] rounded-md disabled:opacity-50"
-                                  // onClick={() => onClickRenewButton()}
-                                >
-                                  Renew
-                                </span>
-                              </Link>
+                                Renew
+                              </span>
+                            </Link>
                             {/* )} */}
                             <span
                               className="px-2 cursor-pointer py-1 bg-red-700 text-white text-[12px] rounded-md disabled:opacity-50"
                               onClick={() => onClickDeleteButton(order._id)}
                             >
                               Delete
+                            </span>
+                          </td>
+                          <td className="py-2 px-4 border-b text-center capitalize">
+                            <span
+                              onClick={() => handleOpenModal(order)}
+                              className="px-2 cursor-pointer mr-[5px] py-1 bg-gray-300 text-black text-[12px] rounded-md disabled:opacity-50"
+                            >
+                              Click Here
                             </span>
                           </td>
                         </tr>
@@ -247,6 +269,117 @@ const DashboardNodeScreen = () => {
                 {/* <span className="text-base">Want to test the waters first? </span> */}
               </div>
             </div>
+          )}
+          {orderList.length > 0 && selected !== null && (
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+              <p className="dark:text-white text-black font-inter font-bold pb-[5px]">
+                Bot URLs
+              </p>
+              <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
+                HTTP:&nbsp;
+                <a
+                  href={`https://${
+                    selected.region.toLowerCase().includes("ams")
+                      ? "ams"
+                      : selected.region.toLowerCase().includes("va")
+                      ? "va"
+                      : "fr"
+                  }.leap-blockchain.com/?api_key=${selected.api_key}`}
+                  target="_blank"
+                  className="text-blue-500 underline font-inter "
+                >
+                  https://
+                  {selected.region.toLowerCase().includes("ams")
+                    ? "ams"
+                    : selected.region.toLowerCase().includes("va")
+                    ? "va"
+                    : "fr"}
+                  .leap-blockchain.com/?api_key={selected.api_key}{" "}
+                </a>
+              </p>
+
+              <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
+                WSS:&nbsp;
+                <span className="font-normal">
+                  wss://
+                  {selected.region.toLowerCase().includes("ams")
+                    ? "ams"
+                    : selected.region.toLowerCase().includes("va")
+                    ? "va"
+                    : "fr"}
+                  .leap-blockchain.com/?api_key={selected.api_key}
+                </span>{" "}
+              </p>
+              <p className="dark:text-white text-black font-inter font-bold pt-[15px] pb-[5px]">
+                gRPC/Geyser URLs
+              </p>
+              <p>
+                <a
+                  href={` https://${
+                    selected.region.toLowerCase().includes("ams")
+                      ? "ams"
+                      : selected.region.toLowerCase().includes("va")
+                      ? "va"
+                      : "fr"
+                  }.leap-blockchain.com:1000/?api_key=${selected.api_key}`}
+                  target="_blank"
+                  className="text-blue-500 underline font-inter "
+                >
+                  https://
+                  {selected.region.toLowerCase().includes("ams")
+                    ? "ams"
+                    : selected.region.toLowerCase().includes("va")
+                    ? "va"
+                    : "fr"}
+                  .leap-blockchain.com:1000/?api_key={selected.api_key}
+                </a>
+              </p>
+              <p>
+                <a
+                  href={`https://${
+                    selected.region.toLowerCase().includes("ams")
+                      ? "ams"
+                      : selected.region.toLowerCase().includes("va")
+                      ? "va"
+                      : "fr"
+                  }.leap-blockchain.com/10443?api_key=${selected.api_key}`}
+                  target="_blank"
+                  className="text-blue-500 underline font-inter "
+                >
+                  https://
+                  {selected.region.toLowerCase().includes("ams")
+                    ? "ams"
+                    : selected.region.toLowerCase().includes("va")
+                    ? "va"
+                    : "fr"}
+                  .leap-blockchain.com/10443?api_key={selected.api_key}
+                </a>
+              </p>
+              <p className="dark:text-white text-black font-inter font-bold pt-[15px] pb-[5px]">
+                Browser URL
+              </p>
+              <p className="dark:text-white text-black">
+                <a
+                  href={`https://${
+                    selected.region.toLowerCase().includes("ams")
+                      ? "ams"
+                      : selected.region.toLowerCase().includes("va")
+                      ? "va"
+                      : "fr"
+                  }.leap-blockchain.com/?api_key=${selected.api_key}`}
+                  target="_blank"
+                  className="text-blue-500 underline font-inter "
+                >
+                  https://
+                  {selected.region.toLowerCase().includes("ams")
+                    ? "ams"
+                    : selected.region.toLowerCase().includes("va")
+                    ? "va"
+                    : "fr"}
+                  .leap-blockchain.com/?api_key={selected.api_key}
+                </a>
+              </p>
+            </Modal>
           )}
         </div>
       </div>
