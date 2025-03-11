@@ -235,6 +235,15 @@ export default function RootLayout({ children }) {
               )}
             </ThemeProvider>
           </Suspense>
+          {/* <!-- Google tag (gtag.js) --> */}
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-EG8RE8E6ZQ"></script>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments)}
+            gtag('js', new Date());
+
+            gtag('config', 'G-EG8RE8E6ZQ');
+          </script>
         </body>
       </DynamicContextProvider>
     </html>
