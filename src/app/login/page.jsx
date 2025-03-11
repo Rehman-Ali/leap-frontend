@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import FullPageLoader from "../_components/loader";
 
+
+
+
 const LoginPage = () => {
   const router = useRouter();
   const [loader, setLoader] = useState(true);

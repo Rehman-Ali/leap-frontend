@@ -18,6 +18,8 @@ import Swal from "sweetalert2";
 import Script from "next/script"; // ✅ Import next/script
 import Head from "next/head";
 
+
+
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -206,11 +208,14 @@ export default function RootLayout({ children }) {
   const includeDashboardLayout =
     privateRoutes.includes(pathname) || adminRoutes.includes(pathname);
 
+
+  
+
   return (
     <html lang="en">
       {/* ✅ Google Analytics Script */}
       <Head>
-        <meta name="google-site-verification" content="KtTMBV0PsMKme0FfaQTOlUYnMc4y7jTfcKHDXF_4CzU" />
+       
         <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-EG8RE8E6ZQ"
