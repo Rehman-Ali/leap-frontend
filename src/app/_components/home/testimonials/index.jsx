@@ -150,7 +150,7 @@ const Testimonials = () => {
         <div className="absolute top-0 right-0 z-10 h-full w-[100px] bg-gradient-to-l from-[#070806] to-transparent pointer-events-none"></div>
 
         <Marquee direction="right" pauseOnHover={true}>
-          <div className="w-[370px] mx-[12px] h-[480px] bg-[#13141266]  flex flex-col justify-between  rounded-[12px] border border-[#1f250e] p-[24px]">
+          <div className="w-[370px] mx-[12px] h-[500px] bg-[#13141266]  flex flex-col justify-between  rounded-[12px] border border-[#1f250e] p-[24px]">
             <p className="text-[16px] text-[#c5c6c5] font-inter">
               &quot;I have used most of the different bots and nodes on the
               market, and I must say I am really impressed with what Leap has
