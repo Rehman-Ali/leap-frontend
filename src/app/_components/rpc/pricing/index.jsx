@@ -80,7 +80,7 @@ const RPCPricing = () => {
             </div>
             <div className="w-[25%] px-6 py-[20px] bg-[#37415133] rounded-tl-[24px] rounded-bl-[24px]">
               <div className=" flex flex-col justify-end">
-                <div className="grow pb-4 mb-4 border-b border-slate-800">
+                <div className="grow pb-[55px] mw-12:pb-[40px] mb-4 border-b border-slate-800">
                   <div className="text-base font-inter font-medium text-white pb-0.5">
                     Getting Started
                   </div>
@@ -99,7 +99,7 @@ const RPCPricing = () => {
                   Instant access to any location of your choice
                   </div>
                 </div>
-                <div className="pb-4 border-b border-slate-800">
+                <div className=" pb-4 border-b border-slate-800">
                   <Link href="/buy">
                     <button
                       className="flex text-[16px] gap-2 flex-row h-[32px] text-black  items-center justify-center rounded-[50px] bg-darkPrimary font-medium font-inter cursor-pointer hover:bg-white w-full transition duration-150 ease-in-out group"
@@ -254,7 +254,7 @@ const RPCPricing = () => {
             </div>
             <div className="w-[25%]  px-6 py-[20px] bg-[#37415133] rounded-tr-[24px] rounded-br-[24px]">
               <div className=" flex flex-col justify-end">
-                <div className="grow pb-4 mb-4 border-b border-slate-800">
+                <div className="grow pb-[34px] mb-4 border-b border-slate-800">
                   <div className="text-base font-inter font-medium text-white pb-0.5">
                     Enterprise
                   </div>
