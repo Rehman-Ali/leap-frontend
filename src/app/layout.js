@@ -15,6 +15,7 @@ import FullPageLoader from "./_components/loader";
 import axios from "axios";
 import { SERVER_URL } from "@/utils/server";
 import Swal from "sweetalert2";
+import Script from "next/script"; // ✅ Import next/script
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
@@ -206,6 +207,22 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+       {/* ✅ Google Analytics Script */}
+       <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-EG8RE8E6ZQ"
+      />
+      <Script
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-EG8RE8E6ZQ');
+          `,
+        }}
+      />
       <DynamicContextProvider
         theme="auto"
         settings={{
@@ -235,15 +252,7 @@ export default function RootLayout({ children }) {
               )}
             </ThemeProvider>
           </Suspense>
-          {/* <!-- Google tag (gtag.js) --> */}
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-EG8RE8E6ZQ"></script>
-          <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments)}
-            gtag('js', new Date());
-
-            gtag('config', 'G-EG8RE8E6ZQ');
-          </script>
+         
         </body>
       </DynamicContextProvider>
     </html>
