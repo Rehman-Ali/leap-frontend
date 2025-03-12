@@ -18,8 +18,6 @@ import Swal from "sweetalert2";
 import Script from "next/script"; // ✅ Import next/script
 import Head from "next/head";
 
-
-
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -208,14 +206,10 @@ export default function RootLayout({ children }) {
   const includeDashboardLayout =
     privateRoutes.includes(pathname) || adminRoutes.includes(pathname);
 
-
-  
-
   return (
     <html lang="en">
       {/* ✅ Google Analytics Script */}
       <Head>
-       
         <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-EG8RE8E6ZQ"
@@ -228,7 +222,7 @@ export default function RootLayout({ children }) {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-EG8RE8E6ZQ');
-          `,
+          `
           }}
         />
       </Head>
@@ -247,21 +241,8 @@ export default function RootLayout({ children }) {
       >
         <body className={includeDashboardLayout ? "" : "bg-bodyColor"}>
           <Suspense fallback={<FullPageLoader />}>
-            <ThemeProvider attribute="class" defaultTheme="dark">
-              {includeDashboardLayout ? (
-                <DashboardLayout>{children}</DashboardLayout>
-              ) : (
-                <div
-                  className={`${inter.variable} container mx-auto min-h-screen flex flex-col`}
-                >
-                  {pathname !== "/login" && <Header />}
-                  <main className="flex-grow">{children}</main>
-                  {pathname !== "/login" && <Footer />}
-                </div>
-              )}
-            </ThemeProvider>
+            <main className="flex-grow">{children}</main>
           </Suspense>
-
         </body>
       </DynamicContextProvider>
     </html>
