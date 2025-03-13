@@ -39,7 +39,7 @@ const Footer = () => {
 
           {/* Navigation Links */}
           <div className="w-full lg:w-1/5">
-            <p className="text-lg lg:text-xl font-medium text-white">Page</p>
+            <p className="text-lg lg:text-xl font-medium text-white">Pages</p>
             <nav className="flex flex-col gap-3 mt-4">
               {[
                 { name: "Home", href: "/" },

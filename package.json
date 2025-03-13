@@ -13,6 +13,7 @@
     "@dynamic-labs/sdk-react-core": "*",
     "@dynamic-labs/solana": "*",
     "@dynamic-labs/solana-core": "^4.6.3",
+    "@solana/spl-token": "^0.4.13",
     "@solana/web3.js": "^1.98.0",
     "@tiptap/extension-list": "^3.0.0-next.4",
     "@tiptap/pm": "^2.11.5",
