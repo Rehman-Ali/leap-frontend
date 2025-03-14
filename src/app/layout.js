@@ -112,7 +112,7 @@ export default function RootLayout({ children }) {
     const role = JSON.parse(localStorage.getItem("role"));
     const allRoutes = [...privateRoutes, ...adminRoutes, ...publicRoutes];
 
-    // 🔹 Check invalid route
+   // // 🔹 Check invalid route
     if (!allRoutes.includes(pathname)) {
       if (pathname !== "/not-found") {
         router.replace("/not-found");
