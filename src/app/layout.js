@@ -55,6 +55,8 @@ export default function RootLayout({ children }) {
     "/solana-wrapper",
     "/vapor-tool",
     "/burn-token",
+    "/robots.txt",
+    "/sitemap.xml"
   ];
 
   const token =
