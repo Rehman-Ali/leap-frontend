@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
     "/invoices",
     "/buy",
     "/buy-vps",
-    "/vps-info"
+    "/vps-info",
   ];
   const adminRoutes = [
     "/admin-dashboard",
@@ -51,7 +51,10 @@ export default function RootLayout({ children }) {
     "/rpc",
     "/trading-bot",
     "/vps",
-    "/not-found"
+    "/not-found",
+    "/solana-wrapper",
+    "/vapor-tool",
+    "/burn-token",
   ];
 
   const token =
@@ -254,9 +257,9 @@ export default function RootLayout({ children }) {
                 <div
                   className={`${inter.variable} container mx-auto min-h-screen flex flex-col`}
                 >
-                  {pathname !== "/login" && <Header />}
+                  {/* {pathname !== "/login" && <Header />} */}
                   <main className="flex-grow">{children}</main>
-                  {pathname !== "/login" && <Footer />}
+                  {/* {pathname !== "/login" && <Footer />} */}
                 </div>
               )}
             </ThemeProvider>
