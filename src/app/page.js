@@ -1,9 +1,9 @@
 
 import HomePageScreen from "@/pages/home-page";
-import BurnTokenToolScreen from "@/pages/tools-page/burn-token-tool";
-import SolanaWrapperScreen from "@/pages/tools-page/solana-wrapper-tool";
-import CreateTestTokenAccounts from "@/pages/tools-page/test-token-create";
-import VaporToolScreen from "@/pages/tools-page/vapor-tool";
+// import BurnTokenToolScreen from "@/pages/tools-page/burn-token-tool";
+// import SolanaWrapperScreen from "@/pages/tools-page/solana-wrapper-tool";
+// import CreateTestTokenAccounts from "@/pages/tools-page/test-token-create";
+// import VaporToolScreen from "@/pages/tools-page/vapor-tool";
 
 
 
