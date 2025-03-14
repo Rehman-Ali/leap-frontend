@@ -74,7 +74,7 @@ const Header = () => {
             </div>
 
             {isToolsOpen && (
-              <div className="absolute top-full mt-2 w-[200px] bg-[#07080699] rounded-lg shadow-lg border border-[#20211f]">
+              <div className="absolute top-full mt-2 w-[200px] bg-bodyColor rounded-lg border border-[#20211f]">
                 <Link
                   href="/solana-wrapper"
                   className="block px-4 py-3 text-white hover:bg-darkPrimary"
