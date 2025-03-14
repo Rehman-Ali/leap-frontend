@@ -257,9 +257,9 @@ export default function RootLayout({ children }) {
                 <div
                   className={`${inter.variable} container mx-auto min-h-screen flex flex-col`}
                 >
-                  {/* {pathname !== "/login" && <Header />} */}
+                  {pathname !== "/login" && <Header />}
                   <main className="flex-grow">{children}</main>
-                  {/* {pathname !== "/login" && <Footer />} */}
+                  {pathname !== "/login" && <Footer />}
                 </div>
               )}
             </ThemeProvider>
