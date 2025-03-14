@@ -1,4 +1,4 @@
-import BurnTokenToolScreen from "@/pages/tools-page/burn-token-tool";
+import BurnTokenToolScreen from "@/app/_components/tools-components/burn-token-tool";
 
 export const metadata = {
   title: "Leap",

@@ -1,4 +1,4 @@
-import SolanaWrapperScreen from "@/pages/tools-page/solana-wrapper-tool";
+import SolanaWrapperScreen from "@/app/_components/tools-components/solana-wrapper-tool";
 
 export const metadata = {
   title: "Leap",

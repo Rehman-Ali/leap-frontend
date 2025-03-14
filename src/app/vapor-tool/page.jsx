@@ -1,4 +1,4 @@
-import VaporToolScreen from "@/pages/tools-page/vapor-tool";
+import VaporToolScreen from "@/app/_components/tools-components/vapor-tool";
 
 export const metadata = {
   title: "Leap",
