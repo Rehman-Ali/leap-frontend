@@ -17,7 +17,7 @@ const Accordion = ({ items, isVisible }) => {
       if (part.startsWith("http")) {
         return (
           <a key={index} href={part} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
-            Discord 
+            here 
           </a>
         );
       }
@@ -102,17 +102,17 @@ const FAQComponent = () => {
     {
       title: "How do I get started?",
       content:
-        "Simply join our discord here https://discord.gg/9UXPJgnZ5q Our team will guide you through the onboarding process."
+        "Simply join our discord https://discord.gg/9UXPJgnZ5q Our team will guide you through the onboarding process."
     },
     {
       title: "Do Leap offer a free trial?",
       content:
-        "Simply join our discord here https://discord.gg/9UXPJgnZ5q Our team will guide you through the onboarding process."
+        "Simply join our discord https://discord.gg/9UXPJgnZ5q Our team will guide you through the onboarding process."
     },
     {
       title: "Where is Leaps Node located?",
       content:
-        "For our shared nodes you can choose between Virginia,Frankfurt and Amsterdam. However for private node we have a lot more location available."
+        "For our shared nodes you can choose between Virginia, Frankfurt and Amsterdam. However for private node we have a lot more location available."
     },
     {
       title: "Can I cancel my Subscription at any time?",

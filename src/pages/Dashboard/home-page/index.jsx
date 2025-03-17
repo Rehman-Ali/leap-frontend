@@ -17,7 +17,7 @@ const DashboardScreen = () => {
 
     axios
       .get(`${SERVER_URL}/api/order/near-to-expire`, {
-        headers: { "x-auth-token": JSON.parse(token) },
+        headers: { "x-auth-token": JSON.parse(token) }
       })
       .then((res) => {
         if (res.data.data.length > 0) {
@@ -52,7 +52,7 @@ const DashboardScreen = () => {
 
     axios
       .get(`${SERVER_URL}/api/order/user`, {
-        headers: { "x-auth-token": JSON.parse(token) },
+        headers: { "x-auth-token": JSON.parse(token) }
       })
       .then((res) => {
         if (res.data && res.data.data) {
@@ -76,6 +76,40 @@ const DashboardScreen = () => {
     setIsModalOpen(true);
     setSelected(order);
   };
+
+  const [copyStatus, setCopyStatus] = useState({});
+
+  // Function to copy text to clipboard and update status
+  const copyToClipboard = (text, id) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setCopyStatus({ ...copyStatus, [id]: true });
+
+        // Reset status after 2 seconds
+        setTimeout(() => {
+          setCopyStatus({ ...copyStatus, [id]: false });
+        }, 2000);
+      })
+      .catch((err) => {
+        console.error("Failed to copy: ", err);
+      });
+  };
+
+  // Helper function to get base URL based on region
+  const getBaseUrl = () => {
+    if (selected !== null) {
+      if (selected.region.toLowerCase().includes("ams")) {
+        return "ams";
+      } else if (selected.region.toLowerCase().includes("va")) {
+        return "va";
+      } else {
+        return "fr";
+      }
+    }
+  };
+
+  const baseUrl = getBaseUrl();
 
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
@@ -235,113 +269,136 @@ const DashboardScreen = () => {
         )}
         {orderList.length > 0 && selected !== null && (
           <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-            <p className="dark:text-white text-black font-inter font-bold pb-[5px]">
-              Bot URLs
-            </p>
-            <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
-              HTTP:&nbsp;
-              <a
-                href={`https://${
-                  selected.region.toLowerCase().includes("ams")
-                    ? "ams"
-                    : selected.region.toLowerCase().includes("va")
-                    ? "va"
-                    : "fr"
-                }.leap-blockchain.com/?api_key=${selected.api_key}`}
-                target="_blank"
-                className="text-blue-500 underline font-inter "
-              >
-                https://
-                {selected.region.toLowerCase().includes("ams")
-                  ? "ams"
-                  : selected.region.toLowerCase().includes("va")
-                  ? "va"
-                  : "fr"}
-                .leap-blockchain.com/?api_key={selected.api_key}{" "}
-              </a>
-            </p>
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="bg-white  dark:bg-bodyColor p-6 rounded-lg max-w-lg w-full">
+                <div className="flex justify-between mb-4">
+                  <h3 className="font-bold text-lg text-black dark:text-white">
+                    Connection Details
+                  </h3>
+                  <button
+                    onClick={() => setIsModalOpen(false)}
+                    className="text-gray-500 hover:text-gray-700"
+                  >
+                    ✕
+                  </button>
+                </div>
 
-            <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
-              WSS:&nbsp;
-              <span className="font-normal">
-                wss://
-                {selected.region.toLowerCase().includes("ams")
-                  ? "ams"
-                  : selected.region.toLowerCase().includes("va")
-                  ? "va"
-                  : "fr"}
-                .leap-blockchain.com/?api_key={selected.api_key}
-              </span>{" "}
-            </p>
-            <p className="dark:text-white text-black font-inter font-bold pt-[15px] pb-[5px]">
-              gRPC/Geyser URLs
-            </p>
-            <p>
-              <a
-                href={` https://${
-                  selected.region.toLowerCase().includes("ams")
-                    ? "ams"
-                    : selected.region.toLowerCase().includes("va")
-                    ? "va"
-                    : "fr"
-                }.leap-blockchain.com:1000/?api_key=${selected.api_key}`}
-                target="_blank"
-                className="text-blue-500 underline font-inter "
-              >
-                https://
-                {selected.region.toLowerCase().includes("ams")
-                  ? "ams"
-                  : selected.region.toLowerCase().includes("va")
-                  ? "va"
-                  : "fr"}
-                .leap-blockchain.com:1000/?api_key={selected.api_key}
-              </a>
-            </p>
-            <p>
-              <a
-                href={`https://${
-                  selected.region.toLowerCase().includes("ams")
-                    ? "ams"
-                    : selected.region.toLowerCase().includes("va")
-                    ? "va"
-                    : "fr"
-                }.leap-blockchain.com/10443?api_key=${selected.api_key}`}
-                target="_blank"
-                className="text-blue-500 underline font-inter "
-              >
-                https://
-                {selected.region.toLowerCase().includes("ams")
-                  ? "ams"
-                  : selected.region.toLowerCase().includes("va")
-                  ? "va"
-                  : "fr"}
-                .leap-blockchain.com/10443?api_key={selected.api_key}
-              </a>
-            </p>
-            <p className="dark:text-white text-black font-inter font-bold pt-[15px] pb-[5px]">
-              Browser URL
-            </p>
-            <p className="dark:text-white text-black">
-              <a
-                href={`https://${
-                  selected.region.toLowerCase().includes("ams")
-                    ? "ams"
-                    : selected.region.toLowerCase().includes("va")
-                    ? "va"
-                    : "fr"
-                }.leap-blockchain.com/?api_key=${selected.api_key}`}
-                target="_blank"
-                className="text-blue-500 underline font-inter "
-              >
-                https://
-                {selected.region.toLowerCase().includes("ams")
-                  ? "ams"
-                  : selected.region.toLowerCase().includes("va")
-                  ? "va"
-                  : "fr"}
-                .leap-blockchain.com/?api_key={selected.api_key}
-              </a>
-            </p>
+                <div className="space-y-4">
+                  <p className="dark:text-white text-black font-inter font-bold pb-[5px]">
+                    Bot URLs
+                  </p>
+
+                  <div>
+                    <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
+                      HTTP:
+                    </p>
+                    <div className="flex items-center space-x-2">
+                      <p className="dark:text-white text-black font-inter font-normal truncate flex-1">
+                        {`https://${baseUrl}.leap-blockchain.com/?api_key=${selected.api_key}`}
+                      </p>
+                      <button
+                        onClick={() =>
+                          copyToClipboard(
+                            `https://${baseUrl}.leap-blockchain.com/?api_key=${selected.api_key}`,
+                            "http"
+                          )
+                        }
+                        className="bg-darkPrimary cursor-pointer text-white px-3 py-1 rounded text-sm"
+                      >
+                        {copyStatus.http ? "Copied!" : "Copy"}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
+                      WSS:
+                    </p>
+                    <div className="flex items-center space-x-2">
+                      <p className="dark:text-white text-black font-inter font-normal truncate flex-1">
+                        {`wss://${baseUrl}.leap-blockchain.com/?api_key=${selected.api_key}`}
+                      </p>
+                      <button
+                        onClick={() =>
+                          copyToClipboard(
+                            `wss://${baseUrl}.leap-blockchain.com/?api_key=${selected.api_key}`,
+                            "wss"
+                          )
+                        }
+                        className="bg-darkPrimary cursor-pointer text-white px-3 py-1 rounded text-sm"
+                      >
+                        {copyStatus.wss ? "Copied!" : "Copy"}
+                      </button>
+                    </div>
+                  </div>
+
+                  <p className="dark:text-white text-black font-inter font-bold pt-[15px] pb-[5px]">
+                    gRPC/Geyser URLs
+                  </p>
+
+                  <div>
+                    <div className="flex items-center space-x-2">
+                      <p className="dark:text-white text-black font-inter font-normal truncate flex-1">
+                        {`https://${baseUrl}.leap-blockchain.com:1000/?api_key=${selected.api_key}`}
+                      </p>
+                      <button
+                        onClick={() =>
+                          copyToClipboard(
+                            `https://${baseUrl}.leap-blockchain.com:1000/?api_key=${selected.api_key}`,
+                            "grpc1"
+                          )
+                        }
+                        className="bg-darkPrimary cursor-pointer text-white px-3 py-1 rounded text-sm"
+                      >
+                        {copyStatus.grpc1 ? "Copied!" : "Copy"}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center space-x-2">
+                      <p className="dark:text-white text-black font-inter font-normal truncate flex-1">
+                        {`https://${baseUrl}.leap-blockchain.com/10443?api_key=${selected.api_key}`}
+                      </p>
+                      <button
+                        onClick={() =>
+                          copyToClipboard(
+                            `https://${baseUrl}.leap-blockchain.com/10443?api_key=${selected.api_key}`,
+                            "grpc2"
+                          )
+                        }
+                        className="bg-darkPrimary cursor-pointer text-white px-3 py-1 rounded text-sm"
+                      >
+                        {copyStatus.grpc2 ? "Copied!" : "Copy"}
+                      </button>
+                    </div>
+                  </div>
+
+                  <p className="dark:text-white text-black font-inter font-bold pt-[15px] pb-[5px]">
+                    Browser URL
+                  </p>
+
+                  <div>
+                    <div className="flex items-center space-x-2">
+                      <p className="dark:text-white text-black font-inter font-normal truncate flex-1">
+                        {`https://${baseUrl}.leap-blockchain.com/?api_key=${selected.api_key}`}
+                      </p>
+                      <button
+                        onClick={() =>
+                          copyToClipboard(
+                            `https://${baseUrl}.leap-blockchain.com/?api_key=${selected.api_key}`,
+                            "browser"
+                          )
+                        }
+                        className="bg-darkPrimary cursor-pointer text-white px-3 py-1 rounded text-sm"
+                      >
+                        {copyStatus.browser ? "Copied!" : "Copy"}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </Modal>
         )}
       </div>

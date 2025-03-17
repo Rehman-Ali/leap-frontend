@@ -94,14 +94,6 @@ const DashboardVpsScreen = () => {
   };
 
 
- /// Modal of connection URL
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selected, setSelected] = useState(null);
-
-  const handleOpenModal = (order) => {
-    setIsModalOpen(true);
-    setSelected(order);
-  };
 
 
   return (
@@ -140,7 +132,7 @@ const DashboardVpsScreen = () => {
                         <th className="py-2 border">Order Date</th>
                         <th className="py-2 border">Expiry Date</th>
                         <th className="py-2 border">Action</th>
-                        {/* <th className="py-2 border">Connection URL</th> */}
+                       
 
                       </tr>
                     </thead>
@@ -218,14 +210,7 @@ const DashboardVpsScreen = () => {
                               Delete
                             </span>
                           </td>
-                          {/* <td className="py-2 px-4 border-b text-center capitalize">
-                            <span
-                              onClick={() => handleOpenModal(order)}
-                              className="px-2 cursor-pointer mr-[5px] py-1 bg-gray-300 text-black text-[12px] rounded-md disabled:opacity-50"
-                            >
-                              Click Here
-                            </span>
-                          </td> */}
+                          
                         </tr>
                       ))}
                     </tbody>
@@ -271,117 +256,7 @@ const DashboardVpsScreen = () => {
               </div>
             </div>
           )}
-            {orderList.length > 0 && selected !== null && (
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-              <p className="dark:text-white text-black font-inter font-bold pb-[5px]">
-                Bot URLs
-              </p>
-              <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
-                HTTP:&nbsp;
-                <a
-                  href={`https://${
-                    selected.region.toLowerCase().includes("ams")
-                      ? "ams"
-                      : selected.region.toLowerCase().includes("va")
-                      ? "va"
-                      : "fr"
-                  }.leap-blockchain.com/?api_key=${selected.api_key}`}
-                  target="_blank"
-                  className="text-blue-500 underline font-inter "
-                >
-                  https://
-                  {selected.region.toLowerCase().includes("ams")
-                    ? "ams"
-                    : selected.region.toLowerCase().includes("va")
-                    ? "va"
-                    : "fr"}
-                  .leap-blockchain.com/?api_key={selected.api_key}{" "}
-                </a>
-              </p>
-
-              <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
-                WSS:&nbsp;
-                <span className="font-normal">
-                  wss://
-                  {selected.region.toLowerCase().includes("ams")
-                    ? "ams"
-                    : selected.region.toLowerCase().includes("va")
-                    ? "va"
-                    : "fr"}
-                  .leap-blockchain.com/?api_key={selected.api_key}
-                </span>{" "}
-              </p>
-              <p className="dark:text-white text-black font-inter font-bold pt-[15px] pb-[5px]">
-                gRPC/Geyser URLs
-              </p>
-              <p>
-                <a
-                  href={` https://${
-                    selected.region.toLowerCase().includes("ams")
-                      ? "ams"
-                      : selected.region.toLowerCase().includes("va")
-                      ? "va"
-                      : "fr"
-                  }.leap-blockchain.com:1000/?api_key=${selected.api_key}`}
-                  target="_blank"
-                  className="text-blue-500 underline font-inter "
-                >
-                  https://
-                  {selected.region.toLowerCase().includes("ams")
-                    ? "ams"
-                    : selected.region.toLowerCase().includes("va")
-                    ? "va"
-                    : "fr"}
-                  .leap-blockchain.com:1000/?api_key={selected.api_key}
-                </a>
-              </p>
-              <p>
-                <a
-                  href={`https://${
-                    selected.region.toLowerCase().includes("ams")
-                      ? "ams"
-                      : selected.region.toLowerCase().includes("va")
-                      ? "va"
-                      : "fr"
-                  }.leap-blockchain.com/10443?api_key=${selected.api_key}`}
-                  target="_blank"
-                  className="text-blue-500 underline font-inter "
-                >
-                  https://
-                  {selected.region.toLowerCase().includes("ams")
-                    ? "ams"
-                    : selected.region.toLowerCase().includes("va")
-                    ? "va"
-                    : "fr"}
-                  .leap-blockchain.com/10443?api_key={selected.api_key}
-                </a>
-              </p>
-              <p className="dark:text-white text-black font-inter font-bold pt-[15px] pb-[5px]">
-                Browser URL
-              </p>
-              <p className="dark:text-white text-black">
-                <a
-                  href={`https://${
-                    selected.region.toLowerCase().includes("ams")
-                      ? "ams"
-                      : selected.region.toLowerCase().includes("va")
-                      ? "va"
-                      : "fr"
-                  }.leap-blockchain.com/?api_key=${selected.api_key}`}
-                  target="_blank"
-                  className="text-blue-500 underline font-inter "
-                >
-                  https://
-                  {selected.region.toLowerCase().includes("ams")
-                    ? "ams"
-                    : selected.region.toLowerCase().includes("va")
-                    ? "va"
-                    : "fr"}
-                  .leap-blockchain.com/?api_key={selected.api_key}
-                </a>
-              </p>
-            </Modal>
-          )}
+         
         </div>
       </div>
     </div>

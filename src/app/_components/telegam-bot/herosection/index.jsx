@@ -119,7 +119,7 @@ const TelegramHeroSection = () => {
               image: "/assets/telebot/telebot1.png",
               title: "Coin Analytics",
               description:
-                "Automatically follow the trades by your selected wallets."
+                "Track market trends and wallet activity for smarter trades."
             },
             {
               image: "/assets/node/node2.png",
@@ -136,7 +136,7 @@ const TelegramHeroSection = () => {
               image: "/assets/telebot/telegram3.png",
               title: "MEV Protection",
               description:
-                "Automatically follow the trades by your selected wallets."
+                "Protect your trades from front-running and price manipulation."
             },
             {
               image: "/assets/telebot/telegram3.png",

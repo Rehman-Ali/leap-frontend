@@ -10,9 +10,9 @@ import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 
 const BuyVPSScreen = () => {
-  const searchParams = useSearchParams()
-  const router = useRouter();   
-  const search = searchParams.get('id')
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const search = searchParams.get("id");
   const [selectPlan, setSelectedPlan] = useState("Basic");
   const [selectRegion, setSelectedRegion] = useState("");
   const [operatingSystem, setOperatingSystem] = useState("");
@@ -42,83 +42,85 @@ const BuyVPSScreen = () => {
     fetchSolPrice();
   }, []);
 
- 
-   const payOrder = async () => {
-     if (!primaryWallet || !isSolanaWallet(primaryWallet)) {
-       return;
-     }
- 
-     const connection = await primaryWallet.getConnection();
-     const cluster = connection.rpcEndpoint.includes("devnet")
-       ? "devnet"
-       : "mainnet";
- 
-     const fromKey = new PublicKey(primaryWallet.address);
-     const toKey = new PublicKey(WALLET_ADDRESS);
- 
-     const balance = await connection.getBalance(fromKey);
- 
-     // const amountInLamports = 0.0;
-     const value = (
-       (selectPlan === "Basic"
-         ? selectedDuration === 7
-           ? 400
-           : (1200 / 30) * selectedDuration
-         : selectedDuration === 7
-         ? 600
-         : (1800 / 30) * selectedDuration) / solPrice
-     ).toFixed(4);
- 
-     const amountInLamports = 0 * 1000000000;
-     // const amountInLamports = Math.round(value * 1000000000);
- 
-     // check if wallet have balance or not
-     const estimatedFee = 5000; // Solana transactions typically cost around 5000 lamports
-     // const totalCost = amountInLamports + estimatedFee;
-     const totalCost = 0;
- 
-     if (balance < totalCost) {
-       Swal.fire({
-         position: "center",
-         icon: "error",
-         title: "Insufficient balance to complete this transaction.",
-         showConfirmButton: false,
-         timer: 2000
-       });
-       return;
-     }
- 
-     const transferTransaction = new Transaction().add(
-       SystemProgram.transfer({
-         fromPubkey: fromKey,
-         lamports: amountInLamports,
-         toPubkey: toKey
-       })
-     );
-     const blockhash = await connection.getLatestBlockhash();
-     transferTransaction.recentBlockhash = blockhash.blockhash;
-     transferTransaction.feePayer = fromKey;
- 
-     const signer = await primaryWallet.getSigner();
- 
-     await signer
-       .signAndSendTransaction(transferTransaction)
-       .then((value) => {
-         onConfirmOrder();
-         console.log(
-           `Transaction successful: https://solscan.io/tx/${value.signature}?cluster=${cluster}`
-         );
-       })
-       .catch((error) => {
-         Swal.fire({
-           position: "center",
-           icon: "error",
-           title: error || "Transaction failed. Try again!.",
-           showConfirmButton: false,
-           timer: 2500
-         });
-       });
-   };
+  const payOrder = async () => {
+    if (!primaryWallet || !isSolanaWallet(primaryWallet)) {
+      return;
+    }
+
+    const connection = await primaryWallet.getConnection();
+    const cluster = connection.rpcEndpoint.includes("devnet")
+      ? "devnet"
+      : "mainnet";
+
+    const fromKey = new PublicKey(primaryWallet.address);
+    const toKey = new PublicKey(WALLET_ADDRESS);
+
+    const balance = await connection.getBalance(fromKey);
+
+    // const amountInLamports = 0.0;
+    const value = (
+      (operatingSystem === "windows"
+        ? (80 / 30) * selectedDuration
+        : (60 / 30) * selectedDuration) /
+        solPrice -
+      ((operatingSystem === "windows"
+        ? (80 / 30) * selectedDuration
+        : (60 / 30) * selectedDuration) /
+        solPrice /
+        100) *
+        (selectedDuration === 90 ? 10 : selectedDuration === 180 ? 15 : 0)
+    ).toFixed(4);
+
+    const amountInLamports = 0 * 1000000000;
+    // const amountInLamports = Math.round(value * 1000000000);
+
+    // check if wallet have balance or not
+    const estimatedFee = 5000; // Solana transactions typically cost around 5000 lamports
+    // const totalCost = amountInLamports + estimatedFee;
+    const totalCost = 0;
+
+    if (balance < totalCost) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Insufficient balance to complete this transaction.",
+        showConfirmButton: false,
+        timer: 2000
+      });
+      return;
+    }
+
+    const transferTransaction = new Transaction().add(
+      SystemProgram.transfer({
+        fromPubkey: fromKey,
+        lamports: amountInLamports,
+        toPubkey: toKey
+      })
+    );
+    const blockhash = await connection.getLatestBlockhash();
+    transferTransaction.recentBlockhash = blockhash.blockhash;
+    transferTransaction.feePayer = fromKey;
+
+    const signer = await primaryWallet.getSigner();
+
+    await signer
+      .signAndSendTransaction(transferTransaction)
+      .then((value) => {
+        onConfirmOrder();
+        console.log(
+          `Transaction successful: https://solscan.io/tx/${value.signature}?cluster=${cluster}`
+        );
+      })
+      .catch((error) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: error || "Transaction failed. Try again!.",
+          showConfirmButton: false,
+          timer: 2500
+        });
+      });
+  };
 
   const getExpiryDate = (date) => {
     const serviceStartDate = new Date(date);
@@ -142,20 +144,31 @@ const BuyVPSScreen = () => {
     return `${month}/${day}/${year}`;
   };
 
-
   const onConfirmOrder = async () => {
     try {
       let body = {
         duration: selectedDuration,
         status: "active",
         price:
-         operatingSystem === "windows"
+          (operatingSystem === "windows"
             ? (80 / 30) * selectedDuration
-            : (60 / 30) * selectedDuration,
+            : (60 / 30) * selectedDuration) -
+          ((operatingSystem === "windows"
+            ? (80 / 30) * selectedDuration
+            : (60 / 30) * selectedDuration) /
+            100) *
+            (selectedDuration === 90 ? 10 : selectedDuration === 180 ? 15 : 0),
         price_in_SOL: (
           (operatingSystem === "windows"
             ? (80 / 30) * selectedDuration
-            : (60 / 30) * selectedDuration) / solPrice
+            : (60 / 30) * selectedDuration) /
+            solPrice -
+          ((operatingSystem === "windows"
+            ? (80 / 30) * selectedDuration
+            : (60 / 30) * selectedDuration) /
+            solPrice /
+            100) *
+            (selectedDuration === 90 ? 10 : selectedDuration === 180 ? 15 : 0)
         ).toFixed(4),
         order_category: "vps",
         operating_system: operatingSystem,
@@ -164,45 +177,45 @@ const BuyVPSScreen = () => {
         expiry_date: getFormattedDate(getExpiryDate(Date.now()))
       };
       let token = JSON.parse(localStorage.getItem("u_t"));
-      if(search === null){
-      const response = await axios.post(
-        `${SERVER_URL}/api/order/create`,
-        body,
-        {
-          headers: {
-            "x-auth-token": token
+      if (search === null) {
+        const response = await axios.post(
+          `${SERVER_URL}/api/order/create`,
+          body,
+          {
+            headers: {
+              "x-auth-token": token
+            }
           }
-        }
-      );
-    
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Your order has been placed successfully",
-        showConfirmButton: false,
-        timer: 1500
-      });
-      router.push("/vps-info")
-    }else{
-      const response = await axios.put(
-        `${SERVER_URL}/api/order/update/${search}`,
-        body,
-        {
-          headers: {
-            "x-auth-token": token
-          }
-        }
-      );
-      router.push("/vps-info")
+        );
 
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Your order has been renew successfully",
-        showConfirmButton: false,
-        timer: 1500
-      });
-    }
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your order has been placed successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        router.push("/vps-info");
+      } else {
+        const response = await axios.put(
+          `${SERVER_URL}/api/order/update/${search}`,
+          body,
+          {
+            headers: {
+              "x-auth-token": token
+            }
+          }
+        );
+        router.push("/vps-info");
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your order has been renew successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
     } catch (error) {
       Swal.fire({
         position: "center",
@@ -223,7 +236,7 @@ const BuyVPSScreen = () => {
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
       <div className="h-full w-full max-w-[1500px] p-2 lg:p-5">
-       <h1 className="text-xl font-semibold dark:text-white">Buy VPS</h1>
+        <h1 className="text-xl font-semibold dark:text-white">Buy VPS</h1>
         <div className="flex flex-row items-center gap-x-4 mb-5 mt-8">
           <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black">
             1
@@ -279,7 +292,7 @@ const BuyVPSScreen = () => {
                 </div>
                 <div className="flex-1">Unlimited Bandwith &amp; Requests</div>
               </li>
-             
+
               <li className="flex flex-row items-center gap-x-2">
                 <div className="flex-none text-[#6840FD]">
                   <svg
@@ -308,7 +321,7 @@ const BuyVPSScreen = () => {
                 </div>
                 <div className="flex-1">Unlimited Rate Limit</div>
               </li>
-             
+
               <li className="flex flex-row items-center gap-x-2">
                 <div className="flex-none text-[#6840FD]">
                   <svg
@@ -377,14 +390,13 @@ const BuyVPSScreen = () => {
             <div
               onClick={() => setOperatingSystem("linux")}
               className={`flex w-full p-5 ${
-                operatingSystem === 'linux'
+                operatingSystem === "linux"
                   ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
                   : "dark:text-white"
               }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
               Linux
             </div>
-           
           </div>
         </div>
 
@@ -420,23 +432,33 @@ const BuyVPSScreen = () => {
             </div>
             <div
               onClick={() => setSelectedDuration(90)}
-              className={`flex w-full p-5 ${
+              className={`flex justify-between  w-full p-5 ${
                 selectedDuration === 90
                   ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
                   : "dark:text-white"
               }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
-              3 month
+              <p>3 month</p>
+              <span
+                className={`flex text-[12px] px-2 py-1 items-center border rounded-lg cursor-pointer transition-colors border-gray-300 dark:hover:text-bodyColor`}
+              >
+                Discount 10%
+              </span>
             </div>
             <div
               onClick={() => setSelectedDuration(180)}
-              className={`flex w-full p-5 ${
+              className={`flex justify-between w-full p-5 ${
                 selectedDuration === 180
                   ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
                   : "dark:text-white"
               }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
             >
-              6 month
+              <p>6 month</p>
+              <span
+                className={`flex text-[12px] px-2 py-1 items-center border rounded-lg cursor-pointer transition-colors border-gray-300 dark:hover:text-bodyColor`}
+              >
+                Discount 15%
+              </span>
             </div>
           </div>
         </div>
@@ -580,7 +602,33 @@ const BuyVPSScreen = () => {
                         ).toFixed(4)}
                         &nbsp; SOL
                       </p>
-                      {/* <p className="dark:text-white">2.12 SOL</p> */}
+                    </div>
+                    <hr className="my-2.5" />
+                    <div className="flex justify-between">
+                      <p className="font-medium dark:text-white">
+                        Discount (
+                        {selectedDuration === 90
+                          ? "10%"
+                          : selectedDuration === 180
+                          ? "15%"
+                          : "0%"}
+                        )
+                      </p>
+                      <p className="dark:text-white">
+                        {(
+                          ((operatingSystem === "windows"
+                            ? (80 / 30) * selectedDuration
+                            : (60 / 30) * selectedDuration) /
+                            solPrice /
+                            100) *
+                          (selectedDuration === 90
+                            ? 10
+                            : selectedDuration === 180
+                            ? 15
+                            : 0)
+                        ).toFixed(4)}
+                        &nbsp; SOL
+                      </p>
                     </div>
                     <hr className="my-2.5" />
                     <div className="flex justify-between">
@@ -589,13 +637,23 @@ const BuyVPSScreen = () => {
                         {(
                           (operatingSystem === "windows"
                             ? (80 / 30) * selectedDuration
-                            : (60 / 30) * selectedDuration) / solPrice
+                            : (60 / 30) * selectedDuration) /
+                            solPrice -
+                          ((operatingSystem === "windows"
+                            ? (80 / 30) * selectedDuration
+                            : (60 / 30) * selectedDuration) /
+                            solPrice /
+                            100) *
+                            (selectedDuration === 90
+                              ? 10
+                              : selectedDuration === 180
+                              ? 15
+                              : 0)
                         ).toFixed(4)}
                         &nbsp; SOL
                       </p>
                     </div>
                     <hr className="my-2.5" />
-
                     <p className="text-sm text-red-500 h-4"></p>
                   </div>
                 </div>
