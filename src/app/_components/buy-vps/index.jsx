@@ -187,6 +187,12 @@ const BuyVPSScreen = () => {
             }
           }
         );
+        // save invoice
+        await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
+          headers: {
+            "x-auth-token": token
+          }
+        });
 
         Swal.fire({
           position: "center",
@@ -206,6 +212,12 @@ const BuyVPSScreen = () => {
             }
           }
         );
+        // save invoice
+        await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
+          headers: {
+            "x-auth-token": token
+          }
+        });
         router.push("/vps-info");
 
         Swal.fire({

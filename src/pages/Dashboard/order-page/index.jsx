@@ -22,7 +22,7 @@ const OrderScreen = () => {
   useEffect(() => {
     let token = JSON.parse(localStorage.getItem("u_t"));
     axios
-      .get(SERVER_URL + "/api/order/user", {
+      .get(SERVER_URL + "/api/invoice/user", {
         headers: {
           "x-auth-token": token
         }
@@ -57,14 +57,12 @@ const OrderScreen = () => {
                     <tr className="bg-darkPrimary text-black">
                       <th className="py-2 border">Sr</th>
                       <th className="py-2 border">Category</th>
-                      <th className="py-2 border">API Key</th>
                       <th className="py-2  border">Duration</th>
                       <th className="py-2 border">Price ($)</th>
                       <th className="py-2 border">Price (SOL)</th>
                       <th className="py-2 border">Operating System</th>
-                      <th className="py-2 border">Status</th>
-                      <th className="py-2 border">Order Date</th>
-                      <th className="py-2 border">Expiry Date</th>
+                      <th className="py-2 border">Starting Date</th>
+                      <th className="py-2 border">Ending Date</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -75,9 +73,6 @@ const OrderScreen = () => {
                         </td>
                         <td className="py-2 px-4 border-b uppercase text-center">
                           {order.order_category}
-                        </td>
-                        <td className="py-2 px-4 border-b text-start">
-                          {order.api_key}
                         </td>
                         <td className="py-2 px-4 border-b text-center">
                           {order.duration === 7
@@ -94,17 +89,6 @@ const OrderScreen = () => {
                           {order.operating_system === null
                             ? "N/A"
                             : order.operating_system}
-                        </td>
-                        <td className="py-2 px-4 border-b text-center capitalize">
-                          <span
-                            className={`px-2 cursor-pointer mr-[5px] py-1 ${
-                              order.status === "active"
-                                ? "bg-darkPrimary text-black "
-                                : "bg-red-700 text-white"
-                            }  text-[12px] rounded-md disabled:opacity-50`}
-                          >
-                            {order.status}
-                          </span>
                         </td>
                         <td className="py-2 px-4 border-b text-center">
                           {new Date(order.createdAt).toLocaleDateString()}

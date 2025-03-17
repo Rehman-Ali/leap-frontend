@@ -62,10 +62,22 @@ const BuyScreen = () => {
       (selectPlan === "Getting-Started"
         ? selectedDuration === 7
           ? 400
-          : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
+          : selectedDuration === 30
+          ? 1200
+          : selectedDuration === 90
+          ? 3400
+          : selectedDuration === 180
+          ? 6000
+          : ""
         : selectedDuration === 7
         ? 600
-        : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  "") / solPrice
+        : selectedDuration === 30
+        ? 1800
+        : selectedDuration === 90
+        ? 4800
+        : selectedDuration === 180
+        ? 8000
+        : "") / solPrice
     ).toFixed(4);
 
     const amountInLamports = 0 * 1000000000;
@@ -141,29 +153,51 @@ const BuyScreen = () => {
     return `${month}/${day}/${year}`;
   };
 
-  console.log(search, "search here====");
-
   const onConfirmOrder = async () => {
     try {
       let body = {
         duration: selectedDuration,
         status: "active",
         price:
-        (selectPlan === "Getting-Started"
-          ? selectedDuration === 7
-            ? 400
-            : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
-          : selectedDuration === 7
-          ? 600
-          : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  ""),
+          selectPlan === "Getting-Started"
+            ? selectedDuration === 7
+              ? 400
+              : selectedDuration === 30
+              ? 1200
+              : selectedDuration === 90
+              ? 3400
+              : selectedDuration === 180
+              ? 6000
+              : ""
+            : selectedDuration === 7
+            ? 600
+            : selectedDuration === 30
+            ? 1800
+            : selectedDuration === 90
+            ? 4800
+            : selectedDuration === 180
+            ? 8000
+            : "",
         price_in_SOL: (
           (selectPlan === "Getting-Started"
             ? selectedDuration === 7
               ? 400
-              : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
+              : selectedDuration === 30
+              ? 1200
+              : selectedDuration === 90
+              ? 3400
+              : selectedDuration === 180
+              ? 6000
+              : ""
             : selectedDuration === 7
             ? 600
-            : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  "") / solPrice
+            : selectedDuration === 30
+            ? 1800
+            : selectedDuration === 90
+            ? 4800
+            : selectedDuration === 180
+            ? 8000
+            : "") / solPrice
         ).toFixed(4),
         order_category: "RPC-" + selectPlan.toLowerCase(),
         operating_system: null,
@@ -182,6 +216,12 @@ const BuyScreen = () => {
             }
           }
         );
+        // save invoice
+        await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
+          headers: {
+            "x-auth-token": token
+          }
+        });
         console.log(response.data, "Response received");
         router.push("/nodes");
 
@@ -202,6 +242,12 @@ const BuyScreen = () => {
             }
           }
         );
+        // save invoice
+        await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
+          headers: {
+            "x-auth-token": token
+          }
+        });
         router.push("/nodes");
 
         Swal.fire({
@@ -1020,10 +1066,22 @@ const BuyScreen = () => {
                       {selectPlan === "Getting-Started"
                         ? selectedDuration === 7
                           ? 400
-                          : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
+                          : selectedDuration === 30
+                          ? 1200
+                          : selectedDuration === 90
+                          ? 3400
+                          : selectedDuration === 180
+                          ? 6000
+                          : ""
                         : selectedDuration === 7
                         ? 600
-                        : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  "" }
+                        : selectedDuration === 30
+                        ? 1800
+                        : selectedDuration === 90
+                        ? 4800
+                        : selectedDuration === 180
+                        ? 8000
+                        : ""}
                     </p>
                   </div>
                   <div className="">
@@ -1036,12 +1094,24 @@ const BuyScreen = () => {
                   <p className="dark:text-white">
                     $
                     {selectPlan === "Getting-Started"
-                        ? selectedDuration === 7
-                          ? 400
-                          : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
-                        : selectedDuration === 7
-                        ? 600
-                        : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  ""}
+                      ? selectedDuration === 7
+                        ? 400
+                        : selectedDuration === 30
+                        ? 1200
+                        : selectedDuration === 90
+                        ? 3400
+                        : selectedDuration === 180
+                        ? 6000
+                        : ""
+                      : selectedDuration === 7
+                      ? 600
+                      : selectedDuration === 30
+                      ? 1800
+                      : selectedDuration === 90
+                      ? 4800
+                      : selectedDuration === 180
+                      ? 8000
+                      : ""}
                   </p>
                 </div>
                 <hr className="my-2.5" />
@@ -1054,10 +1124,22 @@ const BuyScreen = () => {
                           (selectPlan === "Getting-Started"
                             ? selectedDuration === 7
                               ? 400
-                              : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
+                              : selectedDuration === 30
+                              ? 1200
+                              : selectedDuration === 90
+                              ? 3400
+                              : selectedDuration === 180
+                              ? 6000
+                              : ""
                             : selectedDuration === 7
                             ? 600
-                            : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  "") / solPrice
+                            : selectedDuration === 30
+                            ? 1800
+                            : selectedDuration === 90
+                            ? 4800
+                            : selectedDuration === 180
+                            ? 8000
+                            : "") / solPrice
                         ).toFixed(4)}
                         &nbsp; SOL
                       </p>
@@ -1071,10 +1153,22 @@ const BuyScreen = () => {
                           (selectPlan === "Getting-Started"
                             ? selectedDuration === 7
                               ? 400
-                              : selectedDuration === 30 ? 1200 : selectedDuration === 90 ?  3400 : selectedDuration === 180 ? 6000 :  ""
+                              : selectedDuration === 30
+                              ? 1200
+                              : selectedDuration === 90
+                              ? 3400
+                              : selectedDuration === 180
+                              ? 6000
+                              : ""
                             : selectedDuration === 7
                             ? 600
-                            : selectedDuration === 30 ? 1800 : selectedDuration === 90 ?  4800 : selectedDuration === 180 ? 8000 :  "") / solPrice
+                            : selectedDuration === 30
+                            ? 1800
+                            : selectedDuration === 90
+                            ? 4800
+                            : selectedDuration === 180
+                            ? 8000
+                            : "") / solPrice
                         ).toFixed(4)}
                         &nbsp; SOL
                       </p>
