@@ -79,19 +79,19 @@ const Header = () => {
                   href="/solana-wrapper"
                   className="block px-4 py-3 text-white hover:bg-darkPrimary"
                 >
-                  Sol Wrap/Unwrap
+                  SOL Wrap/Unwrap
                 </Link>
                 <Link
                   href="/vapor-tool"
                   className="block px-4 py-3 text-white hover:bg-darkPrimary"
                 >
-                   Close Unused Token
+                   Token Account Closer
                 </Link>
                 <Link
                   href="/burn-token"
                   className="block px-4 py-3 text-white hover:bg-darkPrimary"
                 >
-                  Sol token Burner
+                  SOL Token Burner
                 </Link>
               </div>
             )}
@@ -169,19 +169,19 @@ const Header = () => {
                     href="/solana-wrapper"
                     className="block px-4 py-2 text-white hover:bg-darkPrimary"
                   >
-                    Sol Wrap/Unwrap
+                    SOL Wrap/Unwrap
                   </Link>
                   <Link
                     href="/vapor-tool"
                     className="block px-4 py-2 text-white hover:bg-darkPrimary"
                   >
-                     Close Unused Token
+                     Token Account Closer
                   </Link>
                   <Link
                     href="/burn-token"
                     className="block px-4 py-2 text-white hover:bg-darkPrimary"
                   >
-                    Sol token Burner
+                    SOL Token Burner
                   </Link>
                 </div>
               )}
