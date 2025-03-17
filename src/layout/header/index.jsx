@@ -85,7 +85,7 @@ const Header = () => {
                   href="/vapor-tool"
                   className="block px-4 py-3 text-white hover:bg-darkPrimary"
                 >
-                  Vapor
+                   Close Unused Token
                 </Link>
                 <Link
                   href="/burn-token"
@@ -146,37 +146,36 @@ const Header = () => {
             {/* Tools Dropdown for Mobile */}
             <div className="flex flex-col items-center">
               <div
-               className="flex flex-row items-center gap-1"
-               onClick={() => setIsToolsOpen(!isToolsOpen)}
+                className="flex flex-row items-center gap-1"
+                onClick={() => setIsToolsOpen(!isToolsOpen)}
               >
-              <button
-                className={`${
-                  isToolsOpen ? "text-darkPrimary" : "text-white"
-                }  text-[16px] font-medium cursor-pointer`}
-               
-              >
-                Tools
-              </button>
-              {isToolsOpen ? (
-                <MdKeyboardArrowUp color="#37F94E" size={20} />
-              ) : (
-                <MdKeyboardArrowDown color="#fff" size={20} />
-              )}
+                <button
+                  className={`${
+                    isToolsOpen ? "text-darkPrimary" : "text-white"
+                  }  text-[16px] font-medium cursor-pointer`}
+                >
+                  Tools
+                </button>
+                {isToolsOpen ? (
+                  <MdKeyboardArrowUp color="#37F94E" size={20} />
+                ) : (
+                  <MdKeyboardArrowDown color="#fff" size={20} />
+                )}
               </div>
-              
+
               {isToolsOpen && (
                 <div className="flex flex-col items-center mt-2 w-40 bg-[#07080699] rounded-lg shadow-lg">
                   <Link
                     href="/solana-wrapper"
                     className="block px-4 py-2 text-white hover:bg-darkPrimary"
                   >
-                     Sol Wrap/Unwrap
+                    Sol Wrap/Unwrap
                   </Link>
                   <Link
                     href="/vapor-tool"
                     className="block px-4 py-2 text-white hover:bg-darkPrimary"
                   >
-                     Vapor
+                     Close Unused Token
                   </Link>
                   <Link
                     href="/burn-token"
