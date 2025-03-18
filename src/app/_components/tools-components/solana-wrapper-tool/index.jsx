@@ -178,11 +178,6 @@ const SolanaWrapperScreen = () => {
       await signer
         .signAndSendTransaction(transaction)
         .then((value) => {
-          // onConfirmOrder();
-          // console.log(
-          //   `Transaction successful: https://solscan.io/tx/${value.signature}?cluster=${cluster}`
-          // );
-          // setSuccess(`Successfully wrapped ${amount} SOL to wSOL!`);
           toast.success(`Successfully wrapped ${amount} SOL to wSOL!`);
           setAmount(0);
           fetchBalances();

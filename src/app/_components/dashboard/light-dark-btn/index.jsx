@@ -6,7 +6,6 @@ const LightDarkButton = () => {
   const { theme, setTheme } = useTheme();
 
   const handelLightDarkMode = () => {
-    console.log("click working on not", theme);
     setTheme(theme === "dark" ? "light" : "dark");
   };
 

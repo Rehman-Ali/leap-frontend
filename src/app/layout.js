@@ -160,7 +160,6 @@ export default function RootLayout({ children }) {
         }
       );
 
-      console.log(response.data, "Response received");
       localStorage.setItem("u_t", JSON.stringify(response.data.token.token));
       localStorage.setItem("role", JSON.stringify(response.data.token.role));
       let prev_path = localStorage.getItem("c_path");

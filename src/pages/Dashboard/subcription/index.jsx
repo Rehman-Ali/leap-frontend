@@ -4,7 +4,7 @@ import { SERVER_URL } from "@/utils/server";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-
+import Modal from "@/app/_components/connectionUrl-modal";
 const SubscriptionScreen = () => {
   const [orderList, setOrderList] = useState([]);
 
@@ -12,6 +12,7 @@ const SubscriptionScreen = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [isDelete, setIsDelete] = useState(false);
+  const [isUpdated, setIsUpdated] = useState(false);
 
   const totalPages = Math.ceil(orderList.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -36,7 +37,7 @@ const SubscriptionScreen = () => {
         }
       })
       .catch((err) => console.error("Error fetching data", err));
-  }, [isDelete]);
+  }, [isDelete, isUpdated]);
 
   const onClickDeleteButton = (id) => {
     setIsDelete(false);
@@ -87,6 +88,54 @@ const SubscriptionScreen = () => {
           );
       }
     });
+  };
+
+  /// Modal of connection URL
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const [selectType, setSelectType] = useState("");
+  const [selectDays, setSelectDays] = useState(0);
+  const handleOpenModal = (order) => {
+    setIsModalOpen(true);
+    setSelected(order);
+  };
+
+  const onUpdateExpiry = async () => {
+    try {
+      setIsUpdated(false)
+      let body = {
+        duration: selectDays,
+        actionType: selectType
+      };
+      let token = JSON.parse(localStorage.getItem("u_t"));
+      await axios.put(`${SERVER_URL}/api/order/extend-reduce/${selected._id}`, body, {
+        headers: {
+          "x-auth-token": token
+        }
+      });
+      setIsUpdated(true)
+      setIsModalOpen(false);
+      setSelectDays(0);
+      setSelectType("");
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: `This order has been ${selectType} successfully`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: `Error during update order ${
+          error.response?.data || error.message
+        }`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
   };
 
   return (
@@ -169,16 +218,12 @@ const SubscriptionScreen = () => {
                           {new Date(order.expiry_date).toLocaleDateString()}
                         </td>
                         <td className="py-2  px-4 border-b text-center">
-                          {/* { (order.isExpiryNear || order.status === 'inactive') && order.status !== "expired" && order.status !== "cancelled" && order.status !== "pending"  && 
-                      //  <Link href={`${order.order_category === "vps" ? `/buy-vps?id=${order._id}` : `/buy?id=${order._id}`}`}>
-                       <span
-                          className="px-2 cursor-pointer mr-[10px] py-1 bg-darkPrimary text-black text-[12px] rounded-md disabled:opacity-50"
-                          // onClick={() => onClickRenewButton()}
-                        >
-                          Renew
-                        </span>
-                        // </Link>
-                      } */}
+                          <span
+                            className="mr-2 px-2 cursor-pointer py-1 bg-gray-400 text-white text-[12px] rounded-md disabled:opacity-50"
+                            onClick={() => handleOpenModal(order)}
+                          >
+                            Edit
+                          </span>
                           <span
                             className="px-2 cursor-pointer py-1 bg-red-700 text-white text-[12px] rounded-md disabled:opacity-50"
                             onClick={() => onClickDeleteButton(order._id)}
@@ -200,10 +245,7 @@ const SubscriptionScreen = () => {
               >
                 Previous
               </button>
-              <span
-                className="text-sm dark:text-white text-black
-                "
-              >
+              <span className="text-sm dark:text-white text-black">
                 Page {currentPage} of {totalPages}
               </span>
               <button
@@ -221,6 +263,97 @@ const SubscriptionScreen = () => {
           <p className="dark:text-white text-black font-inter font-semibold text-center ">
             No Data Exist
           </p>
+        )}
+
+        {paginatedData.length > 0 && selected !== null && (
+          <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <div className="fixed inset-0  bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="bg-white  dark:bg-bodyColor p-6 rounded-lg max-w-lg w-full">
+                <div className="flex justify-between mb-4">
+                  <h3 className="font-bold text-lg text-black dark:text-white">
+                    Extend or Reduce User's Expiry
+                  </h3>
+                  <button
+                    onClick={() => setIsModalOpen(false)}
+                    className="text-gray-500 hover:text-gray-700"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="w-full">
+                    <label className="block text-sm font-medium dark:text-white text-black  mb-2">
+                      Select Type
+                    </label>
+                    <select
+                      value={selectType}
+                      onChange={(e) => setSelectType(e.target.value)}
+                      className="block w-full px-4 py-2 border border-gray-300 dark:text-white text-black dark:bg-bodyColor bg-white rounded-lg shadow-sm focus:ring-darkPrimary focus:border-darkPrimary"
+                    >
+                      <option value="" disabled>
+                        choose type
+                      </option>
+                      <option value="extended">Extended</option>
+                      <option value="reduced">Reduced</option>
+                    </select>
+                  </div>
+                  <div className="w-full">
+                    <label className="block text-sm font-medium dark:text-white text-black  mb-2">
+                      Select Days
+                    </label>
+                    <select
+                      value={selectDays}
+                      onChange={(e) => setSelectDays(e.target.value)}
+                      className="block w-full px-4 py-2 border border-gray-300 dark:text-white text-black dark:bg-bodyColor bg-white rounded-lg shadow-sm focus:ring-darkPrimary focus:border-darkPrimary"
+                    >
+                      <option value="" disabled>
+                        choose days
+                      </option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                  </div>
+                  <div className="flex flex-row items-end justify-end w-full mt-[30px]">
+                    <button
+                      onClick={() => onUpdateExpiry()}
+                      className="w-[140px] h-[46px]  mw-12:w-[150px] leading-none flex flex-row items-center justify-center gap-x-2  mw-12:text-[14px]  bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"
+                    >
+                      Update Order
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Modal>
         )}
       </div>
     </div>

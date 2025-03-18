@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 export default function DashboardHeader({ toggleSidebar }) {
   const { user, handleLogOut } = useDynamicContext();
   const [clientUser, setClientUser] = useState(null);
-    console.log(user, 'user======')
 
   useEffect(() => {
     // Ensure `user` is only set after hydration

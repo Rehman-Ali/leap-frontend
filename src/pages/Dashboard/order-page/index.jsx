@@ -2,9 +2,8 @@
 
 import { SERVER_URL } from "@/utils/server";
 import axios from "axios";
-import Link from "next/link";
 import { useState, useEffect } from "react";
-import Swal from "sweetalert2";
+
 
 const OrderScreen = () => {
   const [orderList, setOrderList] = useState([]);
@@ -61,8 +60,8 @@ const OrderScreen = () => {
                       <th className="py-2 border">Price ($)</th>
                       <th className="py-2 border">Price (SOL)</th>
                       <th className="py-2 border">Operating System</th>
-                      <th className="py-2 border">Starting Date</th>
-                      <th className="py-2 border">Ending Date</th>
+                      <th className="py-2 border">Created At</th>
+                      
                     </tr>
                   </thead>
                   <tbody>
@@ -93,9 +92,9 @@ const OrderScreen = () => {
                         <td className="py-2 px-4 border-b text-center">
                           {new Date(order.createdAt).toLocaleDateString()}
                         </td>
-                        <td className="py-2 px-4 border-b text-center">
+                        {/* <td className="py-2 px-4 border-b text-center">
                           {new Date(order.expiry_date).toLocaleDateString()}
-                        </td>
+                        </td> */}
                       </tr>
                     ))}
                   </tbody>

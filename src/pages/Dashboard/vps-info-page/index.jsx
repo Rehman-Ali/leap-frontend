@@ -42,6 +42,8 @@ const DashboardVpsScreen = () => {
       .catch((err) => console.error("Error fetching data", err));
   }, [isDelete]);
 
+  
+
   const onClickDeleteButton = (id) => {
     setIsDelete(false);
     Swal.fire({
@@ -124,7 +126,7 @@ const DashboardVpsScreen = () => {
                       <tr className="bg-darkPrimary text-black">
                         <th className="py-2 border">Sr</th>
                         <th className="py-2 border">API Key</th>
-                        <th className="py-2  border">Duration</th>
+                        {/* <th className="py-2  border">Duration</th> */}
                         <th className="py-2 border">Price ($)</th>
                         <th className="py-2 border">Price (SOL)</th>
                         <th className="py-2 border">Operating System</th>
@@ -146,11 +148,11 @@ const DashboardVpsScreen = () => {
                           <td className="py-2 px-4 border-b text-start">
                             {order.api_key}
                           </td>
-                          <td className="py-2 px-4 border-b text-center">
+                          {/* <td className="py-2 px-4 border-b text-center">
                             {order.duration === 7
                               ? "1 week"
                               : order.duration / 30 + " month"}
-                          </td>
+                          </td> */}
                           <td className="py-2 px-4 border-b text-center">
                             $ {order.price.toFixed(2)}
                           </td>

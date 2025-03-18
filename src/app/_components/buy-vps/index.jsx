@@ -19,6 +19,7 @@ const BuyVPSScreen = () => {
   const [status, setStatus] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const [selectedDuration, setSelectedDuration] = useState(null);
+ const [orderDetail, setOrderDetail] = useState(null);
 
   const [solPrice, setSolPrice] = useState(null); // Current SOL price in USD
 
@@ -33,7 +34,7 @@ const BuyVPSScreen = () => {
         const data = await response.json();
         const price = data.solana.usd; // Get SOL price in USD
         setSolPrice(price);
-        console.log(data, price, "====SOL======");
+   
       } catch (error) {
         console.error("Error fetching Solana price:", error);
       }
@@ -41,6 +42,25 @@ const BuyVPSScreen = () => {
 
     fetchSolPrice();
   }, []);
+  useEffect(() => {
+    let token = JSON.parse(localStorage.getItem("u_t"));
+    axios
+      .get(`${SERVER_URL}/api/order/get-single/${search}`, {
+        headers: {
+          "x-auth-token": token
+        }
+      })
+      .then((res) => {
+        if (res.data && res.data.data) {
+          setOrderDetail(res.data.data);
+          setOperatingSystem(res.data.data.operating_system);
+        } else {
+          console.error("Invalid response format", res);
+        }
+      })
+      .catch((err) => console.error("Error fetching data", err));
+  }, []);
+
 
   const payOrder = async () => {
     if (!primaryWallet || !isSolanaWallet(primaryWallet)) {
@@ -174,7 +194,10 @@ const BuyVPSScreen = () => {
         operating_system: operatingSystem,
         region: selectRegion,
         plan: selectPlan,
-        expiry_date: getFormattedDate(getExpiryDate(Date.now()))
+        // expiry_date: getFormattedDate(getExpiryDate(Date.now()))
+        ...(search === null && {
+          expiry_date: getFormattedDate(getExpiryDate(Date.now())),
+        }),
       };
       let token = JSON.parse(localStorage.getItem("u_t"));
       if (search === null) {

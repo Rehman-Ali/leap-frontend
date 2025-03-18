@@ -11,34 +11,34 @@ const AdminDashboardScreen = () => {
   const [totalRevenue, setTotalRevenuce] = useState(0);
 
   useEffect(() => {
-   let token = JSON.parse(localStorage.getItem("u_t"))
+    let token = JSON.parse(localStorage.getItem("u_t"));
 
     axios
-      .get(SERVER_URL + "/api/order/all", 
-        {
-          headers: {
-            "x-auth-token": token
-          }
-        }
-      )
-      .then((res) => {
-        setOrderList(res.data.data);
-        for (var i = 0; i < res.data.data.length; i++) {
-          setTotalRevenuce(totalRevenue + res.data.data[i].price_in_SOL);
-        }
-      })
-      .catch((err) => console.log(err));
-
-    axios
-      .get(SERVER_URL + "/api/user/all",{
+      .get(SERVER_URL + "/api/order/all", {
         headers: {
           "x-auth-token": token
         }
       })
-      .then((res) => {
+      .then(res => {
+        setOrderList(res.data.data);
+        let total = 0;
+        for (var i = 0; i < res.data.data.length; i++) {
+          total = total + res.data.data[i].price_in_SOL;
+        }
+        setTotalRevenuce(total);
+      })
+      .catch(err => console.log(err));
+
+    axios
+      .get(SERVER_URL + "/api/user/all", {
+        headers: {
+          "x-auth-token": token
+        }
+      })
+      .then(res => {
         setUserList(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   }, []);
 
   return (
@@ -97,7 +97,9 @@ const AdminDashboardScreen = () => {
                     <div>
                       <div className="text-black dark:text-darkPrimary text-[24px] font-inter font-medium">
                         Total Revenue
-                        <span className="dark:text-white text-black text-[16px]">&nbsp;(SOL)</span>
+                        <span className="dark:text-white text-black text-[16px]">
+                          &nbsp;(SOL)
+                        </span>
                       </div>
                       <div className=" font-normal font-inter text-black text-[24px] mt-4 dark:text-white">
                         {totalRevenue.toFixed(4)}

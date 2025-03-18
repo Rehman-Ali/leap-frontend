@@ -19,6 +19,7 @@ const BuyScreen = () => {
   const [status, setStatus] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const [selectedDuration, setSelectedDuration] = useState(null);
+  const [orderDetail, setOrderDetail] = useState(null);
 
   const [solPrice, setSolPrice] = useState(null); // Current SOL price in USD
 
@@ -30,10 +31,11 @@ const BuyScreen = () => {
         const response = await fetch(
           "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
         );
+
         const data = await response.json();
+
         const price = data.solana.usd; // Get SOL price in USD
         setSolPrice(price);
-        console.log(data, price, "====SOL======");
       } catch (error) {
         console.error("Error fetching Solana price:", error);
       }
@@ -41,6 +43,28 @@ const BuyScreen = () => {
 
     fetchSolPrice();
   }, []);
+
+  useEffect(() => {
+    let token = JSON.parse(localStorage.getItem("u_t"));
+    axios
+      .get(`${SERVER_URL}/api/order/get-single/${search}`, {
+        headers: {
+          "x-auth-token": token
+        }
+      })
+      .then((res) => {
+        if (res.data && res.data.data) {
+          setOrderDetail(res.data.data);
+          setSelectedPlan(res.data.data.order_category.slice(4, 100));
+          console.log(res.data.data.order_category.slice(4, 100));
+        } else {
+          console.error("Invalid response format", res);
+        }
+      })
+      .catch((err) => console.error("Error fetching data", err));
+  }, []);
+
+  // console.log(selectPlan, "plam------")
 
   const payOrder = async () => {
     if (!primaryWallet || !isSolanaWallet(primaryWallet)) {
@@ -59,7 +83,7 @@ const BuyScreen = () => {
 
     // const amountInLamports = 0.0;
     const value = (
-      (selectPlan === "Getting-Started"
+      (selectPlan.toLowerCase() === "getting-started"
         ? selectedDuration === 7
           ? 400
           : selectedDuration === 30
@@ -159,7 +183,7 @@ const BuyScreen = () => {
         duration: selectedDuration,
         status: "active",
         price:
-          selectPlan === "Getting-Started"
+          selectPlan.toLowerCase() === "getting-started"
             ? selectedDuration === 7
               ? 400
               : selectedDuration === 30
@@ -179,7 +203,7 @@ const BuyScreen = () => {
             ? 8000
             : "",
         price_in_SOL: (
-          (selectPlan === "Getting-Started"
+          (selectPlan.toLowerCase() === "getting-started"
             ? selectedDuration === 7
               ? 400
               : selectedDuration === 30
@@ -199,11 +223,16 @@ const BuyScreen = () => {
             ? 8000
             : "") / solPrice
         ).toFixed(4),
-        order_category: "RPC-" + selectPlan.toLowerCase(),
+
         operating_system: null,
         region: selectRegion,
-        plan: selectPlan,
-        expiry_date: getFormattedDate(getExpiryDate(Date.now()))
+
+        // expiry_date: getFormattedDate(getExpiryDate(Date.now()))
+        ...(search === null && {
+          order_category: "RPC-" + selectPlan.toLowerCase(),
+          plan: selectPlan,
+          expiry_date: getFormattedDate(getExpiryDate(Date.now()))
+        })
       };
       let token = JSON.parse(localStorage.getItem("u_t"));
       if (search === null) {
@@ -222,7 +251,7 @@ const BuyScreen = () => {
             "x-auth-token": token
           }
         });
-        console.log(response.data, "Response received");
+
         router.push("/nodes");
 
         Swal.fire({
@@ -324,585 +353,1176 @@ const BuyScreen = () => {
           </div>
           <h1 className="text-xl font-semibold dark:text-white">Select Plan</h1>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <div
-            onClick={() => setSelectedPlan("Getting-Started")}
-            className={`${
-              selectPlan === "Getting-Started" ? "opacity-90" : "opacity-50"
-            } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#6840FD] to-[#6840FD] bg-[linear-gradient(324.64deg,rgba(104,64,253,0)0%,rgba(255,255,255,0.2)100%)] `}
-          >
-            <Image
-              height={100}
-              width={100}
-              className="absolute pb-7 right-0 w-full h-full"
-              src="/assets/dashboard/card-bg.svg"
-              alt="card"
-            />
-            <div className="text-white font-semibold rounded-full w-[150px] text-center py-1 mb-3 bg-white/20 border border-white/50">
-              Getting Started
-            </div>
-            <div className="text-white font-semibold lg:h-[50px] mw-12:h-[70px]">
-              Instant access to any location of your choice
-            </div>
-            <ul className="flex flex-row  items-start gap-x-10 mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none  h-[120px]">
-              <li className="flex flex-col items-start gap-y-2">
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
+        {search === null && orderDetail === null ? (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div
+              onClick={() => setSelectedPlan("Getting-Started")}
+              className={`${
+                selectPlan === "Getting-Started" ? "opacity-90" : "opacity-50"
+              } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#6840FD] to-[#6840FD] bg-[linear-gradient(324.64deg,rgba(104,64,253,0)0%,rgba(255,255,255,0.2)100%)] `}
+            >
+              <Image
+                height={100}
+                width={100}
+                className="absolute pb-7 right-0 w-full h-full"
+                src="/assets/dashboard/card-bg.svg"
+                alt="card"
+              />
+              <div className="text-white font-semibold rounded-full w-[150px] text-center py-1 mb-3 bg-white/20 border border-white/50">
+                Getting Started
+              </div>
+              <div className="text-white font-semibold lg:h-[50px] mw-12:h-[70px]">
+                Instant access to any location of your choice
+              </div>
+              <ul className="flex flex-row  items-start gap-x-10 mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none  h-[120px]">
+                <li className="flex flex-col items-start gap-y-2">
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      Unlimited Bandwith &amp; Requests
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    Unlimited Bandwith &amp; Requests
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">200 Requests per 10 Seconds</div>
                   </div>
-                </div>
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Enterprise Add-ons</div>
                   </div>
-                  <div className="flex-1">200 Requests per 10 Seconds</div>
-                </div>
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Premium Support</div>
                   </div>
-                  <div className="flex-1">Enterprise Add-ons</div>
-                </div>
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div className="flex-1">Premium Support</div>
-                </div>
-              </li>
+                </li>
 
-              <li className="flex flex-col items-start gap-y-2">
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
+                <li className="flex flex-col items-start gap-y-2">
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">High Landing Rate</div>
                   </div>
-                  <div className="flex-1">High Landing Rate</div>
-                </div>
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Websocket Support</div>
                   </div>
-                  <div className="flex-1">Websocket Support</div>
-                </div>
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Dedicated Regions</div>
                   </div>
-                  <div className="flex-1">Dedicated Regions</div>
-                </div>
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Geyser gRPC</div>
                   </div>
-                  <div className="flex-1">Geyser gRPC</div>
+                </li>
+              </ul>
+              <div className="flex flex-row  gap-x-4 text-xl text-white my-6">
+                <div className="text-white font-semibold">TPS</div>
+                <div className="text-white/50">~500</div>
+              </div>
+              <div className="flex flex-row items-start gap-x-[50px]">
+                <div className="flex flex-col items-start gap-y-2">
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px] ">
+                      $400
+                    </span>
+                    /1 week
+                  </div>
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px]  ">
+                      $1200
+                    </span>
+                    /1 month
+                  </div>
                 </div>
-              </li>
-            </ul>
-            <div className="flex flex-row  gap-x-4 text-xl text-white my-6">
-              <div className="text-white font-semibold">TPS</div>
-              <div className="text-white/50">~500</div>
-            </div>
-            <div className="flex flex-row items-start gap-x-[50px]">
-              <div className="flex flex-col items-start gap-y-2">
-                <div className="text-white/50 text-3xl">
-                  <span className="text-white font-semibold pl-[10px] ">
-                    $400
-                  </span>
-                  /1 week
-                </div>
-                <div className="text-white/50 text-3xl">
-                  <span className="text-white font-semibold pl-[10px]  ">
-                    $1200
-                  </span>
-                  /1 month
+                <div className="flex flex-col items-start gap-y-2">
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px]  ">
+                      $3400
+                    </span>
+                    /3 month
+                  </div>
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px]  ">
+                      6000
+                    </span>
+                    /6 month
+                  </div>
                 </div>
               </div>
-              <div className="flex flex-col items-start gap-y-2">
-                <div className="text-white/50 text-3xl">
-                  <span className="text-white font-semibold pl-[10px]  ">
-                    $3400
-                  </span>
-                  /3 month
+            </div>
+            <div
+              onClick={() => setSelectedPlan("Professional")}
+              className={`${
+                selectPlan === "Professional" ? "opacity-90" : "opacity-50"
+              } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#41BF6D] to-[#41BF6D] bg-[linear-gradient(324.64deg,rgba(65,191,109,0)0%,rgba(255,255,255,0.2)100%)]`}
+            >
+              <Image
+                height={100}
+                width={100}
+                className="absolute  pb-7 right-0 w-full h-full"
+                src="/assets/dashboard/card-bg.svg"
+                alt="card"
+              />
+              <div className="text-white font-semibold rounded-full w-[150px] text-center py-1 mb-3 bg-white/20 border border-white/50">
+                Professional
+              </div>
+              <div className="text-white font-semibold lg:h-[50px] mw-12:h-[70px]">
+                Take your trading to the next level with no rate limits and
+                Instant access to all our node locations including, VA,
+                Frankfurt and Amsterdam.
+              </div>
+              <ul className="flex flex-row  items-start gap-x-10  mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none  h-[120px]">
+                <li className="flex flex-col items-start gap-y-2">
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#41BF6D]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      Unlimited Bandwith &amp; Requests
+                    </div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#41BF6D]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">No Rate Limit</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Enterprise Add-ons</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Premium Support</div>
+                  </div>
+                </li>
+                <li className="flex flex-col items-start gap-y-2">
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">High Landing Rate</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Websocket Support</div>
+                  </div>
+
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Dedicated Regions</div>
+                  </div>
+
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Geyser gRPC</div>
+                  </div>
+                </li>
+              </ul>
+              <div className="flex flex-row gap-x-4 text-xl text-white my-6">
+                <div className="text-white font-semibold">TPS</div>
+                <div className="text-white/50">~1000</div>
+              </div>
+              <div className="flex flex-row items-start gap-x-[50px]">
+                <div className="flex flex-col items-start gap-y-2">
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px]">
+                      $600
+                    </span>
+                    /1 week
+                  </div>
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px] ">
+                      $1800
+                    </span>
+                    /1 month
+                  </div>
                 </div>
-                <div className="text-white/50 text-3xl">
-                  <span className="text-white font-semibold pl-[10px]  ">
-                    6000
-                  </span>
-                  /6 month
+                <div className="flex flex-col items-start gap-y-2">
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px]  ">
+                      $4800
+                    </span>
+                    /3 month
+                  </div>
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px]  ">
+                      $8000
+                    </span>
+                    /6 month
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div
-            onClick={() => setSelectedPlan("Professional")}
-            className={`${
-              selectPlan === "Professional" ? "opacity-90" : "opacity-50"
-            } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#41BF6D] to-[#41BF6D] bg-[linear-gradient(324.64deg,rgba(65,191,109,0)0%,rgba(255,255,255,0.2)100%)]`}
-          >
-            <Image
-              height={100}
-              width={100}
-              className="absolute  pb-7 right-0 w-full h-full"
-              src="/assets/dashboard/card-bg.svg"
-              alt="card"
-            />
-            <div className="text-white font-semibold rounded-full w-[150px] text-center py-1 mb-3 bg-white/20 border border-white/50">
-              Professional
-            </div>
-            <div className="text-white font-semibold lg:h-[50px] mw-12:h-[70px]">
-              Take your trading to the next level with no rate limits and
-              Instant access to all our node locations including, VA, Frankfurt
-              and Amsterdam.
-            </div>
-            <ul className="flex flex-row  items-start gap-x-10  mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none  h-[120px]">
-              <li className="flex flex-col items-start gap-y-2">
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#41BF6D]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    Unlimited Bandwith &amp; Requests
-                  </div>
-                </div>
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#41BF6D]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div className="flex-1">No Rate Limit</div>
-                </div>
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div className="flex-1">Enterprise Add-ons</div>
-                </div>
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div className="flex-1">Premium Support</div>
-                </div>
-              </li>
-              <li className="flex flex-col items-start gap-y-2">
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div className="flex-1">High Landing Rate</div>
-                </div>
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div className="flex-1">Websocket Support</div>
-                </div>
-
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div className="flex-1">Dedicated Regions</div>
-                </div>
-
-                <div className="flex flex-row items-center gap-x-2">
-                  <div className="flex-none text-[#6840FD]">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 25 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="0.723633"
-                        y="0.220703"
-                        width="23.9443"
-                        height="23.9443"
-                        rx="11.9722"
-                        fill="white"
-                      ></rect>
-                      <path
-                        d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                        stroke="currentColor"
-                        strokeWidth="1.99536"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div className="flex-1">Geyser gRPC</div>
-                </div>
-              </li>
-            </ul>
-            <div className="flex flex-row gap-x-4 text-xl text-white my-6">
-              <div className="text-white font-semibold">TPS</div>
-              <div className="text-white/50">~1000</div>
-            </div>
-            <div className="flex flex-row items-start gap-x-[50px]">
-              <div className="flex flex-col items-start gap-y-2">
-                <div className="text-white/50 text-3xl">
-                  <span className="text-white font-semibold pl-[10px]">
-                    $600
-                  </span>
-                  /1 week
-                </div>
-                <div className="text-white/50 text-3xl">
-                  <span className="text-white font-semibold pl-[10px] ">
-                    $1800
-                  </span>
-                  /1 month
-                </div>
+        ) : orderDetail?.order_category.slice(4, 100).toLowerCase() ===
+          "getting-started" ? (
+          <div className="grid mw-11:grid-cols-1 mw-12:grid-cols-2  lg:grid-cols-2 gap-5">
+            <div
+              onClick={() => setSelectedPlan("Getting-Started")}
+              className={`${
+                selectPlan.toLowerCase() === "getting-started"
+                  ? "opacity-90"
+                  : "opacity-50"
+              } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#6840FD] to-[#6840FD] bg-[linear-gradient(324.64deg,rgba(104,64,253,0)0%,rgba(255,255,255,0.2)100%)] `}
+            >
+              <Image
+                height={100}
+                width={100}
+                className="absolute pb-7 right-0 w-full h-full"
+                src="/assets/dashboard/card-bg.svg"
+                alt="card"
+              />
+              <div className="text-white font-semibold rounded-full w-[150px] text-center py-1 mb-3 bg-white/20 border border-white/50">
+                Getting Started
               </div>
-              <div className="flex flex-col items-start gap-y-2">
-                <div className="text-white/50 text-3xl">
-                  <span className="text-white font-semibold pl-[10px]  ">
-                    $4800
-                  </span>
-                  /3 month
+              <div className="text-white font-semibold lg:h-[50px] mw-12:h-[70px]">
+                Instant access to any location of your choice
+              </div>
+              <ul className="flex flex-row  items-start gap-x-10 mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none  h-[120px]">
+                <li className="flex flex-col items-start gap-y-2">
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      Unlimited Bandwith &amp; Requests
+                    </div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">200 Requests per 10 Seconds</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Enterprise Add-ons</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Premium Support</div>
+                  </div>
+                </li>
+
+                <li className="flex flex-col items-start gap-y-2">
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">High Landing Rate</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Websocket Support</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Dedicated Regions</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Geyser gRPC</div>
+                  </div>
+                </li>
+              </ul>
+              <div className="flex flex-row  gap-x-4 text-xl text-white my-6">
+                <div className="text-white font-semibold">TPS</div>
+                <div className="text-white/50">~500</div>
+              </div>
+              <div className="flex flex-row items-start gap-x-[50px]">
+                <div className="flex flex-col items-start gap-y-2">
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px] ">
+                      $400
+                    </span>
+                    /1 week
+                  </div>
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px]  ">
+                      $1200
+                    </span>
+                    /1 month
+                  </div>
                 </div>
-                <div className="text-white/50 text-3xl">
-                  <span className="text-white font-semibold pl-[10px]  ">
-                    $8000
-                  </span>
-                  /6 month
+                <div className="flex flex-col items-start gap-y-2">
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px]  ">
+                      $3400
+                    </span>
+                    /3 month
+                  </div>
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px]  ">
+                      6000
+                    </span>
+                    /6 month
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="grid mw-11:grid-cols-1 mw-12:grid-cols-2  lg:grid-cols-2 gap-5">
+            <div
+              onClick={() => setSelectedPlan("Professional")}
+              className={`${
+                selectPlan.toLowerCase() === "professional"
+                  ? "opacity-90"
+                  : "opacity-50"
+              } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#41BF6D] to-[#41BF6D] bg-[linear-gradient(324.64deg,rgba(65,191,109,0)0%,rgba(255,255,255,0.2)100%)]`}
+            >
+              <Image
+                height={100}
+                width={100}
+                className="absolute  pb-7 right-0 w-full h-full"
+                src="/assets/dashboard/card-bg.svg"
+                alt="card"
+              />
+              <div className="text-white font-semibold rounded-full w-[150px] text-center py-1 mb-3 bg-white/20 border border-white/50">
+                Professional
+              </div>
+              <div className="text-white font-semibold lg:h-[50px] mw-12:h-[70px]">
+                Take your trading to the next level with no rate limits and
+                Instant access to all our node locations including, VA,
+                Frankfurt and Amsterdam.
+              </div>
+              <ul className="flex flex-row  items-start gap-x-10  mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none  h-[120px]">
+                <li className="flex flex-col items-start gap-y-2">
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#41BF6D]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      Unlimited Bandwith &amp; Requests
+                    </div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#41BF6D]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">No Rate Limit</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Enterprise Add-ons</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Premium Support</div>
+                  </div>
+                </li>
+                <li className="flex flex-col items-start gap-y-2">
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">High Landing Rate</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Websocket Support</div>
+                  </div>
+
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Dedicated Regions</div>
+                  </div>
+
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#6840FD]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Geyser gRPC</div>
+                  </div>
+                </li>
+              </ul>
+              <div className="flex flex-row gap-x-4 text-xl text-white my-6">
+                <div className="text-white font-semibold">TPS</div>
+                <div className="text-white/50">~1000</div>
+              </div>
+              <div className="flex flex-row items-start gap-x-[50px]">
+                <div className="flex flex-col items-start gap-y-2">
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px]">
+                      $600
+                    </span>
+                    /1 week
+                  </div>
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px] ">
+                      $1800
+                    </span>
+                    /1 month
+                  </div>
+                </div>
+                <div className="flex flex-col items-start gap-y-2">
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px]  ">
+                      $4800
+                    </span>
+                    /3 month
+                  </div>
+                  <div className="text-white/50 text-3xl">
+                    <span className="text-white font-semibold pl-[10px]  ">
+                      $8000
+                    </span>
+                    /6 month
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="mt-6">
           <div className="flex flex-row items-center gap-x-4 mb-5">
             <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black ">
