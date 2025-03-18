@@ -14,13 +14,13 @@ const VaporToolScreen = () => {
       <div className="flex items-center justify-center min-h-screen ">
         <div className="flex flex-col items-center justify-center mw-4:w-[340px] mw-9:w-[360px] mw-5:w-[400px] w-[600px]">
           <h1 className="text-[45px] mw-7:text-[28px] text-center font-inter text-darkPrimary font-bold">
-            Vapor
+            Token Account Closer
           </h1>
           <p className="text-[18px] mw-7:text-[16px] text-center font-inter text-white font-medium">
             powered by Leap
           </p>
           <p className="py-[20px] text-[16px] mw-7:text-[14px] text-center font-inter text-white font-normal">
-            Vapor is a tool to close unused token accounts in your wallet. By
+            Token Account Closer is a tool to close unused token accounts in your wallet. By
             closing these accounts, you will be refunded the SOL used to create
             them, which is 0.00204 SOL per account.
           </p>
