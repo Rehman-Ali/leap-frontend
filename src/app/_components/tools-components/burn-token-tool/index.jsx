@@ -20,7 +20,7 @@ const BurnTokenToolScreen = () => {
 
             <p className="py-[10px] text-[16px] mw-7:text-[14px] font-inter text-white font-normal">
               The burn tool on the Sol-Incinerator tool is used to facilitate
-              the irreversible burning of your tokens.
+              the irreversible burning                                                                                                                                                  of your tokens.
             </p>
             <p className="py-[10px] text-[16px] mw-7:text-[14px]  font-inter text-white font-normal">
               By using this tool, you are doing so at your own risk. The
