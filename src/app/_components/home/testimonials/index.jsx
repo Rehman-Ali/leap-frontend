@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 const Testimonials = () => {
   const sectionRef = useRef(null);
   const isVisible = useInView(sectionRef, { threshold: 0.4 });
@@ -28,33 +28,33 @@ const Testimonials = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     centerMode: true,
-    centerPadding: '5px',
+    centerPadding: "5px",
     className: "center",
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
-        },
+          slidesToScroll: 1
+        }
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '10px',
-        },
+          centerPadding: "10px"
+        }
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '10px',
-        },
-      },
-    ],
+          centerPadding: "10px"
+        }
+      }
+    ]
   };
 
   // Settings for the second row slider (reverse direction)
@@ -63,7 +63,7 @@ const Testimonials = () => {
     autoplay: true,
 
     autoplaySpeed: 2500,
-    rtl: true, // Right to left to mimic the reverse direction
+    rtl: true // Right to left to mimic the reverse direction
   };
 
   return (
@@ -113,10 +113,20 @@ const Testimonials = () => {
                     alt="user icon"
                     className="h-[54px] w-[54px] rounded-[12px]"
                   />
-                  <div className="flex flex-col gap-y-1">
-                    <p className="text-white text-[16px] font-inter font-bold">
-                      rizzlablue
-                    </p>
+                  <div className="flex flex-col gap-y-1 ">
+                    <div className="flex flex-row gap-x-2 items-center">
+                      <p className="text-white text-[16px] font-inter font-bold">
+                        rizzlablue
+                      </p>
+                      <div className="flex flex-row gap-x-1">
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStarHalfAlt siz={20} color="#feff05" />
+                        <FaRegStar siz={20} color="#feff05" />
+                      </div>
+                    </div>
+
                     <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 10:29
                     </p>
@@ -127,10 +137,10 @@ const Testimonials = () => {
             <div className="px-1">
               <div className="w-full h-[320px] bg-[#13141266] flex flex-col justify-between rounded-[12px] border border-[#1f250e] p-[24px]">
                 <p className="text-[16px] text-[#c5c6c5] font-inter">
-                  &quot;I have recently started using Leap Node, and can already say
-                  it is faster and more consistent than any node i have personally
-                  used before. Also backed by a great team, who are always on hand
-                  to help and answer any questions.&quot;
+                  &quot;I have recently started using Leap Node, and can already
+                  say it is faster and more consistent than any node i have
+                  personally used before. Also backed by a great team, who are
+                  always on hand to help and answer any questions.&quot;
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
@@ -141,9 +151,19 @@ const Testimonials = () => {
                     className="h-[54px] w-[54px] rounded-[12px]"
                   />
                   <div className="flex flex-col gap-y-1">
+                  <div className="flex flex-row gap-x-2 items-center">
                     <p className="text-white text-[16px] font-inter font-bold">
                       hambo
                     </p>
+                    <div className="flex flex-row gap-x-1">
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                    
+                      </div>
+                    </div>
                     <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 10:30
                     </p>
@@ -154,11 +174,12 @@ const Testimonials = () => {
             <div className="px-1">
               <div className="w-full h-[320px] bg-[#13141266] flex flex-col justify-between rounded-[12px] border border-[#1f250e] p-[24px]">
                 <p className="text-[16px] text-[#c5c6c5] font-inter">
-                  &quot;I've been trading memecoins for a few months using Photon,
-                  Bullx and Trojan. But this solana node and tg bot is the fastest
-                  bot I've ever used. I don't need anything else now and it's the
-                  only bot I use to trade sol memecoins with now. It's consistent
-                  and reliable and the entries have been exact and perfect. &quot;
+                  &quot;I've been trading memecoins for a few months using
+                  Photon, Bullx and Trojan. But this solana node and tg bot is
+                  the fastest bot I've ever used. I don't need anything else now
+                  and it's the only bot I use to trade sol memecoins with now.
+                  It's consistent and reliable and the entries have been exact
+                  and perfect. &quot;
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
@@ -169,9 +190,18 @@ const Testimonials = () => {
                     className="h-[54px] w-[54px] rounded-[12px]"
                   />
                   <div className="flex flex-col gap-y-1">
+                  <div className="flex flex-row gap-x-2 items-center">
                     <p className="text-white text-[16px] font-inter font-bold">
                       Kobe
                     </p>
+                    <div className="flex flex-row gap-x-1">
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaRegStar siz={20} color="#feff05" />
+                      </div>
+                    </div>
                     <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 10:57
                     </p>
@@ -183,7 +213,8 @@ const Testimonials = () => {
               <div className="w-full h-[320px] bg-[#13141266] flex flex-col justify-between rounded-[12px] border border-[#1f250e] p-[24px]">
                 <p className="text-[16px] text-[#c5c6c5] font-inter">
                   &quot;Best trading bot i have user for a while super fast and
-                  super reliable , and devs continue pushing new features ! &quot;
+                  super reliable , and devs continue pushing new features !
+                  &quot;
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
@@ -194,9 +225,19 @@ const Testimonials = () => {
                     className="h-[54px] w-[54px] rounded-[12px]"
                   />
                   <div className="flex flex-col gap-y-1">
+                  <div className="flex flex-row gap-x-2 items-center">
                     <p className="text-white text-[16px] font-inter font-bold">
                       BLACKENVYPR
                     </p>
+                    <div className="flex flex-row gap-x-1">
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStarHalfAlt siz={20} color="#feff05" />
+                    
+                      </div>
+                    </div>
                     <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 11:21
                     </p>
@@ -221,15 +262,16 @@ const Testimonials = () => {
               <div className="w-full h-[500px] bg-[#13141266] flex flex-col justify-between rounded-[12px] border border-[#1f250e] p-[24px]">
                 <p className="text-[16px] text-[#c5c6c5] font-inter">
                   &quot;I have used most of the different bots and nodes on the
-                  market, and I must say I am really impressed with what Leap has
-                  achieved so far. I am part of the Alpha testing of the Copytrade
-                  bot and I can safely say its my main copytrading bot. The recent
-                  update utilizing a new way of recieving token data increased my
-                  speeds a lot, to the point where I am beating my previous setup
-                  that currently cost nearly 200 sol. My current setup using Leaps
-                  CLI bot + Leap Node has made me a ton of money already, and that
-                  is only from Alpha testing! So safe to say I am super excited to
-                  see what the Leap team can do in the future! &quot;
+                  market, and I must say I am really impressed with what Leap
+                  has achieved so far. I am part of the Alpha testing of the
+                  Copytrade bot and I can safely say its my main copytrading
+                  bot. The recent update utilizing a new way of recieving token
+                  data increased my speeds a lot, to the point where I am
+                  beating my previous setup that currently cost nearly 200 sol.
+                  My current setup using Leaps CLI bot + Leap Node has made me a
+                  ton of money already, and that is only from Alpha testing! So
+                  safe to say I am super excited to see what the Leap team can
+                  do in the future! &quot;
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
@@ -240,9 +282,18 @@ const Testimonials = () => {
                     className="h-[54px] w-[54px] rounded-[12px]"
                   />
                   <div className="flex flex-col gap-y-1">
+                  <div className="flex flex-row gap-x-2 items-center">
                     <p className="text-white text-[16px] font-inter font-bold">
                       monke
                     </p>
+                    <div className="flex flex-row gap-x-1">
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStarHalfAlt siz={20} color="#feff05" />
+                        <FaRegStar siz={20} color="#feff05" />
+                      </div>
+                    </div>
                     <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 11:38
                     </p>
@@ -253,9 +304,10 @@ const Testimonials = () => {
             <div className="px-1">
               <div className="w-full h-[320px] bg-[#13141266] flex flex-col justify-between rounded-[12px] border border-[#1f250e] p-[24px]">
                 <p className="text-[16px] text-[#c5c6c5] font-inter">
-                  &quot;Just had my node for a few days now, but the performance has
-                  been fantastic, even with the shitty market conditions I am still
-                  able to get some good Ws. Very happy with the node. &quot;
+                  &quot;Just had my node for a few days now, but the performance
+                  has been fantastic, even with the shitty market conditions I
+                  am still able to get some good Ws. Very happy with the node.
+                  &quot;
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
@@ -266,9 +318,18 @@ const Testimonials = () => {
                     className="h-[54px] w-[54px] rounded-[12px]"
                   />
                   <div className="flex flex-col gap-y-1">
+                  <div className="flex flex-row gap-x-2 items-center">
                     <p className="text-white text-[16px] font-inter font-bold">
                       Eth
                     </p>
+                    <div className="flex flex-row gap-x-1">
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStarHalfAlt siz={20} color="#feff05" />
+                        <FaRegStar siz={20} color="#feff05" />
+                      </div>
+                    </div>
                     <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 12:46
                     </p>
@@ -280,9 +341,9 @@ const Testimonials = () => {
               <div className="w-full h-[320px] bg-[#13141266] flex flex-col justify-between rounded-[12px] border border-[#1f250e] p-[24px]">
                 <p className="text-[16px] text-[#c5c6c5] font-inter">
                   &quot;Top of the line RPC. One of the fastest speeds I have
-                  achieved in my botting experience. Very helpful and responsive in
-                  the tickets aswell! Looking forward to what the team cooks up,
-                  especially the shredder! &quot;
+                  achieved in my botting experience. Very helpful and responsive
+                  in the tickets aswell! Looking forward to what the team cooks
+                  up, especially the shredder! &quot;
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
@@ -293,9 +354,18 @@ const Testimonials = () => {
                     className="h-[54px] w-[54px] rounded-[12px]"
                   />
                   <div className="flex flex-col gap-y-1">
+                  <div className="flex flex-row gap-x-2 items-center">
                     <p className="text-white text-[16px] font-inter font-bold">
                       rip
                     </p>
+                    <div className="flex flex-row gap-x-1">
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStarHalfAlt siz={20} color="#feff05" />
+                        <FaRegStar siz={20} color="#feff05" />
+                      </div>
+                    </div>
                     <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 19:19
                     </p>
@@ -307,10 +377,10 @@ const Testimonials = () => {
               <div className="w-full h-[320px] bg-[#13141266] flex flex-col justify-between rounded-[12px] border border-[#1f250e] p-[24px]">
                 <p className="text-[16px] text-[#c5c6c5] font-inter">
                   &quot;Call this review biased, given I'm on the team. But I've
-                  genuinely joined here as a member, and ended up joining the team,
-                  investing my time and energy here as I do see this as the future
-                  of trading bots. Just wait to see what we have in store, we have a
-                  lot of things cooking up&quot;
+                  genuinely joined here as a member, and ended up joining the
+                  team, investing my time and energy here as I do see this as
+                  the future of trading bots. Just wait to see what we have in
+                  store, we have a lot of things cooking up&quot;
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
@@ -321,9 +391,18 @@ const Testimonials = () => {
                     className="h-[54px] w-[54px] rounded-[12px]"
                   />
                   <div className="flex flex-col gap-y-1">
+                  <div className="flex flex-row gap-x-2 items-center">
                     <p className="text-white text-[16px] font-inter font-bold">
                       Nba1990
                     </p>
+                    <div className="flex flex-row gap-x-1">
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaRegStar siz={20} color="#feff05" />
+                        <FaRegStar siz={20} color="#feff05" />
+                      </div>
+                    </div>
                     <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 22:14
                     </p>
@@ -334,9 +413,9 @@ const Testimonials = () => {
             <div className="px-1">
               <div className="w-full h-[320px] bg-[#13141266] flex flex-col justify-between rounded-[12px] border border-[#1f250e] p-[24px]">
                 <p className="text-[16px] text-[#c5c6c5] font-inter">
-                  &quot;Very reliable provider, instantly helped me with issues and
-                  gave me great advice on how I can increase my performance. Very
-                  proud to be a member of Leap &quot;
+                  &quot;Very reliable provider, instantly helped me with issues
+                  and gave me great advice on how I can increase my performance.
+                  Very proud to be a member of Leap &quot;
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
@@ -347,9 +426,19 @@ const Testimonials = () => {
                     className="h-[54px] w-[54px] rounded-[12px]"
                   />
                   <div className="flex flex-col gap-y-1">
+                  <div className="flex flex-row gap-x-2 items-center">
                     <p className="text-white text-[16px] font-inter font-bold">
                       classicgrey
                     </p>
+                    <div className="flex flex-row gap-x-1">
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        
+                      </div>
+                    </div>
                     <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 23:42
                     </p>
