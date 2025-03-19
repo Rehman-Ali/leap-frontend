@@ -21,7 +21,7 @@ import {
   createCloseAccountInstruction,
   createSyncNativeInstruction
 } from "@solana/spl-token";
-import { SOL_RPC_URL, X_API_KEY } from "@/utils/server";
+import { SOL_RPC_URL } from "@/utils/server";
 import { ToastContainer, toast } from "react-toastify";
 
 // WSOL token mint address on mainnet
