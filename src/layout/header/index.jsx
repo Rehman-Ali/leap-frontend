@@ -82,7 +82,7 @@ const Header = () => {
                   SOL Wrap/Unwrap
                 </Link>
                 <Link
-                  href="/vapor-tool"
+                  href="/token-account-closer"
                   className="block px-4 py-3 text-white hover:bg-darkPrimary"
                 >
                    Token Account Closer
@@ -172,7 +172,7 @@ const Header = () => {
                     SOL Wrap/Unwrap
                   </Link>
                   <Link
-                    href="/vapor-tool"
+                    href="/token-account-closer"
                     className="block px-4 py-2 text-white hover:bg-darkPrimary"
                   >
                      Token Account Closer

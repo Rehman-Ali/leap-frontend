@@ -20,7 +20,7 @@ const SOLANA_RPC_URL = "https://api.devnet.solana.com";
 // const SOLANA_RPC_URL = "https://api.mainnet-beta.solana.com";
 const cluster = SOLANA_RPC_URL.includes("devnet") ? "devnet" : "mainnet";
 
-const VaporToolScreen2 = () => {
+const VaporToolScreen = () => {
   const { primaryWallet, handleLogOut, setShowAuthFlow } = useDynamicContext();
   const [tokenAccounts, setTokenAccounts] = useState([]);
   const [selectedAccounts, setSelectedAccounts] = useState({});
@@ -353,4 +353,4 @@ const VaporToolScreen2 = () => {
   );
 };
 
-export default VaporToolScreen2;
+export default VaporToolScreen;

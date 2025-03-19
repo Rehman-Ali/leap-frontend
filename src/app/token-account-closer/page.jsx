@@ -1,4 +1,5 @@
-import VaporToolScreen from "@/app/_components/tools-components/vapor-tool";
+import VaporToolScreen from "@/app/_components/tools-components/token-account-closer";
+import CreateTestTokenAccounts from "../_components/tools-components/leap tool file/test-token-create";
 
 export const metadata = {
   title: "Leap",
@@ -13,6 +14,7 @@ const VaporToolPage = () => {
   return (
     <div>
       <VaporToolScreen />
+      {/* <CreateTestTokenAccounts/> */}
     </div>
   );
 };

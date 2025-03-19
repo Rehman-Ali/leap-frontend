@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
     "/vps",
     "/not-found",
     "/solana-wrapper",
-    "/vapor-tool",
+    "/token-account-closer",
     "/burn-token",
     "/robots.txt",
     "/sitemap.xml"
