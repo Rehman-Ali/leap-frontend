@@ -10,7 +10,9 @@ export const DYNAMIC_XYZ_TOKEN = "dyn_7MQWkmtdSsnj0SDeDckM9FBjK65nekLZGYYsKmftdM
 // tool solana rpc url for live and dev
 // export const SOL_RPC_URL = "https://api.devnet.solana.com";
 // export const SOL_RPC_URL = "https://api.mainnet-beta.solana.com";
-export const SOL_RPC_URL = "https://mainnet.helius-rpc.com/?api-key=3f88b6b7-e3bf-4652-8298-e4819479b8c4";
+export const SOL_RPC_URL = "http://35.225.18.243/rpc";
+// export const SOL_RPC_URL = "https://mainnet.helius-rpc.com/?api-key=3f88b6b7-e3bf-4652-8298-e4819479b8c4";
+
 
 
 
