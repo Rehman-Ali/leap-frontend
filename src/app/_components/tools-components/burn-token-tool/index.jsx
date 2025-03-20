@@ -30,7 +30,11 @@ const BurnTokenToolScreen = () => {
   const [selectedTokens, setSelectedTokens] = useState([]);
   const [burnOption, setBurnOption] = useState("emptyOnly"); // "emptyOnly" or "burnAndClose"
 
-  const connection = new Connection(SOLANA_RPC_URL);
+  const connection = new Connection(SOLANA_RPC_URL, {
+    httpHeaders: {
+      "X-API-KEY": "leap-node"
+    }
+  });
 
   // Fetch all token accounts owned by the user
   const fetchTokenAccounts = async () => {
@@ -192,7 +196,9 @@ const BurnTokenToolScreen = () => {
           setSelectedTokens([]);
         } catch (error) {
           console.error("Error processing tokens:", error);
-          toast.error("Error: " + (error.message || "Failed to process tokens"));
+          toast.error(
+            "Error: " + (error.message || "Failed to process tokens")
+          );
         }
       } else {
         toast.error("No eligible token accounts to process");
@@ -284,7 +290,9 @@ const BurnTokenToolScreen = () => {
     >
       <div className="flex items-center justify-center min-h-screen ">
         <div className="w-full max-w-md mx-auto p-4">
-          <h2 className="text-[24px] font-bold mb-4 text-darkPrimary text-center">Token Burner</h2>
+          <h2 className="text-[24px] font-bold mb-4 text-darkPrimary text-center">
+            Token Burner
+          </h2>
 
           <>
             <p className="mb-4">

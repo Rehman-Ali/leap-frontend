@@ -47,14 +47,11 @@ const SolanaWrapperScreen = () => {
 
   // Create connection
   // const connection = new Connection(SOLANA_RPC_URL);
-  const connection = new Connection(
-    SOLANA_RPC_URL,
-    {
-      httpHeaders: {
-        'X-API-KEY': 'leap-node'
-      }
+  const connection = new Connection(SOLANA_RPC_URL, {
+    httpHeaders: {
+      "X-API-KEY": "leap-node"
     }
-  );
+  });
 
   useEffect(() => {
     if (primaryWallet?.address) {
