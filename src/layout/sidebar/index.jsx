@@ -10,7 +10,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
   const [role, setRole] = useState("");
 
   useEffect(() => {
-    let userRole = JSON.parse(localStorage.getItem("role"));
+    let userRole = localStorage.getItem("role");
     setRole(userRole);
   }, []);
 

@@ -109,7 +109,7 @@ export default function RootLayout({ children }) {
     const isPrivateRoute = privateRoutes.includes(pathname);
     const isAdminRoute = adminRoutes.includes(pathname);
     const isPublicRoute = publicRoutes.includes(pathname);
-    const role = JSON.parse(localStorage.getItem("role"));
+    const role = localStorage.getItem("role");
     const allRoutes = [...privateRoutes, ...adminRoutes, ...publicRoutes];
 
    // // 🔹 Check invalid route
@@ -161,7 +161,7 @@ export default function RootLayout({ children }) {
       );
 
       localStorage.setItem("u_t", JSON.stringify(response.data.token.token));
-      localStorage.setItem("role", JSON.stringify(response.data.token.role));
+      localStorage.setItem("role", response.data.token.role);
       let prev_path = localStorage.getItem("c_path");
 
       if (!prev_path) {

@@ -15,7 +15,7 @@ const LoginPage = () => {
 
   const token =
     typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("role"))
+      ? localStorage.getItem("role")
       : null;
 
   useEffect(() => {
