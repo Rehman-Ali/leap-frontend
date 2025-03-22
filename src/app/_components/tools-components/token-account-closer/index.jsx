@@ -28,6 +28,7 @@ const VaporToolScreen = () => {
   const [success, setSuccess] = useState("");
   const [solBalance, setSolBalance] = useState(0);
   const [potentialRefund, setPotentialRefund] = useState(0);
+  const [solPrice, setSolPrice] = useState(null); // Current SOL price in USD
 
   // Create connection
   const connection = new Connection(SOLANA_RPC_URL, {
@@ -35,6 +36,26 @@ const VaporToolScreen = () => {
       "X-API-KEY": "leap-node"
     }
   });
+
+  useEffect(() => {
+    async function fetchSolPrice() {
+      try {
+        const response = await fetch(
+          "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
+        );
+
+        const data = await response.json();
+
+        const price = data.solana.usd; // Get SOL price in USD
+        setSolPrice(price);
+      } catch (error) {
+        console.error("Error fetching Solana price:", error);
+      }
+    }
+
+    fetchSolPrice();
+  }, []);
+
   // Fetch token accounts on wallet connection or refresh
   useEffect(() => {
     if (primaryWallet?.address) {
@@ -273,17 +294,23 @@ const VaporToolScreen = () => {
             used to create them, which is 0.00204 SOL per account.
           </p>
           <div className="w-full max-w-md mx-auto p-4">
-            <div className="mb-4 p-3 bg-gray-100 rounded-lg">
-              <div className="flex justify-between mb-2">
-                <span className="text-black font-inter">SOL Balance:</span>
-                <span className="font-medium text-black font-inter">
+            <div className="mb-4 p-3 bg-[#1d1d1d] rounded-lg">
+              <div className="flex justify-between mb-4">
+                <span className="text-white font-inter">SOL Balance:</span>
+                <span className="font-medium text-white font-inter">
                   {solBalance.toFixed(6)} SOL
+                  <span className="text-[16px] ml-[10px] mw-9:text-[14px] font-inter text-black font-normal bg-darkPrimary px-2 py-1 rounded-[8px] ">
+                    ${(solBalance * solPrice).toFixed(2)}
+                  </span>
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-black font-inter">Potential Refund:</span>
-                <span className="font-medium text-black font-inter">
+                <span className="text-white font-inter">Potential Refund:</span>
+                <span className="font-medium text-white font-inter">
                   {potentialRefund.toFixed(6)} SOL
+                  <span className="text-[16px] ml-[10px] mw-9:text-[14px] font-inter text-black font-normal bg-darkPrimary px-2 py-1 rounded-[8px] ">
+                    ${(potentialRefund * solPrice).toFixed(2)}
+                  </span>
                 </span>
               </div>
             </div>
@@ -291,21 +318,22 @@ const VaporToolScreen = () => {
             <div className="my-4 flex space-x-2">
               <button
                 onClick={fetchTokenAccounts}
-                className="mw-4:px-3 px-4 py-2 text-black bg-gray-200 font-inter rounded-md hover:bg-gray-300 transition duration-300"
+                // className="mw-4:px-3 px-4 py-2 text-black bg-gray-200 font-inter rounded-md hover:bg-gray-300 transition duration-300"
+                className="text-[14px] mw-9:text-[14px] font-inter text-white font-normal cursor-pointer hover:bg-darkPrimary bg-black px-2 p-2 rounded-[8px] transition duration-300"
                 disabled={fetchingAccounts}
               >
                 {fetchingAccounts ? "Loading..." : "Refresh Accounts"}
               </button>
               <button
                 onClick={selectAllCloseable}
-                className="mw-4:px-3 px-4 py-2 bg-blue-100 text-black font-inter rounded-md hover:bg-blue-200 transition duration-300"
+                className="text-[14px] mw-9:text-[14px] font-inter text-white font-normal cursor-pointer hover:bg-darkPrimary bg-black px-2 py-1 rounded-[8px] transition duration-300"
                 disabled={fetchingAccounts}
               >
                 Select All Closeable
               </button>
               <button
                 onClick={clearSelection}
-                className="mw-4:px-3 px-4 py-2 font-inter bg-gray-200 rounded-md text-black  hover:bg-gray-300 transition duration-300"
+                className="text-[14px] mw-9:text-[14px] font-inter text-white font-normal cursor-pointer hover:bg-darkPrimary bg-black px-2 py-1 rounded-[8px] transition duration-300"
                 disabled={fetchingAccounts}
               >
                 Clear Selection
@@ -316,8 +344,8 @@ const VaporToolScreen = () => {
               {success && <div className="mb-4 p-3 bg-green-100 text-green-700 rounded-lg font-inter">{success}</div>}
                */}
             <div className="mt-4">
-              <h3 className="font-medium font-inter mb-2">
-                Your Token Accounts ({tokenAccounts.length})
+              <h3 className="font-medium text-white text-[14px] font-inter mb-2">
+                Your Token Accounts <span className="text-darkPrimary">({tokenAccounts.length})</span> 
               </h3>
 
               {fetchingAccounts ? (
@@ -325,7 +353,7 @@ const VaporToolScreen = () => {
                   Loading accounts...
                 </div>
               ) : tokenAccounts.length === 0 ? (
-                <div className="text-center p-4 bg-gray-50 text-black rounded-lg font-inter">
+                <div className="text-center p-4 bg-[#1d1d1d] text-white rounded-lg font-inter">
                   No token accounts found
                 </div>
               ) : (
@@ -333,38 +361,47 @@ const VaporToolScreen = () => {
                   {tokenAccounts.map((account) => (
                     <div
                       key={account.pubkey}
-                      className={`mb-2 p-3 rounded-lg border ${
+                      className={`mb-2 p-3 rounded-lg ${
                         account.isCloseable
                           ? selectedAccounts[account.pubkey]
-                            ? "bg-blue-50 border-blue-300"
-                            : "bg-green-50 border-green-200"
-                          : "bg-gray-50 border-gray-200"
+                            ? "bg-bodyColor"
+                            : "bg-[#1d1d1d]"
+                          : "bg-[#1d1d1d]"
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <div>
-                          <div className="font-medium text-black font-inter">
+                          <div className="font-medium text-white font-inter">
                             {account.tokenName ||
                               account.mint.slice(0, 6) + "..."}
                           </div>
                           <div>
-                            <p className=" text-black font-inter">
+                            <p className=" text-white font-inter">
                               {account.pubkey.slice(0, 8)}...
                               {account.pubkey.slice(-8)}
                             </p>
                           </div>
-                          <div className="text-sm text-black font-inter">
+                          <div className="text-sm text-white font-inter">
                             Balance:{" "}
-                            <span className="font-medium">
+                            <span className="font-medium text-darkPrimary">
                               {account.balance}
                             </span>
                           </div>
-                          <div className="text-xs text-black font-inter">
+                          <div className="text-xs text-white font-inter">
                             Rent:{" "}
-                            {(
-                              account.rentExemptLamports / LAMPORTS_PER_SOL
-                            ).toFixed(6)}{" "}
-                            SOL
+                            <span className="font-medium text-darkPrimary">
+                              {(
+                                account.rentExemptLamports / LAMPORTS_PER_SOL
+                              ).toFixed(6)}{" "}
+                              SOL
+                              <span className="text-[10px] ml-[10px] mw-9:text-[14px] font-inter text-black font-normal bg-darkPrimary px-2 py-1 rounded-[8px] ">
+                               ${(
+                                  (account.rentExemptLamports /
+                                    LAMPORTS_PER_SOL) *
+                                  solPrice
+                                ).toFixed(2)}
+                              </span>
+                            </span>
                           </div>
                         </div>
 
@@ -376,10 +413,10 @@ const VaporToolScreen = () => {
                               onChange={() =>
                                 toggleAccountSelection(account.pubkey)
                               }
-                              className="h-5 w-5 rounded border-black cursor-pointer"
+                              className="h-5 w-5 rounded  border-black cursor-pointer"
                             />
                           ) : (
-                            <span className="text-xs text-red-500 font-inter">
+                            <span className="text-xs text-red-600 font-inter border p-1 rounded-[5px] border-red-600">
                               Not empty
                             </span>
                           )}
@@ -403,7 +440,7 @@ const VaporToolScreen = () => {
                     (k) => selectedAccounts[k]
                   ).length > 0
                     ? "bg-darkPrimary  text-white cursor-pointer"
-                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-darkPrimary  text-gray-500 cursor-not-allowed"
                 }`}
               >
                 {loading
@@ -418,13 +455,15 @@ const VaporToolScreen = () => {
 
             <div className="mt-6 text-xs text-gray-200">
               <p className="font-inter">
-                Connected wallet: {primaryWallet.address.slice(0, 4)}...
+                Connected wallet:&nbsp;<span className="text-darkPrimary">
+                {primaryWallet.address.slice(0, 4)}...
                 {primaryWallet.address.slice(-4)}
+                </span>
               </p>
               <p className="mt-1">
                 <button
                   onClick={handleLogOut}
-                  className="text-blue-500 font-inter font-semibold hover:text-blue-700"
+                  className="text-red-500 font-inter font-semibold hover:text-red-700"
                 >
                   Disconnect
                 </button>

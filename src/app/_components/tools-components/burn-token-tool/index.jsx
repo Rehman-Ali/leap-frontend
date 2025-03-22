@@ -238,22 +238,22 @@ const BurnTokenToolScreen = () => {
               </h1>
 
               <p className="py-[10px] text-[16px] mw-7:text-[14px] font-inter text-white font-normal">
-                The Burn Token tool is used to facilitate
-                the irreversible burning of your tokens.
+                The Burn Token tool is used to facilitate the irreversible
+                burning of your tokens.
               </p>
               <p className="py-[10px] text-[16px] mw-7:text-[14px]  font-inter text-white font-normal">
-                By using this tool, you are doing so at your own risk. The
-                Burn Token tool is not responsible for any tokens burned as a
-                result of its usage.
+                By using this tool, you are doing so at your own risk. The Burn
+                Token tool is not responsible for any tokens burned as a result
+                of its usage.
               </p>
               <p className="py-[10px] text-[16px] mw-7:text-[14px] font-inter text-white font-normal">
                 By using the tool you explicitly accept full responsibility for
                 any and all burns.
               </p>
               <p className="py-[10px] text-[16px] mw-7:text-[14px]  font-inter text-white font-normal">
-                The Burn Token tool additionally does not assume liability
-                for any mistakes, accidents, miss-intentions or any other
-                actions that led to an undesired burn.
+                The Burn Token tool additionally does not assume liability for
+                any mistakes, accidents, miss-intentions or any other actions
+                that led to an undesired burn.
               </p>
 
               <button
@@ -291,30 +291,35 @@ const BurnTokenToolScreen = () => {
     >
       <div className="flex items-center justify-center min-h-screen ">
         <div className="w-full max-w-md mx-auto p-4">
-          <h2 className="text-[24px] font-bold mb-4 text-darkPrimary text-center">
+          <h2 className="text-[24px] font-inter font-bold mb-4 text-darkPrimary text-center">
             Token Burner
           </h2>
 
           <>
-            <p className="mb-4">
+            <p className="mb-4 font-inter">
               This tool allows you to burn tokens and close token accounts to
               reclaim rent.
             </p>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-2">
+            <div className="bg-[#1d1d1d] rounded-[12px] w-full  p-4 mb-4">
+              <label className="block text-white text-[16px] font-inter font-medium mb-2">
                 Choose option:
               </label>
-              <div className="flex flex-col space-y-2">
+              <div className="flex flex-col space-y-3">
                 <label className="inline-flex items-center">
                   <input
                     type="radio"
                     value="emptyOnly"
                     checked={burnOption === "emptyOnly"}
                     onChange={() => setBurnOption("emptyOnly")}
-                    className="mr-2"
+                    className="mr-3"
                   />
-                  <span>Close empty accounts only (reclaim SOL rent)</span>
+                  <span className="font-inter text-white">
+                    Close empty accounts only{" "}
+                    <span className="text-darkPrimary text-[13px]">
+                      (reclaim SOL rent)
+                    </span>
+                  </span>
                 </label>
                 <label className="inline-flex items-center">
                   <input
@@ -322,11 +327,13 @@ const BurnTokenToolScreen = () => {
                     value="burnAndClose"
                     checked={burnOption === "burnAndClose"}
                     onChange={() => setBurnOption("burnAndClose")}
-                    className="mr-2"
+                    className="mr-3"
                   />
-                  <span>
-                    Burn tokens AND close accounts (WARNING: tokens will be
-                    permanently destroyed)
+                  <span className="font-inter text-white">
+                    Burn tokens AND close accounts{" "}
+                    <span className="text-darkPrimary text-[13px]">
+                      (WARNING: tokens will be permanently destroyed)
+                    </span>
                   </span>
                 </label>
               </div>
@@ -335,87 +342,98 @@ const BurnTokenToolScreen = () => {
             <button
               onClick={fetchTokenAccounts}
               disabled={loading}
-              className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-blue-300 mb-4"
+              className="w-[100%] px-8 py-3 bg-darkPrimary font-inter text-sm sm:text-base text-[#231F20] font-semibold rounded-full cursor-pointer hover:bg-white transition duration-300"
             >
               {loading ? "Loading..." : "Fetch Token Accounts"}
             </button>
+            <div className="mt-4">
+              {tokenAccounts.length > 0 && (
+                <div className="mb-4">
+                  <h3 className="font-medium text-white text-[14px] font-inter mb-2">
+                    Your Token Accounts{" "}
+                    <span className="text-darkPrimary">
+                      ({tokenAccounts.length})
+                    </span>
+                  </h3>
+                  <div className="max-h-60 overflow-y-auto">
+                    {tokenAccounts.map((account) => {
+                      const isEligible =
+                        burnOption === "burnAndClose" || account.canClose;
 
-            {tokenAccounts.length > 0 && (
-              <div className="mb-4">
-                <h3 className="text-lg font-medium mb-2">
-                  Your Token Accounts
-                </h3>
-                <div className="max-h-60 overflow-y-auto">
-                  {tokenAccounts.map((account) => {
-                    const isEligible =
-                      burnOption === "burnAndClose" || account.canClose;
-
-                    return (
-                      <div
-                        key={account.tokenAccount.toString()}
-                        className={`flex items-center justify-between p-2 border-b ${
-                          isEligible ? "" : "opacity-50"
-                        }`}
-                      >
-                        <div>
-                          <div className="text-sm font-medium truncate w-40">
-                            {account.mint.toString().slice(0, 8)}...
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            Balance: {account.balance}
-                          </div>
-                          <div className="text-xs">
-                            {account.balance === 0 ? (
-                              <span className="text-green-600">Can close</span>
-                            ) : burnOption === "burnAndClose" ? (
-                              <span className="text-orange-500">
-                                Will burn tokens
+                      return (
+                        <div
+                          key={account.tokenAccount.toString()}
+                          className={`flex items-center justify-between mb-[15px] p-4 border rounded-[12px] border-darkPrimary `}
+                        >
+                          <div>
+                            <div className="text-sm font-medium font-inter truncate w-40 text-white">
+                              {account.mint.toString().slice(0, 8)}...
+                            </div>
+                            <div className="text-xs font-inter text-white py-[5px]">
+                              Balance:{" "}
+                              <span className="text-darkPrimary font-bold">
+                                {account.balance}
                               </span>
-                            ) : (
-                              <span className="text-red-500">
-                                Has balance (can't close)
-                              </span>
-                            )}
+                            </div>
+                            <div className="text-xs mt-[5px]">
+                              {account.balance === 0 ? (
+                                <span className=" bg-darkPrimary text-xs text-white font-inter border p-1 rounded-[5px] border-green-800">
+                                  Can close
+                                </span>
+                              ) : burnOption === "burnAndClose" ? (
+                                <span className=" bg-orange-500 text-xs text-white font-inter border p-1 rounded-[5px] border-orange-500">
+                                  Will burn tokens
+                                </span>
+                              ) : (
+                                <span className=" bg-red-500 text-xs text-white font-inter border p-1 rounded-[5px] border-red-500">
+                                  Has balance (can't close)
+                                </span>
+                              )}
+                            </div>
                           </div>
-                        </div>
-                        <input
-                          type="checkbox"
-                          disabled={!isEligible}
-                          checked={selectedTokens.includes(
-                            account.tokenAccount.toString()
-                          )}
-                          onChange={() =>
-                            toggleTokenSelection(
+                          <input
+                            type="checkbox"
+                            disabled={!isEligible}
+                            checked={selectedTokens.includes(
                               account.tokenAccount.toString()
-                            )
-                          }
-                          className="ml-2"
-                        />
-                      </div>
-                    );
-                  })}
+                            )}
+                            onChange={() =>
+                              toggleTokenSelection(
+                                account.tokenAccount.toString()
+                              )
+                            }
+                            className="ml-2"
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className="bg-[#1d1d1d] rounded-[12px] mt-4 p-4 ">
+                    <div className="text-sm text-red-500 font-inter">
+                      {burnOption === "emptyOnly"
+                        ? "Note: Only accounts with zero balance can be closed."
+                        : "Warning: This will permanently burn tokens in selected accounts!"}
+                    </div>
+                    <div className="mt-2 text-sm">
+                      <span className="font-medium font-inter text-white">
+                        Eligible accounts: <span className="text-darkPrimary">{eligibleAccounts.length}</span>  of{" "}
+                        {tokenAccounts.length}{" "}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="mt-4 text-sm text-gray-200">
-                  {burnOption === "emptyOnly"
-                    ? "Note: Only accounts with zero balance can be closed."
-                    : "Warning: This will permanently burn tokens in selected accounts!"}
-                </div>
-                <div className="mt-2 text-sm">
-                  <span className="font-medium">Eligible accounts: </span>
-                  {eligibleAccounts.length} of {tokenAccounts.length}
-                </div>
-              </div>
-            )}
+              )}
+            </div>
 
             {selectedTokens.length > 0 && (
               <button
                 onClick={processSelectedTokens}
                 disabled={loading}
-                className={`w-full py-2 px-4 ${
+                className={`w-full px-8 py-3 ${
                   burnOption === "burnAndClose"
-                    ? "bg-red-600 hover:bg-red-700"
-                    : "bg-blue-500 hover:bg-blue-600"
-                } text-white rounded-md disabled:opacity-50`}
+                    ? "bg-red-600 hover:bg-red-700 text-white"
+                    : "bg-darkPrimary text-black"
+                }   disabled:opacity-50 font-inter font-semibold cursor-pointer transition duration-300 rounded-full`}
               >
                 {loading
                   ? "Processing..."
@@ -424,17 +442,14 @@ const BurnTokenToolScreen = () => {
                   : `Close ${selectedTokens.length} Empty Accounts`}
               </button>
             )}
-
-            {/* {status && (
-              <div className="mt-4 p-3 bg-gray-100 text-black rounded-md whitespace-pre-line">
-                {status}
-              </div>
-            )} */}
           </>
-          <div className="mt-6 text-xs text-gray-200">
+          <div className="mt-6 text-xs text-white">
             <p className="font-inter">
-              Connected wallet: {primaryWallet.address.slice(0, 4)}...
-              {primaryWallet.address.slice(-4)}
+              Connected wallet:{" "}
+              <span className="text-darkPrimary">
+                {primaryWallet.address.slice(0, 4)}...
+                {primaryWallet.address.slice(-4)}
+              </span>
             </p>
             {/* <p className="mt-1">
               <button
@@ -447,7 +462,7 @@ const BurnTokenToolScreen = () => {
             <p className="mt-1">
               <button
                 onClick={handleLogOut}
-                className="text-blue-500 font-inter font-semibold cursor-pointer hover:text-blue-700"
+                className="text-red-500 font-inter font-semibold cursor-pointer hover:text-red-700"
               >
                 Disconnect
               </button>

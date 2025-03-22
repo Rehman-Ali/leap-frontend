@@ -63,4 +63,12 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+input[type="checkbox"] {
+  accent-color: #37F94E;
+  /* Green color */
+}
 
+input[type="radio"] {
+  accent-color: #37F94E;
+  /* Green color */
+}

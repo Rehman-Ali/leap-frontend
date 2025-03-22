@@ -55,25 +55,24 @@ const SolanaWrapperScreen = () => {
     }
   });
 
+  useEffect(() => {
+    async function fetchSolPrice() {
+      try {
+        const response = await fetch(
+          "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
+        );
 
-    useEffect(() => {
-      async function fetchSolPrice() {
-        try {
-          const response = await fetch(
-            "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
-          );
-  
-          const data = await response.json();
-  
-          const price = data.solana.usd; // Get SOL price in USD
-          setSolPrice(price);
-        } catch (error) {
-          console.error("Error fetching Solana price:", error);
-        }
+        const data = await response.json();
+
+        const price = data.solana.usd; // Get SOL price in USD
+        setSolPrice(price);
+      } catch (error) {
+        console.error("Error fetching Solana price:", error);
       }
-  
-      fetchSolPrice();
-    }, []);
+    }
+
+    fetchSolPrice();
+  }, []);
 
   useEffect(() => {
     if (primaryWallet?.address) {
@@ -455,7 +454,6 @@ const SolanaWrapperScreen = () => {
                   </div>
                 </div>
                 <div className="flex flex-row items-center justify-end  mw-5:gap-x-[10px] gap-x-[30px] mt-[20px]">
-                 
                   <div className="flex flex-row items-center gap-1 ">
                     <MdOutlineAccountBalanceWallet size={15} color="#a5a5a5" />
                     <p className="text-[16px] mw-5:text-[12px] font-inter text-[#a5a5a5] font-normal  ">
@@ -465,10 +463,10 @@ const SolanaWrapperScreen = () => {
                   <div className="flex flex-row items-center gap-1 ">
                     <MdOutlineAccountBalanceWallet size={15} color="#a5a5a5" />
                     <p className="text-[16px] mw-5:text-[12px] font-inter text-[#a5a5a5] font-normal  ">
-                    ${(balance.sol * solPrice).toFixed(2)}
+                      ${(balance.sol * solPrice).toFixed(2)}
                     </p>
                   </div>
-                 
+
                   <div
                     onClick={() => setAmount(balance.wsol.toString())}
                     className="text-[16px] mw-9:text-[14px] font-inter text-white font-normal cursor-pointer hover:bg-darkPrimary bg-black px-2 py-1 rounded-[8px]"
@@ -477,8 +475,8 @@ const SolanaWrapperScreen = () => {
                   </div>
                 </div>
                 <p className="text-[12px] pt-[10px] font-inter text-[#a5a5a5] font-normal  ">
-                    WSOL can only be unwrapped to SOL in full amount
-                  </p>
+                  WSOL can only be unwrapped to SOL in full amount
+                </p>
               </div>
             </div>
             <div
@@ -531,20 +529,24 @@ const SolanaWrapperScreen = () => {
         ) : (
           <div>
             <div className="mt-6 text-xs text-[#a5a5a5]">
-              <p>
-                Connected wallet: {primaryWallet.address.slice(0, 4)}...
+              <p> 
+                Connected wallet: &nbsp;
+                <span className="text-darkPrimary">
+                {primaryWallet.address.slice(0, 4)}...
                 {primaryWallet.address.slice(-4)}
+                </span>
+               
               </p>
               <p className="mt-1">
                 <button
                   onClick={fetchBalances}
-                  className="text-blue-500 hover:text-blue-700 mr-2"
+                  className="text-blue-500 hover:text-blue-700  mr-2"
                 >
                   Refresh balances
                 </button>
                 <button
                   onClick={handleLogOut}
-                  className="text-red-500 hover:text-blue-700"
+                  className="text-red-500 hover:text-red-700"
                 >
                   Disconnect
                 </button>
