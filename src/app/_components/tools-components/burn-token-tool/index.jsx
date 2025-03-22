@@ -189,7 +189,8 @@ const BurnTokenToolScreen = () => {
             successMessage += `Closed ${closeCount} token accounts! `;
           }
 
-          toast.success(`Success! ${successMessage}Signature: ${signature}`);
+          toast.success(`Success! ${successMessage} `);
+          // toast.success(`Success! ${successMessage}Signature: ${signature}`);
 
           // Refresh token accounts after processing
           await fetchTokenAccounts();
@@ -237,12 +238,12 @@ const BurnTokenToolScreen = () => {
               </h1>
 
               <p className="py-[10px] text-[16px] mw-7:text-[14px] font-inter text-white font-normal">
-                The burn tool on the Sol-Incinerator tool is used to facilitate
+                The Burn Token tool is used to facilitate
                 the irreversible burning of your tokens.
               </p>
               <p className="py-[10px] text-[16px] mw-7:text-[14px]  font-inter text-white font-normal">
                 By using this tool, you are doing so at your own risk. The
-                Sol-Incinerator is not responsible for any tokens burned as a
+                Burn Token tool is not responsible for any tokens burned as a
                 result of its usage.
               </p>
               <p className="py-[10px] text-[16px] mw-7:text-[14px] font-inter text-white font-normal">
@@ -250,7 +251,7 @@ const BurnTokenToolScreen = () => {
                 any and all burns.
               </p>
               <p className="py-[10px] text-[16px] mw-7:text-[14px]  font-inter text-white font-normal">
-                The Sol-Incinerator tool additionally does not assume liability
+                The Burn Token tool additionally does not assume liability
                 for any mistakes, accidents, miss-intentions or any other
                 actions that led to an undesired burn.
               </p>

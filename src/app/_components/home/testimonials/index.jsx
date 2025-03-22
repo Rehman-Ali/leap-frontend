@@ -107,7 +107,7 @@ const Testimonials = () => {
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
-                    src="/assets/home/testimonials/user.png"
+                    src="/assets/home/testimonials/riz.jpg"
                     height={54}
                     width={54}
                     alt="user icon"
@@ -122,14 +122,14 @@ const Testimonials = () => {
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
-                        <FaStarHalfAlt siz={20} color="#feff05" />
-                        <FaRegStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
                       </div>
                     </div>
 
-                    <p className="text-[14px] font-inter text-[#C5C6C5]">
+                    {/* <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 10:29
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
@@ -144,7 +144,7 @@ const Testimonials = () => {
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
-                    src="/assets/home/testimonials/user.png"
+                    src="/assets/home/testimonials/hambo.jpg"
                     height={100}
                     width={100}
                     alt="user icon"
@@ -164,9 +164,9 @@ const Testimonials = () => {
                     
                       </div>
                     </div>
-                    <p className="text-[14px] font-inter text-[#C5C6C5]">
+                    {/* <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 10:30
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
@@ -183,7 +183,7 @@ const Testimonials = () => {
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
-                    src="/assets/home/testimonials/user.png"
+                    src="/assets/home/testimonials/kove.jpg"
                     height={54}
                     width={54}
                     alt="user icon"
@@ -199,12 +199,13 @@ const Testimonials = () => {
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
-                        <FaRegStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                 
                       </div>
                     </div>
-                    <p className="text-[14px] font-inter text-[#C5C6C5]">
+                    {/* <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 10:57
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
@@ -218,7 +219,7 @@ const Testimonials = () => {
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
-                    src="/assets/home/testimonials/user.png"
+                    src="/assets/home/testimonials/blacken.jpg"
                     height={100}
                     width={100}
                     alt="user icon"
@@ -234,13 +235,14 @@ const Testimonials = () => {
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
-                        <FaStarHalfAlt siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                    
                     
                       </div>
                     </div>
-                    <p className="text-[14px] font-inter text-[#C5C6C5]">
+                    {/* <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 11:21
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
@@ -275,7 +277,7 @@ const Testimonials = () => {
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
-                    src="/assets/home/testimonials/user.png"
+                    src="/assets/home/testimonials/monke.jpg"
                     height={54}
                     width={54}
                     alt="user icon"
@@ -290,13 +292,14 @@ const Testimonials = () => {
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
-                        <FaStarHalfAlt siz={20} color="#feff05" />
-                        <FaRegStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                      
                       </div>
                     </div>
-                    <p className="text-[14px] font-inter text-[#C5C6C5]">
+                    {/* <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 11:38
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
@@ -311,7 +314,7 @@ const Testimonials = () => {
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
-                    src="/assets/home/testimonials/user.png"
+                    src="/assets/home/testimonials/eth.jpg"
                     height={54}
                     width={54}
                     alt="user icon"
@@ -326,13 +329,14 @@ const Testimonials = () => {
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
-                        <FaStarHalfAlt siz={20} color="#feff05" />
-                        <FaRegStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                      
                       </div>
                     </div>
-                    <p className="text-[14px] font-inter text-[#C5C6C5]">
+                    {/* <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 12:46
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
@@ -347,7 +351,7 @@ const Testimonials = () => {
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
-                    src="/assets/home/testimonials/user.png"
+                    src="/assets/home/testimonials/rotary.jpg"
                     height={54}
                     width={54}
                     alt="user icon"
@@ -362,13 +366,14 @@ const Testimonials = () => {
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
-                        <FaStarHalfAlt siz={20} color="#feff05" />
-                        <FaRegStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                       
                       </div>
                     </div>
-                    <p className="text-[14px] font-inter text-[#C5C6C5]">
+                    {/* <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 19:19
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
@@ -384,7 +389,7 @@ const Testimonials = () => {
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
-                    src="/assets/home/testimonials/user.png"
+                    src="/assets/home/testimonials/nba.jpg"
                     height={54}
                     width={54}
                     alt="user icon"
@@ -399,13 +404,14 @@ const Testimonials = () => {
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
                         <FaStar siz={20} color="#feff05" />
-                        <FaRegStar siz={20} color="#feff05" />
-                        <FaRegStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                        <FaStar siz={20} color="#feff05" />
+                     
                       </div>
                     </div>
-                    <p className="text-[14px] font-inter text-[#C5C6C5]">
+                    {/* <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 22:14
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
@@ -419,7 +425,7 @@ const Testimonials = () => {
                 </p>
                 <div className="flex flex-row items-center gap-x-3">
                   <Image
-                    src="/assets/home/testimonials/user.png"
+                    src="/assets/home/testimonials/classic.jpg"
                     height={54}
                     width={54}
                     alt="user icon"
@@ -439,9 +445,9 @@ const Testimonials = () => {
                         
                       </div>
                     </div>
-                    <p className="text-[14px] font-inter text-[#C5C6C5]">
+                    {/* <p className="text-[14px] font-inter text-[#C5C6C5]">
                       04/03/2025, 23:42
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
