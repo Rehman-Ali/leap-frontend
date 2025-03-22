@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 import { LuArrowUpDown } from "react-icons/lu";
+import { FaWallet } from "react-icons/fa";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import {
   Connection,
@@ -36,6 +37,7 @@ const SOLANA_RPC_URL = SOL_RPC_URL;
 const SolanaWrapperScreen = () => {
   const { primaryWallet, handleLogOut, setShowAuthFlow } = useDynamicContext();
   const [toggle, setToggle] = useState(false);
+  const [solPrice, setSolPrice] = useState(null); // Current SOL price in USD
 
   const [amount, setAmount] = useState("");
   const [balance, setBalance] = useState({ sol: 0, wsol: 0 });
@@ -52,6 +54,26 @@ const SolanaWrapperScreen = () => {
       "X-API-KEY": "leap-node"
     }
   });
+
+
+    useEffect(() => {
+      async function fetchSolPrice() {
+        try {
+          const response = await fetch(
+            "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
+          );
+  
+          const data = await response.json();
+  
+          const price = data.solana.usd; // Get SOL price in USD
+          setSolPrice(price);
+        } catch (error) {
+          console.error("Error fetching Solana price:", error);
+        }
+      }
+  
+      fetchSolPrice();
+    }, []);
 
   useEffect(() => {
     if (primaryWallet?.address) {
@@ -311,7 +333,7 @@ const SolanaWrapperScreen = () => {
                 <div className="flex flex-row items-center justify-between px-[10px]">
                   <input
                     type="number"
-                    className="border-none bg-[#1d1d1d] outline-none w-[150px] font-medium text-[25px]"
+                    className="border-none bg-[#1d1d1d] outline-none max-w-[350px] font-medium text-[25px] mw-9:text-[16px]"
                     placeholder="0"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
@@ -335,8 +357,14 @@ const SolanaWrapperScreen = () => {
                 <div className="flex flex-row items-center justify-end gap-x-[20px] mt-[20px]">
                   <div className="flex flex-row items-center gap-1">
                     <MdOutlineAccountBalanceWallet size={15} color="#a5a5a5" />
-                    <p className="text-[16px] font-inter text-[#a5a5a5] font-normal  ">
+                    <p className="text-[16px] mw-9:text-[12px] font-inter text-[#a5a5a5] font-normal  ">
                       {balance.sol.toFixed(4)} SOL
+                    </p>
+                  </div>
+                  <div className="flex flex-row items-center gap-1">
+                    <FaWallet size={13} color="#a5a5a5" />
+                    <p className="text-[16px] mw-9:text-[12px] font-inter text-[#a5a5a5] font-normal  ">
+                      ${(balance.sol * solPrice).toFixed(2)}
                     </p>
                   </div>
                   <div
@@ -345,7 +373,7 @@ const SolanaWrapperScreen = () => {
                         Math.max(0, (balance.sol - 0.01) / 2).toString()
                       )
                     }
-                    className="text-[16px] font-inter text-white font-normal bg-black px-2 py-1 rounded-[8px]"
+                    className="text-[16px] mw-9:text-[14px] cursor-pointer font-inter text-white font-normal bg-black px-2 py-1 rounded-[8px] hover:bg-darkPrimary"
                   >
                     50%
                   </div>
@@ -353,7 +381,7 @@ const SolanaWrapperScreen = () => {
                     onClick={() =>
                       setAmount(Math.max(0, balance.sol - 0.01).toString())
                     }
-                    className="text-[16px] font-inter text-white font-normal bg-black px-2 py-1 rounded-[8px]"
+                    className="text-[16px] mw-9:text-[14px] font-inter text-white font-normal bg-black px-2 py-1 rounded-[8px] cursor-pointer hover:bg-darkPrimary"
                   >
                     MAX
                   </div>
@@ -375,7 +403,7 @@ const SolanaWrapperScreen = () => {
                   <input
                     type="number"
                     placeholder="0"
-                    className="border-none bg-[#1d1d1d] outline-none w-[150px] font-medium text-[25px]"
+                    className="border-none bg-[#1d1d1d] outline-none max-w-[350px] font-medium text-[25px] mw-9:text-[16px]"
                     value={amount}
                     disabled
                   />
@@ -405,7 +433,7 @@ const SolanaWrapperScreen = () => {
                 <div className="flex flex-row items-center justify-between px-[10px]">
                   <input
                     type="number"
-                    className="border-none bg-[#1d1d1d] outline-none w-[150px] font-medium text-[25px]"
+                    className="border-none bg-[#1d1d1d] outline-none max-w-[350px] font-medium text-[25px] mw-9:text-[16px]"
                     placeholder="0"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
@@ -426,23 +454,31 @@ const SolanaWrapperScreen = () => {
                     </p>
                   </div>
                 </div>
-                <div className="flex flex-row items-center justify-start mw-5:gap-x-[2px] gap-x-[10px] mt-[20px]">
-                  <p className="text-[12px] font-inter text-[#a5a5a5] font-normal  ">
-                    WSOL can only be unwrapped to SOL in full amount
-                  </p>
-                  <div className="flex flex-row items-center gap-1 w-[200px]">
+                <div className="flex flex-row items-center justify-end  mw-5:gap-x-[10px] gap-x-[30px] mt-[20px]">
+                 
+                  <div className="flex flex-row items-center gap-1 ">
                     <MdOutlineAccountBalanceWallet size={15} color="#a5a5a5" />
                     <p className="text-[16px] mw-5:text-[12px] font-inter text-[#a5a5a5] font-normal  ">
                       {balance.wsol.toFixed(4)} wSOL
                     </p>
                   </div>
+                  <div className="flex flex-row items-center gap-1 ">
+                    <MdOutlineAccountBalanceWallet size={15} color="#a5a5a5" />
+                    <p className="text-[16px] mw-5:text-[12px] font-inter text-[#a5a5a5] font-normal  ">
+                    ${(balance.sol * solPrice).toFixed(2)}
+                    </p>
+                  </div>
+                 
                   <div
                     onClick={() => setAmount(balance.wsol.toString())}
-                    className="text-[16px] font-inter text-white font-normal bg-black px-2 py-1 rounded-[8px]"
+                    className="text-[16px] mw-9:text-[14px] font-inter text-white font-normal cursor-pointer hover:bg-darkPrimary bg-black px-2 py-1 rounded-[8px]"
                   >
                     MAX
                   </div>
                 </div>
+                <p className="text-[12px] pt-[10px] font-inter text-[#a5a5a5] font-normal  ">
+                    WSOL can only be unwrapped to SOL in full amount
+                  </p>
               </div>
             </div>
             <div
@@ -459,7 +495,7 @@ const SolanaWrapperScreen = () => {
                 <div className="flex flex-row items-center justify-between px-[10px]">
                   <input
                     type="number"
-                    className="border-none bg-[#1d1d1d] outline-none w-[150px] font-medium text-[25px]"
+                    className="border-none bg-[#1d1d1d] outline-none max-w-[350px] font-medium text-[25px] mw-9:text-[16px]"
                     value={amount}
                     disabled
                   />
