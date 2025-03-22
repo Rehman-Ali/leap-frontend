@@ -11,7 +11,7 @@ import {
   PublicKey,
   Transaction,
   SystemProgram,
-  LAMPORTS_PER_SOL
+  LAMPORTS_PER_SOL,
 } from "@solana/web3.js";
 import {
   Token,
@@ -20,7 +20,7 @@ import {
   getAssociatedTokenAddress,
   createAssociatedTokenAccountInstruction,
   createCloseAccountInstruction,
-  createSyncNativeInstruction
+  createSyncNativeInstruction,
 } from "@solana/spl-token";
 import { SOL_RPC_URL, X_API_KEY } from "@/utils/server";
 import { ToastContainer, toast } from "react-toastify";
@@ -51,8 +51,8 @@ const SolanaWrapperScreen = () => {
   // const connection = new Connection(SOLANA_RPC_URL);
   const connection = new Connection(SOLANA_RPC_URL, {
     httpHeaders: {
-      "X-API-KEY": "leap-node"
-    }
+      "X-API-KEY": "leap-node",
+    },
   });
 
   useEffect(() => {
@@ -116,13 +116,13 @@ const SolanaWrapperScreen = () => {
 
         setBalance({
           sol: solBalance / LAMPORTS_PER_SOL,
-          wsol: wsolBalance
+          wsol: wsolBalance,
         });
       } catch (err) {
         console.error("Error fetching wSOL balance:", err);
         setBalance({
           sol: solBalance / LAMPORTS_PER_SOL,
-          wsol: 0
+          wsol: 0,
         });
       }
     } catch (err) {
@@ -184,7 +184,7 @@ const SolanaWrapperScreen = () => {
         SystemProgram.transfer({
           fromPubkey: publicKey,
           toPubkey: wsolTokenAccount,
-          lamports: amountLamports
+          lamports: amountLamports,
         }),
         createSyncNativeInstruction(wsolTokenAccount)
       );
@@ -329,17 +329,26 @@ const SolanaWrapperScreen = () => {
                 <p>You Wrap</p>
               </div>
               <div>
-                <div className="flex flex-row items-center justify-between px-[10px]">
-                  <input
-                    type="number"
-                    className="border-none bg-[#1d1d1d] outline-none max-w-[350px] font-medium text-[25px] mw-9:text-[16px]"
-                    placeholder="0"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    min="0"
-                    step="0.001"
-                    required
-                  />
+                <div className="flex flex-row items-start justify-between mt-[10px] px-[10px]">
+                  <div className="flex flex-col">
+                    <input
+                      type="number"
+                      className="border-none bg-[#1d1d1d] text-white outline-none max-w-[350px] mw-5:text-[18px] font-medium text-[25px] mw-9:text-[16px]"
+                      placeholder="0"
+                      value={amount}
+                      onChange={(e) => setAmount(e.target.value)}
+                      min="0"
+                      step="0.001"
+                      required
+                    />
+                    <input
+                      type="number"
+                      className="border-none bg-[#1d1d1d] text-white outline-none max-w-[350px] font-medium text-[16px] mw-9:text-[14px]"
+                      placeholder={`$${(amount * solPrice).toFixed(2)} `}
+                      disabled
+                    />
+                  </div>
+
                   <div className="flex flex-row items-center gap-2 border-[2px] border-[#ffffff29] px-3 py-2  rounded-[15px]">
                     <Image
                       src="/assets/sol.webp"
@@ -399,13 +408,21 @@ const SolanaWrapperScreen = () => {
               </div>
               <div className="mb-[20px]">
                 <div className="flex flex-row items-center justify-between px-[10px]">
-                  <input
-                    type="number"
-                    placeholder="0"
-                    className="border-none bg-[#1d1d1d] outline-none max-w-[350px] font-medium text-[25px] mw-9:text-[16px]"
-                    value={amount}
-                    disabled
-                  />
+                  <div className="flex flex-col">
+                    <input
+                      type="number"
+                      placeholder="0"
+                      className="border-none bg-[#1d1d1d] text-white outline-none max-w-[350px] font-medium text-[25px] mw-5:text-[18px] mw-9:text-[16px]"
+                      value={amount}
+                      disabled
+                    />
+                    <input
+                      type="number"
+                      className="border-none bg-[#1d1d1d] text-white outline-none max-w-[350px] font-medium text-[16px] mw-9:text-[14px]"
+                      placeholder={`$${(amount * solPrice).toFixed(2)} `}
+                      disabled
+                    />
+                  </div>
                   <div className="flex flex-row items-center gap-2 border-[2px] border-[#ffffff29] px-3 py-2  rounded-[15px]">
                     <Image
                       src="/assets/sol.webp"
@@ -430,16 +447,24 @@ const SolanaWrapperScreen = () => {
               </div>
               <div>
                 <div className="flex flex-row items-center justify-between px-[10px]">
-                  <input
-                    type="number"
-                    className="border-none bg-[#1d1d1d] outline-none max-w-[350px] font-medium text-[25px] mw-9:text-[16px]"
-                    placeholder="0"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    min="0"
-                    step="0.001"
-                    required
-                  />
+                  <div className="flex flex-col">
+                    <input
+                      type="number"
+                      className="border-none bg-[#1d1d1d] text-white outline-none max-w-[350px] mw-5:text-[18px] font-medium text-[25px] mw-9:text-[16px]"
+                      placeholder="0"
+                      value={amount}
+                      onChange={(e) => setAmount(e.target.value)}
+                      min="0"
+                      step="0.001"
+                      required
+                    />
+                    <input
+                      type="number"
+                      className="border-none bg-[#1d1d1d] text-white outline-none max-w-[350px] font-medium text-[16px] mw-9:text-[14px]"
+                      placeholder={`$${(amount * solPrice).toFixed(2)} `}
+                      disabled
+                    />
+                  </div>
                   <div className="flex flex-row items-center gap-2 border-[2px] border-[#ffffff29] px-3 py-2  rounded-[15px]">
                     <Image
                       src="/assets/sol.webp"
@@ -491,12 +516,20 @@ const SolanaWrapperScreen = () => {
               </div>
               <div className="mb-[20px]">
                 <div className="flex flex-row items-center justify-between px-[10px]">
-                  <input
-                    type="number"
-                    className="border-none bg-[#1d1d1d] outline-none max-w-[350px] font-medium text-[25px] mw-9:text-[16px]"
-                    value={amount}
-                    disabled
-                  />
+                  <div className="flex flex-col">
+                    <input
+                      type="number"
+                      className="border-none bg-[#1d1d1d] text-white outline-none max-w-[350px] mw-5:text-[18px] font-medium text-[25px] mw-9:text-[16px]"
+                      value={amount}
+                      disabled
+                    />
+                    <input
+                      type="number"
+                      className="border-none bg-[#1d1d1d] text-white outline-none max-w-[350px] font-medium text-[16px] mw-9:text-[14px]"
+                      placeholder={`$${(amount * solPrice).toFixed(2)} `}
+                      disabled
+                    />
+                  </div>
                   <div className="flex flex-row items-center gap-2 border-[2px] border-[#ffffff29] px-3 py-2  rounded-[15px]">
                     <Image
                       src="/assets/sol.webp"
@@ -529,13 +562,12 @@ const SolanaWrapperScreen = () => {
         ) : (
           <div>
             <div className="mt-6 text-xs text-[#a5a5a5]">
-              <p> 
+              <p>
                 Connected wallet: &nbsp;
                 <span className="text-darkPrimary">
-                {primaryWallet.address.slice(0, 4)}...
-                {primaryWallet.address.slice(-4)}
+                  {primaryWallet.address.slice(0, 4)}...
+                  {primaryWallet.address.slice(-4)}
                 </span>
-               
               </p>
               <p className="mt-1">
                 <button

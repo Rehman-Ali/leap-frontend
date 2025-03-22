@@ -41,7 +41,7 @@ const HeroSection = () => {
         </div>
 
         <div className="flex flex-col items-center justify-center mw-6:mt-[30px] mt-[70px]">
-          <div
+          {/* <div
             className={`w-[150px] h-[34px] ${animationTriggered
               ? "animate-slideIn"
               : ""} bg-[#131412] rounded-[40px] border border-[#07210a] flex flex-row gap-x-1 justify-center items-center`}
@@ -50,7 +50,7 @@ const HeroSection = () => {
             <p className="text-[14px]  mw-12:text-[12px] font-inter text-darkPrimary">
               HOW IT WORKS
             </p>
-          </div>
+          </div> */}
           <p
             className={`text-white ${animationTriggered
               ? "animate-slideIn"
