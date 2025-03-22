@@ -7,9 +7,9 @@ export const PRODUCTION_EDITOR = "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NzAwNzY3OTksI
 // clients token dynamic.xyz
 export const DYNAMIC_XYZ_TOKEN = "dyn_7MQWkmtdSsnj0SDeDckM9FBjK65nekLZGYYsKmftdMbHC2XUHQ3iwGO6"
 // tool solana rpc url for live and dev
-export const SOL_RPC_URL = "https://api.devnet.solana.com";
+// export const SOL_RPC_URL = "https://api.devnet.solana.com";
 // export const SOL_RPC_URL = "https://api.mainnet-beta.solana.com";
-// export const SOL_RPC_URL = "https://proxy.leap-blockchain.com/rpc";
+export const SOL_RPC_URL = "https://proxy.leap-blockchain.com/rpc";
 // export const SOL_RPC_URL = "https://mainnet.helius-rpc.com/?api-key=3f88b6b7-e3bf-4652-8298-e4819479b8c4";
 
 
