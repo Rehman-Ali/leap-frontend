@@ -29,11 +29,11 @@ const VPSHeroSection = () => {
             } text-white text-center text-4xl sm:text-5xl lg:text-6xl font-inter font-medium`}>
             Leap <span className="text-darkPrimary">VPS</span>
           </h1>
-          <p className={` ${
+          <h2 className={` ${
               animationTriggered ? "animate-slideIn" : ""
             } text-[#C6C7C6] text-center text-base sm:text-lg font-inter font-medium`}>
             Land transactions faster and more consistently than ever before
-          </p>
+          </h2>
         </div>
 
         {/* Features Section */}

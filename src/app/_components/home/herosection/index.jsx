@@ -65,7 +65,7 @@ const HeroSection = () => {
             {
               title: "Unmatched Speed",
               description:
-                "Leap’s state-of-the-art infrastructure ensures industry-leading speed and performance, enabling you to execute trades seamlessly, even during periods of high network congestion on Solana."
+                "Leap's state-of-the-art infrastructure ensures industry-leading speed and performance, enabling you to execute trades seamlessly, even during periods of high network congestion on Solana."
             },
             {
               title: "Proven Reliability",
@@ -92,9 +92,9 @@ const HeroSection = () => {
                 animationDelay: `${index * 0.1}s`
               }}
             >
-              <p className="text-[24px] font-inter font-medium text-white">
+              <h3 className="text-[24px] font-inter font-medium text-white">
                 {item.title}
-              </p>
+              </h3>
               <p className="text-[16px] text-[#c5c6c5] font-inter mt-[15px]">
                 {item.description}
               </p>
@@ -111,11 +111,11 @@ const HeroSection = () => {
               WHAT WE OFFER
             </p>
           </div>
-          <p className="text-white
+          <h2 className="text-white
           
           text-[60px]  mw-12:text-[42px] mw-8:text-[36px] font-inter font-medium mt-[5px]">
             Services
-          </p>
+          </h2>
         </div>
       </div>
     </div>

@@ -30,14 +30,17 @@ const TelegramHeroSection = () => {
           >
             Leap Telegram<span className="text-darkPrimary"> Bot</span>
           </h1>
-          <p
+          <h2
             className={`text-[#C6C7C6]
           ${animationTriggered ? "animate-slideIn" : ""}
           text-sm sm:text-base lg:text-lg max-w-xl`}
           >
             Take your crypto trading to the next level with the Leap Telegram
             Bot, designed for speed, simplicity, and precision.
-          </p>
+          </h2>
+          <p className="text-[#C6C7C6] text-sm sm:text-base lg:text-lg max-w-xl mt-4">
+             Our advanced trading bot integrates seamlessly with Telegram, providing real-time market updates, automated trading strategies, and comprehensive portfolio management. With features like copy trading, DCA orders, and MEV protection, you'll have everything you need for successful trading on Solana.
+           </p>
           <a href="https://t.me/leaptrading_bot" target="_blank">
             <button
               className={`w-36
@@ -162,7 +165,7 @@ const TelegramHeroSection = () => {
                 src={feature.image}
                 height={48}
                 width={48}
-                alt={feature.title}
+                alt={`Leap Telegram Bot ${feature.title} Feature - ${feature.description}`}
               />
               <h3 className="text-xl text-white font-medium">
                 {feature.title}

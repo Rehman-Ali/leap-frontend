@@ -32,24 +32,24 @@ const RPCHeroSection = () => {
           >
             Leap <span className="text-darkPrimary">RPC</span>
           </h1>
-          <p
+          <h2
             className={` ${
               animationTriggered ? "animate-slideIn" : ""
             } text-[#C6C7C6] text-center text-base sm:text-lg font-inter font-medium`}
           >
             Land transactions faster and more consistently than ever before
-          </p>
+          </h2>
         </div>
 
         {/* Features Section */}
         <div className="flex flex-col items-center justify-center mw-6:mt-[20px] mt-16">
-          <p
+          <h2
             className={` ${
               animationTriggered ? "animate-slideIn" : ""
             } text-white text-center text-3xl sm:text-4xl lg:text-5xl font-inter font-medium`}
           >
             Features
-          </p>
+          </h2>
         </div>
         <div className="flex flex-wrap justify-center gap-6 mt-8 px-4">
           {[

@@ -27,7 +27,7 @@ const VPSRental = () => {
         >
           <Image
             src="/assets/home/telegram-trading-bot.jpg"
-            alt="Telegram Trading Bot"
+            alt="Leap VPS Hosting - High Performance Virtual Private Servers for Crypto Trading with Low Latency"
             width={535}
             height={422}
             className=" mw-8:w-full w-[535px] h-auto rounded-[10px]"
@@ -47,23 +47,22 @@ const VPSRental = () => {
           </div>
 
           {/* Title */}
-          <p
+          <h2
             className={`text-white mb-[10px]  text-[60px] mw-12:text-[42px] mw-8:text-[36px] font-inter font-medium leading-[70px] mw-12:leading-[48px] mw-8:leading-[42px] mt-[20px]`}
           >
-            VPS Rental
-          </p>
-          <p
+            VPS <span className="text-darkPrimary">Rental</span>
+          </h2>
+          <h3
             className={`text-[#C5C6C5] font-inter  text-[16px] mw-8:max-w-[100%] max-w-[500px] my-[20px] text-left`}
           >
             Unlock the power of dedicated performance with our virtual private
             servers! Enjoy fast, secure, and reliable hosting with complete
-            control over your environment.
-          </p>
+            control over your environment. <Link href="/vps" className="text-darkPrimary hover:text-white">Learn more about our VPS hosting</Link>.
+          </h3>
           <p
             className={`text-[#C5C6C5] font-inter $ text-[16px] mw-8:max-w-[100%] max-w-[500px] mb-[20px] text-left`}
           >
-            Our affordable servers are also hosted in the same rack as our node
-            to give our users the lowest latency we can!
+           Our affordable servers are also hosted in the same rack as our <Link href="/rpc" className="text-darkPrimary hover:text-white">RPC nodes</Link> to give our users the lowest latency we can! Check out our <Link href="/telegram-bot" className="text-darkPrimary hover:text-white">Telegram bot</Link> for real-time monitoring.
           </p>
 
           <div className="w-[100%]">
