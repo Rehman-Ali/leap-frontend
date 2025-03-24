@@ -25,13 +25,13 @@ const VPSRental = () => {
             animationTriggered ? "animate__animated animate__fadeInLeft" : ""
           } `}
         >
-          <Image
+          {/* <Image
             src="/assets/home/telegram-trading-bot.jpg"
             alt="Leap VPS Hosting - High Performance Virtual Private Servers for Crypto Trading with Low Latency"
             width={535}
             height={422}
             className=" mw-8:w-full w-[535px] h-auto rounded-[10px]"
-          />
+          /> */}
         </div>
 
         {/* Right Content */}

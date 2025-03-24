@@ -75,13 +75,13 @@ const Services = () => {
             animationTriggered ? "animate__animated animate__fadeInRight" : ""
           } `}
         >
-          <Image
+          {/* <Image
             src="/assets/home/services/services.jpg"
             alt="RPC Rental Service"
             width={535}
             height={460}
             className="h-auto mw-8:w-full w-[535px] rounded-[15px]"
-          />
+          /> */}
         </div>
       </div>
     </div>

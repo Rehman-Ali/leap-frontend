@@ -91,13 +91,13 @@ const BuyVPSScreen = () => {
         (selectedDuration === 90 ? 10 : selectedDuration === 180 ? 15 : 0)
     ).toFixed(4);
 
-    const amountInLamports = 0 * 1000000000;
-    // const amountInLamports = Math.round(value * 1000000000);
+    // const amountInLamports = 0 * 1000000000;
+    const amountInLamports = Math.round(value * 1000000000);
 
     // check if wallet have balance or not
-    const estimatedFee = 5000; // Solana transactions typically cost around 5000 lamports
-    // const totalCost = amountInLamports + estimatedFee;
-    const totalCost = 0;
+    // const estimatedFee = 5000; // Solana transactions typically cost around 5000 lamports
+    const totalCost = amountInLamports;
+    // const totalCost = 0;
 
     if (balance < totalCost) {
       Swal.fire({
