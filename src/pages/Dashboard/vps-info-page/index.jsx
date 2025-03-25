@@ -135,7 +135,7 @@ const DashboardVpsScreen = () => {
                   <table className="w-full bg-white dark:bg-bodyColor rounded-lg shadow-md">
                     <thead>
                       <tr className="bg-darkPrimary text-black">
-                        <th className="py-2 border">Sr</th>
+                        {/* <th className="py-2 border">Sr</th> */}
                         <th className="py-2 border">API Key</th>
                         <th className="py-2 border">Public ID</th>
                         {/* <th className="py-2  border">Duration</th> */}
@@ -153,9 +153,9 @@ const DashboardVpsScreen = () => {
                     <tbody>
                       {paginatedData.map((order, index) => (
                         <tr key={index} className=" dark:text-white text-black">
-                          <td className="py-2 px-4 border-b text-center">
+                          {/* <td className="py-2 px-4 border-b text-center">
                             {index + 1}
-                          </td>
+                          </td> */}
 
                           <td className="py-2 px-4 border-b text-start">
                             {order.api_key}

@@ -173,14 +173,14 @@ const DashboardNodeScreen = () => {
                   <table className="w-full bg-white dark:bg-bodyColor rounded-lg shadow-md">
                     <thead>
                       <tr className="bg-darkPrimary text-black">
-                        <th className="py-2 border">Sr</th>
+                        {/* <th className="py-2 border">Sr</th> */}
                         <th className="py-2 border">Node Category</th>
                         <th className="py-2 border">API Key</th>
                         <th className="py-2 border">Public ID</th>
                         {/* <th className="py-2  border">Duration</th> */}
                         <th className="py-2 border">Price ($)</th>
                         <th className="py-2 border">Price (SOL)</th>
-                        <th className="py-2 border">Operating System</th>
+                        {/* <th className="py-2 border">Operating System</th> */}
                         <th className="py-2 border">Status</th>
                         <th className="py-2 border">Order Date</th>
                         <th className="py-2 border">Expiry Date</th>
@@ -191,9 +191,9 @@ const DashboardNodeScreen = () => {
                     <tbody>
                       {paginatedData.map((order, index) => (
                         <tr key={index} className=" dark:text-white text-black">
-                          <td className="py-2 px-4 border-b text-center">
+                          {/* <td className="py-2 px-4 border-b text-center">
                             {index + 1}
-                          </td>
+                          </td> */}
                           <td className="py-2 px-4 border-b uppercase text-center">
                             {order.order_category}
                           </td>
@@ -221,11 +221,11 @@ const DashboardNodeScreen = () => {
                           <td className="py-2 px-4 border-b text-center">
                             {order.price_in_SOL} SOL
                           </td>
-                          <td className="py-2 px-4 border-b capitalize text-center">
+                          {/* <td className="py-2 px-4 border-b capitalize text-center">
                             {order.operating_system === null
                               ? "N/A"
                               : order.operating_system}
-                          </td>
+                          </td> */}
                           <td className="py-2 px-4 border-b text-center capitalize">
                             <span
                               className={`px-2 cursor-pointer mr-[5px] py-1 ${

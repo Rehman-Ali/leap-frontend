@@ -47,11 +47,13 @@ const VPSRental = () => {
           </div>
 
           {/* Title */}
-          <h2
-            className={`text-white mb-[10px]  text-[60px] mw-12:text-[42px] mw-8:text-[36px] font-inter font-medium leading-[70px] mw-12:leading-[48px] mw-8:leading-[42px] mt-[20px]`}
-          >
-            VPS <span className="text-darkPrimary">Rental</span>
-          </h2>
+          <div className="text-center">
+            <h2 className="text-[32px] font-bold mb-4">VPS Rental</h2>
+            <p className="text-[16px] text-slate-500 mb-8">
+              Experience lightning-fast trading with our high-performance VPS hosting. Our virtual private servers are hosted in the same rack as our nodes to provide the lowest possible latency for your trading operations.
+            </p>
+          </div>
+
           <h3
             className={`text-[#C5C6C5] font-inter  text-[16px] mw-8:max-w-[100%] max-w-[500px] my-[20px] text-left`}
           >
@@ -114,7 +116,7 @@ const VPSRental = () => {
                     className={`flex gap-x-1 items-center justify-centerw-auto px-[12px] h-[34px] bg-[#131412] rounded-[40px] border border-[#07210a]`}
                   >
                     <p className="text-[14px] mw-12:text-[10px] font-inter text-white">
-                      Staten Island, NY
+                      Staten Island, NY
                     </p>
                   </div>
                 </div>

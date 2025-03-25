@@ -1,4 +1,3 @@
-
 import HomePageScreen from "@/pages/home-page";
 // import BurnTokenToolScreen from "@/pages/tools-page/burn-token-tool";
 // import SolanaWrapperScreen from "@/pages/tools-page/solana-wrapper-tool";
@@ -8,11 +7,21 @@ import HomePageScreen from "@/pages/home-page";
 
 
 export const metadata = {
-  title: "Leap",
-  description: "",
-  keywords: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-  other: {
-    "google-site-verification": "KtTMBV0PsMKme0FfaQTOlUYnMc4y7jTfcKHDXF_4CzU",
+  title: "Leap - High-Performance Trading Infrastructure for Solana",
+  description: "Experience unmatched trading performance with Leap's comprehensive suite of tools: High-speed RPC nodes, Low-latency VPS hosting, and Advanced Telegram Trading Bot. Built specifically for the Solana ecosystem.",
+  keywords: ["Solana RPC", "High-Performance VPS", "Telegram Trading Bot", "Crypto Trading Infrastructure", "Solana Trading Tools", "MEV Protection", "DCA Trading", "Copy Trading"],
+  openGraph: {
+    title: "Leap - High-Performance Trading Infrastructure for Solana",
+    description: "Experience unmatched trading performance with Leap's comprehensive suite of tools: High-speed RPC nodes, Low-latency VPS hosting, and Advanced Telegram Trading Bot.",
+    url: "https://leap.io",
+    siteName: "Leap Trading Infrastructure",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Leap - High-Performance Trading Infrastructure for Solana",
+    description: "Experience unmatched trading performance with Leap's comprehensive suite of tools: High-speed RPC nodes, Low-latency VPS hosting, and Advanced Telegram Trading Bot.",
   },
 };
 

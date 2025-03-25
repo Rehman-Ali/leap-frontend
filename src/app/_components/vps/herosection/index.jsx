@@ -23,17 +23,11 @@ const VPSHeroSection = () => {
       {/* Content */}
       <div className="relative mw-6:mt-[10px] mt-[50px] flex flex-col h-full z-10">
         {/* Hero Section */}
-        <div className="flex flex-col justify-center items-center px-4 space-y-4">
-          <h1 className={` ${
-              animationTriggered ? "animate-slideIn" : ""
-            } text-white text-center text-4xl sm:text-5xl lg:text-6xl font-inter font-medium`}>
-            Leap <span className="text-darkPrimary">VPS</span>
-          </h1>
-          <h2 className={` ${
-              animationTriggered ? "animate-slideIn" : ""
-            } text-[#C6C7C6] text-center text-base sm:text-lg font-inter font-medium`}>
-            Land transactions faster and more consistently than ever before
-          </h2>
+        <div className="text-center">
+          <h1 className="text-[48px] font-bold mb-4">VPS Hosting</h1>
+          <p className="text-[18px] text-slate-500 mb-8">
+            High-performance VPS hosting for Solana trading. Our virtual private servers are hosted in the same rack as our nodes to provide the lowest possible latency for your trading operations.
+          </p>
         </div>
 
         {/* Features Section */}

@@ -25,20 +25,12 @@ const RPCHeroSection = () => {
       <div className="relative flex flex-col h-full z-10">
         {/* Hero Section */}
         <div className="flex flex-col justify-center items-center px-4 space-y-4">
-          <h1
-            className={` ${
-              animationTriggered ? "animate-slideIn" : ""
-            } text-white text-center text-4xl sm:text-5xl lg:text-6xl font-inter font-medium`}
-          >
-            Leap <span className="text-darkPrimary">RPC</span>
-          </h1>
-          <h2
-            className={` ${
-              animationTriggered ? "animate-slideIn" : ""
-            } text-[#C6C7C6] text-center text-base sm:text-lg font-inter font-medium`}
-          >
-            Land transactions faster and more consistently than ever before
-          </h2>
+          <div className="text-center">
+            <h1 className="text-[48px] font-bold mb-4">Solana RPC Node</h1>
+            <p className="text-[18px] text-slate-500 mb-8">
+              Experience lightning-fast Solana RPC nodes with features like GRPC, JitoShred, Bloxroute BDM, and unlimited TPS. Optimized for high-frequency trading and MEV protection.
+            </p>
+          </div>
         </div>
 
         {/* Features Section */}
