@@ -6,6 +6,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
 
 const DashboardNodeScreen = () => {
   const [orderList, setOrderList] = useState([]);
@@ -121,6 +122,17 @@ const DashboardNodeScreen = () => {
       });
   };
 
+  const copyToClipboardPublicId = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        toast.success(`Public Id copied successfully`);
+      })
+      .catch((err) => {
+        console.error("Failed to copy: ", err);
+      });
+  };
+
   // Helper function to get base URL based on region
   const getBaseUrl = () => {
     if (selected !== null) {
@@ -164,6 +176,7 @@ const DashboardNodeScreen = () => {
                         <th className="py-2 border">Sr</th>
                         <th className="py-2 border">Node Category</th>
                         <th className="py-2 border">API Key</th>
+                        <th className="py-2 border">Public ID</th>
                         {/* <th className="py-2  border">Duration</th> */}
                         <th className="py-2 border">Price ($)</th>
                         <th className="py-2 border">Price (SOL)</th>
@@ -184,8 +197,18 @@ const DashboardNodeScreen = () => {
                           <td className="py-2 px-4 border-b uppercase text-center">
                             {order.order_category}
                           </td>
+
                           <td className="py-2 px-4 border-b text-start">
                             {order.api_key}
+                          </td>
+                          <td className="py-2 px-4 border-b text-center">
+                            <span
+                              onClick={() => copyToClipboardPublicId(order._id)}
+                              className="px-2 cursor-pointer py-1 bg-darkPrimary text-white text-[12px] rounded-md disabled:opacity-50"
+                            >
+                              Copy
+                            </span>
+                            {/* {order._id} */}
                           </td>
                           {/* <td className="py-2 px-4 border-b text-center">
                             {order.duration === 7
@@ -256,7 +279,7 @@ const DashboardNodeScreen = () => {
                               onClick={() => handleOpenModal(order)}
                               className="px-2 cursor-pointer mr-[5px] py-1 bg-gray-300 text-black text-[12px] rounded-md disabled:opacity-50"
                             >
-                              Click Here
+                              Click here
                             </span>
                           </td>
                         </tr>
@@ -440,6 +463,19 @@ const DashboardNodeScreen = () => {
           )}
         </div>
       </div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        // transition={Bounce}
+      />
     </div>
   );
 };

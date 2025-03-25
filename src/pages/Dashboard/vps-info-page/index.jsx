@@ -6,6 +6,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
 
 const DashboardVpsScreen = () => {
   const [orderList, setOrderList] = useState([]);
@@ -95,6 +96,16 @@ const DashboardVpsScreen = () => {
     });
   };
 
+  const copyToClipboardPublicId = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        toast.success(`Public Id copied successfully`);
+      })
+      .catch((err) => {
+        console.error("Failed to copy: ", err);
+      });
+  };
 
 
 
@@ -126,6 +137,7 @@ const DashboardVpsScreen = () => {
                       <tr className="bg-darkPrimary text-black">
                         <th className="py-2 border">Sr</th>
                         <th className="py-2 border">API Key</th>
+                        <th className="py-2 border">Public ID</th>
                         {/* <th className="py-2  border">Duration</th> */}
                         <th className="py-2 border">Price ($)</th>
                         <th className="py-2 border">Price (SOL)</th>
@@ -147,6 +159,15 @@ const DashboardVpsScreen = () => {
 
                           <td className="py-2 px-4 border-b text-start">
                             {order.api_key}
+                          </td>
+                          <td className="py-2 px-4 border-b text-center">
+                            <span
+                              onClick={() => copyToClipboardPublicId(order._id)}
+                              className="px-2 cursor-pointer py-1 bg-darkPrimary text-white text-[12px] rounded-md disabled:opacity-50"
+                            >
+                              Copy
+                            </span>
+                            {/* {order._id} */}
                           </td>
                           {/* <td className="py-2 px-4 border-b text-center">
                             {order.duration === 7
@@ -261,6 +282,19 @@ const DashboardVpsScreen = () => {
          
         </div>
       </div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        // transition={Bounce}
+      />
     </div>
   );
 };
