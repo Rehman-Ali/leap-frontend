@@ -2,8 +2,7 @@
 
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { FaBars, FaTimes, FaArrowRight } from "react-icons/fa";
 import Image from "next/image";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
@@ -12,43 +11,13 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isToolsOpen, setIsToolsOpen] = useState(false);
   const { setShowAuthFlow } = useDynamicContext();
-  const toolsRef = useRef(null);
-  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Close tools dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        toolsRef.current &&
-        !toolsRef.current.contains(event.target)
-      ) {
-        setIsToolsOpen(false);
-      }
-    };
-
-    // Add event listener when tools dropdown is open
-    if (isToolsOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    // Cleanup the event listener
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isToolsOpen]);
-
-  // Close tools dropdown when pathname changes
-  useEffect(() => {
-    setIsToolsOpen(false);
-    setIsMenuOpen(false);
-  }, [pathname]);
-
   return (
-    <header className="relative z-50">
+    <header>
       <div className="mx-[10px] mt-[20px] border border-[#20211f] bg-[#07080699] rounded-[50px] flex flex-row items-center justify-between px-[30px] lg:px-[130px] py-[16px] backdrop-blur-[10px]">
         <Link
           className="text-white font-inter text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
@@ -85,10 +54,7 @@ const Header = () => {
           </Link>
 
           {/* Tools Dropdown */}
-          <div 
-            className="relative group z-50" 
-            ref={toolsRef}
-          >
+          <div className="relative group">
             <div
               className="flex flex-row items-center gap-1"
               onClick={() => setIsToolsOpen(!isToolsOpen)}
@@ -108,7 +74,7 @@ const Header = () => {
             </div>
 
             {isToolsOpen && (
-              <div className="absolute top-full mt-2 w-[200px] bg-bodyColor rounded-lg border border-[#20211f] z-50">
+              <div className="absolute top-full mt-2 w-[200px] bg-bodyColor rounded-lg border border-[#20211f]">
                 <Link
                   href="/solana-wrapper"
                   className="block px-4 py-3 text-white hover:bg-darkPrimary"
@@ -153,7 +119,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-[#07080699] mt-2 rounded-[20px] p-5 z-50">
+        <div className="lg:hidden bg-[#07080699] mt-2 rounded-[20px] p-5">
           <div className="flex flex-col items-center gap-y-5">
             <Link
               className="text-white text-[16px] font-medium cursor-pointer hover:text-darkPrimary"
@@ -178,10 +144,7 @@ const Header = () => {
             </Link>
 
             {/* Tools Dropdown for Mobile */}
-            <div 
-              className="flex flex-col items-center z-50"
-              ref={toolsRef}
-            >
+            <div className="flex flex-col items-center">
               <div
                 className="flex flex-row items-center gap-1"
                 onClick={() => setIsToolsOpen(!isToolsOpen)}
@@ -201,7 +164,7 @@ const Header = () => {
               </div>
 
               {isToolsOpen && (
-                <div className="flex flex-col items-center mt-2 w-40 bg-[#07080699] rounded-lg shadow-lg z-50">
+                <div className="flex flex-col items-center mt-2 w-40 bg-[#07080699] rounded-lg shadow-lg">
                   <Link
                     href="/solana-wrapper"
                     className="block px-4 py-2 text-white hover:bg-darkPrimary"
@@ -228,8 +191,8 @@ const Header = () => {
               className="w-[168px] h-[46px]  mw-12:w-[150px] leading-none flex flex-row items-center justify-center gap-x-2  mw-12:text-[14px]  bg-darkPrimary font-inter text-[#231F20] font-medium rounded-[50px] cursor-pointer hover:bg-white"
               onClick={() => setShowAuthFlow(true)}
             >
-              Dashboard
-              <FaArrowRight color="#231F20" size={18} />
+              Dasboard
+              <FaArrowRight color="#231F20" size-={18} />
             </button>
           </div>
         </div>
