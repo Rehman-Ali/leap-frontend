@@ -17,6 +17,9 @@ export const metadata = {
     title: "VPS Hosting | Low-Latency Trading Infrastructure",
     description: "High-performance VPS hosting for Solana trading. Our virtual private servers are hosted in the same rack as our nodes to provide the lowest possible latency.",
   },
+  alternates: {
+    canonical: 'https://www.leap-blockchain.com/vps'
+  }
 };
   
 

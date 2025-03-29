@@ -26,7 +26,7 @@ const VPSHeroSection = () => {
         <div className="text-center">
           <h1 className="text-[48px] font-bold mb-4 text-white">VPS Hosting</h1>
           <p className="text-[18px] text-slate-500 mb-8 text-white">
-            High-performance VPS hosting for Solana trading. Our virtual private servers are hosted in the same rack as our nodes to provide the lowest possible latency for your trading operations.
+            High-performance VPS hosting. Our virtual private servers are hosted in the same rack as our nodes to provide the lowest possible latency for your trading operations.
           </p>
         </div>
 
