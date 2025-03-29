@@ -23,6 +23,9 @@ export const metadata = {
     title: "Leap - High-Performance Trading Infrastructure for Solana",
     description: "Experience unmatched performance with Leap's comprehensive suite of tools: High-speed RPC nodes, Low-latency VPS hosting, and Advanced Telegram Trading Bot",
   },
+  alternates: {
+    canonical: 'https://www.leap-blockchain.com'
+  }
 };
 
 
