@@ -12,6 +12,6 @@ export const DYNAMIC_XYZ_TOKEN = "dyn_7MQWkmtdSsnj0SDeDckM9FBjK65nekLZGYYsKmftdM
 export const SOL_RPC_URL = "https://proxy.leap-blockchain.com/rpc";
 // export const SOL_RPC_URL = "https://mainnet.helius-rpc.com/?api-key=3f88b6b7-e3bf-4652-8298-e4819479b8c4";
 
-
+////
 
 
