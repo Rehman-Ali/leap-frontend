@@ -4,11 +4,11 @@ export const metadata = {
       default: 'Leap - High-Performance Trading Infrastructure for Solana | RPC, VPS & Trading Bots',
       template: '%s | Leap - Advanced Trading Infrastructure'
     },
-    description: "Experience unmatched trading performance with Leap's comprehensive suite of tools: High-speed RPC nodes, Low-latency VPS hosting, and Advanced Telegram Trading Bot. Built specifically for the Solana ecosystem.",
+    description: "Experience unmatched performance with Leap's comprehensive suite of tools: High-speed RPC nodes, Low-latency VPS hosting, and Advanced Telegram Trading Bot",
     keywords: ['Solana RPC', 'High-Performance VPS', 'Telegram Trading Bot', 'Crypto Trading Infrastructure', 'Solana Trading Tools', 'MEV Protection', 'DCA Trading', 'Copy Trading'],
     openGraph: {
       title: 'Leap - High-Performance Trading Infrastructure for Solana | RPC, VPS & Trading Bots',
-      description: "Experience unmatched trading performance with Leap's comprehensive suite of tools: High-speed RPC nodes, Low-latency VPS hosting, and Advanced Telegram Trading Bot.",
+      description: "Experience unmatched performance with Leap's comprehensive suite of tools: High-speed RPC nodes, Low-latency VPS hosting, and Advanced Telegram Trading Bot",
       url: 'https://leap.io',
       siteName: 'Leap Trading Infrastructure',
       locale: 'en_US',
@@ -17,7 +17,7 @@ export const metadata = {
     twitter: {
       card: 'summary_large_image',
       title: 'Leap - High-Performance Trading Infrastructure for Solana',
-      description: "Experience unmatched trading performance with Leap's comprehensive suite of tools: High-speed RPC nodes, Low-latency VPS hosting, and Advanced Telegram Trading Bot.",
+      description: "Experience unmatched performance with Leap's comprehensive suite of tools: High-speed RPC nodes, Low-latency VPS hosting, and Advanced Telegram Trading Bot",
     },
     robots: {
       index: true,

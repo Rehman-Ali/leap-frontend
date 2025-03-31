@@ -234,7 +234,7 @@ const BurnTokenToolScreen = () => {
           {!agree ? (
             <div className="flex flex-col items-center justify-center mw-4:w-[340px] mw-9:w-[360px] mw-5:w-[400px] w-[600px] bg-[#1d1d1d] p-5 rounded-[12px]">
               <h1 className="text-[32px] mw-7:text-[24px] text-center font-inter text-darkPrimary font-medium">
-                Disclaimer
+              Burn Token Tool
               </h1>
 
               <p className="py-[10px] text-[16px] mw-7:text-[14px] font-inter text-white font-normal">

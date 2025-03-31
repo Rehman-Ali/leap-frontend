@@ -354,7 +354,294 @@ const BuyScreen = () => {
           <h1 className="text-xl font-semibold dark:text-white">Select Plan</h1>
         </div>
         {search === null && orderDetail === null ? (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+              <div
+              onClick={() => setSelectedPlan("Free")}
+              className={`${
+                selectPlan === "Free" ? "opacity-90" : "opacity-50"
+              } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#FF9B17] to-[#FF9B17] bg-[linear-gradient(324.64deg,rgba(104,64,253,0)0%,rgba(255,255,255,0.2)100%)] `}
+            >
+              <Image
+                height={100}
+                width={100}
+                className="absolute pb-7 right-0 w-full h-full"
+                src="/assets/dashboard/card-bg.svg"
+                alt="card"
+              />
+              <div className="text-white font-semibold rounded-full w-[80px] text-center py-1 mb-3 bg-white/20 border border-white/50">
+                Free
+              </div>
+              <div className="text-white font-semibold lg:h-[50px] mw-12:h-[70px]">
+                Instant access to any location of your choice
+              </div>
+              <ul className="flex flex-row  items-start gap-x-10 mx-2 mb-[50px] my-8 text-white text-[12px] xl:text-[14px] list-none  h-[120px]">
+                <li className="flex flex-col items-start gap-y-2">
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#FF9B17]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"  
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      Unlimited Bandwith &amp; Requests
+                    </div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#FF9B17]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">200 Requests per 10 Seconds</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#FF9B17]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Enterprise Add-ons</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#FF9B17]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Premium Support</div>
+                  </div>
+                </li>
+
+                <li className="flex flex-col items-start gap-y-2">
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#FF9B17]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">High Landing Rate</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#FF9B17]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Websocket Support</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#FF9B17]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Dedicated Regions</div>
+                  </div>
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#FF9B17]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">Geyser gRPC</div>
+                  </div>
+                </li>
+              </ul>
+              <div className="flex flex-row  gap-x-4 text-xl text-white pl-[10px] my-6">
+                <div className="text-white font-semibold">TPS</div>
+                <div className="text-white/50">~500</div>
+              </div>
+              <div className="flex flex-row items-start gap-x-[50px]">
+                <div className="flex flex-col items-start gap-y-2">
+                  <div className="text-white/50 text-2xl">
+                    <span className="text-white font-semibold pl-[10px] ">
+                      $0
+                    </span>
+                    /1 week
+                  </div>
+                  <div className="text-white/50 text-2xl">
+                    <span className="text-white font-semibold pl-[10px]  ">
+                      $0
+                    </span>
+                    /1 month
+                  </div>
+                </div>
+                <div className="flex flex-col items-start gap-y-2">
+                  <div className="text-white/50 text-2xl">
+                    <span className="text-white font-semibold pl-[10px]  ">
+                      $0
+                    </span>
+                    /3 month
+                  </div>
+                  <div className="text-white/50 text-2xl">
+                    <span className="text-white font-semibold pl-[10px]  ">
+                      $0
+                    </span>
+                    /6 month
+                  </div>
+                </div>
+              </div>
+            </div>
             <div
               onClick={() => setSelectedPlan("Getting-Started")}
               className={`${
@@ -374,7 +661,7 @@ const BuyScreen = () => {
               <div className="text-white font-semibold lg:h-[50px] mw-12:h-[70px]">
                 Instant access to any location of your choice
               </div>
-              <ul className="flex flex-row  items-start gap-x-10 mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none  h-[120px]">
+              <ul className="flex flex-row  items-start gap-x-10 mx-2 mb-[50px] my-8 text-white text-[12px] xl:text-[14px] list-none  h-[120px]">
                 <li className="flex flex-col items-start gap-y-2">
                   <div className="flex flex-row items-center gap-x-2">
                     <div className="flex-none text-[#6840FD]">
@@ -607,19 +894,19 @@ const BuyScreen = () => {
                   </div>
                 </li>
               </ul>
-              <div className="flex flex-row  gap-x-4 text-xl text-white my-6">
+              <div className="flex flex-row  gap-x-4 text-xl text-white my-6 pl-[10px]">
                 <div className="text-white font-semibold">TPS</div>
                 <div className="text-white/50">~500</div>
               </div>
               <div className="flex flex-row items-start gap-x-[50px]">
                 <div className="flex flex-col items-start gap-y-2">
-                  <div className="text-white/50 text-3xl">
+                  <div className="text-white/50 text-2xl">
                     <span className="text-white font-semibold pl-[10px] ">
                       $400
                     </span>
                     /1 week
                   </div>
-                  <div className="text-white/50 text-3xl">
+                  <div className="text-white/50 text-2xl">
                     <span className="text-white font-semibold pl-[10px]  ">
                       $1200
                     </span>
@@ -627,15 +914,15 @@ const BuyScreen = () => {
                   </div>
                 </div>
                 <div className="flex flex-col items-start gap-y-2">
-                  <div className="text-white/50 text-3xl">
+                  <div className="text-white/50 text-2xl">
                     <span className="text-white font-semibold pl-[10px]  ">
                       $3400
                     </span>
                     /3 month
                   </div>
-                  <div className="text-white/50 text-3xl">
+                  <div className="text-white/50 text-2xl">
                     <span className="text-white font-semibold pl-[10px]  ">
-                      6000
+                      $6000
                     </span>
                     /6 month
                   </div>
@@ -663,7 +950,7 @@ const BuyScreen = () => {
                 Instant access to all our node locations including, VA,
                 Frankfurt and Amsterdam.
               </div>
-              <ul className="flex flex-row  items-start gap-x-10  mx-2 mb-[50px] my-8 text-white text-sm xl:text-base list-none  h-[120px]">
+              <ul className="flex flex-row  items-start gap-x-10  mx-2 mb-[50px] my-8 text-white text-[12px] xl:text-[14px] list-none  h-[120px]">
                 <li className="flex flex-col items-start gap-y-2">
                   <div className="flex flex-row items-center gap-x-2">
                     <div className="flex-none text-[#41BF6D]">
@@ -897,19 +1184,19 @@ const BuyScreen = () => {
                   </div>
                 </li>
               </ul>
-              <div className="flex flex-row gap-x-4 text-xl text-white my-6">
+              <div className="flex flex-row gap-x-4 text-xl text-white my-6 pl-[10px]">
                 <div className="text-white font-semibold">TPS</div>
                 <div className="text-white/50">~1000</div>
               </div>
               <div className="flex flex-row items-start gap-x-[50px]">
                 <div className="flex flex-col items-start gap-y-2">
-                  <div className="text-white/50 text-3xl">
+                  <div className="text-white/50 text-2xl">
                     <span className="text-white font-semibold pl-[10px]">
                       $600
                     </span>
                     /1 week
                   </div>
-                  <div className="text-white/50 text-3xl">
+                  <div className="text-white/50 text-2xl">
                     <span className="text-white font-semibold pl-[10px] ">
                       $1800
                     </span>
@@ -917,13 +1204,13 @@ const BuyScreen = () => {
                   </div>
                 </div>
                 <div className="flex flex-col items-start gap-y-2">
-                  <div className="text-white/50 text-3xl">
+                  <div className="text-white/50 text-2xl">
                     <span className="text-white font-semibold pl-[10px]  ">
                       $4800
                     </span>
                     /3 month
                   </div>
-                  <div className="text-white/50 text-3xl">
+                  <div className="text-white/50 text-2xl">
                     <span className="text-white font-semibold pl-[10px]  ">
                       $8000
                     </span>
@@ -932,6 +1219,7 @@ const BuyScreen = () => {
                 </div>
               </div>
             </div>
+           
           </div>
         ) : orderDetail?.order_category.slice(4, 100).toLowerCase() ===
           "getting-started" ? (
