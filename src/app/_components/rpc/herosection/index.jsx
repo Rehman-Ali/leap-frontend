@@ -28,7 +28,7 @@ const RPCHeroSection = () => {
           <div className="text-center">
             <h1 className="text-[48px] font-bold mb-4 text-white">Solana RPC Node</h1>
             <p className="text-[18px] text-slate-500 mb-8 text-white">
-              Experience lightning-fast Solana RPC nodes with features like GRPC, JitoShred, Bloxroute BDM, and unlimited TPS. Optimized for high-frequency trading and MEV protection.
+              Lightning-fast Solana RPC nodes with features GRPC, JitoShred, Bloxroute BDM, and unlimited TPS. Optimized for high-frequency trading and MEV protection.
             </p>
           </div>
         </div>

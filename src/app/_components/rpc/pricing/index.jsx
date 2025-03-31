@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
+import { IoClose, IoScale } from "react-icons/io5";
 const RPCPricing = () => {
   return (
     <section className="relative" id="pricing">
@@ -76,6 +77,10 @@ const RPCPricing = () => {
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px]">
                   <p>Premium Support</p>
                 </div>
+                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px]">
+                  <p>
+                  Community Support</p>
+                </div>
               </div>
             </div>
            
@@ -98,7 +103,7 @@ const RPCPricing = () => {
                     </span>
                   </div>
                   <div className="text-slate-500 font-inter mw-12:text-[12px] min-h-[65px] text-[14px] font-normal">
-                  Instant access to any location of your choice
+                  
                   </div>
                 </div>
                 <div className=" pb-4 border-b border-slate-800">
@@ -120,16 +125,16 @@ const RPCPricing = () => {
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
-                  <p>Unlimited</p>
+                  <p>100,000</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
-                  <p>200/10 secs</p>
+                  <p>10 rps</p>
                 </div>
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                  500
+                  20
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
                   &nbsp;
@@ -147,11 +152,11 @@ const RPCPricing = () => {
                   <p>&nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                  <FaCheck size={14} color={"#fff"} />
+                <IoClose size={16} color={"#FF0000"} />
                   <p> &nbsp;</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
-                  <FaCheck size={14} color={"#fff"} />
+                <IoClose size={16} color={"#FF0000"} /> 
                   <p> &nbsp;</p>
                 </div>
               </div>
@@ -160,6 +165,10 @@ const RPCPricing = () => {
                   &nbsp;
                 </p>
 
+                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
+                  <IoClose size={16} color={"#FF0000"} />
+                  <p> &nbsp;</p>
+                </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
                   <FaCheck size={14} color={"#fff"} />
                   <p> &nbsp;</p>
@@ -207,16 +216,16 @@ const RPCPricing = () => {
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
-                  <p>Unlimited</p>
+                  <p>200/sec</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
-                  <p>200/10 secs</p>
+                  <p>200 rps</p>
                 </div>
               </div>
               <div>
                 <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
-                  500
+                  200
                 </p>
                 <p className="pt-[30px] text-white font-inter font-medium text-[14px]">
                   &nbsp;
@@ -247,6 +256,10 @@ const RPCPricing = () => {
                   &nbsp;
                 </p>
 
+                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
+                  <FaCheck size={14} color={"#fff"} />
+                  <p> &nbsp;</p>
+                </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
                   <FaCheck size={14} color={"#fff"} />
                   <p> &nbsp;</p>
@@ -333,6 +346,10 @@ const RPCPricing = () => {
                   &nbsp;
                 </p>
 
+                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
+                  <FaCheck size={14} color={"#fff"} />
+                  <p>&nbsp;</p>
+                </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
                   <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
@@ -424,6 +441,10 @@ const RPCPricing = () => {
                   <FaCheck size={14} color={"#fff"} />
                   <p>&nbsp;</p>
                 </div>
+                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center">
+                  <FaCheck size={14} color={"#fff"} />
+                  <p>&nbsp;</p>
+                </div>
                 {/*   */}
               </div>
             </div>
@@ -447,7 +468,7 @@ const RPCPricing = () => {
                     </span>
                   </div>
                   <div className="text-slate-500 font-inter mw-12:text-[12px] text-[14px] font-normal">
-                    Instant access to any location of your choice.
+                    {/* Instant access to any location of your choice. */}
                   </div>
                 </div>
                 <div className="pb-4 border-b border-slate-800">
@@ -472,11 +493,11 @@ const RPCPricing = () => {
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                   <FaCheck size={14} color={"#fff"} />
-                  <p>Unlimited Request</p>
+                  <p>100,000</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                   <FaCheck size={14} color={"#fff"} />
-                  <p>200/10 secs Rate Limit</p>
+                  <p>10 rps Rate Limit</p>
                 </div>
 
                 <div>
@@ -498,14 +519,6 @@ const RPCPricing = () => {
                     <FaCheck size={14} color={"#fff"} />
                     <p>Dedicated Regions</p>
                   </div>
-                  <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                    <FaCheck size={14} color={"#fff"} />
-                    <p>Geyser gRPC</p>
-                  </div>
-                  <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
-                    <FaCheck size={14} color={"#fff"} />
-                    <p>Enterprise Add-ons</p>
-                  </div>
                 </div>
                 <div>
                   <p className="pt-[20px] text-white font-inter font-medium text-[14px]">
@@ -514,7 +527,8 @@ const RPCPricing = () => {
 
                   <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                     <FaCheck size={14} color={"#fff"} />
-                    <p>Premium Support</p>
+                    <p>
+                    Community Support</p>
                   </div>
                   {/* <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                 <FaCheck size={14} color={"#fff"} />
@@ -566,11 +580,11 @@ const RPCPricing = () => {
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                   <FaCheck size={14} color={"#fff"} />
-                  <p>Unlimited Request</p>
+                  <p>200/sec</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                   <FaCheck size={14} color={"#fff"} />
-                  <p>200/10 secs Rate Limit</p>
+                  <p>200 rps Rate Limit</p>
                 </div>
 
                 <div>
@@ -609,6 +623,10 @@ const RPCPricing = () => {
                   <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                     <FaCheck size={14} color={"#fff"} />
                     <p>Premium Support</p>
+                  </div>
+                  <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
+                    <FaCheck size={14} color={"#fff"} />
+                    <p>Community Support</p>
                   </div>
                   {/* <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                 <FaCheck size={14} color={"#fff"} />
@@ -785,6 +803,10 @@ const RPCPricing = () => {
                   <FaCheck size={14} color={"#fff"} />
                   <p>Premium Support</p>
                 </div>
+                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
+                  <FaCheck size={14} color={"#fff"} />
+                  <p>Community Support</p>
+                </div>
                 {/* <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                 <FaCheck size={14} color={"#fff"} />
                   <p>Dedicated Agent</p>
@@ -878,6 +900,11 @@ const RPCPricing = () => {
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                   <FaCheck size={14} color={"#fff"} />
                   <p>Premium Support</p>
+                </div>
+                <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
+                  <FaCheck size={14} color={"#fff"} />
+                  <p>
+                    Community Support</p>
                 </div>
                 {/* <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                 <FaCheck size={14} color={"#fff"} />

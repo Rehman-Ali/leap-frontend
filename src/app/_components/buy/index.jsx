@@ -49,8 +49,8 @@ const BuyScreen = () => {
     axios
       .get(`${SERVER_URL}/api/order/get-single/${search}`, {
         headers: {
-          "x-auth-token": token
-        }
+          "x-auth-token": token,
+        },
       })
       .then((res) => {
         if (res.data && res.data.data) {
@@ -118,7 +118,7 @@ const BuyScreen = () => {
         icon: "error",
         title: "Insufficient balance to complete this transaction.",
         showConfirmButton: false,
-        timer: 2000
+        timer: 2000,
       });
       return;
     }
@@ -127,7 +127,7 @@ const BuyScreen = () => {
       SystemProgram.transfer({
         fromPubkey: fromKey,
         lamports: amountInLamports,
-        toPubkey: toKey
+        toPubkey: toKey,
       })
     );
     const blockhash = await connection.getLatestBlockhash();
@@ -150,7 +150,7 @@ const BuyScreen = () => {
           icon: "error",
           title: error || "Transaction failed. Try again!.",
           showConfirmButton: false,
-          timer: 2500
+          timer: 2500,
         });
       });
   };
@@ -231,8 +231,8 @@ const BuyScreen = () => {
         ...(search === null && {
           order_category: "RPC-" + selectPlan.toLowerCase(),
           plan: selectPlan,
-          expiry_date: getFormattedDate(getExpiryDate(Date.now()))
-        })
+          expiry_date: getFormattedDate(getExpiryDate(Date.now())),
+        }),
       };
       let token = JSON.parse(localStorage.getItem("u_t"));
       if (search === null) {
@@ -241,15 +241,15 @@ const BuyScreen = () => {
           body,
           {
             headers: {
-              "x-auth-token": token
-            }
+              "x-auth-token": token,
+            },
           }
         );
         // save invoice
         await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
           headers: {
-            "x-auth-token": token
-          }
+            "x-auth-token": token,
+          },
         });
 
         router.push("/nodes");
@@ -259,7 +259,7 @@ const BuyScreen = () => {
           icon: "success",
           title: "Your order has been placed successfully",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
       } else {
         const response = await axios.put(
@@ -267,15 +267,15 @@ const BuyScreen = () => {
           body,
           {
             headers: {
-              "x-auth-token": token
-            }
+              "x-auth-token": token,
+            },
           }
         );
         // save invoice
         await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
           headers: {
-            "x-auth-token": token
-          }
+            "x-auth-token": token,
+          },
         });
         router.push("/nodes");
 
@@ -284,7 +284,7 @@ const BuyScreen = () => {
           icon: "success",
           title: "Your order has been renew successfully",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
       }
     } catch (error) {
@@ -295,7 +295,7 @@ const BuyScreen = () => {
           error.response?.data || error.message
         }`,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
       console.error(
         "Error during placed order",
@@ -355,7 +355,7 @@ const BuyScreen = () => {
         </div>
         {search === null && orderDetail === null ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-              <div
+            <div
               onClick={() => setSelectedPlan("Free")}
               className={`${
                 selectPlan === "Free" ? "opacity-90" : "opacity-50"
@@ -372,7 +372,7 @@ const BuyScreen = () => {
                 Free
               </div>
               <div className="text-white font-semibold lg:h-[50px] mw-12:h-[70px]">
-                Instant access to any location of your choice
+                Instant access to dedicated location
               </div>
               <ul className="flex flex-row  items-start gap-x-10 mx-2 mb-[50px] my-8 text-white text-[12px] xl:text-[14px] list-none  h-[120px]">
                 <li className="flex flex-col items-start gap-y-2">
@@ -390,7 +390,7 @@ const BuyScreen = () => {
                           y="0.220703"
                           width="23.9443"
                           height="23.9443"
-                          rx="11.9722"  
+                          rx="11.9722"
                           fill="white"
                         ></rect>
                         <path
@@ -402,9 +402,7 @@ const BuyScreen = () => {
                         ></path>
                       </svg>
                     </div>
-                    <div className="flex-1">
-                      Unlimited Bandwith &amp; Requests
-                    </div>
+                    <div className="flex-1">Unlimited Bandwith</div>
                   </div>
                   <div className="flex flex-row items-center gap-x-2">
                     <div className="flex-none text-[#FF9B17]">
@@ -432,7 +430,36 @@ const BuyScreen = () => {
                         ></path>
                       </svg>
                     </div>
-                    <div className="flex-1">200 Requests per 10 Seconds</div>
+                    <div className="flex-1">100,000 Requests</div>
+                  </div>
+
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className="flex-none text-[#FF9B17]">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0.723633"
+                          y="0.220703"
+                          width="23.9443"
+                          height="23.9443"
+                          rx="11.9722"
+                          fill="white"
+                        ></rect>
+                        <path
+                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
+                          stroke="currentColor"
+                          strokeWidth="1.99536"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1">10 rps Rate Limit</div>
                   </div>
                   <div className="flex flex-row items-center gap-x-2">
                     <div className="flex-none text-[#FF9B17]">
@@ -460,35 +487,7 @@ const BuyScreen = () => {
                         ></path>
                       </svg>
                     </div>
-                    <div className="flex-1">Enterprise Add-ons</div>
-                  </div>
-                  <div className="flex flex-row items-center gap-x-2">
-                    <div className="flex-none text-[#FF9B17]">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 25 25"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect
-                          x="0.723633"
-                          y="0.220703"
-                          width="23.9443"
-                          height="23.9443"
-                          rx="11.9722"
-                          fill="white"
-                        ></rect>
-                        <path
-                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                          stroke="currentColor"
-                          strokeWidth="1.99536"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        ></path>
-                      </svg>
-                    </div>
-                    <div className="flex-1">Premium Support</div>
+                    <div className="flex-1">Community Support</div>
                   </div>
                 </li>
 
@@ -577,39 +576,11 @@ const BuyScreen = () => {
                     </div>
                     <div className="flex-1">Dedicated Regions</div>
                   </div>
-                  <div className="flex flex-row items-center gap-x-2">
-                    <div className="flex-none text-[#FF9B17]">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 25 25"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect
-                          x="0.723633"
-                          y="0.220703"
-                          width="23.9443"
-                          height="23.9443"
-                          rx="11.9722"
-                          fill="white"
-                        ></rect>
-                        <path
-                          d="M8.2063 12.1927L11.1993 15.1858L17.1854 9.19971"
-                          stroke="currentColor"
-                          strokeWidth="1.99536"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        ></path>
-                      </svg>
-                    </div>
-                    <div className="flex-1">Geyser gRPC</div>
-                  </div>
                 </li>
               </ul>
               <div className="flex flex-row  gap-x-4 text-xl text-white pl-[10px] my-6">
                 <div className="text-white font-semibold">TPS</div>
-                <div className="text-white/50">~500</div>
+                <div className="text-white/50">~20</div>
               </div>
               <div className="flex flex-row items-start gap-x-[50px]">
                 <div className="flex flex-col items-start gap-y-2">
@@ -617,27 +588,6 @@ const BuyScreen = () => {
                     <span className="text-white font-semibold pl-[10px] ">
                       $0
                     </span>
-                    /1 week
-                  </div>
-                  <div className="text-white/50 text-2xl">
-                    <span className="text-white font-semibold pl-[10px]  ">
-                      $0
-                    </span>
-                    /1 month
-                  </div>
-                </div>
-                <div className="flex flex-col items-start gap-y-2">
-                  <div className="text-white/50 text-2xl">
-                    <span className="text-white font-semibold pl-[10px]  ">
-                      $0
-                    </span>
-                    /3 month
-                  </div>
-                  <div className="text-white/50 text-2xl">
-                    <span className="text-white font-semibold pl-[10px]  ">
-                      $0
-                    </span>
-                    /6 month
                   </div>
                 </div>
               </div>
@@ -719,7 +669,7 @@ const BuyScreen = () => {
                         ></path>
                       </svg>
                     </div>
-                    <div className="flex-1">200 Requests per 10 Seconds</div>
+                    <div className="flex-1">200 Requests per second</div>
                   </div>
                   <div className="flex flex-row items-center gap-x-2">
                     <div className="flex-none text-[#6840FD]">
@@ -896,7 +846,7 @@ const BuyScreen = () => {
               </ul>
               <div className="flex flex-row  gap-x-4 text-xl text-white my-6 pl-[10px]">
                 <div className="text-white font-semibold">TPS</div>
-                <div className="text-white/50">~500</div>
+                <div className="text-white/50">~200</div>
               </div>
               <div className="flex flex-row items-start gap-x-[50px]">
                 <div className="flex flex-col items-start gap-y-2">
@@ -1219,7 +1169,6 @@ const BuyScreen = () => {
                 </div>
               </div>
             </div>
-           
           </div>
         ) : orderDetail?.order_category.slice(4, 100).toLowerCase() ===
           "getting-started" ? (

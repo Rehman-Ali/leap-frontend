@@ -2,7 +2,7 @@ import RPCScreen from "@/pages/rpc-page";
 
 export const metadata = {
   title: "Solana RPC Node | High-Performance Trading Infrastructure",
-  description: "Experience lightning-fast Solana RPC nodes with features like GRPC, JitoShred, Bloxroute BDM, and unlimited TPS. Optimized for high-frequency trading and MEV protection.",
+  description: "Lightning-fast Solana RPC nodes with features GRPC, JitoShred, Bloxroute BDM, and unlimited TPS. Optimized for high-frequency trading and MEV protection.",
   keywords: ["Solana RPC", "RPC Node", "GRPC", "JitoShred", "Bloxroute", "High Performance RPC", "Solana Infrastructure", "MEV Protection", "Trading RPC"],
   openGraph: {
     title: "Solana RPC Node | High-Performance Trading Infrastructure",

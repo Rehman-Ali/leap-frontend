@@ -152,48 +152,49 @@ export default function RootLayout({ children }) {
   }, [pathname, token, router]);
 
   const handleLoginAndRegister = async (userData) => {
-    try {
-      const response = await axios.post(
-        `${SERVER_URL}/api/user/signin-and-signup`,
-        {
-          dp_user_id: userData.userId
-        }
-      );
+    console.log(userData, "user data from login")
+    // try {
+    //   const response = await axios.post(
+    //     `${SERVER_URL}/api/user/signin-and-signup`,
+    //     {
+    //       dp_user_id: userData.userId
+    //     }
+    //   );
 
-      localStorage.setItem("u_t", JSON.stringify(response.data.token.token));
-      localStorage.setItem("role", response.data.token.role);
-      let prev_path = localStorage.getItem("c_path");
+    //   localStorage.setItem("u_t", JSON.stringify(response.data.token.token));
+    //   localStorage.setItem("role", response.data.token.role);
+    //   let prev_path = localStorage.getItem("c_path");
 
-      if (!prev_path) {
-        router.push(
-          response.data.token.role === "admin"
-            ? "/admin-dashboard"
-            : "/dashboard"
-        );
-      } else {
-        router.push(prev_path);
-        localStorage.removeItem("c_path");
-      }
-    } catch (error) {
-      console.error(
-        "Error during login or registration:",
-        error.response?.data || error.message
-      );
+    //   if (!prev_path) {
+    //     router.push(
+    //       response.data.token.role === "admin"
+    //         ? "/admin-dashboard"
+    //         : "/dashboard"
+    //     );
+    //   } else {
+    //     router.push(prev_path);
+    //     localStorage.removeItem("c_path");
+    //   }
+    // } catch (error) {
+    //   console.error(
+    //     "Error during login or registration:",
+    //     error.response?.data || error.message
+    //   );
 
-      setTimeout(() => {
-        localStorage.clear();
-        sessionStorage.clear();
-        window.location.reload();
-      }, 1000);
+    //   setTimeout(() => {
+    //     localStorage.clear();
+    //     sessionStorage.clear();
+    //     window.location.reload();
+    //   }, 1000);
 
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: error.response?.data.message || "Login failed",
-        showConfirmButton: false,
-        timer: 2500
-      });
-    }
+    //   Swal.fire({
+    //     position: "center",
+    //     icon: "error",
+    //     title: error.response?.data.message || "Login failed",
+    //     showConfirmButton: false,
+    //     timer: 2500
+    //   });
+    // }
   };
 
   if (isLoading) {
