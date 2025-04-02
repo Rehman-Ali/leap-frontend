@@ -15,6 +15,7 @@ export default function DashboardHeader({ toggleSidebar }) {
   const onLogoutHandler = () => {
     handleLogOut();
     localStorage.removeItem("u_t");
+    localStorage.removeItem("l_w");
     localStorage.removeItem("role");
     setTimeout(() => {
       redirect("/");

@@ -188,15 +188,18 @@ const DashboardScreen = () => {
                                   : order.operating_system}
                               </td>
                               <td className="py-2 px-4 border-b text-center capitalize">
-                                <span
-                                  className={`px-2 cursor-pointer mr-[5px] py-1 ${
-                                    order.status === "active"
-                                      ? "bg-darkPrimary text-black "
-                                      : "bg-red-700 text-white"
-                                  }  text-[12px] rounded-md disabled:opacity-50`}
-                                >
-                                  {order.status}
-                                </span>
+                              {order.order_category !== "RPC-free"
+                              ?  <span
+                              className={`px-2 cursor-pointer mr-[5px] py-1 ${
+                                order.status === "active"
+                                  ? "bg-darkPrimary text-black "
+                                  : "bg-red-700 text-white"
+                              }  text-[12px] rounded-md disabled:opacity-50`}
+                            >
+                              {order.status}
+                            </span>
+                              : <span className="text-[14px]">{ order.usage_used + " out of 100000 Usage" }</span>}
+                               
                               </td>
                               <td className="py-2 px-4 border-b text-center capitalize">
                                 <span
@@ -282,7 +285,57 @@ const DashboardScreen = () => {
                     ✕
                   </button>
                 </div>
+                {selected.order_category === "RPC-free" ? (
+                    <div className="space-y-4">
+                      <p className="dark:text-white text-black font-inter font-bold pb-[5px]">
+                        For Europe:
+                      </p>
 
+                      <div>
+                        <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
+                          HTTP:
+                        </p>
+                        <div className="flex items-center space-x-2">
+                          <p className="dark:text-white text-black font-inter font-normal truncate flex-1">
+                            {`http://eu-trial.leap-blockchain.com/?api_key=${selected.api_key}`}
+                          </p>
+                          <button
+                            onClick={() =>
+                              copyToClipboard(
+                                `http://eu-trial.leap-blockchain.com/?api_key=${selected.api_key}`,
+                                "http"
+                              )
+                            }
+                            className="bg-darkPrimary cursor-pointer text-white px-3 py-1 rounded text-sm"
+                          >
+                            {copyStatus.http ? "Copied!" : "Copy"}
+                          </button>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
+                          For USA:
+                        </p>
+                        <div className="flex items-center space-x-2">
+                          <p className="dark:text-white text-black font-inter font-normal truncate flex-1">
+                            {`http://usa-trial.leap-blockchain.com/?api_key=${selected.api_key}`}
+                          </p>
+                          <button
+                            onClick={() =>
+                              copyToClipboard(
+                                `http://usa-trial.leap-blockchain.com/?api_key=${selected.api_key}`,
+                                "http2"
+                              )
+                            }
+                            className="bg-darkPrimary cursor-pointer text-white px-3 py-1 rounded text-sm"
+                          >
+                            {copyStatus.http2 ? "Copied!" : "Copy"}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
                 <div className="space-y-4">
                   <p className="dark:text-white text-black font-inter font-bold pb-[5px]">
                     Bot URLs
@@ -397,6 +450,7 @@ const DashboardScreen = () => {
                     </div>
                   </div>
                 </div>
+                  )}
               </div>
             </div>
           </Modal>

@@ -162,7 +162,9 @@ export default function RootLayout({ children }) {
         }
       );
 
+      let loginWithGmail =  userData.email !== undefined ? true : false;
       localStorage.setItem("u_t", JSON.stringify(response.data.token.token));
+      localStorage.setItem("l_w", JSON.stringify(loginWithGmail));
       localStorage.setItem("role", response.data.token.role);
       let prev_path = localStorage.getItem("c_path");
 

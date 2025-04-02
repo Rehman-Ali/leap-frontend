@@ -64,8 +64,6 @@ const BuyScreen = () => {
       .catch((err) => console.error("Error fetching data", err));
   }, []);
 
-  // console.log(selectPlan, "plam------")
-
   const payOrder = async () => {
     if (!primaryWallet || !isSolanaWallet(primaryWallet)) {
       return;
@@ -160,6 +158,20 @@ const BuyScreen = () => {
 
     // Assuming the service lasts 30 days (adjust according to your actual duration)
     const serviceDuration = selectedDuration; // in days
+
+    // Calculate the service end date
+    let serviceEndDate = new Date(serviceStartDate);
+    serviceEndDate.setDate(serviceEndDate.getDate() + serviceDuration);
+
+    // Return the calculated expiry date
+    return serviceEndDate;
+  };
+
+  const getExpiryDateForFreeNode = (date) => {
+    const serviceStartDate = new Date(date);
+
+    // Assuming the service lasts 30 days (adjust according to your actual duration)
+    const serviceDuration = 1000; // in days
 
     // Calculate the service end date
     let serviceEndDate = new Date(serviceStartDate);
@@ -302,6 +314,72 @@ const BuyScreen = () => {
         error.response?.data || error.message
       );
     }
+  };
+
+  console.log(selectPlan, "plam------");
+
+  const freeOrder = async (e) => {
+   let loginWithEmail = JSON.parse(localStorage.getItem("l_w"))
+   if(loginWithEmail){
+    try {
+      let body = {
+        status: "active",
+        price: 0,
+        price_in_SOL: 0,
+        operating_system: null,
+        region: selectRegion,
+        order_category: "RPC-" + selectPlan.toLowerCase(),
+        plan: selectPlan,
+        usage_used: 0,
+        expiry_date: getFormattedDate(getExpiryDateForFreeNode(Date.now())),
+      };
+      let token = JSON.parse(localStorage.getItem("u_t"));
+      const response = await axios.post(
+        `${SERVER_URL}/api/order/create`,
+        body,
+        {
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      );
+      // save invoice
+      await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
+        headers: {
+          "x-auth-token": token,
+        },
+      });
+
+      router.push("/nodes");
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your claim has been placed successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: `${
+          error.response?.data.message
+        }`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+   }else{
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: `Please login with Gmail to claim Free Node`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+   }
+  
   };
 
   return (
@@ -1760,58 +1838,60 @@ const BuyScreen = () => {
           </div>
         )}
 
-        <div className="mt-6">
-          <div className="flex flex-row items-center gap-x-4 mb-5">
-            <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black ">
-              2
+        {selectPlan !== "Free" && (
+          <div className="mt-6">
+            <div className="flex flex-row items-center gap-x-4 mb-5">
+              <div className="w-6 h-6 bg-[#f4f4f5] rounded-full flex items-center justify-center text-black dark:text-black ">
+                2
+              </div>
+              <h1 className="text-xl dark:text-white font-semibold">
+                Select Duration
+              </h1>
             </div>
-            <h1 className="text-xl dark:text-white font-semibold">
-              Select Duration
-            </h1>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              <div
+                onClick={() => setSelectedDuration(7)}
+                className={`flex w-full p-5 ${
+                  selectedDuration === 7
+                    ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                    : "dark:text-white"
+                }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+              >
+                1 week
+              </div>
+              <div
+                onClick={() => setSelectedDuration(30)}
+                className={`flex w-full p-5 ${
+                  selectedDuration === 30
+                    ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                    : "dark:text-white"
+                }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+              >
+                1 month
+              </div>
+              <div
+                onClick={() => setSelectedDuration(90)}
+                className={`flex w-full p-5 ${
+                  selectedDuration === 90
+                    ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                    : "dark:text-white"
+                }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+              >
+                3 month
+              </div>
+              <div
+                onClick={() => setSelectedDuration(180)}
+                className={`flex w-full p-5 ${
+                  selectedDuration === 180
+                    ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                    : "dark:text-white"
+                }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+              >
+                6 month
+              </div>
+            </div>
           </div>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            <div
-              onClick={() => setSelectedDuration(7)}
-              className={`flex w-full p-5 ${
-                selectedDuration === 7
-                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
-                  : "dark:text-white"
-              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
-            >
-              1 week
-            </div>
-            <div
-              onClick={() => setSelectedDuration(30)}
-              className={`flex w-full p-5 ${
-                selectedDuration === 30
-                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
-                  : "dark:text-white"
-              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
-            >
-              1 month
-            </div>
-            <div
-              onClick={() => setSelectedDuration(90)}
-              className={`flex w-full p-5 ${
-                selectedDuration === 90
-                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
-                  : "dark:text-white"
-              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
-            >
-              3 month
-            </div>
-            <div
-              onClick={() => setSelectedDuration(180)}
-              className={`flex w-full p-5 ${
-                selectedDuration === 180
-                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
-                  : "dark:text-white"
-              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
-            >
-              6 month
-            </div>
-          </div>
-        </div>
+        )}
 
         <div className="mt-6">
           <div className="flex flex-row items-center gap-x-4 mb-5">
@@ -1823,66 +1903,31 @@ const BuyScreen = () => {
             </h1>
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            <div
-              onClick={() => setSelectedRegion("Frankfurt")}
-              className={`flex w-full p-5 ${
-                selectRegion === "Frankfurt"
-                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
-                  : "dark:text-white"
-              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
-            >
-              Frankfurt
-            </div>
-            <div
-              onClick={() => setSelectedRegion("Amsterdam")}
-              className={`flex w-full p-5 ${
-                selectRegion === "Amsterdam"
-                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
-                  : "dark:text-white"
-              }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
-            >
-              Amsterdam
-            </div>
-            {/* <div
-              onClick={() => setSelectedRegion("AMS - Netherlands")}
-              className={`flex w-full p-5 ${
-                selectRegion === "AMS - Netherlands"
-                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
-                  : "dark:text-white"
-              }   items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
-            >
-              AMS - Netherlands
-            </div> */}
-            {/* <div
-              onClick={() => setSelectedRegion("Bend, OR")}
-              className={`flex dark:text-white ${
-                selectRegion === "Bend, OR"
-                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
-                  : "dark:text-white"
-              } w-full p-5 items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
-            >
-              Bend, OR
-            </div> */}
-            {/* <div
-              onClick={() => setSelectedRegion("Latham, NY")}
-              className={`flex w-full ${
-                selectRegion === "Latham, NY"
-                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
-                  : "dark:text-white"
-              }   p-5 items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
-            >
-              Latham, NY
-            </div> */}
-            {/* <div
-              onClick={() => setSelectedRegion("FRS - France")}
-              className={`flex w-full ${
-                selectRegion === "FRS - France"
-                  ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
-                  : "dark:text-white"
-              } p-5  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
-            >
-              FRS - France
-            </div> */}
+            {selectPlan !== "Free" && (
+              <>
+                <div
+                  onClick={() => setSelectedRegion("Amsterdam")}
+                  className={`flex w-full p-5 ${
+                    selectRegion === "Amsterdam"
+                      ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                      : "dark:text-white"
+                  }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+                >
+                  Amsterdam
+                </div>
+                <div
+                  onClick={() => setSelectedRegion("Frankfurt")}
+                  className={`flex w-full p-5 ${
+                    selectRegion === "Frankfurt"
+                      ? "dark:bg-gray-100 dark:text-bodyColor bg-gray-100"
+                      : "dark:text-white"
+                  }  items-center gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-bodyColor`}
+                >
+                  Frankfurt
+                </div>
+              </>
+            )}
+
             <div
               onClick={() => setSelectedRegion("Ashburn, VA")}
               className={`flex w-full  ${
@@ -1893,16 +1938,6 @@ const BuyScreen = () => {
             >
               Ashburn, VA
             </div>
-            {/* <div
-              onClick={() => setSelectedRegion("Staten Island, NY")}
-              className={`flex w-full p-5  ${
-                selectRegion === "Staten Island, NY"
-                  ? "dark:bg-gray-100 dark:text-bodyColor  bg-gray-100 "
-                  : "dark:text-white"
-              } items-center  gap-2 border rounded-lg cursor-pointer transition-colors border-gray-300 hover:bg-gray-100 dark:hover:text-black`}
-            >
-              Staten Island, NY
-            </div> */}
           </div>
         </div>
         <div className="my-20 min-h-96">
@@ -2058,6 +2093,20 @@ const BuyScreen = () => {
                 <p className="mt-2.5 w-full text-center text-sm text-gray-400">
                   Payments are made in Solana. Plan doesn't auto-renew.
                 </p>
+              </div>
+            </>
+          )}
+
+          {selectPlan === "Free" && selectRegion !== "" && (
+            <>
+              <hr className="my-4" />
+              <div>
+                <button
+                  onClick={(e) => freeOrder(e)}
+                  className="bg-darkPrimary flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
+                >
+                  Claim Now
+                </button>
               </div>
             </>
           )}
