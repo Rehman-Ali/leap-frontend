@@ -66,7 +66,13 @@ const BuyScreen = () => {
 
   const payOrder = async () => {
     if (!primaryWallet || !isSolanaWallet(primaryWallet)) {
-      return;
+      return  Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Please connect wallet first like Phantom!",
+        showConfirmButton: false,
+        timer: 2500,
+      });
     }
 
     const connection = await primaryWallet.getConnection();
