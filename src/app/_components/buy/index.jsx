@@ -3,12 +3,14 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { SERVER_URL, WALLET_ADDRESS } from "@/utils/server";
 import axios from "axios";
-import Swal from "sweetalert2";
 import { useRouter, useSearchParams } from "next/navigation";
 import { isSolanaWallet } from "@dynamic-labs/solana-core";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { ToastContainer, toast } from "react-toastify";
+import { FaGoogle } from "react-icons/fa";
+import { MdAccountBalanceWallet } from "react-icons/md";
+import { redirect } from "next/navigation";
 
 const BuyScreen = () => {
   const searchParams = useSearchParams();
@@ -22,12 +24,13 @@ const BuyScreen = () => {
   const [transactionId, setTransactionId] = useState("");
   const [selectedDuration, setSelectedDuration] = useState(null);
   const [orderDetail, setOrderDetail] = useState(null);
-
   const [solPrice, setSolPrice] = useState(null); // Current SOL price in USD
-
-  const { primaryWallet } = useDynamicContext();
+  const { primaryWallet, handleLogOut } = useDynamicContext();
+  const [isLoginWithEmail, setIsLoginWithEmail] = useState(false);
 
   useEffect(() => {
+    let getLoginWithEmail = JSON.parse(localStorage.getItem("l_w"));
+    setIsLoginWithEmail(getLoginWithEmail);
     async function fetchSolPrice() {
       try {
         const response = await fetch(
@@ -66,13 +69,11 @@ const BuyScreen = () => {
       .catch((err) => console.error("Error fetching data", err));
   }, []);
 
-
-  const onChnageSelectedPlan = (plan) =>{
+  const onChnageSelectedPlan = (plan) => {
     setSelectedPlan(plan);
     setSelectedRegion("");
     setSelectedDuration(null);
-  }
-
+  };
 
   const payOrder = async () => {
     if (!primaryWallet || !isSolanaWallet(primaryWallet)) {
@@ -121,13 +122,7 @@ const BuyScreen = () => {
     // const totalCost = 0;
 
     if (balance < totalCost) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Insufficient balance to complete this transaction.",
-        showConfirmButton: false,
-        timer: 2000
-      });
+      toast.error("Insufficient balance to complete this transaction.");
       return;
     }
 
@@ -242,6 +237,8 @@ const BuyScreen = () => {
 
         operating_system: null,
         region: selectRegion,
+        is_free_tier: false,
+        order_region: selectRegion === "Ashburn, VA" ? "usa" : "europe",
 
         // expiry_date: getFormattedDate(getExpiryDate(Date.now()))
         ...(search === null && {
@@ -270,13 +267,7 @@ const BuyScreen = () => {
 
         router.push("/nodes");
 
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Your order has been placed successfully",
-          showConfirmButton: false,
-          timer: 1500
-        });
+        toast.success("Your order has been placed successfully");
       } else {
         const response = await axios.put(
           `${SERVER_URL}/api/order/update/${search}`,
@@ -295,27 +286,11 @@ const BuyScreen = () => {
         });
         router.push("/nodes");
 
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Your order has been renew successfully",
-          showConfirmButton: false,
-          timer: 1500
-        });
+        toast.success("Your order has been renew successfully");
       }
     } catch (error) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: `Error during placed order ${
-          error.response?.data || error.message
-        }`,
-        showConfirmButton: false,
-        timer: 1500
-      });
-      console.error(
-        "Error during placed order",
-        error.response?.data || error.message
+      toast.error(
+        `Error during placed order ${error.response?.data || error.message}`
       );
     }
   };
@@ -333,6 +308,8 @@ const BuyScreen = () => {
           order_category: "RPC-" + selectPlan.toLowerCase(),
           plan: selectPlan,
           usage_used: 0,
+          is_free_tier: true,
+          order_region: "usa",
           expiry_date: getFormattedDate(getExpiryDateForFreeNode(Date.now()))
         };
         let token = JSON.parse(localStorage.getItem("u_t"));
@@ -354,21 +331,27 @@ const BuyScreen = () => {
 
         router.push("/nodes");
 
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Your claim has been placed successfully",
-          showConfirmButton: false,
-          timer: 1500
-        });
+        toast.success("You've successfully got free tier.");
       } catch (error) {
-        toast.error("You've already claimed our free tier. To maintain uninterrupted access to our node. Please upgrade to a paid plan.");
+        toast.error(
+          "You've already got our free tier. To maintain uninterrupted access to our node. Please upgrade to a paid plan."
+        );
       }
     } else {
-      toast.error("Please login via Gmail to claim your Free Node");
+      toast.error("Please login via Gmail to get your Free Node");
     }
   };
 
+  const logoutToConnect = () => {
+    handleLogOut();
+    localStorage.removeItem("u_t");
+    localStorage.removeItem("l_w");
+    localStorage.removeItem("role");
+    localStorage.setItem("c_path", "/buy");
+    setTimeout(() => {
+      redirect("/login");
+    }, 1000);
+  };
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
       <div className="h-full w-full max-w-[1500px] p-2 lg:p-5">
@@ -2071,15 +2054,29 @@ const BuyScreen = () => {
                     </a>
                   </div>
                 )}
-                <button
-                  onClick={(e) => payOrder(e)}
-                  className="bg-darkPrimary flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
-                >
-                  Pay Now
-                </button>
-                <p className="mt-2.5 w-full text-center text-sm text-gray-400">
-                  Payments are made in Solana. Plan doesn't auto-renew.
-                </p>
+                {isLoginWithEmail ? (
+                  <div>
+                    <button
+                      onClick={(e) => logoutToConnect(e)}
+                      className="bg-gray-200 flex justify-center items-center font-semibold gap-2.5 text-[16px] px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
+                    >
+                      <MdAccountBalanceWallet size={22} color={"#231F20"} />{" "}
+                      Continue with Wallet
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <button
+                      onClick={(e) => payOrder(e)}
+                      className="bg-darkPrimary flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
+                    >
+                      Pay Now
+                    </button>
+                    <p className="mt-2.5 w-full text-center text-sm text-gray-400">
+                      Payments are made in Solana. Plan doesn't auto-renew.
+                    </p>
+                  </>
+                )}
               </div>
             </>
           )}
@@ -2087,20 +2084,32 @@ const BuyScreen = () => {
           {selectPlan === "Free" && selectRegion !== "" && (
             <>
               <hr className="my-4" />
-              <div>
-                <button
-                  onClick={(e) => freeOrder(e)}
-                  className="bg-darkPrimary flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
-                >
-                  Claim Now
-                </button>
-              </div>
+              {isLoginWithEmail ? (
+                <div>
+                  <button
+                    onClick={(e) => freeOrder(e)}
+                    className="bg-darkPrimary flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
+                  >
+                    Get Free Node Now
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <button
+                    onClick={(e) => logoutToConnect(e)}
+                    className="bg-gray-200 flex justify-center items-center font-semibold gap-2.5 text-[16px] px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
+                  >
+                    <FaGoogle size={22} color={"#231F20"} /> Continue with
+                    Google
+                  </button>
+                </div>
+              )}
             </>
           )}
         </div>
       </div>
       <ToastContainer
-        position="bottom-center"
+        position="bottom-right"
         autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -2109,7 +2118,7 @@ const BuyScreen = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="dark"
         // transition={Bounce}
       />
     </div>

@@ -529,7 +529,7 @@ const SolanaWrapperScreen = () => {
         )}
       </div>
       <ToastContainer
-        position="bottom-center"
+        position="bottom-right"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -538,7 +538,7 @@ const SolanaWrapperScreen = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="dark"
         // transition={Bounce}
       />
     </div>

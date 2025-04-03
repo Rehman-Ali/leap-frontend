@@ -3,11 +3,11 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { SERVER_URL, WALLET_ADDRESS } from "@/utils/server";
 import axios from "axios";
-import Swal from "sweetalert2";
 import { useRouter, useSearchParams } from "next/navigation";
 import { isSolanaWallet } from "@dynamic-labs/solana-core";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
+import { ToastContainer, toast } from "react-toastify";
 
 const BuyVPSScreen = () => {
   const searchParams = useSearchParams();
@@ -19,7 +19,7 @@ const BuyVPSScreen = () => {
   const [status, setStatus] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const [selectedDuration, setSelectedDuration] = useState(null);
- const [orderDetail, setOrderDetail] = useState(null);
+  const [orderDetail, setOrderDetail] = useState(null);
 
   const [solPrice, setSolPrice] = useState(null); // Current SOL price in USD
 
@@ -34,9 +34,8 @@ const BuyVPSScreen = () => {
         const data = await response.json();
         const price = data.solana.usd; // Get SOL price in USD
         setSolPrice(price);
-   
       } catch (error) {
-        console.error("Error fetching Solana price:", error);
+        toast.error("Error fetching Solana price");
       }
     }
 
@@ -60,7 +59,6 @@ const BuyVPSScreen = () => {
       })
       .catch((err) => console.error("Error fetching data", err));
   }, []);
-
 
   const payOrder = async () => {
     if (!primaryWallet || !isSolanaWallet(primaryWallet)) {
@@ -100,13 +98,7 @@ const BuyVPSScreen = () => {
     // const totalCost = 0;
 
     if (balance < totalCost) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Insufficient balance to complete this transaction.",
-        showConfirmButton: false,
-        timer: 2000
-      });
+      toast.error("Insufficient balance to complete this transaction.");
       return;
     }
 
@@ -127,18 +119,9 @@ const BuyVPSScreen = () => {
       .signAndSendTransaction(transferTransaction)
       .then((value) => {
         onConfirmOrder();
-        console.log(
-          `Transaction successful: https://solscan.io/tx/${value.signature}?cluster=${cluster}`
-        );
       })
       .catch((error) => {
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: error || "Transaction failed. Try again!.",
-          showConfirmButton: false,
-          timer: 2500
-        });
+        toast.error(error || "Transaction failed. Try again!.");
       });
   };
 
@@ -194,10 +177,16 @@ const BuyVPSScreen = () => {
         operating_system: operatingSystem,
         region: selectRegion,
         plan: selectPlan,
+        is_free_tier: false,
+        order_region:
+          selectRegion === "AMS - Netherlands" ||
+          selectRegion === "FRS - France"
+            ? "europe"
+            : "usa",
         // expiry_date: getFormattedDate(getExpiryDate(Date.now()))
         ...(search === null && {
-          expiry_date: getFormattedDate(getExpiryDate(Date.now())),
-        }),
+          expiry_date: getFormattedDate(getExpiryDate(Date.now()))
+        })
       };
       let token = JSON.parse(localStorage.getItem("u_t"));
       if (search === null) {
@@ -217,13 +206,8 @@ const BuyVPSScreen = () => {
           }
         });
 
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Your order has been placed successfully",
-          showConfirmButton: false,
-          timer: 1500
-        });
+        toast.success("Your order has been placed successfully");
+
         router.push("/vps-info");
       } else {
         const response = await axios.put(
@@ -243,27 +227,11 @@ const BuyVPSScreen = () => {
         });
         router.push("/vps-info");
 
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Your order has been renew successfully",
-          showConfirmButton: false,
-          timer: 1500
-        });
+        toast.success("Your order has been renew successfully");
       }
     } catch (error) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: `Error during placed order ${
-          error.response?.data || error.message
-        }`,
-        showConfirmButton: false,
-        timer: 1500
-      });
-      console.error(
-        "Error during placed order",
-        error.response?.data || error.message
+      toast.error(
+        `Error during placed order ${error.response?.data || error.message}`
       );
     }
   };
@@ -720,6 +688,19 @@ const BuyVPSScreen = () => {
           )}
         </div>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        // transition={Bounce}
+      />
     </div>
   );
 };

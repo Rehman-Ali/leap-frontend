@@ -287,32 +287,7 @@ const DashboardScreen = () => {
                 </div>
                 {selected.order_category === "RPC-free" ? (
                     <div className="space-y-4">
-                      <p className="dark:text-white text-black font-inter font-bold pb-[5px]">
-                        For Europe:
-                      </p>
-
-                      <div>
-                        <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
-                          HTTP:
-                        </p>
-                        <div className="flex items-center space-x-2">
-                          <p className="dark:text-white text-black font-inter font-normal truncate flex-1">
-                            {`http://eu-trial.leap-blockchain.com/?api_key=${selected.api_key}`}
-                          </p>
-                          <button
-                            onClick={() =>
-                              copyToClipboard(
-                                `http://eu-trial.leap-blockchain.com/?api_key=${selected.api_key}`,
-                                "http"
-                              )
-                            }
-                            className="bg-darkPrimary cursor-pointer text-white px-3 py-1 rounded text-sm"
-                          >
-                            {copyStatus.http ? "Copied!" : "Copy"}
-                          </button>
-                        </div>
-                      </div>
-
+                    
                       <div>
                         <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
                           For USA:
