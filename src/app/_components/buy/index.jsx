@@ -66,6 +66,14 @@ const BuyScreen = () => {
       .catch((err) => console.error("Error fetching data", err));
   }, []);
 
+
+  const onChnageSelectedPlan = (plan) =>{
+    setSelectedPlan(plan);
+    setSelectedRegion("");
+    setSelectedDuration(null);
+  }
+
+
   const payOrder = async () => {
     if (!primaryWallet || !isSolanaWallet(primaryWallet)) {
       return toast.error("Please connect wallet first like Phantom!");
@@ -354,16 +362,10 @@ const BuyScreen = () => {
           timer: 1500
         });
       } catch (error) {
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: `${error.response?.data.message}`,
-          showConfirmButton: false,
-          timer: 1500
-        });
+        toast.error("You've already claimed our free tier. To maintain uninterrupted access to our node. Please upgrade to a paid plan.");
       }
     } else {
-      toast.error("Please login with Gmail to claim Free Node");
+      toast.error("Please login via Gmail to claim your Free Node");
     }
   };
 
@@ -419,7 +421,7 @@ const BuyScreen = () => {
         {search === null && orderDetail === null ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             <div
-              onClick={() => setSelectedPlan("Free")}
+              onClick={() => onChnageSelectedPlan("Free")}
               className={`${
                 selectPlan === "Free" ? "opacity-90" : "opacity-50"
               } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#FF9B17] to-[#FF9B17] bg-[linear-gradient(324.64deg,rgba(104,64,253,0)0%,rgba(255,255,255,0.2)100%)] `}
@@ -656,7 +658,7 @@ const BuyScreen = () => {
               </div>
             </div>
             <div
-              onClick={() => setSelectedPlan("Getting-Started")}
+              onClick={() => onChnageSelectedPlan("Getting-Started")}
               className={`${
                 selectPlan === "Getting-Started" ? "opacity-90" : "opacity-50"
               } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#6840FD] to-[#6840FD] bg-[linear-gradient(324.64deg,rgba(104,64,253,0)0%,rgba(255,255,255,0.2)100%)] `}
@@ -943,7 +945,7 @@ const BuyScreen = () => {
               </div>
             </div>
             <div
-              onClick={() => setSelectedPlan("Professional")}
+              onClick={() => onChnageSelectedPlan("Professional")}
               className={`${
                 selectPlan === "Professional" ? "opacity-90" : "opacity-50"
               } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#41BF6D] to-[#41BF6D] bg-[linear-gradient(324.64deg,rgba(65,191,109,0)0%,rgba(255,255,255,0.2)100%)]`}
@@ -1237,7 +1239,7 @@ const BuyScreen = () => {
           "getting-started" ? (
           <div className="grid mw-11:grid-cols-1 mw-12:grid-cols-2  lg:grid-cols-2 gap-5">
             <div
-              onClick={() => setSelectedPlan("Getting-Started")}
+              onClick={() => onChnageSelectedPlan("Getting-Started")}
               className={`${
                 selectPlan.toLowerCase() === "getting-started"
                   ? "opacity-90"
@@ -1529,7 +1531,7 @@ const BuyScreen = () => {
         ) : (
           <div className="grid mw-11:grid-cols-1 mw-12:grid-cols-2  lg:grid-cols-2 gap-5">
             <div
-              onClick={() => setSelectedPlan("Professional")}
+              onClick={() => onChnageSelectedPlan("Professional")}
               className={`${
                 selectPlan.toLowerCase() === "professional"
                   ? "opacity-90"
@@ -2099,7 +2101,7 @@ const BuyScreen = () => {
       </div>
       <ToastContainer
         position="bottom-center"
-        autoClose={3000}
+        autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={false}

@@ -267,7 +267,7 @@ const SubscriptionScreen = () => {
 
         {paginatedData.length > 0 && selected !== null && (
           <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-            <div className="fixed inset-0  bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="flex items-center justify-center z-50">
               <div className="bg-white  dark:bg-bodyColor p-6 rounded-lg max-w-lg w-full">
                 <div className="flex justify-between mb-4">
                   <h3 className="font-bold text-lg text-black dark:text-white">
