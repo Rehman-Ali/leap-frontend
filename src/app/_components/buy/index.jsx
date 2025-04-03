@@ -8,6 +8,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { isSolanaWallet } from "@dynamic-labs/solana-core";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
+import { ToastContainer, toast } from "react-toastify";
+
 const BuyScreen = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -49,8 +51,8 @@ const BuyScreen = () => {
     axios
       .get(`${SERVER_URL}/api/order/get-single/${search}`, {
         headers: {
-          "x-auth-token": token,
-        },
+          "x-auth-token": token
+        }
       })
       .then((res) => {
         if (res.data && res.data.data) {
@@ -66,13 +68,7 @@ const BuyScreen = () => {
 
   const payOrder = async () => {
     if (!primaryWallet || !isSolanaWallet(primaryWallet)) {
-      return  Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Please connect wallet first like Phantom!",
-        showConfirmButton: false,
-        timer: 2500,
-      });
+      return toast.error("Please connect wallet first like Phantom!");
     }
 
     const connection = await primaryWallet.getConnection();
@@ -122,7 +118,7 @@ const BuyScreen = () => {
         icon: "error",
         title: "Insufficient balance to complete this transaction.",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 2000
       });
       return;
     }
@@ -131,7 +127,7 @@ const BuyScreen = () => {
       SystemProgram.transfer({
         fromPubkey: fromKey,
         lamports: amountInLamports,
-        toPubkey: toKey,
+        toPubkey: toKey
       })
     );
     const blockhash = await connection.getLatestBlockhash();
@@ -149,13 +145,7 @@ const BuyScreen = () => {
         );
       })
       .catch((error) => {
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: error || "Transaction failed. Try again!.",
-          showConfirmButton: false,
-          timer: 2500,
-        });
+        toast.error(error || "Transaction failed. Try again!.");
       });
   };
 
@@ -249,8 +239,8 @@ const BuyScreen = () => {
         ...(search === null && {
           order_category: "RPC-" + selectPlan.toLowerCase(),
           plan: selectPlan,
-          expiry_date: getFormattedDate(getExpiryDate(Date.now())),
-        }),
+          expiry_date: getFormattedDate(getExpiryDate(Date.now()))
+        })
       };
       let token = JSON.parse(localStorage.getItem("u_t"));
       if (search === null) {
@@ -259,15 +249,15 @@ const BuyScreen = () => {
           body,
           {
             headers: {
-              "x-auth-token": token,
-            },
+              "x-auth-token": token
+            }
           }
         );
         // save invoice
         await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
           headers: {
-            "x-auth-token": token,
-          },
+            "x-auth-token": token
+          }
         });
 
         router.push("/nodes");
@@ -277,7 +267,7 @@ const BuyScreen = () => {
           icon: "success",
           title: "Your order has been placed successfully",
           showConfirmButton: false,
-          timer: 1500,
+          timer: 1500
         });
       } else {
         const response = await axios.put(
@@ -285,15 +275,15 @@ const BuyScreen = () => {
           body,
           {
             headers: {
-              "x-auth-token": token,
-            },
+              "x-auth-token": token
+            }
           }
         );
         // save invoice
         await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
           headers: {
-            "x-auth-token": token,
-          },
+            "x-auth-token": token
+          }
         });
         router.push("/nodes");
 
@@ -302,7 +292,7 @@ const BuyScreen = () => {
           icon: "success",
           title: "Your order has been renew successfully",
           showConfirmButton: false,
-          timer: 1500,
+          timer: 1500
         });
       }
     } catch (error) {
@@ -313,7 +303,7 @@ const BuyScreen = () => {
           error.response?.data || error.message
         }`,
         showConfirmButton: false,
-        timer: 1500,
+        timer: 1500
       });
       console.error(
         "Error during placed order",
@@ -322,70 +312,59 @@ const BuyScreen = () => {
     }
   };
 
-  console.log(selectPlan, "plam------");
-
   const freeOrder = async (e) => {
-   let loginWithEmail = JSON.parse(localStorage.getItem("l_w"))
-   if(loginWithEmail){
-    try {
-      let body = {
-        status: "active",
-        price: 0,
-        price_in_SOL: 0,
-        operating_system: null,
-        region: selectRegion,
-        order_category: "RPC-" + selectPlan.toLowerCase(),
-        plan: selectPlan,
-        usage_used: 0,
-        expiry_date: getFormattedDate(getExpiryDateForFreeNode(Date.now())),
-      };
-      let token = JSON.parse(localStorage.getItem("u_t"));
-      const response = await axios.post(
-        `${SERVER_URL}/api/order/create`,
-        body,
-        {
+    let loginWithEmail = JSON.parse(localStorage.getItem("l_w"));
+    if (loginWithEmail) {
+      try {
+        let body = {
+          status: "active",
+          price: 0,
+          price_in_SOL: 0,
+          operating_system: null,
+          region: selectRegion,
+          order_category: "RPC-" + selectPlan.toLowerCase(),
+          plan: selectPlan,
+          usage_used: 0,
+          expiry_date: getFormattedDate(getExpiryDateForFreeNode(Date.now()))
+        };
+        let token = JSON.parse(localStorage.getItem("u_t"));
+        const response = await axios.post(
+          `${SERVER_URL}/api/order/create`,
+          body,
+          {
+            headers: {
+              "x-auth-token": token
+            }
+          }
+        );
+        // save invoice
+        await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
           headers: {
-            "x-auth-token": token,
-          },
-        }
-      );
-      // save invoice
-      await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
-        headers: {
-          "x-auth-token": token,
-        },
-      });
+            "x-auth-token": token
+          }
+        });
 
-      router.push("/nodes");
+        router.push("/nodes");
 
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Your claim has been placed successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } catch (error) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: `${
-          error.response?.data.message
-        }`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your claim has been placed successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      } catch (error) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `${error.response?.data.message}`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    } else {
+      toast.error("Please login with Gmail to claim Free Node");
     }
-   }else{
-    Swal.fire({
-      position: "center",
-      icon: "error",
-      title: `Please login with Gmail to claim Free Node`,
-      showConfirmButton: false,
-      timer: 1500,
-    });
-   }
-  
   };
 
   return (
@@ -753,7 +732,7 @@ const BuyScreen = () => {
                         ></path>
                       </svg>
                     </div>
-                    <div className="flex-1">200 Requests per second</div>
+                    <div className="flex-1">Unlimited Requests</div>
                   </div>
                   <div className="flex flex-row items-center gap-x-2">
                     <div className="flex-none text-[#6840FD]">
@@ -2118,6 +2097,19 @@ const BuyScreen = () => {
           )}
         </div>
       </div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        // transition={Bounce}
+      />
     </div>
   );
 };

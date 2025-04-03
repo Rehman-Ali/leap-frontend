@@ -216,7 +216,7 @@ const RPCPricing = () => {
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
-                  <p>200/sec</p>
+                  <p>Unlimited</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-3">
                   <FaCheck size={14} color={"#fff"} />
@@ -580,7 +580,7 @@ const RPCPricing = () => {
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                   <FaCheck size={14} color={"#fff"} />
-                  <p>200/sec</p>
+                  <p>Unlimited Requests</p>
                 </div>
                 <div className="border-b border-gray-800 py-[10px] text-slate-400 font-inter text-[14px] flex flex-row items-center gap-x-3">
                   <FaCheck size={14} color={"#fff"} />

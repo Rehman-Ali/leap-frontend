@@ -56,7 +56,8 @@ export default function RootLayout({ children }) {
     "/token-account-closer",
     "/burn-token",
     "/robots.txt",
-    "/sitemap.xml"
+    "/sitemap.xml",
+    "/privacy-policy",
   ];
 
   const token =

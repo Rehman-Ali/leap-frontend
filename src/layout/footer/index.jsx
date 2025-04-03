@@ -47,7 +47,7 @@ const Footer = () => {
                 { name: "Telegram Bot", href: "/telegram-bot" },
                 // { name: "Trading Bot", href: "/trading-bot" },
                 { name: "VPS", href: "/vps" },
-                // { name: "Articles", href: "/articles" },
+                { name: "Privacy Policy", href: "/privacy-policy" },
               ].map(({ name, href }, idx) => (
                 <Link
                   key={idx}
