@@ -47,11 +47,14 @@ const VPSRental = () => {
           </div>
 
           {/* Title */}
-          <div className="text-center">
+          <div className="text-start mt-[15px]">
             <h2 className="text-[32px] font-bold mb-4 text-white">VPS Rental</h2>
-            <p className="text-[16px] text-[#C5C6C5] mb-8">
-              Experience lightning-fast trading with our high-performance VPS hosting. Our virtual private servers are hosted in the same rack as our nodes to provide the lowest possible latency for your trading operations.
-            </p>
+          
+            <h3
+            className={`text-[#C5C6C5] font-inter  text-[16px] mw-8:max-w-[100%] max-w-[500px] my-[20px] text-left`}
+          >
+               Experience lightning-fast trading with our high-performance VPS hosting. Our virtual private servers are hosted in the same rack as our nodes to provide the lowest possible latency for your trading operations
+          </h3>
           </div>
           <h3
             className={`text-[#C5C6C5] font-inter  text-[16px] mw-8:max-w-[100%] max-w-[500px] my-[20px] text-left`}
