@@ -5,7 +5,11 @@ import { SERVER_URL, WALLET_ADDRESS } from "@/utils/server";
 import axios from "axios";
 import { useRouter, useSearchParams, redirect } from "next/navigation";
 import { isSolanaWallet } from "@dynamic-labs/solana-core";
-import { useDynamicContext , useDynamicModals,  DynamicMultiWalletPromptsWidget,} from "@dynamic-labs/sdk-react-core";
+import {
+  useDynamicContext,
+  useDynamicModals,
+  DynamicMultiWalletPromptsWidget
+} from "@dynamic-labs/sdk-react-core";
 import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { ToastContainer, toast } from "react-toastify";
 import { FaGoogle } from "react-icons/fa";
@@ -28,9 +32,6 @@ const BuyScreen = () => {
   const { setShowLinkNewWalletModal } = useDynamicModals();
   const [isLoginWithEmail, setIsLoginWithEmail] = useState(false);
 
-
-
-
   useEffect(() => {
     let getLoginWithEmail = JSON.parse(localStorage.getItem("l_w"));
     setIsLoginWithEmail(getLoginWithEmail);
@@ -44,7 +45,6 @@ const BuyScreen = () => {
 
         const price = data.solana.usd; // Get SOL price in USD
         setSolPrice(price);
-       
       } catch (error) {
         console.error("Error fetching Solana price:", error);
       }
@@ -354,9 +354,9 @@ const BuyScreen = () => {
       localStorage.removeItem("u_t");
       localStorage.removeItem("l_w");
       localStorage.removeItem("role");
-      setTimeout(() =>{
-      setShowLinkNewWalletModal(true);
-      }, 2000)      
+      setTimeout(() => {
+        setShowLinkNewWalletModal(true);
+      }, 2000);
     } catch (error) {
       console.error("Error during logout process:", error);
     }
@@ -366,17 +366,16 @@ const BuyScreen = () => {
     try {
       // Call handleLogOut and wait for it to complete
       await handleLogOut();
-      
+
       // Set localStorage items after logout is complete
       localStorage.setItem("c_path", "/buy");
       localStorage.removeItem("u_t");
       localStorage.removeItem("l_w");
       localStorage.removeItem("role");
-      toast.error("Free tiers must authenticate with google to avoid abuse!");
-      setTimeout(() =>{
-        redirect("/login")
-      }, 2500)
-     
+      // toast.error("");
+      setTimeout(() => {
+        redirect("/login");
+      }, 2000);
     } catch (error) {
       console.error("Error during logout process:", error);
     }
@@ -2131,6 +2130,9 @@ const BuyScreen = () => {
                     <FaGoogle size={22} color={"#231F20"} /> Continue with
                     Google
                   </button>
+                  <p className="mt-2.5 w-full text-center text-sm text-gray-400">
+                    Free tiers must authenticate with google to avoid abuse!
+                  </p>
                 </div>
               )}
             </>
