@@ -3,14 +3,13 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { SERVER_URL, WALLET_ADDRESS } from "@/utils/server";
 import axios from "axios";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, redirect } from "next/navigation";
 import { isSolanaWallet } from "@dynamic-labs/solana-core";
-import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import { useDynamicContext , useDynamicModals,  DynamicMultiWalletPromptsWidget,} from "@dynamic-labs/sdk-react-core";
 import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { ToastContainer, toast } from "react-toastify";
 import { FaGoogle } from "react-icons/fa";
 import { MdAccountBalanceWallet } from "react-icons/md";
-import { redirect } from "next/navigation";
 
 const BuyScreen = () => {
   const searchParams = useSearchParams();
@@ -26,7 +25,11 @@ const BuyScreen = () => {
   const [orderDetail, setOrderDetail] = useState(null);
   const [solPrice, setSolPrice] = useState(null); // Current SOL price in USD
   const { primaryWallet, handleLogOut } = useDynamicContext();
+  const { setShowLinkNewWalletModal } = useDynamicModals();
   const [isLoginWithEmail, setIsLoginWithEmail] = useState(false);
+
+
+
 
   useEffect(() => {
     let getLoginWithEmail = JSON.parse(localStorage.getItem("l_w"));
@@ -41,6 +44,7 @@ const BuyScreen = () => {
 
         const price = data.solana.usd; // Get SOL price in USD
         setSolPrice(price);
+       
       } catch (error) {
         console.error("Error fetching Solana price:", error);
       }
@@ -342,15 +346,40 @@ const BuyScreen = () => {
     }
   };
 
-  const logoutToConnect = () => {
-    handleLogOut();
-    localStorage.removeItem("u_t");
-    localStorage.removeItem("l_w");
-    localStorage.removeItem("role");
-    localStorage.setItem("c_path", "/buy");
-    setTimeout(() => {
-      redirect("/login");
-    }, 1000);
+  const logoutToConnectWallet = async () => {
+    try {
+      await handleLogOut();
+      // Set localStorage items after logout is complete
+      localStorage.setItem("c_path", "/buy");
+      localStorage.removeItem("u_t");
+      localStorage.removeItem("l_w");
+      localStorage.removeItem("role");
+      setTimeout(() =>{
+      setShowLinkNewWalletModal(true);
+      }, 2000)      
+    } catch (error) {
+      console.error("Error during logout process:", error);
+    }
+  };
+
+  const logoutToConnectGoogle = async () => {
+    try {
+      // Call handleLogOut and wait for it to complete
+      await handleLogOut();
+      
+      // Set localStorage items after logout is complete
+      localStorage.setItem("c_path", "/buy");
+      localStorage.removeItem("u_t");
+      localStorage.removeItem("l_w");
+      localStorage.removeItem("role");
+      toast.error("Free tiers must authenticate with google to avoid abuse!");
+      setTimeout(() =>{
+        redirect("/login")
+      }, 2500)
+     
+    } catch (error) {
+      console.error("Error during logout process:", error);
+    }
   };
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
@@ -2057,7 +2086,7 @@ const BuyScreen = () => {
                 {isLoginWithEmail ? (
                   <div>
                     <button
-                      onClick={(e) => logoutToConnect(e)}
+                      onClick={(e) => logoutToConnectWallet(e)}
                       className="bg-gray-200 flex justify-center items-center font-semibold gap-2.5 text-[16px] px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
                     >
                       <MdAccountBalanceWallet size={22} color={"#231F20"} />{" "}
@@ -2096,7 +2125,7 @@ const BuyScreen = () => {
               ) : (
                 <div>
                   <button
-                    onClick={(e) => logoutToConnect(e)}
+                    onClick={(e) => logoutToConnectGoogle(e)}
                     className="bg-gray-200 flex justify-center items-center font-semibold gap-2.5 text-[16px] px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
                   >
                     <FaGoogle size={22} color={"#231F20"} /> Continue with
@@ -2108,6 +2137,7 @@ const BuyScreen = () => {
           )}
         </div>
       </div>
+      <DynamicMultiWalletPromptsWidget />
       <ToastContainer
         position="bottom-right"
         autoClose={4000}
