@@ -74,7 +74,7 @@ const OrderScreen = () => {
                           {order.order_category}
                         </td>
                         <td className="py-2 px-4 border-b text-center">
-                          {order.duration === 7
+                          {(order.duration === null || order.duration === undefined) ? "Free Trial" :    order.duration === 7
                             ? "1 week"
                             : order.duration / 30 + " month"}
                         </td>

@@ -56,7 +56,8 @@ export default function RootLayout({ children }) {
     "/token-account-closer",
     "/burn-token",
     "/robots.txt",
-    "/sitemap.xml"
+    "/sitemap.xml",
+    "/privacy-policy",
   ];
 
   const token =
@@ -175,7 +176,8 @@ export default function RootLayout({ children }) {
             : "/dashboard"
         );
       } else {
-        router.push(prev_path);
+        window.location.assign(prev_path)
+        // router.push(prev_path);
         localStorage.removeItem("c_path");
       }
     } catch (error) {
@@ -222,24 +224,24 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       {/* ✅ Google Analytics Script */}
-      <Head>
-       
+      <head>
         <Script
           strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-EG8RE8E6ZQ"
+          src="https://www.googletagmanager.com/gtag/js?id=G-W4TYWHBMY1"
         />
         <Script
+          id="google-analytics"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-EG8RE8E6ZQ');
-          `,
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-W4TYWHBMY1');
+            `,
           }}
         />
-      </Head>
+      </head>
       <DynamicContextProvider
         theme="auto"
         settings={{

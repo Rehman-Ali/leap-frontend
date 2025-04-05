@@ -3,11 +3,18 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { SERVER_URL, WALLET_ADDRESS } from "@/utils/server";
 import axios from "axios";
-import Swal from "sweetalert2";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, redirect } from "next/navigation";
 import { isSolanaWallet } from "@dynamic-labs/solana-core";
-import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import {
+  useDynamicContext,
+  useDynamicModals,
+  DynamicMultiWalletPromptsWidget
+} from "@dynamic-labs/sdk-react-core";
 import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
+import { ToastContainer, toast } from "react-toastify";
+import { FaGoogle } from "react-icons/fa";
+import { MdAccountBalanceWallet } from "react-icons/md";
+
 const BuyScreen = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -20,12 +27,14 @@ const BuyScreen = () => {
   const [transactionId, setTransactionId] = useState("");
   const [selectedDuration, setSelectedDuration] = useState(null);
   const [orderDetail, setOrderDetail] = useState(null);
-
   const [solPrice, setSolPrice] = useState(null); // Current SOL price in USD
-
-  const { primaryWallet } = useDynamicContext();
+  const { primaryWallet, handleLogOut } = useDynamicContext();
+  const { setShowLinkNewWalletModal } = useDynamicModals();
+  const [isLoginWithEmail, setIsLoginWithEmail] = useState(false);
 
   useEffect(() => {
+    let getLoginWithEmail = JSON.parse(localStorage.getItem("l_w"));
+    setIsLoginWithEmail(getLoginWithEmail);
     async function fetchSolPrice() {
       try {
         const response = await fetch(
@@ -49,8 +58,8 @@ const BuyScreen = () => {
     axios
       .get(`${SERVER_URL}/api/order/get-single/${search}`, {
         headers: {
-          "x-auth-token": token,
-        },
+          "x-auth-token": token
+        }
       })
       .then((res) => {
         if (res.data && res.data.data) {
@@ -64,15 +73,15 @@ const BuyScreen = () => {
       .catch((err) => console.error("Error fetching data", err));
   }, []);
 
+  const onChnageSelectedPlan = (plan) => {
+    setSelectedPlan(plan);
+    setSelectedRegion("");
+    setSelectedDuration(null);
+  };
+
   const payOrder = async () => {
     if (!primaryWallet || !isSolanaWallet(primaryWallet)) {
-      return  Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Please connect wallet first like Phantom!",
-        showConfirmButton: false,
-        timer: 2500,
-      });
+      return toast.error("Please connect wallet first like Phantom!");
     }
 
     const connection = await primaryWallet.getConnection();
@@ -117,13 +126,7 @@ const BuyScreen = () => {
     // const totalCost = 0;
 
     if (balance < totalCost) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Insufficient balance to complete this transaction.",
-        showConfirmButton: false,
-        timer: 2000,
-      });
+      toast.error("Insufficient balance to complete this transaction.");
       return;
     }
 
@@ -131,7 +134,7 @@ const BuyScreen = () => {
       SystemProgram.transfer({
         fromPubkey: fromKey,
         lamports: amountInLamports,
-        toPubkey: toKey,
+        toPubkey: toKey
       })
     );
     const blockhash = await connection.getLatestBlockhash();
@@ -149,13 +152,7 @@ const BuyScreen = () => {
         );
       })
       .catch((error) => {
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: error || "Transaction failed. Try again!.",
-          showConfirmButton: false,
-          timer: 2500,
-        });
+        toast.error(error || "Transaction failed. Try again!.");
       });
   };
 
@@ -244,13 +241,15 @@ const BuyScreen = () => {
 
         operating_system: null,
         region: selectRegion,
+        is_free_tier: false,
+        order_region: selectRegion === "Ashburn, VA" ? "usa" : "europe",
 
         // expiry_date: getFormattedDate(getExpiryDate(Date.now()))
         ...(search === null && {
           order_category: "RPC-" + selectPlan.toLowerCase(),
           plan: selectPlan,
-          expiry_date: getFormattedDate(getExpiryDate(Date.now())),
-        }),
+          expiry_date: getFormattedDate(getExpiryDate(Date.now()))
+        })
       };
       let token = JSON.parse(localStorage.getItem("u_t"));
       if (search === null) {
@@ -259,135 +258,128 @@ const BuyScreen = () => {
           body,
           {
             headers: {
-              "x-auth-token": token,
-            },
+              "x-auth-token": token
+            }
           }
         );
         // save invoice
         await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
           headers: {
-            "x-auth-token": token,
-          },
+            "x-auth-token": token
+          }
         });
 
         router.push("/nodes");
 
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Your order has been placed successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        toast.success("Your order has been placed successfully");
       } else {
         const response = await axios.put(
           `${SERVER_URL}/api/order/update/${search}`,
           body,
           {
             headers: {
-              "x-auth-token": token,
-            },
+              "x-auth-token": token
+            }
           }
         );
         // save invoice
         await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
           headers: {
-            "x-auth-token": token,
-          },
+            "x-auth-token": token
+          }
         });
         router.push("/nodes");
 
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Your order has been renew successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        toast.success("Your order has been renew successfully");
       }
     } catch (error) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: `Error during placed order ${
-          error.response?.data || error.message
-        }`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      console.error(
-        "Error during placed order",
-        error.response?.data || error.message
+      toast.error(
+        `Error during placed order ${error.response?.data || error.message}`
       );
     }
   };
-
-  console.log(selectPlan, "plam------");
 
   const freeOrder = async (e) => {
-   let loginWithEmail = JSON.parse(localStorage.getItem("l_w"))
-   if(loginWithEmail){
-    try {
-      let body = {
-        status: "active",
-        price: 0,
-        price_in_SOL: 0,
-        operating_system: null,
-        region: selectRegion,
-        order_category: "RPC-" + selectPlan.toLowerCase(),
-        plan: selectPlan,
-        usage_used: 0,
-        expiry_date: getFormattedDate(getExpiryDateForFreeNode(Date.now())),
-      };
-      let token = JSON.parse(localStorage.getItem("u_t"));
-      const response = await axios.post(
-        `${SERVER_URL}/api/order/create`,
-        body,
-        {
+    let loginWithEmail = JSON.parse(localStorage.getItem("l_w"));
+    if (loginWithEmail) {
+      try {
+        let body = {
+          status: "active",
+          price: 0,
+          price_in_SOL: 0,
+          operating_system: null,
+          region: selectRegion,
+          order_category: "RPC-" + selectPlan.toLowerCase(),
+          plan: selectPlan,
+          usage_used: 0,
+          is_free_tier: true,
+          order_region: "usa",
+          expiry_date: getFormattedDate(getExpiryDateForFreeNode(Date.now()))
+        };
+        let token = JSON.parse(localStorage.getItem("u_t"));
+        const response = await axios.post(
+          `${SERVER_URL}/api/order/create`,
+          body,
+          {
+            headers: {
+              "x-auth-token": token
+            }
+          }
+        );
+        // save invoice
+        await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
           headers: {
-            "x-auth-token": token,
-          },
-        }
-      );
-      // save invoice
-      await axios.post(`${SERVER_URL}/api/invoice/create`, body, {
-        headers: {
-          "x-auth-token": token,
-        },
-      });
+            "x-auth-token": token
+          }
+        });
 
-      router.push("/nodes");
+        router.push("/nodes");
 
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Your claim has been placed successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } catch (error) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: `${
-          error.response?.data.message
-        }`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
+        toast.success("You've successfully got free tier.");
+      } catch (error) {
+        toast.error(
+          "You've already got our free tier. To maintain uninterrupted access to our node. Please upgrade to a paid plan."
+        );
+      }
+    } else {
+      toast.error("Please login via Gmail to get your Free Node");
     }
-   }else{
-    Swal.fire({
-      position: "center",
-      icon: "error",
-      title: `Please login with Gmail to claim Free Node`,
-      showConfirmButton: false,
-      timer: 1500,
-    });
-   }
-  
   };
 
+  const logoutToConnectWallet = async () => {
+    try {
+      await handleLogOut();
+      // Set localStorage items after logout is complete
+      localStorage.setItem("c_path", "/buy");
+      localStorage.removeItem("u_t");
+      localStorage.removeItem("l_w");
+      localStorage.removeItem("role");
+      setTimeout(() => {
+        setShowLinkNewWalletModal(true);
+      }, 2000);
+    } catch (error) {
+      console.error("Error during logout process:", error);
+    }
+  };
+
+  const logoutToConnectGoogle = async () => {
+    try {
+      // Call handleLogOut and wait for it to complete
+      await handleLogOut();
+
+      // Set localStorage items after logout is complete
+      localStorage.setItem("c_path", "/buy");
+      localStorage.removeItem("u_t");
+      localStorage.removeItem("l_w");
+      localStorage.removeItem("role");
+      // toast.error("");
+      setTimeout(() => {
+        redirect("/login");
+      }, 2000);
+    } catch (error) {
+      console.error("Error during logout process:", error);
+    }
+  };
   return (
     <div className="h-full w-full max-w-[100vw] flex justify-center dark:bg-bodyColor bg-white">
       <div className="h-full w-full max-w-[1500px] p-2 lg:p-5">
@@ -440,7 +432,7 @@ const BuyScreen = () => {
         {search === null && orderDetail === null ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             <div
-              onClick={() => setSelectedPlan("Free")}
+              onClick={() => onChnageSelectedPlan("Free")}
               className={`${
                 selectPlan === "Free" ? "opacity-90" : "opacity-50"
               } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#FF9B17] to-[#FF9B17] bg-[linear-gradient(324.64deg,rgba(104,64,253,0)0%,rgba(255,255,255,0.2)100%)] `}
@@ -677,7 +669,7 @@ const BuyScreen = () => {
               </div>
             </div>
             <div
-              onClick={() => setSelectedPlan("Getting-Started")}
+              onClick={() => onChnageSelectedPlan("Getting-Started")}
               className={`${
                 selectPlan === "Getting-Started" ? "opacity-90" : "opacity-50"
               } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#6840FD] to-[#6840FD] bg-[linear-gradient(324.64deg,rgba(104,64,253,0)0%,rgba(255,255,255,0.2)100%)] `}
@@ -753,7 +745,7 @@ const BuyScreen = () => {
                         ></path>
                       </svg>
                     </div>
-                    <div className="flex-1">200 Requests per second</div>
+                    <div className="flex-1">Unlimited Requests</div>
                   </div>
                   <div className="flex flex-row items-center gap-x-2">
                     <div className="flex-none text-[#6840FD]">
@@ -964,7 +956,7 @@ const BuyScreen = () => {
               </div>
             </div>
             <div
-              onClick={() => setSelectedPlan("Professional")}
+              onClick={() => onChnageSelectedPlan("Professional")}
               className={`${
                 selectPlan === "Professional" ? "opacity-90" : "opacity-50"
               } rounded-xl px-5 py-6 relative shadow-lg cursor-pointer hover:scale-[1.01] hover:opacity-90 transition-all duration-200 transform-gpu bg-gradient-to-t from-[#41BF6D] to-[#41BF6D] bg-[linear-gradient(324.64deg,rgba(65,191,109,0)0%,rgba(255,255,255,0.2)100%)]`}
@@ -1258,7 +1250,7 @@ const BuyScreen = () => {
           "getting-started" ? (
           <div className="grid mw-11:grid-cols-1 mw-12:grid-cols-2  lg:grid-cols-2 gap-5">
             <div
-              onClick={() => setSelectedPlan("Getting-Started")}
+              onClick={() => onChnageSelectedPlan("Getting-Started")}
               className={`${
                 selectPlan.toLowerCase() === "getting-started"
                   ? "opacity-90"
@@ -1550,7 +1542,7 @@ const BuyScreen = () => {
         ) : (
           <div className="grid mw-11:grid-cols-1 mw-12:grid-cols-2  lg:grid-cols-2 gap-5">
             <div
-              onClick={() => setSelectedPlan("Professional")}
+              onClick={() => onChnageSelectedPlan("Professional")}
               className={`${
                 selectPlan.toLowerCase() === "professional"
                   ? "opacity-90"
@@ -2090,15 +2082,29 @@ const BuyScreen = () => {
                     </a>
                   </div>
                 )}
-                <button
-                  onClick={(e) => payOrder(e)}
-                  className="bg-darkPrimary flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
-                >
-                  Pay Now
-                </button>
-                <p className="mt-2.5 w-full text-center text-sm text-gray-400">
-                  Payments are made in Solana. Plan doesn't auto-renew.
-                </p>
+                {isLoginWithEmail ? (
+                  <div>
+                    <button
+                      onClick={(e) => logoutToConnectWallet(e)}
+                      className="bg-gray-200 flex justify-center items-center font-semibold gap-2.5 text-[16px] px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
+                    >
+                      <MdAccountBalanceWallet size={22} color={"#231F20"} />{" "}
+                      Continue with Wallet
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <button
+                      onClick={(e) => payOrder(e)}
+                      className="bg-darkPrimary flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
+                    >
+                      Pay Now
+                    </button>
+                    <p className="mt-2.5 w-full text-center text-sm text-gray-400">
+                      Payments are made in Solana. Plan doesn't auto-renew.
+                    </p>
+                  </>
+                )}
               </div>
             </>
           )}
@@ -2106,18 +2112,47 @@ const BuyScreen = () => {
           {selectPlan === "Free" && selectRegion !== "" && (
             <>
               <hr className="my-4" />
-              <div>
-                <button
-                  onClick={(e) => freeOrder(e)}
-                  className="bg-darkPrimary flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
-                >
-                  Claim Now
-                </button>
-              </div>
+              {isLoginWithEmail ? (
+                <div>
+                  <button
+                    onClick={(e) => freeOrder(e)}
+                    className="bg-darkPrimary flex justify-center items-center font-semibold gap-2.5 text-sm px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
+                  >
+                    Get Free Node Now
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <button
+                    onClick={(e) => logoutToConnectGoogle(e)}
+                    className="bg-gray-200 flex justify-center items-center font-semibold gap-2.5 text-[16px] px-5 py-2  text-[#231F20] rounded-md hover:scale-[1.01] transition-all duration-200 transform-gpu hover:bg-white   w-full mt-5  flex-row "
+                  >
+                    <FaGoogle size={22} color={"#231F20"} /> Continue with
+                    Google
+                  </button>
+                  <p className="mt-2.5 w-full text-center text-sm text-gray-400">
+                    Free tiers must authenticate with google to avoid abuse!
+                  </p>
+                </div>
+              )}
             </>
           )}
         </div>
       </div>
+      <DynamicMultiWalletPromptsWidget />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        // transition={Bounce}
+      />
     </div>
   );
 };

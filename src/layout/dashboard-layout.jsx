@@ -23,7 +23,8 @@ export default function DashboardLayout({
         {/* Dashboard Header */}
         <DashboardHeader toggleSidebar={toggleSidebar} />
         {/* Main Content */}
-        <main className=" mw-7:pt-[70px] p-4">{children}</main>
+        <main className=" mw-7:pt-[70px]">{children}</main>
+        {/* <main className=" mw-7:pt-[70px] p-4">{children}</main> */}
       </div>
     </div>
   );

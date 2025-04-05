@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
+import Link from "next/link";
 
 const RPCHeroSection = () => {
   const sectionRef = useRef(null); // Ref for a div element
@@ -79,7 +80,7 @@ const RPCHeroSection = () => {
           >
             Land transactions faster and more consistently than ever before
           </p>
-          <a href="https://discord.gg/9UXPJgnZ5q" target="_blank">
+          <Link href="/buy" >
             <button
               className={` ${
                 animationTriggered ? "animate-slideIn" : ""
@@ -87,7 +88,7 @@ const RPCHeroSection = () => {
             >
               Get Started
             </button>
-          </a>
+          </Link>
           {/* <p
             className={` ${
               animationTriggered ? "animate-slideIn" : ""

@@ -272,7 +272,7 @@ const DashboardScreen = () => {
         )}
         {orderList.length > 0 && selected !== null && (
           <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className= "flex items-center justify-center z-50">
               <div className="bg-white  dark:bg-bodyColor p-6 rounded-lg max-w-lg w-full">
                 <div className="flex justify-between mb-4">
                   <h3 className="font-bold text-lg text-black dark:text-white">
@@ -287,32 +287,7 @@ const DashboardScreen = () => {
                 </div>
                 {selected.order_category === "RPC-free" ? (
                     <div className="space-y-4">
-                      <p className="dark:text-white text-black font-inter font-bold pb-[5px]">
-                        For Europe:
-                      </p>
-
-                      <div>
-                        <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
-                          HTTP:
-                        </p>
-                        <div className="flex items-center space-x-2">
-                          <p className="dark:text-white text-black font-inter font-normal truncate flex-1">
-                            {`http://eu-trial.leap-blockchain.com/?api_key=${selected.api_key}`}
-                          </p>
-                          <button
-                            onClick={() =>
-                              copyToClipboard(
-                                `http://eu-trial.leap-blockchain.com/?api_key=${selected.api_key}`,
-                                "http"
-                              )
-                            }
-                            className="bg-darkPrimary cursor-pointer text-white px-3 py-1 rounded text-sm"
-                          >
-                            {copyStatus.http ? "Copied!" : "Copy"}
-                          </button>
-                        </div>
-                      </div>
-
+                    
                       <div>
                         <p className="dark:text-white text-black font-inter font-medium pb-[5px]">
                           For USA:
